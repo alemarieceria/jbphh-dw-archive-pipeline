@@ -1,0 +1,29 @@
+# Python-generated files
+__pycache__/
+*.py[oc]
+build/
+dist/
+wheels/
+*.egg-info
+
+# Virtual environments
+.venv
+
+# Local settings (machine-specific paths)
+.env
+
+# Tool caches
+.pytest_cache/
+.ruff_cache/
+
+# Personal editor settings
+.vscode/
+
+# System files
+Thumbs.db
+desktop.ini
+.DS_Store
+
+# Archive files belong in the Shared Drive, never in this repo
+*.pdf
+*.part

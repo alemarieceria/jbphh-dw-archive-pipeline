@@ -1,0 +1,26 @@
+[project]
+name = "jbphh-dw-archive-pipeline"
+version = "0.1.0"
+description = "Collects, archives and registers public JBPHH drinking water documents with provenance."
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "httpx>=0.28.1",
+    "playwright>=1.55",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.2.0",
+    "ruff>=0.17.3",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["scripts"]
+
+[tool.ruff]
+line-length = 120
+src = ["scripts"]  # treat the scripts as this project's own modules when sorting imports
+
+[tool.ruff.lint]
+extend-select = ["I"]  # import sorting
