@@ -25,6 +25,8 @@ of the JBPHH drinking water flushing zones, in a way anyone can rerun and check:
 | Database | None for the archive. The Evidence Tracer gets its own Neon database later and loads the published catalog into it. | The catalog is small and changed by one process; a database would add upkeep without solving a current problem. |
 | Code | One Python package with one command: `uv run archive <step> --zone I1` | Easier to learn than many scripts; `uv run archive --help` lists every step. |
 | Tools | Python + uv, httpx (downloads), Playwright (listings, page captures, diagrams), pytest + ruff, GitHub with automatic checks, Excalidraw stepped diagrams | All already in use. |
+| Wayback backups | Automatic: `archive wayback` checks for an existing backup and, if none, saves the page with archive.org's Save Page Now service (free archive.org account; keys in `.env`). Results go in `catalog/wayback.csv`. | Every source page gets an independent public copy without hand work. |
+| Viewing sources | `notebooks/zones.ipynb` shows, per zone, each source page with its Wayback link and its captures, read from the catalog. `archive publish` reruns it so its saved output is never stale and can be read on GitHub without running anything. | People who don't run code can still see every link and capture. |
 | Tests | Every step ships with unit tests that run offline on saved pages. Archive checks (`inventory`, `verify`) run against the real Drive and website and write dated reports. A step is done only when both pass. | Accuracy must be provable, not assumed. |
 
 ## The workflow
@@ -57,9 +59,9 @@ Each step gets a section, with a stepped diagram, in `notebooks/workflows.ipynb`
 ### 5–7. Status details
 
 - **Catalog:** 169 rows for I1; 160 downloaded, 9 still to find (7 governing documents, 2 Navy communications).
-- **Discrepancy log:** 17 findings; 6 confirmed, 11 to verify. Possible FND-0018 not yet logged: the I1 Stage 2 lab report bundle (DOC-0003) contains a Zone A1 sample (20220104-A1-ZT03, Weck report 2A05051), and the same report is listed under Navy D1.
+- **Discrepancy log:** 18 findings (FND-0001 to FND-0018); 6 confirmed, 12 to verify.
 - **Page captures** to automate with Playwright: PDF, single-file web page (MHTML) and PNG per page.
-- **Wayback:** check existing backups with the public lookup; save new ones with the Save Page Now service (archive.org keys in `.env`), or produce a list to save by hand.
+- **Wayback:** automatic (see Decisions). Needs an archive.org account before the step is built.
 
 ### 10. The Evidence Tracer connection
 
@@ -94,7 +96,8 @@ docs/diagrams/, derived/
    (listings and zone page against the catalog), checked against the known I1 facts.
 4. **Cataloging:** `archive discover --zone I1` proposes rows; it should reproduce I1's
    existing rows.
-5. **Collection:** `archive capture`, then `archive wayback`.
+5. **Collection:** `archive capture`, then `archive wayback`, then the sources view in
+   `notebooks/zones.ipynb`.
 6. **Validation and storage:** `archive verify`; move the catalog into `catalog/`;
    `archive publish`.
 7. **Discrepancy workflow:** the Google Form and `archive findings import`.
