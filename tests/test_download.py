@@ -5,7 +5,7 @@ import hashlib
 import httpx
 import pytest
 
-from download import download, file_name, select_rows, site_folder
+from jbphh_archive.download import download, file_name, select_rows, site_folder
 
 PDF = b"%PDF-1.5 test file"
 

@@ -29,7 +29,7 @@ from pathlib import Path
 
 from playwright.sync_api import sync_playwright
 
-from export_pngs import DIAGRAMS_FOLDER, SCALE
+from jbphh_archive.diagrams.export_pngs import DIAGRAMS_FOLDER, SCALE
 
 # Pinned versions, so the same spec always draws the same way.
 EXCALIDRAW = "https://esm.sh/@excalidraw/excalidraw@0.18.0?deps=react@19.0.0,react-dom@19.0.0"

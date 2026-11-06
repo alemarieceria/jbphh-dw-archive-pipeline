@@ -24,7 +24,7 @@ from urllib.parse import unquote, urlsplit
 
 import httpx
 
-from registry import REGISTRY_FILE, Row, read_rows, registered_paths, write_rows
+from jbphh_archive.catalog import REGISTRY_FILE, Row, read_rows, registered_paths, write_rows
 
 # raw/ subfolder for each source website. Unlisted sites go to raw/other.
 SITE_FOLDERS = {
