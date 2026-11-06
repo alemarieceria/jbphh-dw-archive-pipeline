@@ -13,8 +13,8 @@ docs/diagrams/):
     <name>.png             the finished drawing as an image, for Word and Google Docs
 
 Usage (from the project folder):
-    uv run --env-file .env scripts/build_stepper.py docs/diagrams/specs/listing-check-by-hand.toml
-    uv run scripts/build_stepper.py <spec> --folder docs/diagrams     # write to this repo instead
+    uv run --env-file .env archive diagrams build docs/diagrams/specs/listing-check-by-hand.toml
+    uv run archive diagrams build <spec> --folder docs/diagrams     # write to this repo instead
 """
 
 import argparse
@@ -296,7 +296,9 @@ def draw(spec: dict, png: Path) -> tuple[list[str], str]:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser = argparse.ArgumentParser(
+        prog="archive diagrams build", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
     parser.add_argument("spec", type=Path, help="diagram spec (.toml)")
     parser.add_argument("--archive-root", help="archive folder (default: ARCHIVE_ROOT environment variable)")
     parser.add_argument("--folder", help="folder to write to instead of the archive's docs/diagrams/")
@@ -321,7 +323,3 @@ def main(argv: list[str] | None = None) -> int:
     for suffix in (".embed.html", ".excalidraw.svg", ".png"):
         print(f"    saved {folder / (name + suffix)}")
     return 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())

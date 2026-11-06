@@ -6,10 +6,10 @@ registry/documents.csv, setting status to `done`. Rows already `done` are
 skipped, so it is safe to stop and rerun.
 
 Usage (from the project folder):
-    uv run --env-file .env scripts/download.py --dry-run   # list what would download
-    uv run --env-file .env scripts/download.py --limit 5   # try a few first
-    uv run --env-file .env scripts/download.py             # everything left to download
-    uv run --env-file .env scripts/download.py --doc-id DOC-0010 --doc-id DOC-0011
+    uv run --env-file .env archive download --dry-run   # list what would download
+    uv run --env-file .env archive download --limit 5   # try a few first
+    uv run --env-file .env archive download             # everything left to download
+    uv run --env-file .env archive download --doc-id DOC-0010 --doc-id DOC-0011
 """
 
 import argparse
@@ -96,7 +96,9 @@ def download(client: httpx.Client, row: Row, archive_root: Path, taken: dict[str
 
 
 def parse_args(argv: list[str] | None) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser = argparse.ArgumentParser(
+        prog="archive download", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
     parser.add_argument("--archive-root", help="archive folder (default: ARCHIVE_ROOT environment variable)")
     parser.add_argument("--doc-id", action="append", help="download only this doc_id (repeatable)")
     parser.add_argument("--limit", type=int, help="download at most this many files")
@@ -146,7 +148,3 @@ def main(argv: list[str] | None = None) -> int:
     for doc_id, error in failures:
         print(f"  {doc_id}: {error}")
     return 1 if failures else 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())

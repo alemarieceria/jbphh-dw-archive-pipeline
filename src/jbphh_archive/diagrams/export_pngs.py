@@ -5,8 +5,8 @@ Excalidraw drawing embedded). This writes `name.png` beside each one. A PNG is
 only rebuilt when its SVG is newer, unless --force.
 
 Usage (from the project folder):
-    uv run --env-file .env scripts/export_pngs.py                        # archive's docs/diagrams/
-    uv run scripts/export_pngs.py --folder docs/diagrams                 # this repo's diagrams
+    uv run --env-file .env archive diagrams png                  # archive's docs/diagrams/
+    uv run archive diagrams png --folder docs/diagrams           # this repo's diagrams
 """
 
 import argparse
@@ -31,7 +31,9 @@ def needs_png(svg: Path, force: bool) -> bool:
 
 
 def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
+    parser = argparse.ArgumentParser(
+        prog="archive diagrams png", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
+    )
     parser.add_argument("--archive-root", help="archive folder (default: ARCHIVE_ROOT environment variable)")
     parser.add_argument("--folder", help="diagrams folder to use instead of the archive's docs/diagrams/")
     parser.add_argument("--force", action="store_true", help="rebuild every PNG")
@@ -56,7 +58,3 @@ def main(argv: list[str] | None = None) -> int:
             print(f"    saved {png_path(svg).name}")
         browser.close()
     return 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())
