@@ -27,3 +27,6 @@ desktop.ini
 # Archive files belong in the Shared Drive, never in this repo
 *.pdf
 *.part
+
+# Private working notes (handoffs), kept out of Git
+docs/_internal/
