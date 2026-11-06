@@ -3,7 +3,7 @@ from pathlib import Path
 
 import pytest
 
-from build_stepper import SpecError, embed_file, image_size, load_spec, prepare_images, with_ids
+from jbphh_archive.diagrams.build_stepper import SpecError, embed_file, image_size, load_spec, prepare_images, with_ids
 
 SPECS = Path(__file__).resolve().parents[1] / "docs" / "diagrams" / "specs"
 SCREENSHOTS = SPECS.parent / "screenshots"

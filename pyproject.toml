@@ -9,6 +9,9 @@ dependencies = [
     "playwright>=1.55",
 ]
 
+[project.scripts]
+archive = "jbphh_archive.cli:main"  # `uv run archive --help` lists the steps
+
 [dependency-groups]
 dev = [
     "ipykernel>=7.4.0",
@@ -16,12 +19,16 @@ dev = [
     "ruff>=0.17.3",
 ]
 
-[tool.pytest.ini_options]
-pythonpath = ["scripts"]
-
 [tool.ruff]
 line-length = 120
-src = ["scripts"]  # treat the scripts as this project's own modules when sorting imports
+src = ["src"]  # treat the package as this project's own code when sorting imports
 
 [tool.ruff.lint]
 extend-select = ["I"]  # import sorting
+
+[build-system]
+requires = ["uv_build>=0.10.6,<0.11"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "jbphh_archive"  # the package folder in src/ (differs from the project name)
