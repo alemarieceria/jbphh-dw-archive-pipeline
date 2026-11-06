@@ -38,6 +38,20 @@ uv run scripts/export_pngs.py --folder docs/diagrams   # this repo's diagrams
 
 When a script's behavior changes, update its diagram in the same commit.
 
+## Stepped diagrams
+
+Some workflows are drawn as stepped diagrams: **Back / Next** buttons and a caption for each step, in the same hand-drawn Excalidraw style. Each one is a short spec in `docs/diagrams/specs/`; the top of each spec explains its format. Screenshots used in a diagram live in `docs/diagrams/screenshots/`, with the capture date in the file name, because websites change. To build one (this needs an internet connection, because Excalidraw is loaded from esm.sh):
+
+```powershell
+uv run --env-file .env scripts/build_stepper.py docs/diagrams/specs/listing-check-by-hand.toml
+```
+
+This writes `<name>.embed.html` (the stepped diagram), `<name>.excalidraw.svg` and `<name>.png` to the archive's `docs/diagrams/`. To change a stepped diagram, edit its spec and rebuild: a rebuild replaces all three files, so edits made to them directly are lost.
+
+## Workflows notebook
+
+`workflows.ipynb` shows every workflow diagram in one place. Open it in VS Code, select this folder's `.venv` as the kernel, and choose **Run All**. GitHub can't play stepped diagrams; open the `.embed.html` files in a web browser instead.
+
 ## Checks
 
 ```powershell
