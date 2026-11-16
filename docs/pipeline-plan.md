@@ -3,7 +3,7 @@
 The one place to see what this pipeline is for, how it is organized, and what is done.
 Written by A. Ceria. Update a stage's **Status** line whenever its work changes.
 
-Last updated: 2026-11-10.
+Last updated: 2026-11-16.
 
 ## Goal
 
@@ -37,7 +37,7 @@ Each step gets a section, with a stepped diagram, in `notebooks/workflows.ipynb`
 | Step | What it answers | Status |
 | --- | --- | --- |
 | 1. How to read the notebook | How to view and run the documentation | Not started |
-| 2. The big picture | How the steps fit together | Partial: `archive-big-picture` diagram exists but needs redrawing to match this plan |
+| 2. The big picture | How the steps fit together | Partial: `archive-big-picture` shows the archive today. `archive-pipeline` (planned; `docs/diagrams/pngs/archive-pipeline.png`) shows this plan and replaces it once the catalog is in this repo. |
 | 3. Scope | Which zones, which dates, zone versus system-wide documents | Partial: decided above; `catalog/zones.csv` not yet made |
 | 4. Discovery | Which documents exist for a zone, and how do we know we have them all? | Partial (see below) |
 | 5. Cataloging | Turning found documents into reviewed catalog rows | Partial: I1's 169 rows were built by hand; no script |
@@ -134,18 +134,19 @@ jbphh-dw-archive-pipeline/
 │                       wayback, verify, publish, findings, diagrams/
 ├── tests/              unit tests, with fixtures/ (saved pages, small catalogs)
 ├── notebooks/          workflows.ipynb, zones.ipynb
-└── docs/               this plan, diagrams/ (specs, screenshots)
+└── docs/               this plan, diagrams/ (specs, svgs, pngs, embeds, screenshots)
 
 Shared Drive: raw/, web-captures/, registry/ (published, read-only), reports/ (published),
-docs/diagrams/, derived/ (including derived/zone-index/)
+derived/ (including derived/zone-index/)
 ```
 
 ## Order of work
 
 1. **Restructure** this repo into `src/jbphh_archive/` with one `archive` command; move
    `scripts/` code in, with tests proving nothing changed.
-2. **Big picture:** redraw it to match this plan; set up `notebooks/workflows.ipynb` with
-   the step outline above.
+2. **Big picture:** `archive-pipeline` (planned) shows this plan; it replaces
+   `archive-big-picture` once the catalog moves (item 6). Add the step outline above to
+   `notebooks/workflows.ipynb`.
 3. **Scope and Discovery for I1:** `catalog/zones.csv`, then `archive inventory --zone I1`
    (listings and zone page against the catalog), checked against the known I1 facts.
 4. **Cataloging:** `archive discover --zone I1` proposes rows; it should reproduce I1's
