@@ -1,5 +1,5 @@
 # Stepped diagram: checking one zone's library listing by hand.
-# Build it with: uv run --env-file .env archive diagrams build docs/diagrams/specs/listing-check-by-hand.toml
+# Build it with: uv run archive diagrams build docs/diagrams/specs/listing-check-by-hand.toml
 #
 # How this file works:
 # - [[steps]]: one caption per step, in order. The caption shows under the drawing.

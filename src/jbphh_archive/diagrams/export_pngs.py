@@ -5,8 +5,8 @@ drawing embedded). This writes `pngs/name.png` for each one. A PNG is only rebui
 its SVG is newer, unless --force.
 
 Usage (from the project folder):
-    uv run --env-file .env archive diagrams png                  # archive's docs/diagrams/
-    uv run archive diagrams png --folder docs/diagrams           # this repo's diagrams
+    uv run archive diagrams png            # only PNGs whose SVG changed
+    uv run archive diagrams png --force    # every PNG
 """
 
 import argparse
@@ -27,12 +27,10 @@ def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         prog="archive diagrams png", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
-    parser.add_argument("--archive-root", help="archive folder (default: ARCHIVE_ROOT environment variable)")
-    parser.add_argument("--folder", help="diagrams folder to use instead of the archive's docs/diagrams/")
     parser.add_argument("--force", action="store_true", help="rebuild every PNG")
     args = parser.parse_args(argv)
 
-    folder = diagrams_folder(args.folder, args.archive_root)
+    folder = diagrams_folder()
     pairs = [(svg, png_path(folder, diagram_name(svg))) for svg in svg_files(folder)]
     todo = [(svg, png) for svg, png in pairs if needs_png(svg, png, args.force)]
     print(f"{len(todo)} PNG(s) to build.")

@@ -1,5 +1,5 @@
 # Stepped diagram: the archive pipeline, from the website to the tools that read it.
-# Build it with: uv run archive diagrams build docs/diagrams/specs/archive-pipeline.toml --folder docs/diagrams
+# Build it with: uv run archive diagrams build docs/diagrams/specs/archive-pipeline.toml
 #
 # How this file works: see listing-check-by-hand.toml. Each element's `step` is where it first appears.
 # Colors follow the Red Hill tools design system (docs/design_system.md in the Directory repo):

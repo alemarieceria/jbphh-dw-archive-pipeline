@@ -3,8 +3,29 @@ from pathlib import Path
 
 import pytest
 
+from jbphh_archive.diagrams import paths
 from jbphh_archive.diagrams.export_pngs import needs_png
-from jbphh_archive.diagrams.paths import diagram_name, diagrams_folder, embed_path, png_path, svg_files, svg_path
+from jbphh_archive.diagrams.paths import (
+    DIAGRAMS_FOLDER,
+    diagram_name,
+    diagrams_folder,
+    embed_path,
+    png_path,
+    svg_files,
+    svg_path,
+)
+
+THIS_REPO_DIAGRAMS = Path(__file__).resolve().parents[1] / "docs" / "diagrams"
+
+
+def test_diagrams_folder_is_this_repos_docs_diagrams():
+    assert DIAGRAMS_FOLDER == THIS_REPO_DIAGRAMS
+    assert DIAGRAMS_FOLDER.is_dir()
+
+
+def test_diagrams_folder_is_found_from_any_folder(tmp_path, monkeypatch):
+    monkeypatch.chdir(tmp_path)  # a notebook in notebooks/ runs from there, not the repo root
+    assert diagrams_folder() == THIS_REPO_DIAGRAMS
 
 
 def test_each_kind_of_file_has_its_own_subfolder():
@@ -34,6 +55,7 @@ def test_png_is_rebuilt_only_when_missing_or_older_than_its_svg(tmp_path):
     assert needs_png(svg, png, force=True)
 
 
-def test_missing_diagrams_folder_stops_with_a_plain_message(tmp_path):
+def test_missing_diagrams_folder_stops_with_a_plain_message(tmp_path, monkeypatch):
+    monkeypatch.setattr(paths, "DIAGRAMS_FOLDER", tmp_path / "nowhere")
     with pytest.raises(SystemExit, match="Diagrams folder not found"):
-        diagrams_folder(str(tmp_path / "nowhere"), None)
+        diagrams_folder()

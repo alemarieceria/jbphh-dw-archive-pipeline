@@ -6,15 +6,13 @@ first appears. Elements can include screenshots (PNG or JPEG) stored next to the
 Excalidraw draws the picture, so it has the same hand-drawn look as diagrams made in VS Code. Excalidraw runs in a headless browser and is loaded from
 esm.sh, so this needs an internet connection.
 
-Writes three files, named after the spec's `name`, into the diagrams folder's
-subfolders (default folder: the archive's docs/diagrams/):
+Writes three files, named after the spec's `name`, into docs/diagrams/'s subfolders:
     embeds/<name>.embed.html    the stepped diagram: open it in a browser or show it in a notebook
     svgs/<name>.excalidraw.svg  the finished drawing, which VS Code's Excalidraw extension can open
     pngs/<name>.png             the finished drawing as an image, for Word and Google Docs
 
 Usage (from the project folder):
-    uv run --env-file .env archive diagrams build docs/diagrams/specs/listing-check-by-hand.toml
-    uv run archive diagrams build <spec> --folder docs/diagrams     # write to this repo instead
+    uv run archive diagrams build docs/diagrams/specs/listing-check-by-hand.toml
 """
 
 import argparse
@@ -300,15 +298,13 @@ def main(argv: list[str] | None = None) -> int:
         prog="archive diagrams build", description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter
     )
     parser.add_argument("spec", type=Path, help="diagram spec (.toml)")
-    parser.add_argument("--archive-root", help="archive folder (default: ARCHIVE_ROOT environment variable)")
-    parser.add_argument("--folder", help="folder to write to instead of the archive's docs/diagrams/")
     args = parser.parse_args(argv)
 
     try:
         spec = load_spec(args.spec)
     except (OSError, tomllib.TOMLDecodeError, SpecError) as err:
         sys.exit(f"Could not read the spec: {err}")
-    folder = diagrams_folder(args.folder, args.archive_root)
+    folder = diagrams_folder()
     name = spec["name"]
     svg, png, embed = svg_path(folder, name), png_path(folder, name), embed_path(folder, name)
     for path in (svg, png, embed):

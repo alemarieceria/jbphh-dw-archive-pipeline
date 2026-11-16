@@ -1,8 +1,7 @@
 """Where diagram files live.
 
-Every diagrams folder (this repo's docs/diagrams/ and the archive's) has the same
-subfolders, one per kind of file, so the scripts and workflows.ipynb find files the
-same way:
+Every diagram lives in this repo's docs/diagrams/, which has one subfolder per kind of
+file, so the scripts and the notebooks find files the same way:
 
     specs/   name.toml             the editable source of a stepped diagram
     svgs/    name.excalidraw.svg   the drawing; VS Code's Excalidraw extension edits it
@@ -10,11 +9,14 @@ same way:
     embeds/  name.embed.html       the stepped (Back / Next) player
 """
 
-import os
 import sys
 from pathlib import Path
 
-DIAGRAMS_FOLDER = Path("docs") / "diagrams"  # inside this repo and inside the archive
+# Found from this file's own place (src/jbphh_archive/diagrams/paths.py), so it works from
+# any folder, including notebooks/. This relies on `uv sync` installing the project in
+# editable mode (uv's default), which keeps this file inside the repo's src/.
+REPO_ROOT = Path(__file__).resolve().parents[3]
+DIAGRAMS_FOLDER = REPO_ROOT / "docs" / "diagrams"
 SVG_SUFFIX = ".excalidraw.svg"
 
 
@@ -40,9 +42,8 @@ def svg_files(folder: Path) -> list[Path]:
     return sorted(svg_path(folder, "x").parent.glob(f"*{SVG_SUFFIX}"))
 
 
-def diagrams_folder(folder: str | None, archive_root: str | None) -> Path:
-    """The folder given with --folder, otherwise the archive's docs/diagrams/ (from ARCHIVE_ROOT)."""
-    path = Path(folder) if folder else Path(archive_root or os.environ.get("ARCHIVE_ROOT", "")) / DIAGRAMS_FOLDER
-    if not path.is_dir():
-        sys.exit(f"Diagrams folder not found at {path}. Pass --folder, or set ARCHIVE_ROOT in .env.")
-    return path
+def diagrams_folder() -> Path:
+    """This repo's docs/diagrams/, or stop with a plain message if it is missing."""
+    if not DIAGRAMS_FOLDER.is_dir():
+        sys.exit(f"Diagrams folder not found at {DIAGRAMS_FOLDER}.")
+    return DIAGRAMS_FOLDER
