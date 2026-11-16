@@ -8,7 +8,7 @@
 #   automatic checks  white, dashed #625b53        text  #1c1a17, secondary text #443f38
 
 name = "archive-pipeline"
-title = "Archive pipeline: one zone at a time"
+title = "Archive pipeline (planned): one zone at a time"
 width = 1600
 height = 900
 
@@ -50,9 +50,9 @@ strokeWidth = 0
 [[elements]]
 step = 1
 type = "text"
-x = 440
+x = 360
 y = 20
-text = "Archive pipeline: one zone at a time"
+text = "Archive pipeline (planned): one zone at a time"
 fontSize = 34
 strokeColor = "#1c1a17"
 

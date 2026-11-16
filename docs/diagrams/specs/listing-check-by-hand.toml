@@ -24,13 +24,13 @@ caption = "Open the listing address in any web browser. Two parts of it change f
 caption = "First part: who posted the reports. Use Navy or DoH, written exactly like that."
 
 [[steps]]
-caption = "Second part: the zone ID. Use one of the 19 zones with emergency response documents: A1, A2, A3, B1, C1, C2, C3, D1, D2, D3, D4, E1, F1, F2, G1, H1, H2, H3 or I1. Zone J1 was added later, during the EDWM phase, so it has none."
+caption = "Second part: the zone ID. Use one of the 19 zones with emergency response documents: A1, A2, A3, B1, C1, C2, C3, D1, D2, D3, D4, E1, F1, F2, G1, H1, H2, H3 or I1. Zone J1 (Manana Housing) was added during the EDWM phase, so it has no emergency response documents to download."
 
 [[steps]]
 caption = "Find the total at the bottom of the results. For the Navy listing of Zone I1 it says 1 - 10 of 109 Results, so 109 is the number to match."
 
 [[steps]]
-caption = "Optional: Show 10 Items, above the results, is a menu. Choose Show 100 Items so there are fewer pages to go through; 109 results then fit on 2 pages."
+caption = "Above the results, change two menus: Sort by Rank (DESC) to Sort by System Filename, and Show 10 Items to Show 100 Items. Always sort: the default order can skip or repeat files between pages. 109 results then fit on 2 pages."
 
 [[steps]]
 caption = "Click the Next page arrow to go through every page. The web address doesn't change between pages, so keep clicking until you reach the last page."
@@ -193,7 +193,26 @@ strokeColor = "#6b3fa0"
 backgroundColor = "#efe8f7"
 label = { text = "Total: 109 results\n(the number to match)", fontSize = 20 }
 
-# Step 5: the Show 10 Items menu, top right
+# Step 5: the Sort and Show menus, top right
+[[elements]]
+step = 5
+type = "rectangle"
+x = 569
+y = 441
+width = 134
+height = 32
+strokeColor = "#b35c00"
+backgroundColor = "transparent"
+strokeWidth = 3
+
+[[elements]]
+step = 5
+type = "arrow"
+x = 690
+y = 475
+points = [[0, 0], [0, 11], [205, 11], [205, 192]]  # around the step 7 box, not through it
+strokeColor = "#b35c00"
+
 [[elements]]
 step = 5
 type = "rectangle"
@@ -210,19 +229,19 @@ step = 5
 type = "arrow"
 x = 964
 y = 476
-points = [[0, 0], [-99, 190]]
+points = [[0, 0], [0, 190]]
 strokeColor = "#b35c00"
 
 [[elements]]
 step = 5
 type = "rectangle"
-x = 740
+x = 730
 y = 670
-width = 250
+width = 270
 height = 70
 strokeColor = "#b35c00"
 backgroundColor = "#fff4e5"
-label = { text = "A menu: choose\nShow 100 Items", fontSize = 20, strokeColor = "#1e1e1e" }
+label = { text = "Sort by System Filename\nShow 100 Items", fontSize = 20, strokeColor = "#1e1e1e" }
 
 # Step 6: the Next page arrow, bottom right
 [[elements]]
