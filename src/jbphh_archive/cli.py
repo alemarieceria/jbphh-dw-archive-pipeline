@@ -13,7 +13,7 @@ from jbphh_archive.diagrams import build_stepper, export_pngs
 # Step name -> (one-line summary, function that runs the step with the remaining options).
 STEPS = {
     "download": ("Download catalog rows marked to_download into raw/<site>/", download.main),
-    "diagrams png": ("Write a PNG beside each diagram SVG (only where the SVG changed)", export_pngs.main),
+    "diagrams png": ("Write a PNG in pngs/ for each SVG in svgs/ (only where the SVG changed)", export_pngs.main),
     "diagrams build": ("Build a stepped (Back / Next) diagram from its spec", build_stepper.main),
 }
 

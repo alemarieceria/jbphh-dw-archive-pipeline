@@ -6,11 +6,11 @@ first appears. Elements can include screenshots (PNG or JPEG) stored next to the
 Excalidraw draws the picture, so it has the same hand-drawn look as diagrams made in VS Code. Excalidraw runs in a headless browser and is loaded from
 esm.sh, so this needs an internet connection.
 
-Writes three files, named after the spec's `name` (default folder: the archive's
-docs/diagrams/):
-    <name>.embed.html      the stepped diagram: open it in a browser or show it in a notebook
-    <name>.excalidraw.svg  the finished drawing, which VS Code's Excalidraw extension can open
-    <name>.png             the finished drawing as an image, for Word and Google Docs
+Writes three files, named after the spec's `name`, into the diagrams folder's
+subfolders (default folder: the archive's docs/diagrams/):
+    embeds/<name>.embed.html    the stepped diagram: open it in a browser or show it in a notebook
+    svgs/<name>.excalidraw.svg  the finished drawing, which VS Code's Excalidraw extension can open
+    pngs/<name>.png             the finished drawing as an image, for Word and Google Docs
 
 Usage (from the project folder):
     uv run --env-file .env archive diagrams build docs/diagrams/specs/listing-check-by-hand.toml
@@ -20,7 +20,6 @@ Usage (from the project folder):
 import argparse
 import base64
 import json
-import os
 import re
 import sys
 import tomllib
@@ -29,7 +28,8 @@ from pathlib import Path
 
 from playwright.sync_api import sync_playwright
 
-from jbphh_archive.diagrams.export_pngs import DIAGRAMS_FOLDER, SCALE
+from jbphh_archive.diagrams.export_pngs import SCALE
+from jbphh_archive.diagrams.paths import diagrams_folder, embed_path, png_path, svg_path
 
 # Pinned versions, so the same spec always draws the same way.
 EXCALIDRAW = "https://esm.sh/@excalidraw/excalidraw@0.18.0?deps=react@19.0.0,react-dom@19.0.0"
@@ -308,18 +308,16 @@ def main(argv: list[str] | None = None) -> int:
         spec = load_spec(args.spec)
     except (OSError, tomllib.TOMLDecodeError, SpecError) as err:
         sys.exit(f"Could not read the spec: {err}")
-    if args.folder:
-        folder = Path(args.folder)
-    else:
-        folder = Path(args.archive_root or os.environ.get("ARCHIVE_ROOT", "")) / DIAGRAMS_FOLDER
-    if not folder.is_dir():
-        sys.exit(f"Diagrams folder not found at {folder}. Pass --folder, or set ARCHIVE_ROOT in .env.")
-
+    folder = diagrams_folder(args.folder, args.archive_root)
     name = spec["name"]
+    svg, png, embed = svg_path(folder, name), png_path(folder, name), embed_path(folder, name)
+    for path in (svg, png, embed):
+        path.parent.mkdir(parents=True, exist_ok=True)
+
     print(f"Drawing {len(spec['steps'])} steps of {name} with Excalidraw...")
-    frames, final = draw(spec, folder / f"{name}.png")
-    (folder / f"{name}.excalidraw.svg").write_text(final, encoding="utf-8")
-    (folder / f"{name}.embed.html").write_text(embed_file(spec, frames), encoding="utf-8")
-    for suffix in (".embed.html", ".excalidraw.svg", ".png"):
-        print(f"    saved {folder / (name + suffix)}")
+    frames, final = draw(spec, png)
+    svg.write_text(final, encoding="utf-8")
+    embed.write_text(embed_file(spec, frames), encoding="utf-8")
+    for path in (embed, svg, png):
+        print(f"    saved {path}")
     return 0

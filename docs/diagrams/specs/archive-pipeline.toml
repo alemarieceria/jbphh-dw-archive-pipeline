@@ -1,0 +1,578 @@
+# Stepped diagram: the archive pipeline, from the website to the tools that read it.
+# Build it with: uv run archive diagrams build docs/diagrams/specs/archive-pipeline.toml --folder docs/diagrams
+#
+# How this file works: see listing-check-by-hand.toml. Each element's `step` is where it first appears.
+# Colors follow the Red Hill tools design system (docs/design_system.md in the Directory repo):
+#   automatic step  #e4ece7 fill, #1f5c4a border    step done by hand  #f8efe7, #8c4a35 (thick border)
+#   data comes from or goes  #e6eef6, #2d5b85      data is stored  #dcd6cc, #443f38 (thick border)
+#   automatic checks  white, dashed #625b53        text  #1c1a17, secondary text #443f38
+
+name = "archive-pipeline"
+title = "Archive pipeline: one zone at a time"
+width = 1600
+height = 900
+
+[[steps]]
+caption = "`archive discover` reads every zone page and library listing on the Safe Waters site, plus the Navy and DOH files they link to, and proposes catalog rows. Its dated report lists new files, changed files and files the site no longer shows."
+
+[[steps]]
+caption = "You review the proposals: one decision per listing, and flagged rows one by one. Nothing reaches the catalog without your approval."
+
+[[steps]]
+caption = "`archive merge` shows a dry run, then `--apply` writes the approved rows to the catalog in this repo and gives each new document a `doc_id`. It never overwrites a value you reviewed."
+
+[[steps]]
+caption = "`archive download` saves emergency response files to the Shared Drive's `raw/` folder and records each file's SHA-256 fingerprint. Monitoring documents stay `link_only`: cataloged and linked, not downloaded."
+
+[[steps]]
+caption = "`archive verify` checks every saved file against its recorded fingerprint, so a changed or damaged file is caught."
+
+[[steps]]
+caption = "`archive publish` writes read-only copies of the catalog and an index for each zone, for the Explorer, the Evidence Tracer and the team database."
+
+[[steps]]
+caption = "GitHub Actions runs the tests and catalog checks on every change and checks the live site weekly. Any time, `uv run archive status` shows plain counts by zone and status."
+
+# ---- Background, title and the source (step 1) ----
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 0
+y = 0
+width = 1600
+height = 900
+backgroundColor = "#fbf8f3"
+fillStyle = "solid"
+strokeColor = "transparent"
+strokeWidth = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 440
+y = 20
+text = "Archive pipeline: one zone at a time"
+fontSize = 34
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "text"
+x = 330
+y = 72
+text = "Run each step with `uv run archive <step>`. Every step writes a dated report."
+fontSize = 22
+strokeColor = "#443f38"
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 20
+y = 140
+width = 230
+height = 140
+roundness = { type = 3 }
+backgroundColor = "#e6eef6"
+fillStyle = "solid"
+strokeColor = "#2d5b85"
+roughness = 0
+label = { text = "Safe Waters site\n+ linked Navy\nand DOH files", fontSize = 22, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 1
+type = "arrow"
+x = 250
+y = 210
+points = [[0, 0], [60, 0]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 310
+y = 140
+width = 230
+height = 140
+roundness = { type = 3 }
+backgroundColor = "#e4ece7"
+fillStyle = "solid"
+strokeColor = "#1f5c4a"
+roughness = 0
+label = { text = "1  discover\nfinds every file;\nproposes rows", fontSize = 22, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 1
+type = "text"
+x = 322
+y = 292
+text = "report: proposals,\nchanges, missing"
+fontSize = 21
+strokeColor = "#443f38"
+
+# ---- Legend and sources (step 1) ----
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 1210
+y = 140
+width = 360
+height = 420
+roundness = { type = 3 }
+backgroundColor = "#ffffff"
+fillStyle = "solid"
+strokeColor = "#625b53"
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1230
+y = 155
+text = "Legend"
+fontSize = 26
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 1230
+y = 210
+width = 44
+height = 30
+backgroundColor = "#e4ece7"
+fillStyle = "solid"
+strokeColor = "#1f5c4a"
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1288
+y = 212
+text = "Automatic step"
+fontSize = 22
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 1230
+y = 262
+width = 44
+height = 30
+backgroundColor = "#f8efe7"
+fillStyle = "solid"
+strokeColor = "#8c4a35"
+strokeWidth = 4
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1288
+y = 264
+text = "Step you do by hand"
+fontSize = 22
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 1230
+y = 314
+width = 44
+height = 30
+backgroundColor = "#e6eef6"
+fillStyle = "solid"
+strokeColor = "#2d5b85"
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1288
+y = 310
+text = "Where data comes\nfrom or goes"
+fontSize = 22
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 1230
+y = 388
+width = 44
+height = 30
+backgroundColor = "#dcd6cc"
+fillStyle = "solid"
+strokeColor = "#443f38"
+strokeWidth = 3
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1288
+y = 390
+text = "Where data is stored"
+fontSize = 22
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 1230
+y = 440
+width = 44
+height = 30
+backgroundColor = "#ffffff"
+fillStyle = "solid"
+strokeColor = "#625b53"
+strokeStyle = "dashed"
+strokeWidth = 3
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1288
+y = 442
+text = "Automatic checks"
+fontSize = 22
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "arrow"
+x = 1230
+y = 507
+points = [[0, 0], [44, 0]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1288
+y = 494
+text = "Data moves this way"
+fontSize = 22
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 1210
+y = 590
+width = 360
+height = 220
+roundness = { type = 3 }
+backgroundColor = "#ffffff"
+fillStyle = "solid"
+strokeColor = "#625b53"
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1230
+y = 605
+text = "Sources (click to open)"
+fontSize = 24
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "text"
+x = 1230
+y = 658
+text = "jbphh-safewaters.org"
+fontSize = 22
+strokeColor = "#1f5c4a"
+link = "https://jbphh-safewaters.org/"
+
+[[elements]]
+step = 1
+type = "text"
+x = 1230
+y = 706
+text = "cpf.navy.mil (Navy)"
+fontSize = 22
+strokeColor = "#1f5c4a"
+link = "https://www.cpf.navy.mil/"
+
+[[elements]]
+step = 1
+type = "text"
+x = 1230
+y = 754
+text = "DOH Red Hill water info"
+fontSize = 22
+strokeColor = "#1f5c4a"
+link = "https://health.hawaii.gov/about/red-hill-water-information/"
+
+# ---- Step 2: review ----
+
+[[elements]]
+step = 2
+type = "arrow"
+x = 540
+y = 210
+points = [[0, 0], [60, 0]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 2
+type = "rectangle"
+x = 600
+y = 140
+width = 230
+height = 140
+roundness = { type = 3 }
+backgroundColor = "#f8efe7"
+fillStyle = "solid"
+strokeColor = "#8c4a35"
+roughness = 0
+strokeWidth = 4
+label = { text = "2  review (you)\none decision per\nlisting; flagged\nrows one by one", fontSize = 22, strokeColor = "#1c1a17" }
+
+# ---- Step 3: merge, into the catalog in this repo ----
+
+[[elements]]
+step = 3
+type = "arrow"
+x = 830
+y = 210
+points = [[0, 0], [60, 0]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 3
+type = "rectangle"
+x = 890
+y = 140
+width = 230
+height = 140
+roundness = { type = 3 }
+backgroundColor = "#e4ece7"
+fillStyle = "solid"
+strokeColor = "#1f5c4a"
+roughness = 0
+label = { text = "3  merge\ndry run, then\n`--apply`; assigns\n`doc_id`", fontSize = 22, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 3
+type = "rectangle"
+x = 310
+y = 660
+width = 520
+height = 150
+roundness = { type = 3 }
+backgroundColor = "#dcd6cc"
+fillStyle = "solid"
+strokeColor = "#443f38"
+roughness = 0
+strokeWidth = 3
+label = { text = "Repo: `catalog/` (git history)\n`documents`, `timeline`,\n`document_links`, `zones`\nthe only place rows are edited", fontSize = 22, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 3
+type = "arrow"
+x = 1120
+y = 210
+points = [[0, 0], [40, 0], [40, 390], [-310, 390], [-310, 450]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 3
+type = "text"
+x = 860
+y = 566
+text = "rows"
+fontSize = 21
+strokeColor = "#443f38"
+
+# ---- Step 4: download, to the Shared Drive ----
+
+[[elements]]
+step = 4
+type = "arrow"
+x = 1005
+y = 280
+points = [[0, 0], [0, 120]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 4
+type = "rectangle"
+x = 890
+y = 400
+width = 230
+height = 140
+roundness = { type = 3 }
+backgroundColor = "#e4ece7"
+fillStyle = "solid"
+strokeColor = "#1f5c4a"
+roughness = 0
+label = { text = "4  download\nemergency response\nonly; monitoring\nstays `link_only`", fontSize = 22, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 4
+type = "rectangle"
+x = 890
+y = 660
+width = 230
+height = 150
+roundness = { type = 3 }
+backgroundColor = "#dcd6cc"
+fillStyle = "solid"
+strokeColor = "#443f38"
+roughness = 0
+strokeWidth = 3
+label = { text = "Shared Drive\n`raw/` files +\n`registry/`\n(read-only copy)", fontSize = 22, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 4
+type = "arrow"
+x = 1005
+y = 540
+points = [[0, 0], [0, 120]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 4
+type = "text"
+x = 1015
+y = 615
+text = "files"
+fontSize = 21
+strokeColor = "#443f38"
+
+# ---- Step 5: verify ----
+
+[[elements]]
+step = 5
+type = "arrow"
+x = 890
+y = 470
+points = [[0, 0], [-60, 0]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 5
+type = "rectangle"
+x = 600
+y = 400
+width = 230
+height = 140
+roundness = { type = 3 }
+backgroundColor = "#e4ece7"
+fillStyle = "solid"
+strokeColor = "#1f5c4a"
+roughness = 0
+label = { text = "5  verify\nevery file's\nfingerprint\nstill matches", fontSize = 22, strokeColor = "#1c1a17" }
+
+# ---- Step 6: publish, for the tools that read the archive ----
+
+[[elements]]
+step = 6
+type = "arrow"
+x = 600
+y = 470
+points = [[0, 0], [-60, 0]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 6
+type = "rectangle"
+x = 310
+y = 400
+width = 230
+height = 140
+roundness = { type = 3 }
+backgroundColor = "#e4ece7"
+fillStyle = "solid"
+strokeColor = "#1f5c4a"
+roughness = 0
+label = { text = "6  publish\nread-only copies\n+ zone indexes", fontSize = 22, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 6
+type = "arrow"
+x = 310
+y = 470
+points = [[0, 0], [-60, 0]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 6
+type = "rectangle"
+x = 20
+y = 400
+width = 230
+height = 140
+roundness = { type = 3 }
+backgroundColor = "#e6eef6"
+fillStyle = "solid"
+strokeColor = "#2d5b85"
+roughness = 0
+label = { text = "Explorer,\nEvidence Tracer,\nteam database", fontSize = 22, strokeColor = "#1c1a17" }
+
+# ---- Step 7: automatic checks and status ----
+
+[[elements]]
+step = 7
+type = "rectangle"
+x = 20
+y = 660
+width = 230
+height = 150
+roundness = { type = 3 }
+backgroundColor = "#ffffff"
+fillStyle = "solid"
+strokeColor = "#625b53"
+roughness = 0
+strokeStyle = "dashed"
+strokeWidth = 3
+label = { text = "GitHub Actions\ntests + catalog\ncheck on each\nchange; weekly\nsite check", fontSize = 21, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 7
+type = "arrow"
+x = 250
+y = 735
+points = [[0, 0], [60, 0]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+strokeStyle = "dashed"
+
+[[elements]]
+step = 7
+type = "text"
+x = 330
+y = 845
+text = "Any time: `uv run archive status` shows plain counts by zone and status."
+fontSize = 22
+strokeColor = "#443f38"
