@@ -3,7 +3,7 @@
 The one place to see what this pipeline is for, how it is organized, and what is done.
 Written by A. Ceria. Update a stage's **Status** line whenever its work changes.
 
-Last updated: 2026-11-10.
+Last updated: 2026-11-16.
 
 ## Goal
 
@@ -18,7 +18,7 @@ of the JBPHH drinking water flushing zones, in a way anyone can rerun and check:
 
 | Topic | Decision | Why |
 | --- | --- | --- |
-| Scope | Emergency response documents are downloaded. LTM, EDWM and post-EDWM documents are cataloged as `link_only` (not downloaded) so the apps can point to them. 19 flushing zones: A1, A2, A3, B1, C1, C2, C3, D1, D2, D3, D4, E1, F1, F2, G1, H1, H2, H3, I1. Zone I1 first. In the `zones` column, `all` means the 19 flushing zones plus J1 (Manana Housing). | The funder's focus is the emergency response, but the apps must still point users to later phases. DOH amended the advisory for "all 19 zones and Manana Housing" (Mar 18, 2022), so `all` includes J1, even though J1's zone page has no emergency response section. |
+| Scope | Emergency response documents are downloaded. LTM, EDWM and post-EDWM documents are cataloged as `link_only` (not downloaded) so the apps can point to them. 19 flushing zones: A1, A2, A3, B1, C1, C2, C3, D1, D2, D3, D4, E1, F1, F2, G1, H1, H2, H3, I1. Zone I1 first. In the `zones` column, `all` means the 19 flushing zones plus J1 (Manana Housing). | The funder's focus is the emergency response, but the apps must still point users to later phases. DOH amended the advisory for "all 19 zones and Manana Housing" (Mar 18, 2022), so `all` includes J1, even though J1's zone page has no emergency response section. J1 has no emergency response documents; its EDWM and post-EDWM documents are cataloged as `link_only`. |
 | Files (PDFs, page captures) | Google Shared Drive, organized by website | The team can open them without tools. A document can belong to several zones, so zones are a catalog column, not folders. |
 | Catalog (records about files) | CSV files in this repo (`catalog/`), published read-only to the Drive's `registry/` | Every change has a history and a reviewable diff; no synced-drive write problems; readable in any text editor. |
 | Discrepancy log | CSV in this repo (`catalog/discrepancies.csv`); teammates submit findings through a Google Form; `archive findings import` turns responses into proposed rows for review | History and review, without teammates needing Git. |
@@ -37,7 +37,7 @@ Each step gets a section, with a stepped diagram, in `notebooks/workflows.ipynb`
 | Step | What it answers | Status |
 | --- | --- | --- |
 | 1. How to read the notebook | How to view and run the documentation | Not started |
-| 2. The big picture | How the steps fit together | Partial: `archive-big-picture` diagram exists but needs redrawing to match this plan |
+| 2. The big picture | How the steps fit together | Partial: `archive-big-picture` maps how the pieces connect today; `archive-pipeline` (planned) shows how the archive will run, step by step. Both stay; the big picture is redrawn when the catalog moves (item 6 of the order of work). |
 | 3. Scope | Which zones, which dates, zone versus system-wide documents | Partial: decided above; `catalog/zones.csv` not yet made |
 | 4. Discovery | Which documents exist for a zone, and how do we know we have them all? | Partial (see below) |
 | 5. Cataloging | Turning found documents into reviewed catalog rows | Partial: I1's 169 rows were built by hand; no script |
@@ -134,18 +134,19 @@ jbphh-dw-archive-pipeline/
 │                       wayback, verify, publish, findings, diagrams/
 ├── tests/              unit tests, with fixtures/ (saved pages, small catalogs)
 ├── notebooks/          workflows.ipynb, zones.ipynb
-└── docs/               this plan, diagrams/ (specs, screenshots)
+└── docs/               this plan, diagrams/ (specs, svgs, pngs, embeds, screenshots)
 
 Shared Drive: raw/, web-captures/, registry/ (published, read-only), reports/ (published),
-docs/diagrams/, derived/ (including derived/zone-index/)
+derived/ (including derived/zone-index/)
 ```
 
 ## Order of work
 
 1. **Restructure** this repo into `src/jbphh_archive/` with one `archive` command; move
    `scripts/` code in, with tests proving nothing changed.
-2. **Big picture:** redraw it to match this plan; set up `notebooks/workflows.ipynb` with
-   the step outline above.
+2. **Big picture:** keep `archive-big-picture` as the map of every component and
+   `archive-pipeline` as the step-by-step view; redraw the big picture when the catalog
+   moves (item 6). Add the step outline above to `notebooks/workflows.ipynb`.
 3. **Scope and Discovery for I1:** `catalog/zones.csv`, then `archive inventory --zone I1`
    (listings and zone page against the catalog), checked against the known I1 facts.
 4. **Cataloging:** `archive discover --zone I1` proposes rows; it should reproduce I1's
