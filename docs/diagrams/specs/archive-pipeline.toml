@@ -2,10 +2,7 @@
 # Build it with: uv run archive diagrams build docs/diagrams/specs/archive-pipeline.toml
 #
 # How this file works: see listing-check-by-hand.toml. Each element's `step` is where it first appears.
-# Colors follow the Red Hill tools design system (docs/design_system.md in the Directory repo):
-#   automatic step  #e4ece7 fill, #1f5c4a border    step done by hand  #f8efe7, #8c4a35 (thick border)
-#   data comes from or goes  #e6eef6, #2d5b85      data is stored  #dcd6cc, #443f38 (thick border)
-#   automatic checks  white, dashed #625b53        text  #1c1a17, secondary text #443f38
+# Colors, sizes and wording follow the style rules in docs/diagrams/README.md.
 
 name = "archive-pipeline"
 title = "Archive pipeline (planned): one zone at a time"
@@ -28,7 +25,7 @@ caption = "`archive download` saves emergency response files to the Shared Drive
 caption = "`archive verify` checks every saved file against its recorded fingerprint, so a changed or damaged file is caught."
 
 [[steps]]
-caption = "`archive publish` writes read-only copies of the catalog and an index for each zone, for the Explorer, the Evidence Tracer and the team database."
+caption = "`archive publish` writes read-only copies of the catalog and an index for each zone, for the Explorer (Address Lookup, Glossary and Directory) and the Evidence Tracer."
 
 [[steps]]
 caption = "GitHub Actions runs the tests and catalog checks on every change and checks the live site weekly. Any time, `uv run archive status` shows plain counts by zone and status."
@@ -50,18 +47,18 @@ strokeWidth = 0
 [[elements]]
 step = 1
 type = "text"
-x = 360
+x = 401
 y = 20
 text = "Archive pipeline (planned): one zone at a time"
-fontSize = 34
+fontSize = 36
 strokeColor = "#1c1a17"
 
 [[elements]]
 step = 1
 type = "text"
-x = 330
+x = 367
 y = 72
-text = "Run each step with `uv run archive <step>`. Every step writes a dated report."
+text = "Inside the archive: how one zone's documents are found, checked and published."
 fontSize = 22
 strokeColor = "#443f38"
 
@@ -77,7 +74,7 @@ backgroundColor = "#e6eef6"
 fillStyle = "solid"
 strokeColor = "#2d5b85"
 roughness = 0
-label = { text = "Safe Waters site\n+ linked Navy\nand DOH files", fontSize = 22, strokeColor = "#1c1a17" }
+label = { text = "Safe Waters site\n+ linked Navy\nand DOH files", fontSize = 20, strokeColor = "#1c1a17" }
 
 [[elements]]
 step = 1
@@ -101,7 +98,7 @@ backgroundColor = "#e4ece7"
 fillStyle = "solid"
 strokeColor = "#1f5c4a"
 roughness = 0
-label = { text = "1  discover\nfinds every file;\nproposes rows", fontSize = 22, strokeColor = "#1c1a17" }
+label = { text = "1. `discover`\nfinds every file;\nproposes rows", fontSize = 20, strokeColor = "#1c1a17" }
 
 [[elements]]
 step = 1
@@ -109,7 +106,7 @@ type = "text"
 x = 322
 y = 292
 text = "report: proposals,\nchanges, missing"
-fontSize = 21
+fontSize = 18
 strokeColor = "#443f38"
 
 # ---- Legend and sources (step 1) ----
@@ -133,7 +130,7 @@ type = "text"
 x = 1230
 y = 155
 text = "Legend"
-fontSize = 26
+fontSize = 24
 strokeColor = "#1c1a17"
 
 [[elements]]
@@ -154,7 +151,7 @@ type = "text"
 x = 1288
 y = 212
 text = "Automatic step"
-fontSize = 22
+fontSize = 20
 strokeColor = "#1c1a17"
 
 [[elements]]
@@ -176,7 +173,7 @@ type = "text"
 x = 1288
 y = 264
 text = "Step you do by hand"
-fontSize = 22
+fontSize = 20
 strokeColor = "#1c1a17"
 
 [[elements]]
@@ -197,7 +194,7 @@ type = "text"
 x = 1288
 y = 310
 text = "Where data comes\nfrom or goes"
-fontSize = 22
+fontSize = 20
 strokeColor = "#1c1a17"
 
 [[elements]]
@@ -219,7 +216,7 @@ type = "text"
 x = 1288
 y = 390
 text = "Where data is stored"
-fontSize = 22
+fontSize = 20
 strokeColor = "#1c1a17"
 
 [[elements]]
@@ -242,7 +239,7 @@ type = "text"
 x = 1288
 y = 442
 text = "Automatic checks"
-fontSize = 22
+fontSize = 20
 strokeColor = "#1c1a17"
 
 [[elements]]
@@ -261,7 +258,7 @@ type = "text"
 x = 1288
 y = 494
 text = "Data moves this way"
-fontSize = 22
+fontSize = 20
 strokeColor = "#1c1a17"
 
 [[elements]]
@@ -292,7 +289,7 @@ type = "text"
 x = 1230
 y = 658
 text = "jbphh-safewaters.org"
-fontSize = 22
+fontSize = 20
 strokeColor = "#1f5c4a"
 link = "https://jbphh-safewaters.org/"
 
@@ -302,7 +299,7 @@ type = "text"
 x = 1230
 y = 706
 text = "cpf.navy.mil (Navy)"
-fontSize = 22
+fontSize = 20
 strokeColor = "#1f5c4a"
 link = "https://www.cpf.navy.mil/"
 
@@ -312,7 +309,7 @@ type = "text"
 x = 1230
 y = 754
 text = "DOH Red Hill water info"
-fontSize = 22
+fontSize = 20
 strokeColor = "#1f5c4a"
 link = "https://health.hawaii.gov/about/red-hill-water-information/"
 
@@ -341,7 +338,7 @@ fillStyle = "solid"
 strokeColor = "#8c4a35"
 roughness = 0
 strokeWidth = 4
-label = { text = "2  review (you)\none decision per\nlisting; flagged\nrows one by one", fontSize = 22, strokeColor = "#1c1a17" }
+label = { text = "2. Review (you)\none decision per\nlisting; flagged\nrows one by one", fontSize = 20, strokeColor = "#1c1a17" }
 
 # ---- Step 3: merge, into the catalog in this repo ----
 
@@ -367,7 +364,7 @@ backgroundColor = "#e4ece7"
 fillStyle = "solid"
 strokeColor = "#1f5c4a"
 roughness = 0
-label = { text = "3  merge\ndry run, then\n`--apply`; assigns\n`doc_id`", fontSize = 22, strokeColor = "#1c1a17" }
+label = { text = "3. `merge`\ndry run, then\n`--apply`; assigns\n`doc_id`", fontSize = 20, strokeColor = "#1c1a17" }
 
 [[elements]]
 step = 3
@@ -382,7 +379,7 @@ fillStyle = "solid"
 strokeColor = "#443f38"
 roughness = 0
 strokeWidth = 3
-label = { text = "Repo: `catalog/` (git history)\n`documents`, `timeline`,\n`document_links`, `zones`\nthe only place rows are edited", fontSize = 22, strokeColor = "#1c1a17" }
+label = { text = "Repo: `catalog/` (git history)\n`documents`, `timeline`,\n`document_links`, `zones`\nthe only place rows are edited", fontSize = 20, strokeColor = "#1c1a17" }
 
 [[elements]]
 step = 3
@@ -400,7 +397,7 @@ type = "text"
 x = 860
 y = 566
 text = "rows"
-fontSize = 21
+fontSize = 18
 strokeColor = "#443f38"
 
 # ---- Step 4: download, to the Shared Drive ----
@@ -427,7 +424,7 @@ backgroundColor = "#e4ece7"
 fillStyle = "solid"
 strokeColor = "#1f5c4a"
 roughness = 0
-label = { text = "4  download\nemergency response\nonly; monitoring\nstays `link_only`", fontSize = 22, strokeColor = "#1c1a17" }
+label = { text = "4. `download`\nemergency response\nonly; monitoring\nstays `link_only`", fontSize = 20, strokeColor = "#1c1a17" }
 
 [[elements]]
 step = 4
@@ -442,7 +439,7 @@ fillStyle = "solid"
 strokeColor = "#443f38"
 roughness = 0
 strokeWidth = 3
-label = { text = "Shared Drive\n`raw/` files +\n`registry/`\n(read-only copy)", fontSize = 22, strokeColor = "#1c1a17" }
+label = { text = "Shared Drive\n`raw/` files +\n`registry/`\n(read-only copy)", fontSize = 20, strokeColor = "#1c1a17" }
 
 [[elements]]
 step = 4
@@ -460,7 +457,7 @@ type = "text"
 x = 1015
 y = 615
 text = "files"
-fontSize = 21
+fontSize = 18
 strokeColor = "#443f38"
 
 # ---- Step 5: verify ----
@@ -487,7 +484,7 @@ backgroundColor = "#e4ece7"
 fillStyle = "solid"
 strokeColor = "#1f5c4a"
 roughness = 0
-label = { text = "5  verify\nevery file's\nfingerprint\nstill matches", fontSize = 22, strokeColor = "#1c1a17" }
+label = { text = "5. `verify`\nevery file's\nfingerprint\nstill matches", fontSize = 20, strokeColor = "#1c1a17" }
 
 # ---- Step 6: publish, for the tools that read the archive ----
 
@@ -513,7 +510,7 @@ backgroundColor = "#e4ece7"
 fillStyle = "solid"
 strokeColor = "#1f5c4a"
 roughness = 0
-label = { text = "6  publish\nread-only copies\n+ zone indexes", fontSize = 22, strokeColor = "#1c1a17" }
+label = { text = "6. `publish`\nread-only copies\n+ zone indexes", fontSize = 20, strokeColor = "#1c1a17" }
 
 [[elements]]
 step = 6
@@ -537,7 +534,7 @@ backgroundColor = "#e6eef6"
 fillStyle = "solid"
 strokeColor = "#2d5b85"
 roughness = 0
-label = { text = "Explorer,\nEvidence Tracer,\nteam database", fontSize = 22, strokeColor = "#1c1a17" }
+label = { text = "Explorer:\nAddress Lookup,\nGlossary, Directory\n+ Evidence Tracer", fontSize = 20, strokeColor = "#1c1a17" }
 
 # ---- Step 7: automatic checks and status ----
 
@@ -555,7 +552,7 @@ strokeColor = "#625b53"
 roughness = 0
 strokeStyle = "dashed"
 strokeWidth = 3
-label = { text = "GitHub Actions\ntests + catalog\ncheck on each\nchange; weekly\nsite check", fontSize = 21, strokeColor = "#1c1a17" }
+label = { text = "GitHub Actions\ntests + catalog\ncheck on each\nchange; weekly\nsite check", fontSize = 20, strokeColor = "#1c1a17" }
 
 [[elements]]
 step = 7
@@ -569,10 +566,19 @@ roughness = 0
 strokeStyle = "dashed"
 
 [[elements]]
+step = 1
+type = "text"
+x = 371
+y = 832
+text = "Run each step with `uv run archive <step>`; every step writes a dated report."
+fontSize = 22
+strokeColor = "#443f38"
+
+[[elements]]
 step = 7
 type = "text"
-x = 330
-y = 845
-text = "Any time: `uv run archive status` shows plain counts by zone and status."
+x = 397
+y = 862
+text = "Any time, `uv run archive status` shows plain counts by zone and status."
 fontSize = 22
 strokeColor = "#443f38"

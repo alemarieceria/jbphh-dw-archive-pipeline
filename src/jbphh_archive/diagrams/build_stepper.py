@@ -90,7 +90,8 @@ DRAW_JS = r"""async ({url, elements, width, height, files}) => {
 
   const stepOf = {};
   for (const el of expanded) stepOf[el.id] = el.step;
-  const plain = expanded.map(({step, marks, ...rest}) => rest);
+  // Clean lines unless an element asks otherwise (docs/diagrams/README.md).
+  const plain = expanded.map(({step, marks, ...rest}) => ({roughness: 0, ...rest}));
   const canvas = {type: "rectangle", id: "canvas", x: 0, y: 0, width, height,
                   strokeColor: "transparent", backgroundColor: "transparent"};
   const all = ex.convertToExcalidrawElements([canvas, ...plain], {regenerateIds: false});
