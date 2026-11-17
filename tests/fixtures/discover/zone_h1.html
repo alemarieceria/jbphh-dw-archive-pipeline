@@ -1,0 +1,237 @@
+
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en-us">
+<head><title>
+
+</title>
+
+    <style>
+        html {
+            background-size: cover;
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        /***** CONTAINERS (BARS) *****/
+
+        #divHtmlContent {
+            /* background-color: brown; */
+            font-family: Arial, Verdana;
+            font-size: 12px;
+            line-height: 18px;
+            margin-left: 20px;
+            overflow: clip;
+            /*position: absolute;*/
+            margin-right: 20px;
+            text-align: left;
+            text-indent: 0px;
+            margin-top: 10px;
+        }
+
+        /* Non-standard styles just for BannerHTML */
+        /*******************************************/
+
+        #divBannerBar {
+            /* background-color: green; */
+            height: 100%;
+            width: 100%;
+            overflow: clip;
+        }
+
+    </style>
+</head>
+<body>
+    <form method="post" action="./html.aspx?dsn=SYSTM&amp;idHTML=10755" id="form1">
+<input type="hidden" name="RadScriptManager2_TSM" id="RadScriptManager2_TSM" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
+
+
+<script src="/public/framework/Telerik.Web.UI.WebResource.axd?_TSM_HiddenField_=RadScriptManager2_TSM&amp;compress=1&amp;_TSM_CombinedScripts_=%3b%3bSystem.Web.Extensions%2c+Version%3d4.0.0.0%2c+Culture%3dneutral%2c+PublicKeyToken%3d31bf3856ad364e35%3aen-US%3add3ac3d5-1e29-4112-8fed-529caffa8f24%3aea597d4b" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+if (typeof(Sys) === 'undefined') throw new Error('ASP.NET Ajax client-side framework failed to load.');
+//]]>
+</script>
+
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/Core.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/jQuery.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/jQueryInclude.js" type="text/javascript"></script>
+<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="82D0E615" />
+        
+        <div id="divBannerBar">
+            <div id="divHtmlContent">
+                <style>
+    #parent   { height: none; width: 1204px; overflow: visible; }
+    div#text1 { position:absolute; left:40px; top:40px; width:280px; height:200px; }
+    div#text2 { position:absolute; left:450px; top:40px; width:680px; height:200px; }
+    div#text3 { position:absolute; left:450px; top:840px; width:680px; height:200px; }
+    div#text4 { position:absolute; left:425px; top:2220px; width:695px; height:50px; }
+    .heading  { font-weight: 700; font-size: 20px; }
+    .icon     { width: 18px; height: 18px; padding-right: 10px; vertical-align: middle; }
+    .link     { color: #0096d6; font-weight: 400; text-decoration: none; }
+    /* Collapsible Header / Content Styles  */
+    input { display: none; }
+    label { padding-left: 122px !important; display: block; padding: 6px 22px; margin: 0 0 1px 0; cursor: pointer; border-radius: 3px; color: black; transition: ease .5s; position: relative; }
+    label::after { content: '+ Expand for more information on the Emergency Response'; font-family: 'Segoe UI'; font-size: 16px; color: #333333; position: absolute; left: 12px; top: 5px; }
+    input:checked + label::after { content: '- Contract for more information on the Emergency Response'; left: 12px; top: 5px; }
+    .content { padding: 10px 25px; margin: 0 0 1px 0; border-radius: 3px; }
+    input + label + .content { display: none; }
+    input:checked + label + .content { display: block; }
+</style>
+<div id="parent">
+<div id="text1">
+<img src="../common/jbphh_default/framework/zone_h1_outline_green.png" alt="Zone H1 Profile" style="vertical-align: middle; padding-right: 10px;" />
+<p><span style="line-height: 160%; font-family: 'Segoe UI'; font-size: 16px; color: #333333;"><strong>Communities:</strong><br />
+Aliamanu Military Reservation (918 Homes)<br />
+<br />
+<strong>Interactive Map:</strong><br />
+<a style="font-weight: 500;" class="link" href="https://app.powerbi.com/view?r=eyJrIjoiNTIyNDU0OTMtODgwNS00ZjQ4LTg1Y2UtODkxYTgxMjQ5NGZhIiwidCI6ImUyYzE5MDhiLTI2NzItNGE0Ni05M2ZkLTdmMDhkYTExNjZiNSIsImMiOjJ9" target="_blank"><img src="../common/jbphh_default/framework/icon_external_link.svg" alt="Link" class="icon" />View Interactive Results Map</a><br />
+<br />
+<strong>Last Updated:</strong><br />
+07 April 2026<br />
+<!-- EDWM SECTION -->
+<br />
+</span>
+</p>
+</div>
+<div id="text2" style="line-height: 160%; font-family: 'Segoe UI'; font-size: 16px; color: #333333;">
+<div class="heading">Extended Drinking Water Monitoring</div>
+In April 2024, the Navy began a voluntary 12 month extended drinking water monitoring (EDWM) program, which will collect 5,800 drinking water samples from homes that weren&rsquo;t sampled in the previous Long Term Monitoring program (LTM). We will continue to collect drinking water samples at all schools, child development centers, Waiawa Shaft and hydrants throughout the distribution system monthly. Stage 5 data summary reports with an overview of what was found will be posted at the end of each quarter. Additionally, specific results from each location in this zone are posted monthly with their corresponding time period.<br />
+<br />
+<strong>Quarter 1 - Samples Collected April through June of 2024</strong><br />
+<a class="link" href="https://jbphh-safewaters.org/public/EDWM_Q1_Sampling_Results_Zone_H1_29JUL2025.pdf" target="_blank"><img src="../common/jbphh_default/framework/icon_pdf.svg" alt="PDF" class="icon" />Sampling Results for Zone H1 EDWM Q1</a><br />
+<a class="link" href="https://jbphh-safewaters.org/public/EDWM_Q1_Sampling_Results_Waiawa_Shaft_24JUL2025.pdf" target="_blank"><img src="../common/jbphh_default/framework/icon_pdf.svg" alt="PDF" class="icon" />Sampling Results for Waiawa Shaft EDWM Q1</a><br />
+<br />
+<strong>Quarter 2 - Samples Collected July through September of 2024</strong><br />
+<a class="link" href="https://jbphh-safewaters.org/public/EDWM_Q2_Sampling_Results_Zone_H1_29JUL2025.pdf" target="_blank"><img src="../common/jbphh_default/framework/icon_pdf.svg" alt="PDF" class="icon" />Sampling Results for Zone H1 EDWM Q2</a><br />
+<a class="link" href="https://jbphh-safewaters.org/public/EDWM_Q2_Sampling_Results_Waiawa_Shaft_24JUL2025.pdf" target="_blank"><img src="../common/jbphh_default/framework/icon_pdf.svg" alt="PDF" class="icon" />Sampling Results for Waiawa Shaft EDWM Q2</a><br />
+<br />
+<strong>Quarter 3 - Samples Collected October through December of 2024</strong><br />
+<a class="link" href="https://jbphh-safewaters.org/public/EDWM_Q3_Sampling_Results_Zone_H1_30JUL2025.pdf" target="_blank"><img src="../common/jbphh_default/framework/icon_pdf.svg" alt="PDF" class="icon" />Sampling Results for Zone H1 EDWM Q3</a><br />
+<a class="link" href="https://jbphh-safewaters.org/public/EDWM_Q3_Sampling_Results_Waiawa_Shaft_24JUL2025.pdf" target="_blank"><img src="../common/jbphh_default/framework/icon_pdf.svg" alt="PDF" class="icon" />Sampling Results for Waiawa Shaft EDWM Q3</a><br />
+<br />
+<strong>Quarter 4 - Samples Collected January through March of 2025</strong><br />
+<a class="link" href="https://jbphh-safewaters.org/public/EDWM_Q4_Sampling_Results_Zone_H1_31JUL2025.pdf" target="_blank"><img src="../common/jbphh_default/framework/icon_pdf.svg" alt="PDF" class="icon" />Sampling Results for Zone H1 EDWM Q4</a><br />
+<a class="link" href="https://jbphh-safewaters.org/public/EDWM_Q4_Sampling_Results_Waiawa_Shaft_24JUL2025.pdf" target="_blank"><img src="../common/jbphh_default/framework/icon_pdf.svg" alt="PDF" class="icon" />Sampling Results for Waiawa Shaft EDWM Q4</a><br />
+<br />
+<strong>Post-EDWM (PEM) - Samples Collected from April 2025 onward</strong><br />
+<a class="link" href="https://jbphh-safewaters.org/public/EDWM_PEM_Zone_H1_20260406.pdf" target="_blank"><img src="../common/jbphh_default/framework/icon_pdf.svg" alt="PDF" class="icon" />Sampling Results for Zone H1 PEM</a><br />
+<br />
+<strong>Supporting EDWM Documentation</strong><br />
+<a class="link" href="https://jbphh-safewaters.org/public/framework/appcontainer.aspx?url=../library/searchresults.aspx&amp;dsn=pub&amp;category=JBPHH&amp;subcategory=EDWM&amp;title=EDWM%20Laboratory%20Reports&amp;idMenu=88894&amp;ddlDSN=SYSTM" target="_blank"><img src="../common/jbphh_default/framework/icon_internal_link.svg" alt="link" class="icon" />EDWM Laboratory Reports</a><br />
+<br />
+</div>
+<!-- LTM SECTION -->
+<br />
+<p>&nbsp;</p>
+</div>
+<div id="text3" style="line-height: 160%; font-family: 'Segoe UI'; font-size: 16px; color: #333333;">
+<div class="heading">Drinking Water Long Term Monitoring</div>
+In March 2022 the Navy began a two year long-term monitoring program, which will collect 7,800 samples from homes, schools, child development centers, other buildings and hydrants throughout the distribution system. Long-term monitoring is planned over 7 Periods and a Stage 5 data summary report with an overview of what was found will be posted at the end of each Period. Additionally, specific results from each location in this zone are posted monthly with their corresponding time period.<br />
+<br />
+<strong>Period 1 - Samples Collected March through April of 2022</strong><br />
+<a class="link" href="https://jbphh-safewaters.org/public/LTM_Month_1_Stage_5_Report_Zone_H1_19MAY2022.pdf" target="_blank"><img src="../common/jbphh_default/framework/icon_pdf.svg" alt="PDF" class="icon" />Data Summary for Zone H1 Stage 5 Long-Term Monitoring Period 1, 19 May 2022</a><br />
+<a class="link" href="https://jbphh-safewaters.org/public/LTM_Month_1_Sampling_Results_Zone_H1_06JUN2022.pdf" target="_blank"><img src="../common/jbphh_default/framework/icon_pdf.svg" alt="PDF" class="icon" />Sampling Results for Zone H1 Long-Term Monitoring Period 1, 06 June 2022</a><br />
+<br />
+<strong>Period 2 - Samples Collected April through May of 2022</strong><br />
+<a class="link" href="https://jbphh-safewaters.org/public/LTM_Month_2_Stage_5_Report_Zone_H1_23JUN2022.pdf" target="_blank"><img src="../common/jbphh_default/framework/icon_pdf.svg" alt="PDF" class="icon" />Data Summary for Zone H1 Stage 5 Long-Term Monitoring Period 2, 23 June 2022</a><br />
+<a class="link" href="https://jbphh-safewaters.org/public/LTM_Month_2_Sampling_Results_Zone_H1_13JUN2022.pdf" target="_blank"><img src="../common/jbphh_default/framework/icon_pdf.svg" alt="PDF" class="icon" />Sampling Results for Zone H1 Long-Term Monitoring Period 2, 13 June 2022</a><br />
+<br />
+<strong>Period 3 - Samples Collected May through June of 2022</strong><br />
+<a class="link" href="https://jbphh-safewaters.org/public/LTM_Month_3_Stage_5_Report_Zone_H1_17AUG2022.pdf" target="_blank"><img src="../common/jbphh_default/framework/icon_pdf.svg" alt="PDF" class="icon" />Data Summary for Zone H1 Stage 5 Long-Term Monitoring Period 3, 17 August 2022</a><br />
+<a class="link" href="https://jbphh-safewaters.org/public/LTM_Month_3_Sampling_Results_Zone_H1_05AUG2022.pdf" target="_blank"><img src="../common/jbphh_default/framework/icon_pdf.svg" alt="PDF" class="icon" />Sampling Results for Zone H1 Long-Term Monitoring Period 3, 05 August 2022</a><br />
+<br />
+<strong>Period 4 - Samples Collected June through December of 2022</strong><br />
+<a class="link" href="https://jbphh-safewaters.org/public/LTM_Month_4_Stage_5_Report_Zone_H1_22DEC2022.pdf" target="_blank"><img src="../common/jbphh_default/framework/icon_pdf.svg" alt="PDF" class="icon" />Data Summary for Zone H1 Stage 5 Long-Term Monitoring Period 4, 22 December 2022</a><br />
+<a class="link" href="https://jbphh-safewaters.org/public/LTM_Month_4-9_Sampling_Results_Zone_H1_22DEC2022.pdf" target="_blank"><img src="../common/jbphh_default/framework/icon_pdf.svg" alt="PDF" class="icon" />Sampling Results for Zone H1 Long-Term Monitoring Period 4, 22 December 2022</a><br />
+<br />
+<strong>Period 5 - Samples Collected January through June of 2023</strong><br />
+<a class="link" href="https://jbphh-safewaters.org/public/LTM_Period_5_Stage_5_Report_Zone_H1_FINAL.pdf" target="_blank"><img src="../common/jbphh_default/framework/icon_pdf.svg" alt="PDF" class="icon" />Data Summary for Zone H1 Stage 5 Long-Term Monitoring Period 5, 30 June 2023</a><br />
+<a class="link" href="https://jbphh-safewaters.org/public/LTM_Month_10-15_Sampling_Results_Zone_H1_23JUN2023.pdf" target="_blank"><img src="../common/jbphh_default/framework/icon_pdf.svg" alt="PDF" class="icon" />Sampling Results for Zone H1 Long-Term Monitoring Period 5, 23 June 2023</a><br />
+<br />
+<strong>Period 6 - Samples Collected July through December of 2023</strong><br />
+<a class="link" href="https://jbphh-safewaters.org/public/LTM_Period_6_Stage_5_Report_Zone_H1_FINAL.pdf" target="_blank"><img src="../common/jbphh_default/framework/icon_pdf.svg" alt="PDF" class="icon" />Data Summary for Zone H1 Stage 5 Long-Term Monitoring Period 6, 29 December 2023</a><br />
+<a class="link" href="https://jbphh-safewaters.org/public/LTM_Month_16-21_Sampling_Results_Zone_H1_29DEC2023.pdf" target="_blank"><img src="../common/jbphh_default/framework/icon_pdf.svg" alt="PDF" class="icon" />Sampling Results for Zone H1 Long-Term Monitoring Period 6, 29 December 2023</a><br />
+<br />
+<strong>Period 7 - Samples Collected January through March of 2024</strong><br />
+<a class="link" href="https://jbphh-safewaters.org/public/LTM_Period_7_Sampling_Results_Zone_H1_21JUN2024.pdf" target="_blank"><img src="../common/jbphh_default/framework/icon_pdf.svg" alt="PDF" class="icon" />Sampling Results for Zone H1 Long-Term Monitoring Period 7, 21 June 2024</a><br />
+<br />
+<strong>Waiawa Shaft PFAS Data</strong><br />
+Since December 3, 2021, the Navy water distribution system has been sourced only by the Waiawa shaft. Water from the Waiawa shaft, located 6.2 miles from Red Hill, remains safe and is monitored under the interagency-approved long-term monitoring plan for the Navy water distribution system to ensure it meets DOH and EPA standards for safe drinking water.<br />
+<a class="link" href="https://jbphh-safewaters.org/public/Waiawa_Shaft_PFAS_Results_06JUN23.pdf" target="_blank"><img src="../common/jbphh_default/framework/icon_pdf.svg" alt="PDF" class="icon" />Waiawa Shaft PFAS Results (April 2023)</a><br />
+<br />
+<strong>Supporting LTM Documentation</strong><br />
+<a class="link" href="https://jbphh-safewaters.org/public/framework/appcontainer.aspx?url=../library/searchresults.aspx&amp;dsn=pub&amp;category=JBPHH&amp;subcategory=LTM%20Flushing%20Zone%20H1&amp;title=LTM%20Laboratory%20Reports%20for%20Zone%20H1%20Stage%205&amp;idMenu=88894&amp;ddlDSN=SYSTM" target="_blank"><img src="../common/jbphh_default/framework/icon_internal_link.svg" alt="Internal Link" class="icon" />LTM Laboratory Reports for Zone H1 Stage 5, 20 August 2022</a><br />
+<br />
+<br />
+<!-- ER SECTION -->
+<div class="heading">Emergency Response</div>
+In December 2021, as an emergency response to contamination in the water system, the Navy began execution of the Drinking Water System Recovery Plan, which was approved by the Hawaii Department of Health and the Environmental Protection Agency. The plan involved 5 Stages of recovery, distribution system flushing, distribution system sampling, home and building flushing, home and building sampling, and long-term monitoring. All of the data summaries and results from Stages 1-4 are posted in this section for public awareness.<br />
+<br />
+</div>
+<div id="text4" style="line-height: 160%; font-family: 'Segoe UI'; font-size: 16px; color: #333333;">
+<input type="checkbox" id="title1" />
+<label for="title1"></label><!-- See label/label:after styles above to see content displayed during expand contract -->
+<div class="content">
+<br />
+<strong>Immediate Drinking Water Sampling Plan and Results - December 2021</strong><br />
+<a class="link" href="https://jbphh-safewaters.org/public/Immediate_Drinking_Water_Sampling_Plan_and_Results.pdf" target="_blank"><img src="../common/jbphh_default/framework/icon_pdf.svg" alt="PDF" class="icon" />JBPHH Immediate Drinking Water Sampling Plan and Results</a><br />
+<br />
+<strong>Post System Flushing Data</strong><br />
+<a class="link" href="https://jbphh-safewaters.org/public/Data_Summary_for_Zone_H1_Stage_2_Updated_8_March_2022.pdf" target="_blank"><img src="../common/jbphh_default/framework/icon_pdf.svg" alt="PDF" class="icon" />Data Summary for Zone H1 Stage 2, Updated 08 March 2022</a><br />
+<a class="link" href="https://www.cpf.navy.mil/Portals/52/Downloads/JBPHH-Water-Updates/2022-02-03-flushing-zone-h1-lab-reports-stage-2-data-release.pdf" target="_blank"><img src="../common/jbphh_default/framework/icon_external_link.svg" alt="External Link" class="icon" />Laboratory Reports for Zone H1 Stage 2, 03 February 2022</a><br />
+<a class="link" href="https://jbphh-safewaters.org/public/Corrective_Action_for_BCEE_False_Positive_Results.pdf" target="_blank"><img src="../common/jbphh_default/framework/icon_pdf.svg" alt="PDF" class="icon" />Corrective Action for bis(2-Chloroethyl)ether False Positive Results</a><br />
+<br />
+<strong>Post Residential and Non-Residential Flushing Data</strong><br />
+<a class="link" href="https://jbphh-safewaters.org/public/H1_Flushing_Zone_IDWST_Stage_4_Data_Release_02MAR2022.pdf" target="_blank"><img src="../common/jbphh_default/framework/icon_pdf.svg" alt="PDF" class="icon" />Data Summary for Zone H1 Stage 4 Emergency Response, 02 March 2022</a><br />
+<a class="link" href="https://jbphh-safewaters.org/public/ER_Sampling_Results_Zone_H1_07MAR2022.pdf" target="_blank"><img src="../common/jbphh_default/framework/icon_pdf.svg" alt="PDF" class="icon" />Sampling Results for Zone H1 Emergency Response, 07 March 2022</a><br />
+<a class="link" href="https://jbphh-safewaters.org/public/framework/appcontainer.aspx?url=../library/searchresults.aspx&amp;dsn=pub&amp;category=JBPHH&amp;subcategory=DoH%20Flushing%20Zone%20H1&amp;title=Hawaii%20DoH%20Laboratory%20Reports%20for%20Zone%20H1%20Stage%204&amp;idMenu=88894&amp;ddlDSN=SYSTM" target="_blank"><img src="../common/jbphh_default/framework/icon_internal_link.svg" alt="Internal Link" class="icon" />Hawaii DoH Laboratory Reports for Zone H1 Stage 4, 02 March 2022</a><br />
+<a class="link" href="https://jbphh-safewaters.org/public/framework/appcontainer.aspx?url=../library/searchresults.aspx&amp;dsn=pub&amp;category=JBPHH&amp;subcategory=Navy%20Flushing%20Zone%20H1&amp;title=Navy%20Laboratory%20Reports%20for%20Zone%20H1%20Stage%204&amp;idMenu=88894&amp;ddlDSN=SYSTM" target="_blank"><img src="../common/jbphh_default/framework/icon_internal_link.svg" alt="Internal Link" class="icon" />Navy Laboratory Reports for Zone H1 Stage 4, 02 March 2022</a><br />
+<br />
+<strong>Current Status of the Hawaii Department of Health Public Health Advisory</strong><br />
+<a class="link" href="https://health.hawaii.gov/about/files/2022/03/jbphh_010780.pdf" target="_blank"><img src="../common/jbphh_default/framework/icon_external_link.svg" alt="External Link" class="icon" />Documentation to Support Amendment of Health Advisory for Zone H1</a><br />
+<a class="link" href="https://health.hawaii.gov/news/newsroom/doh-declares-navy-drinking-water-distribution-system-zones-b1-g1-h1-safe/" target="_blank"><img src="../common/jbphh_default/framework/icon_external_link.svg" alt="External Link" class="icon" />Amended Health Advisory for Zone H1</a><br />
+<br />
+</div>
+</div>
+            </div>
+        </div>
+    
+
+<script type="text/javascript">
+//<![CDATA[
+window.__TsmHiddenField = $get('RadScriptManager2_TSM');//]]>
+</script>
+</form>
+
+    <script type="text/javascript">
+
+        var Height = 0;
+
+        function SizeFrameHeightInParent() {
+            if (typeof window.parent.SizeFrameHeight == 'function') {
+                //alert('There is parent SizeFrameHeight!');
+                Height = $telerik.$(document).height();  // Save for parent use later if needed
+                window.parent.parent.SizeFrameHeight(Height);
+            }
+        }
+
+        $telerik.$(document).ready(SizeFrameHeightInParent);
+
+        $telerik.$("#divHtmlContent").on('click', function () {
+            if (typeof window.parent.SizeFrameHeight == 'function') {
+                //alert('There is parent SizeFrameHeight!');
+                Height = $telerik.$(document).height();  // Save for parent use later if needed
+                window.parent.parent.SizeFrameHeight(Height);
+            }
+        })
+
+    </script>
+</body>
+</html>
