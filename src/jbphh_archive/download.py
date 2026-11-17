@@ -3,7 +3,8 @@
 For each row: fetch source_url, save it under the archive's raw/<site>/ with its
 original filename, and record the retrieval time (UTC), SHA-256 hash, and path in
 the catalog (catalog/documents.csv), setting status to `done`. Rows already `done`
-are skipped, so it is safe to stop and rerun. Afterwards, run `archive publish` to
+are skipped, so it is safe to stop and rerun. Rows with `duplicate_of` filled are
+skipped too, so each file is downloaded once. Afterwards, run `archive publish` to
 update the Drive's copy of the catalog.
 
 Usage (from the project folder):
@@ -39,6 +40,7 @@ OTHER_FOLDER = "other"
 USER_AGENT = "jbphh-dw-archive-pipeline/0.1 (University of Hawaii research archive)"
 DELAY_SECONDS = 1.0  # pause between requests so source sites aren't overloaded
 TIMEOUT = httpx.Timeout(30.0, read=120.0)  # Level 4 lab reports can exceed 60 MB
+PDF_HEADER = b"%PDF"  # every real PDF starts with this; an error page doesn't
 
 
 def site_folder(url: str) -> str:
@@ -58,7 +60,7 @@ def file_name(row: Row, headers: httpx.Headers) -> str:
 
 
 def select_rows(rows: list[Row], doc_ids: list[str] | None, limit: int | None) -> list[Row]:
-    todo = [r for r in rows if r["status"] == "to_download" and r["source_url"]]
+    todo = [r for r in rows if r["status"] == "to_download" and r["source_url"] and not r["duplicate_of"]]
     if doc_ids:
         todo = [r for r in todo if r["doc_id"] in doc_ids]
     return todo[:limit] if limit else todo
@@ -77,12 +79,15 @@ def download(client: httpx.Client, row: Row, archive_root: Path, taken: dict[str
         target.parent.mkdir(parents=True, exist_ok=True)
         partial = target.with_name(name + ".part")  # renamed only once complete and checked
         digest = hashlib.sha256()
+        head = b""  # the file's first bytes, kept while downloading so the file is never read back
         try:
             with partial.open("wb") as f:
                 for chunk in response.iter_bytes():
+                    if len(head) < len(PDF_HEADER):
+                        head += chunk[: len(PDF_HEADER) - len(head)]
                     f.write(chunk)
                     digest.update(chunk)
-            if name.lower().endswith(".pdf") and partial.read_bytes()[:4] != b"%PDF":
+            if name.lower().endswith(".pdf") and head != PDF_HEADER:
                 raise ValueError("server did not return a PDF (likely an error page)")
             os.replace(partial, target)
         finally:
