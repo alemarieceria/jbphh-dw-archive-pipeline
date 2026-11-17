@@ -36,7 +36,7 @@ Each step gets a section, with a stepped diagram, in `notebooks/workflows.ipynb`
 
 | Step | What it answers | Status |
 | --- | --- | --- |
-| 1. How to read the notebook | How to view and run the documentation | Not started |
+| 1. How to read the notebook | How to view and run the documentation | Done: the notebook's first section explains how to view and run it |
 | 2. The big picture | How the steps fit together | Partial: `archive-big-picture` maps how the pieces connect today; `archive-pipeline` (planned) shows how the archive will run, step by step. Both stay; the big picture is redrawn when the catalog moves (item 3 of the order of work). |
 | 3. Scope | Which zones, which dates, zone versus system-wide documents | Partial: decided above; `catalog/zones.csv` not yet made |
 | 4. Discovery | Which documents exist for a zone, and how do we know we have them all? | Partial (see below) |
