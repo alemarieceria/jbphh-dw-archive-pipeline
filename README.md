@@ -16,6 +16,7 @@ The goal, decisions and order of work are in [docs/pipeline-plan.md](docs/pipeli
 uv run archive --help                                # list the steps
 uv run archive download --help                       # one step's options
 uv run archive inventory --zone I1                   # example: compare I1's listings with the catalog
+uv run archive discover --zone I1                    # example: propose I1's catalog rows in a review file
 uv run --env-file .env archive download --dry-run    # example: see what would download
 uv run --env-file .env archive publish --dry-run     # example: see what publishing would change
 ```

@@ -30,7 +30,8 @@ Checked 2026-11-17: `archive inventory --zone I1` matched all 123 library rows t
 listings (`reports/2026-11-17-inventory-I1.csv`).
 
 **Who writes it:** people, and `archive download` (retrieval columns). `archive discover`
-will propose new rows once it is built.
+proposes new rows in a review file in `reports/`. `archive merge` (not built yet) will apply
+the approved ones.
 
 **Updates:** rows are never deleted and a `doc_id` is never reused. After a change, commit the
 file and run `archive publish`.
@@ -38,22 +39,22 @@ file and run `archive publish`.
 | Column | Format | Description | Filled by |
 |---|---|---|---|
 | `doc_id` | `DOC-0001` | Stable ID. Never reuse or renumber, even if a row is dropped. | Manually, on approval |
-| `group` | vocabulary | Where the item came from or what role it plays: `zone_page_er`, `navy_lab_collection`, `doh_lab_collection`, `governing`, `doh_decision`, `public_communication`, `web_page`. | Manually (later proposed by `archive discover`) |
-| `title_as_posted` | text | Title exactly as the source shows it. | Manually (later proposed by `archive discover`) |
-| `source_url` | URL | Where to get it. Blank if not found yet. | Manually (later proposed by `archive discover`) |
-| `original_filename` | text | Filename on the source, when known before download. Library files are `pub_00NNNN.pdf`. | Manually, or `archive download` when blank |
-| `library_id` | text | ID in the jbphh-safewaters document library, for library files. Blank if not a library file. | Manually (later proposed by `archive discover`) |
+| `group` | vocabulary | Where the item came from or what role it plays: `zone_page_er`, `navy_lab_collection`, `doh_lab_collection`, `governing`, `doh_decision`, `public_communication`, `web_page`. | Manually (proposed by `archive discover`) |
+| `title_as_posted` | text | Title exactly as the source shows it. | Manually (proposed by `archive discover`) |
+| `source_url` | URL | Where to get it. Blank if not found yet. | Manually (proposed by `archive discover`) |
+| `original_filename` | text | Filename on the source, when known before download. Library files are `pub_00NNNN.pdf`. | Manually (proposed by `archive discover`), or `archive download` when blank |
+| `library_id` | text | ID in the jbphh-safewaters document library, for library files. Blank if not a library file. | Manually (proposed by `archive discover`) |
 | `producer` | text | Organization that created the document (lab, validator, agency). Blank if not yet confirmed. | Manually (later proposed by `archive discover`) |
 | `publisher` | org ID | Stakeholder Directory org ID of the issuing organization (for example `idwst`, `doh`). The most specific one that exists; if only its parent exists, use the parent and say so in `notes`. Blank if not set yet. | Manually (later proposed by `archive discover`) |
-| `doc_type` | vocabulary | `lab_report`, `lab_report_bundle`, `data_validation_report`, `data_validation_checklist`, `data_review_report`, `data_table`, `summary_report`, `results_crosstab`, `removal_action_report`, `plan`, `plan_addendum`, `plan_and_results`, `sop`, `guidance`, `technical_memo`, `regulatory_directive`, `regulatory_advisory`, `regulatory_memo`, `press_release`, `fact_sheet`, `map`, `graphic`, `transcript`, `library_listing`, `web_page`. | Manually (later proposed by `archive discover`) |
-| `date_as_listed` | date | Date shown in the title or listing. **Not** necessarily when it was posted or created. | Manually (later proposed by `archive discover`) |
-| `zones` | list | Flushing zones the document covers, separated by `; ` (for example `I1` or `I1; D1`). `all` for system-wide documents such as plans and directives. | Manually (later proposed by `archive discover`) |
-| `phase` | vocabulary | Response phase the document belongs to. So far always `emergency_response` (Nov 2021 to Mar 2022). | Manually (later proposed by `archive discover`) |
-| `stage` | list | Emergency response stage, from the vocabulary: `immediate`, `stage_1` to `stage_4`, separated by `; `. Blank for monitoring documents, or not set yet. | Manually (later proposed by `archive discover`) |
-| `period` | vocabulary | Monitoring period: `ltm_p1` to `ltm_p7`, `edwm_q1` to `edwm_q4`, `pem`. Blank for emergency response documents, or not set yet. | Manually (later proposed by `archive discover`) |
-| `size_listed` | text | File size as the library lists it. | Manually (later proposed by `archive discover`) |
-| `sdg` | text | Lab job or sample delivery group number, normalized (for example `810-12077-2`). For DOH files, the lab report number. | Manually (later proposed by `archive discover`) |
-| `package_or_validation_level` | text | For lab reports, the data package level (`Level 2`, `Level 3`, `Level 4`). For validation files, the validation stage (`S2AVEM`, `S4VEM`, `Stage 2A`). | Manually (later proposed by `archive discover`) |
+| `doc_type` | vocabulary | `lab_report`, `lab_report_bundle`, `data_validation_report`, `data_validation_checklist`, `data_review_report`, `data_table`, `summary_report`, `results_crosstab`, `removal_action_report`, `plan`, `plan_addendum`, `plan_and_results`, `sop`, `guidance`, `technical_memo`, `regulatory_directive`, `regulatory_advisory`, `regulatory_memo`, `press_release`, `fact_sheet`, `map`, `graphic`, `transcript`, `library_listing`, `web_page`. | Manually (proposed by `archive discover`) |
+| `date_as_listed` | date | Date shown in the title or listing. **Not** necessarily when it was posted or created. | Manually (proposed by `archive discover`) |
+| `zones` | list | Flushing zones the document covers, separated by `; ` (for example `I1` or `I1; D1`). `all` for system-wide documents such as plans and directives. | Manually (proposed by `archive discover`) |
+| `phase` | vocabulary | Response phase the document belongs to. So far always `emergency_response` (Nov 2021 to Mar 2022). | Manually (proposed by `archive discover`) |
+| `stage` | list | Emergency response stage, from the vocabulary: `immediate`, `stage_1` to `stage_4`, separated by `; `. Blank for monitoring documents, or not set yet. | Manually (proposed by `archive discover`) |
+| `period` | vocabulary | Monitoring period: `ltm_p1` to `ltm_p7`, `edwm_q1` to `edwm_q4`, `pem`. Blank for emergency response documents, or not set yet. | Manually (proposed by `archive discover`) |
+| `size_listed` | text | File size as the library lists it. | Manually (proposed by `archive discover`) |
+| `sdg` | text | Lab job or sample delivery group number, normalized (for example `810-12077-2`). For DOH files, the lab report number. | Manually (proposed by `archive discover`) |
+| `package_or_validation_level` | text | For lab reports, the data package level (`Level 2`, `Level 3`, `Level 4`). For validation files, the validation stage (`S2AVEM`, `S4VEM`, `Stage 2A`). | Manually (proposed by `archive discover`) |
 | `revision` | text | Revision as labeled (`Revision 1`), or `duplicate upload (2)` for files the library lists twice. | Manually |
 | `duplicate_of` | doc_id | Filled when this file is byte-identical to another registered file (same SHA-256). Points to the copy to use. **Tools must skip rows with this filled**, so each file is processed once; the duplicate stays archived as evidence of what was posted. Blank if not a duplicate. | Manually |
 | `priority` | vocabulary | `core` (evidence chain and governing documents), `supporting` (communications, fact sheets, maps), `context` (background such as transcripts). | Manually |
