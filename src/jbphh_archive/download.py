@@ -1,12 +1,13 @@
-"""Download registry files marked `to_download` into the archive, with provenance.
+"""Download catalog files marked `to_download` into the archive, with provenance.
 
-For each row: fetch source_url, save it under raw/<site>/ with its original
-filename, and record the retrieval time (UTC), SHA-256 hash, and path in
-registry/documents.csv, setting status to `done`. Rows already `done` are
-skipped, so it is safe to stop and rerun.
+For each row: fetch source_url, save it under the archive's raw/<site>/ with its
+original filename, and record the retrieval time (UTC), SHA-256 hash, and path in
+the catalog (catalog/documents.csv), setting status to `done`. Rows already `done`
+are skipped, so it is safe to stop and rerun. Afterwards, run `archive publish` to
+update the Drive's copy of the catalog.
 
 Usage (from the project folder):
-    uv run --env-file .env archive download --dry-run   # list what would download
+    uv run archive download --dry-run                   # list what would download
     uv run --env-file .env archive download --limit 5   # try a few first
     uv run --env-file .env archive download             # everything left to download
     uv run --env-file .env archive download --doc-id DOC-0010 --doc-id DOC-0011
@@ -24,7 +25,7 @@ from urllib.parse import unquote, urlsplit
 
 import httpx
 
-from jbphh_archive.catalog import REGISTRY_FILE, Row, read_rows, registered_paths, write_rows
+from jbphh_archive.catalog import CATALOG_FILE, Row, archive_folder, read_rows, registered_paths, write_rows
 
 # raw/ subfolder for each source website. Unlisted sites go to raw/other.
 SITE_FOLDERS = {
@@ -45,7 +46,7 @@ def site_folder(url: str) -> str:
 
 
 def file_name(row: Row, headers: httpx.Headers) -> str:
-    """Original filename: the registry value, else the server's suggested name, else the URL's last segment."""
+    """Original filename: the catalog value, else the server's suggested name, else the URL's last segment."""
     name = row["original_filename"]
     if not name:
         match = re.search(r"filename\*?=(?:UTF-8'')?\"?([^\";]+)\"?", headers.get("content-disposition", ""))
@@ -64,7 +65,7 @@ def select_rows(rows: list[Row], doc_ids: list[str] | None, limit: int | None) -
 
 
 def download(client: httpx.Client, row: Row, archive_root: Path, taken: dict[str, str]) -> Row:
-    """Fetch one file into the archive and return the registry fields to update."""
+    """Fetch one file into the archive and return the catalog fields to update."""
     url = row["source_url"]
     with client.stream("GET", url) as response:
         response.raise_for_status()
@@ -108,12 +109,10 @@ def parse_args(argv: list[str] | None) -> argparse.Namespace:
 
 def main(argv: list[str] | None = None) -> int:
     args = parse_args(argv)
-    archive_root = Path(args.archive_root or os.environ.get("ARCHIVE_ROOT", ""))
-    registry = archive_root / REGISTRY_FILE
-    if not registry.is_file():
-        sys.exit(f"Registry not found at {registry}. Set ARCHIVE_ROOT in .env or pass --archive-root.")
+    if not CATALOG_FILE.is_file():
+        sys.exit(f"Catalog not found at {CATALOG_FILE}.")
 
-    columns, rows = read_rows(registry)
+    columns, rows = read_rows(CATALOG_FILE)
     todo = select_rows(rows, args.doc_id, args.limit)
     print(f"{len(todo)} file(s) to download.")
     if args.dry_run:
@@ -121,6 +120,7 @@ def main(argv: list[str] | None = None) -> int:
             print(f"  {row['doc_id']}  {row['title_as_posted'][:70]}")
         return 0
 
+    archive_root = archive_folder(args.archive_root)
     taken = registered_paths(rows)
     failures: list[tuple[str, str]] = []
     transport = httpx.HTTPTransport(retries=2)  # retries connection errors only
@@ -138,7 +138,7 @@ def main(argv: list[str] | None = None) -> int:
                 row.update(updates)
                 taken[updates["local_path"]] = row["doc_id"]
                 try:
-                    write_rows(registry, columns, rows)  # save after every file so progress survives a stop
+                    write_rows(CATALOG_FILE, columns, rows)  # save after every file so progress survives a stop
                 except PermissionError:
                     sys.exit("Could not save documents.csv. Close it in Excel or other programs, then rerun.")
                 print(f"    saved {updates['local_path']}")
@@ -147,4 +147,6 @@ def main(argv: list[str] | None = None) -> int:
     print(f"\nDone: {len(todo) - len(failures)} downloaded, {len(failures)} failed.")
     for doc_id, error in failures:
         print(f"  {doc_id}: {error}")
+    if len(failures) < len(todo):
+        print("Next: run `uv run --env-file .env archive publish` to update the Drive's copy of the catalog.")
     return 1 if failures else 0

@@ -5,6 +5,8 @@ import hashlib
 import httpx
 import pytest
 
+import jbphh_archive.download as download_step
+from jbphh_archive.catalog import write_rows
 from jbphh_archive.download import download, file_name, select_rows, site_folder
 
 PDF = b"%PDF-1.5 test file"
@@ -41,6 +43,15 @@ def test_file_name_prefers_registry_then_server_then_url():
 def test_select_rows_skips_done_and_unfound():
     rows = [row(doc_id="DOC-0001"), row(doc_id="DOC-0002", status="done"), row(doc_id="DOC-0003", source_url="")]
     assert [r["doc_id"] for r in select_rows(rows, None, None)] == ["DOC-0001"]
+
+
+def test_dry_run_reads_the_repo_catalog_without_the_drive(tmp_path, monkeypatch, capsys):
+    catalog = tmp_path / "documents.csv"
+    write_rows(catalog, list(row()), [row(), row(doc_id="DOC-0002", status="done")])
+    monkeypatch.setattr(download_step, "CATALOG_FILE", catalog)
+    monkeypatch.delenv("ARCHIVE_ROOT", raising=False)
+    assert download_step.main(["--dry-run"]) == 0
+    assert "1 file(s) to download." in capsys.readouterr().out
 
 
 def test_download_saves_file_and_records_provenance(tmp_path):
