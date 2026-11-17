@@ -203,7 +203,7 @@ column; and a stepped diagram in `notebooks/workflows.ipynb`. The other catalog 
    step-by-step view), and the step outline in `notebooks/workflows.ipynb`. Redraw the big
    picture as the map of every component once we know whether the results database
    belongs on it.
-3. **Catalog, scope and inventory for I1** (done except its diagram): `documents.csv` moved
+3. **Catalog, scope and inventory for I1** (done): `documents.csv` moved
    into `catalog/` and published to the Drive's `registry/`; `catalog/zones.csv`;
    `archive inventory --zone I1` matches all 123 Navy and DOH listing results to the catalog.
 4. **Automated checks** (done): GitHub Actions runs the tests and ruff on every push.
