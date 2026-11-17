@@ -10,10 +10,10 @@ width = 1600
 height = 900
 
 [[steps]]
-caption = "`archive discover` reads every zone page and library listing on the Safe Waters site, plus the Navy and DOH files they link to, and proposes catalog rows. Its dated report lists new files, changed files and files the site no longer shows."
+caption = "`archive discover` reads every zone page and the zone's library listings on the Safe Waters site and proposes catalog rows. Its dated review file lists new documents, changed ones and ones the site no longer shows."
 
 [[steps]]
-caption = "You review the proposals: one decision per listing, and flagged rows one by one. Nothing reaches the catalog without your approval."
+caption = "You review the proposals: one decision per source (the zone page or a listing), and flagged rows one by one. Nothing reaches the catalog without your approval."
 
 [[steps]]
 caption = "`archive merge` shows a dry run, then `--apply` writes the approved rows to the catalog in this repo and gives each new document a `doc_id`. It never overwrites a value you reviewed."
@@ -105,7 +105,7 @@ step = 1
 type = "text"
 x = 322
 y = 292
-text = "report: proposals,\nchanges, missing"
+text = "review file: proposals,\nchanges, missing"
 fontSize = 18
 strokeColor = "#443f38"
 
@@ -338,7 +338,7 @@ fillStyle = "solid"
 strokeColor = "#8c4a35"
 roughness = 0
 strokeWidth = 4
-label = { text = "2. Review (you)\none decision per\nlisting; flagged\nrows one by one", fontSize = 20, strokeColor = "#1c1a17" }
+label = { text = "2. Review (you)\none decision per\nsource; flagged\nrows one by one", fontSize = 20, strokeColor = "#1c1a17" }
 
 # ---- Step 3: merge, into the catalog in this repo ----
 
