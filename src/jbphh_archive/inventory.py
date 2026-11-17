@@ -62,6 +62,8 @@ class Result:
     library_id: str  # as the catalog writes it: pub_002925
     title: str
     filename: str
+    date: str = ""  # the date the listing shows after the title: 2022-04-26
+    size: str = ""  # the size the listing shows after the file name: 108 KB
 
 
 def form_fields(page: str) -> dict[str, str]:
@@ -105,7 +107,8 @@ def read_page(page: str) -> tuple[list[Result], int, int, int]:
     for chunk in page.split("<a id='aFile")[1:]:
         number = re.match(r"(\d+)'", chunk)
         title = re.search(r">(.*?)</a>", chunk, re.DOTALL)
-        filename = re.search(r"<div class='\w+_GIF'>\s*([^\s<]+)", chunk)
+        filename = re.search(r"<div class='\w+_GIF'>\s*([^\s<]+)\s*(?:\(([^)]+)\))?", chunk)
+        date = re.search(r"</a>[^<]*?(\d{4}-\d{2}-\d{2})\s*<br", chunk)
         if not (number and title):
             raise ListingError("a result on the page has an unexpected layout")
         results.append(
@@ -113,6 +116,8 @@ def read_page(page: str) -> tuple[list[Result], int, int, int]:
                 library_id=f"pub_{int(number.group(1)):06d}",
                 title=unescape(re.sub(r"<[^>]+>", "", title.group(1))).strip(),
                 filename=filename.group(1) if filename else "",
+                date=date.group(1) if date else "",
+                size=(filename.group(2) or "") if filename else "",
             )
         )
     first, last, total = (int(n) for n in counts.groups())

@@ -39,8 +39,8 @@ Each step gets a section, with a stepped diagram, in `notebooks/workflows.ipynb`
 | 1. How to read the notebook | How to view and run the documentation | Done: the notebook's first section explains how to view and run it |
 | 2. The big picture | How the steps fit together | Partial: `archive-big-picture` maps how the pieces connect today; `archive-pipeline` (planned) shows how the archive will run, step by step. Both stay. The big picture is redrawn as the map of every component once we know whether the results database belongs on it. |
 | 3. Scope | Which zones, which dates, zone versus system-wide documents | Done: decided above; `catalog/zones.csv` lists the 20 zones with their zone page and library listing links |
-| 4. Discovery | Which documents exist for a zone, and how do we know we have them all? | Partial: `archive inventory --zone I1` checks the Navy and DOH listings against the catalog (see below) |
-| 5. Cataloging | Turning found documents into reviewed catalog rows | Partial: I1's 169 rows were built manually; no script |
+| 4. Discovery | Which documents exist for a zone, and how do we know we have them all? | Partial: `archive discover --zone I1` reads the zone pages and I1's Navy, DOH and LTM listings and proposes rows in a review file; `archive inventory --zone I1` checks the Navy and DOH listings (see below). Not yet: the EDWM listing and other zones. |
+| 5. Cataloging | Turning found documents into reviewed catalog rows | Partial: I1's 169 rows were built manually; `archive discover` proposes new rows; no `archive merge` yet |
 | 6. Collection | Downloading files, capturing web pages, Wayback backups | Partial: downloads automated; page captures and Wayback done manually |
 | 7. Validation | Is the archive complete and unchanged? | Partial: `archive inventory` checks a zone's Navy and DOH listings against the catalog; no `archive verify` yet |
 | 8. Storage | What lives where, publishing, backups, permissions | Partial: the catalog is in this repo (`catalog/documents.csv`); `archive publish` copies it to the Drive's `registry/`; no zone indexes yet |
@@ -57,7 +57,7 @@ Each step gets a section, with a stepped diagram, in `notebooks/workflows.ipynb`
 - **Shared documents** are archived once and list every zone they belong to.
 - **Known facts (2026-11-17, from `archive inventory --zone I1`):** the Navy I1 listing shows 109 documents and the DoH I1 listing 14. All 123 library IDs match `done` catalog rows, one by one. Each result's library ID is in its link (`aFile2925` = `pub_002925.pdf`).
 
-**`archive discover --zone <zone>` (designed 2026-11-17)**
+**`archive discover --zone <zone>` (built 2026-11-17)**
 - **Reads:** all 20 zone pages, so each document lists every zone that posts it; then every
   section of the chosen zone's page, and its Navy, DOH and LTM listings. A listing link is
   matched by its `subcategory`, because the zone page wraps listing links in a frame link.
@@ -67,10 +67,18 @@ Each step gets a section, with a stepped diagram, in `notebooks/workflows.ipynb`
   are emergency response; "Stage 5" and "Period 1" to "Period 7" are LTM (`ltm_p1` to
   `ltm_p7`); "Quarter 1" to "Quarter 4" are EDWM (`edwm_q1` to `edwm_q4`). A file posted on
   several zone pages gets one row listing every zone that posts it.
+- **Values from titles:** for new library rows, `doc_type`, `sdg` and
+  `package_or_validation_level` come from titles that follow a known pattern ("Laboratory
+  Report, SDG DA22131, Level 4"); other titles leave them blank. Zone page links get
+  `doc_type` from their text ("Data Summary" is `summary_report`, "Sampling Results" is
+  `results_crosstab`, a listing link is `library_listing`).
 - **Writes only a review file,** `reports/<UTC date>-discover-<zone>.csv`, never the catalog.
   Each document is `matched`, `new`, `changed` or `missing`. Each listing has one summary row
   whose `decision` covers all its rows; flagged rows get their own `decision`. Links outside
   the page's sections (such as the interactive map) are flagged.
+- **Zones:** a document is flagged when the site posts it on a zone its `zones` doesn't
+  cover. A zone in `zones` whose page doesn't post it is not flagged, because `zones` lists
+  the zones a document covers.
 - **Existing rows:** the first run fills `found_via`, `found_on` and `first_seen_utc` once for
   each row it matches. After that, only `last_seen_utc` changes.
 - **`archive merge`** applies the approved decisions: a dry run first, then `--apply`. It
@@ -81,7 +89,8 @@ Each step gets a section, with a stepped diagram, in `notebooks/workflows.ipynb`
   listing link), `zone_page_pem`, `ltm_lab_collection` (LTM listing results) and
   `source_water` (Waiawa Shaft files, posted on every zone page). `edwm_lab_collection`
   joins with the all-zone pass.
-- **I1 check (counted 2026-11-17):** 132 rows matched (9 from the zone page, 109 Navy, 14
+- **I1 check (2026-11-17):** the first run (`reports/2026-11-17-discover-I1.csv`) matches the
+  count: 132 rows matched (9 from the zone page, 109 Navy, 14
   DOH); 37 expected gaps (cited documents and other sites); 179 new `link_only` proposals
   (14 LTM, 5 EDWM and 5 Waiawa Shaft links on the zone page, and 155 LTM listing results).
   Each run recounts from the live site.
@@ -170,7 +179,7 @@ fingerprint checks run locally against the Drive.
 jbphh-dw-archive-pipeline/
 ├── catalog/            master records: documents, document_links, timeline, zones, communities,
 │                       wayback, discrepancies (+ README)
-├── reports/            dated inventory and verify reports
+├── reports/            dated inventory, discover and verify reports (+ README)
 ├── src/jbphh_archive/  cli, config, catalog, discover, inventory, download, capture,
 │                       wayback, verify, publish, findings, diagrams/
 ├── tests/              unit tests, with fixtures/ (saved pages, small catalogs)
@@ -198,10 +207,11 @@ column; and a stepped diagram in `notebooks/workflows.ipynb`. The other catalog 
    into `catalog/` and published to the Drive's `registry/`; `catalog/zones.csv`;
    `archive inventory --zone I1` matches all 123 Navy and DOH listing results to the catalog.
 4. **Automated checks** (done): GitHub Actions runs the tests and ruff on every push.
-5. **Cataloging:** first add the new columns and statuses from "Catalog design" (`idwst`
-   goes into the Directory first). Then `archive discover --zone I1` proposes rows,
+5. **Cataloging** (partial): first add the new columns and statuses from "Catalog design"
+   (`idwst` goes into the Directory first). Then `archive discover --zone I1` proposes rows,
    including LTM and EDWM documents as `link_only`; it should reproduce I1's existing rows.
-   Catalog validation joins the automated checks.
+   Catalog validation joins the automated checks. Done so far: the new columns and
+   statuses, and `archive discover --zone I1`. Next: `archive merge`.
 6. **Collection:** `archive capture`, then `archive wayback` (building on the manual Wayback
    records in the Drive's `registry/`), then the sources view in `notebooks/zones.ipynb`.
    Update the Drive's `web-captures/README.txt`.

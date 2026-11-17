@@ -60,6 +60,7 @@ def test_read_page_reads_results_and_counts():
     assert results[0].library_id == "pub_002925"
     assert results[0].filename == "pub_002925.pdf"
     assert results[0].title
+    assert (results[0].date, results[0].size) == ("2022-02-09", "31 MB")  # as DOC-0010 records them
 
 
 def test_read_page_ignores_the_ids_in_the_menu_setting():
