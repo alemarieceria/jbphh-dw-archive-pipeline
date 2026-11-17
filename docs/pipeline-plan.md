@@ -3,7 +3,7 @@
 The one place to see what this pipeline is for, how it is organized, and what is done.
 Written by A. Ceria. Update a stage's **Status** line whenever its work changes.
 
-Last updated: 2026-11-16.
+Last updated: 2026-11-17.
 
 ## Goal
 
@@ -39,10 +39,10 @@ Each step gets a section, with a stepped diagram, in `notebooks/workflows.ipynb`
 | 1. How to read the notebook | How to view and run the documentation | Done: the notebook's first section explains how to view and run it |
 | 2. The big picture | How the steps fit together | Partial: `archive-big-picture` maps how the pieces connect today; `archive-pipeline` (planned) shows how the archive will run, step by step. Both stay. The big picture is redrawn as the map of every component once we know whether the results database belongs on it. |
 | 3. Scope | Which zones, which dates, zone versus system-wide documents | Done: decided above; `catalog/zones.csv` lists the 20 zones with their zone page and library listing links |
-| 4. Discovery | Which documents exist for a zone, and how do we know we have them all? | Partial (see below) |
+| 4. Discovery | Which documents exist for a zone, and how do we know we have them all? | Partial: `archive inventory --zone I1` checks the Navy and DOH listings against the catalog (see below) |
 | 5. Cataloging | Turning found documents into reviewed catalog rows | Partial: I1's 169 rows were built by hand; no script |
 | 6. Collection | Downloading files, capturing web pages, Wayback backups | Partial: downloads automated; page captures and Wayback by hand |
-| 7. Validation | Is the archive complete and unchanged? | Partial: Navy I1 listing checked by hand; no scripts |
+| 7. Validation | Is the archive complete and unchanged? | Partial: `archive inventory` checks a zone's Navy and DOH listings against the catalog; no `archive verify` yet |
 | 8. Storage | What lives where, publishing, backups, permissions | Partial: the catalog is in this repo (`catalog/documents.csv`); `archive publish` copies it to the Drive's `registry/`; no zone indexes yet |
 | 9. Keeping it current | Documents added to or removed from the website later | Not started |
 | 10. Use | Evidence Tracer, researchers, discrepancy log | Partial: the Tracer reads the catalog; log exists on the Drive |
@@ -55,7 +55,7 @@ Each step gets a section, with a stepped diagram, in `notebooks/workflows.ipynb`
 - **Cited documents** (plans, DOH directives) are found by reading other documents. Each catalog row records where it was found, so it can be checked even though it cannot be counted.
 - **Phase rule:** phase comes from the document's stage label (Immediate, Stage 2 and Stage 4 are emergency response). The Nov 20, 2021 – Mar 31, 2022 window only flags mismatches. Event dates, such as each zone's amendment date, go in `catalog/timeline.csv`, not `zones.csv`.
 - **Shared documents** are archived once and list every zone they belong to.
-- **Known facts (2026-11-05):** the Navy I1 listing shows 109 documents, and all 109 library IDs match catalog rows and are downloaded. The DoH I1 listing shows 14, and the catalog has 14 rows (IDs not yet checked one by one). Each result's library ID is in its link (`aFile2925` = `pub_002925.pdf`).
+- **Known facts (2026-11-17, from `archive inventory --zone I1`):** the Navy I1 listing shows 109 documents and the DoH I1 listing 14. All 123 library IDs match `done` catalog rows, one by one. Each result's library ID is in its link (`aFile2925` = `pub_002925.pdf`).
 
 ### 5–7. Status details
 

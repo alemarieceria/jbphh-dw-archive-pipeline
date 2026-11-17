@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Application Error</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, Verdana, sans-serif;
+        }
+        html {
+            font-size: 16px;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            background: #fff;
+            color: #222;
+            font-size: 14px;
+        }
+        body::before {
+            content: "";
+            display: block;
+            height: 6px;
+            background: linear-gradient(90deg, #f2c8c8, #b75a58, #f2c8c8);
+        }
+        .page-shell {
+            min-height: calc(100vh - 6px);
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: clamp(80px, 8vh, 80px) 24px 32px 24px;
+        }
+        .error-card {
+            width: 100%;
+            max-width: 720px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-top: 4px solid #b75a58;
+            border-radius: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,.16);
+            overflow: hidden;
+        }
+        .error-header {
+            background: #fff;
+            padding: 24px 32px 8px 32px;
+            text-align: center;
+        }
+        .error-header h1 {
+            margin: 0;
+            color: #333;
+            font-size: 22px;
+            font-weight: 700;
+            line-height: 1.25;
+        }
+        .error-body {
+            padding: 10px 36px 30px 36px;
+            font-size: 14px;
+            line-height: 1.45;
+            text-align: center;
+        }
+        .message {
+            margin: 0 0 18px 0;
+        }
+        .support-note {
+            margin: 18px 0;
+            padding: 0;
+            background: transparent;
+            border: none;
+            color: #333;
+        }
+        .reference {
+            margin-top: 14px;
+            color: #333;
+            font-size: 14px;
+            font-weight: 700;
+        }
+        .retry-note {
+            margin: 18px 0 0 0;
+            color: #333;
+        }
+        .staff-details {
+            background: #fafafa;
+            border: 1px solid #d6d6d6;
+            border-left: 4px solid #777;
+            border-radius: 4px;
+            margin: 16px 0;
+            padding: 0;
+            text-align: left;
+        }
+        .staff-details summary {
+            background: #f2f2f2;
+            color: #333;
+            cursor: pointer;
+            font-weight: 600;
+            padding: 8px 10px;
+        }
+        .staff-details summary::marker {
+            color: #666;
+        }
+        .staff-details[open] summary {
+            border-bottom: 1px solid #d6d6d6;
+        }
+        .staff-details-content {
+            padding: 10px 12px 12px 12px;
+        }
+        .staff-detail-row {
+            margin-bottom: 8px;
+        }
+        .staff-detail-label {
+            color: #333;
+            font-size: 13px;
+            font-weight: 700;
+        }
+        .staff-detail-value {
+            color: #222;
+            font-size: 13px;
+            overflow-wrap: anywhere;
+        }
+        .staff-actions {
+            margin-top: 10px;
+            text-align: center;
+        }
+        .staff-action-link {
+            display: inline-block;
+            padding: 7px 12px;
+            background: #fff;
+            border: 1px solid #777;
+            border-radius: 4px;
+            color: #222;
+            font-size: 13px;
+            font-weight: 600;
+            line-height: 1.25;
+            text-decoration: none;
+        }
+        .staff-action-link:hover {
+            background: #f0f0f0;
+        }
+        .actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 24px;
+            text-align: center;
+        }
+        .action-link {
+            display: inline-block;
+            min-width: 140px;
+            padding: 8px 14px;
+            border-radius: 5px;
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.25;
+            text-align: center;
+            text-decoration: none;
+        }
+        .action-link.primary {
+            background: #f8d9d9;
+            border: 1px solid #c65b5b;
+            color: #222;
+        }
+        .action-link.primary:hover {
+            background: #f2caca;
+            border-color: #a94442;
+        }
+        .staff-action-link:focus,
+        .action-link:focus {
+            outline: 2px solid #b75a58;
+            outline-offset: 2px;
+        }
+        @supports selector(body:has(.staff-details[open])) {
+            body:has(.staff-details[open]) .page-shell {
+                padding-top: 80px;
+                padding-bottom: 24px;
+            }
+        }
+        @media (max-height: 640px) {
+            .page-shell {
+                padding-top: 24px;
+                padding-bottom: 24px;
+            }
+        }
+        @media (max-width: 640px) {
+            .page-shell {
+                padding-left: 12px;
+                padding-right: 12px;
+            }
+            .error-header {
+                padding: 20px 20px 8px 20px;
+            }
+            .error-body {
+                padding: 10px 20px 24px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="page-shell">
+        <main class="error-card" role="main">
+            <header class="error-header">
+                <h1>Application Error</h1>
+            </header>
+            <section class="error-body">
+                <div class="message">
+An unexpected error occurred in the application you were using.
+                </div>
+                <div class="support-note">
+                    The system recorded diagnostic information for support staff. If this problem is urgent,<br>
+                    please contact your support person directly and describe what you were trying to do.
+<div class="reference">Reference ID: 526280</div>
+                </div>
+
+                <p class="retry-note">Trying the request again may work if the problem was temporary. If the same error repeats,<br>
+                return to the dashboard and navigate to the page again rather than using an old bookmark.</p>
+                <div class="actions">
+                    <a class="action-link primary" href="https://jbphh-safewaters.org/public/framework/bannerhtml.aspx?dsn=systm&amp;idhtml=10768&amp;banner=jbphh_landing.png&amp;title=Joint Base Pearl Harbor-Hickam Safe Waters&amp;HideDbAndMenu=True" target="_parent">Return to Dashboard</a>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

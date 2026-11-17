@@ -1,0 +1,689 @@
+
+<!DOCTYPE html>
+<html lang="en-us">
+<head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>
+
+</title>
+    <style>
+        html {
+            background-size: cover;
+            height: 100%;
+            width: 100%;
+        }
+
+        * {
+            font-family: Arial, Verdana;
+        }
+
+        label {
+            font-size: 12px;
+        }
+
+        .divForm, .divTab {
+            position: relative;
+            height: 100%; /* 630px; */
+            width: 100% /* 860px; */
+        }
+
+        .divForm {
+            /* background-color: rgb(234,234,234); */
+            border: 1px solid black !important;
+        }
+
+        .divField {
+            position: absolute;
+        }
+
+        .divField * {
+            font-size: 12px
+        }
+
+        .divField a, .divField a:active, .divField a:link, .divField a:visited {
+            color: #5e5a4f;
+            text-decoration: none;
+        }
+
+        .divField a:hover {
+            color: black;
+            cursor: pointer;
+            text-decoration: underline !important;
+        }
+
+        .hidden {
+            display: none !important;
+            visibility: hidden !important
+        }
+
+        .MultiPageBorder {
+            border: inset 2px Silver
+        }
+
+        .racItem, .rcbHovered, .rcbInput, .rcbItem {
+            font-size: 12px !important;
+        }
+
+        .RadMultiPage {
+            padding-bottom: 0px;
+            margin-bottom: 15px;
+        }
+
+    </style>
+<link href="https://d35islomi5rx1v.cloudfront.net/ajaxz/2025.2.528/Window.css" type="text/css" rel="stylesheet" class="Telerik_stylesheet" /><link href="https://d35islomi5rx1v.cloudfront.net/ajaxz/2025.2.528/Default/Window.Default.css" type="text/css" rel="stylesheet" class="Telerik_stylesheet" /><link href="https://d35islomi5rx1v.cloudfront.net/ajaxz/2025.2.528/Common/fonticons.css" type="text/css" rel="stylesheet" class="Telerik_stylesheet" /><link href="https://d35islomi5rx1v.cloudfront.net/ajaxz/2025.2.528/Common/MaterialRipple.css" type="text/css" rel="stylesheet" class="Telerik_stylesheet" /><link href="https://d35islomi5rx1v.cloudfront.net/ajaxz/2025.2.528/SearchBoxLite.css" type="text/css" rel="stylesheet" class="Telerik_stylesheet" /><link href="https://d35islomi5rx1v.cloudfront.net/ajaxz/2025.2.528/DefaultLite/SearchBox.Default.css" type="text/css" rel="stylesheet" class="Telerik_stylesheet" /><link href="https://d35islomi5rx1v.cloudfront.net/ajaxz/2025.2.528/ComboBox.css" type="text/css" rel="stylesheet" class="Telerik_stylesheet" /><link href="https://d35islomi5rx1v.cloudfront.net/ajaxz/2025.2.528/Default/ComboBox.Default.css" type="text/css" rel="stylesheet" class="Telerik_stylesheet" /><link href="https://d35islomi5rx1v.cloudfront.net/ajaxz/2025.2.528/Button.css" type="text/css" rel="stylesheet" class="Telerik_stylesheet" /><link href="https://d35islomi5rx1v.cloudfront.net/ajaxz/2025.2.528/Default/Button.Default.css" type="text/css" rel="stylesheet" class="Telerik_stylesheet" /><link href="https://d35islomi5rx1v.cloudfront.net/ajaxz/2025.2.528/Menu.css" type="text/css" rel="stylesheet" class="Telerik_stylesheet" /><link href="https://d35islomi5rx1v.cloudfront.net/ajaxz/2025.2.528/Default/Menu.Default.css" type="text/css" rel="stylesheet" class="Telerik_stylesheet" /><link href="https://d35islomi5rx1v.cloudfront.net/ajaxz/2025.2.528/ToolTip.css" type="text/css" rel="stylesheet" class="Telerik_stylesheet" /><link href="https://d35islomi5rx1v.cloudfront.net/ajaxz/2025.2.528/Default/ToolTip.Default.css" type="text/css" rel="stylesheet" class="Telerik_stylesheet" /></head>
+<body style="background-color: transparent; margin: 0; padding: 0;">
+    <form method="post" action="./searchresults.aspx?dsn=pub&amp;category=JBPHH&amp;subcategory=DoH+Flushing+Zone+I1" id="form1">
+<input type="hidden" name="RadScriptManager1_TSM" id="RadScriptManager1_TSM" value="" />
+<input type="hidden" name="RadStyleSheetManager1_TSSM" id="RadStyleSheetManager1_TSSM" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
+
+
+<script src="/public/library/Telerik.Web.UI.WebResource.axd?_TSM_HiddenField_=RadScriptManager1_TSM&amp;compress=1&amp;_TSM_CombinedScripts_=%3b%3bSystem.Web.Extensions%2c+Version%3d4.0.0.0%2c+Culture%3dneutral%2c+PublicKeyToken%3d31bf3856ad364e35%3aen-US%3add3ac3d5-1e29-4112-8fed-529caffa8f24%3aea597d4b" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+if (typeof(Sys) === 'undefined') throw new Error('ASP.NET Ajax client-side framework failed to load.');
+//]]>
+</script>
+
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/Core.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/jQuery.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/jQueryInclude.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Ajax/Ajax.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/jQueryPlugins.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/AnimationFramework/AnimationFramework.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/Animation/AnimationScripts.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/Popup/PopupScripts.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/Helpers/IETouchActionManager.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/TouchScrollExtender.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/Widgets/Draggable.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/Widgets/Resizable.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/ShortCutManager/ShortCutManagerScripts.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/MaterialRipple/MaterialRippleScripts.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Window/RadWindowScripts.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Window/RadWindowManager.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/Navigation/NavigationScripts.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/Navigation/OverlayScript.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/SearchBox/RadSearchBoxScripts.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/Navigation/OData/OData.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/ComboBox/RadComboBoxScripts.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/ComboBox/Views/ClassicView.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Button/RadButtonScripts.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/Scrolling/ScrollingScripts.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Menu/RadMenuScripts.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Menu/ContextMenu/RadContextMenuScripts.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Menu/MenuItem/RadMenuItem.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Menu/Views/ClassicView.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/ToolTip/RadToolTipScripts.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/ToolTip/Scripts/RadToolTipManager.js" type="text/javascript"></script>
+<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="5C693043" />
+<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="Onw3m70woZoIoFEF9Wn7HSu1xnZMA+3A8uz6IQrX7KuyC4GosB1GebW+9qbGsXxsw3phrjlMdF5pMNVvY4kF+2fJ3Ar9aXMSb7SGSYcV6Yl0FFEZfora4Xw+BE+O16aot6p7w6Vk2sTMMO2AyxQk2b8kDYzFvF3k+jj2SYbRU5qoB5fly7zLBBdkx5/G7bSCM3b6ZEM8k1ytERlJAUE5PGPCZZF8uHfJmZ+xGf/JI98kKRSWuDpdBhJYQD/V+gI01NR1qMG8aC06D+0bJPJVFBP5i44ycjZ6YEYkLrIPWZNYR97g3n1wkDpwgB66Jwzd3B11BKd+IUtZf1P3MZJ5nyoXSJA+7zTmLf5wCu1ZdRJjLWfN93UWf97tDR4x8HBg7C1fxgzhVDjc20+nw5FQ7nBGkDCZow832Q7t94RKeErSGsmzx8twpFAz9xNJxbxX" />
+        
+
+        <!-- 2025.2.528.462 --><div id="RadAjaxManager1SU">
+	<span id="RadAjaxManager1" style="display:none;"></span>
+</div>
+        <div id="RadWindowManager1" style="display:none;">
+	<div id="RadWindowManager1_alerttemplate" style="display:none;">
+        <div class="rwDialogPopup radalert">
+            <div class="rwDialogText">
+            {1}
+            </div>
+
+            <div>
+                <a  onclick="$find('{0}').close(true);"
+                class="rwPopupButton" href="javascript:void(0);">
+                    <span class="rwOuterSpan">
+                        <span class="rwInnerSpan">##LOC[OK]##</span>
+                    </span>
+                </a>
+            </div>
+        </div>
+        </div><div id="RadWindowManager1_prompttemplate" style="display:none;">
+         <div class="rwDialogPopup radprompt">
+                <div class="rwDialogText">
+                {1}
+                </div>
+                <div>
+                    <script type="text/javascript">
+                    function RadWindowprompt_detectenter(id, ev, input)
+                    {
+                        if (!ev) ev = window.event;
+                        if (ev.keyCode == 13)
+                        {
+                            var but = input.parentNode.parentNode.getElementsByTagName("A")[0];
+                            if (but)
+                            {
+                                if (but.click) but.click();
+                                else if (but.onclick)
+                                {
+                                    but.focus(); var click = but.onclick; but.onclick = null; if (click) click.call(but);
+                                }
+                            }
+                           return false;
+                        }
+                        else return true;
+                    }
+                    </script>
+                    <input title="Enter Value" onkeydown="return RadWindowprompt_detectenter('{0}', event, this);" type="text"  class="rwDialogInput" value="{2}" />
+                </div>
+                <div>
+                    <a onclick="$find('{0}').close(this.parentNode.parentNode.getElementsByTagName('input')[0].value);"
+                        class="rwPopupButton" href="javascript:void(0);" ><span class="rwOuterSpan"><span class="rwInnerSpan">##LOC[OK]##</span></span></a>
+                    <a onclick="$find('{0}').close(null);" class="rwPopupButton"  href="javascript:void(0);"><span class="rwOuterSpan"><span class="rwInnerSpan">##LOC[Cancel]##</span></span></a>
+                </div>
+            </div>
+        </div><div id="RadWindowManager1_confirmtemplate" style="display:none;">
+        <div class="rwDialogPopup radconfirm">
+            <div class="rwDialogText">
+            {1}
+            </div>
+            <div>
+                <a onclick="$find('{0}').close(true);"  class="rwPopupButton" href="javascript:void(0);" ><span class="rwOuterSpan"><span class="rwInnerSpan">##LOC[OK]##</span></span></a>
+                <a onclick="$find('{0}').close(false);" class="rwPopupButton"  href="javascript:void(0);"><span class="rwOuterSpan"><span class="rwInnerSpan">##LOC[Cancel]##</span></span></a>
+            </div>
+        </div>
+        </div><input id="RadWindowManager1_ClientState" name="RadWindowManager1_ClientState" type="hidden" />
+</div>
+        <div id="RadWindowManager2" style="display:none;">
+	<div id="RadWindowManager2_alerttemplate" style="display:none;">
+        <div class="rwDialogPopup radalert">
+            <div class="rwDialogText">
+            {1}
+            </div>
+
+            <div>
+                <a  onclick="$find('{0}').close(true);"
+                class="rwPopupButton" href="javascript:void(0);">
+                    <span class="rwOuterSpan">
+                        <span class="rwInnerSpan">##LOC[OK]##</span>
+                    </span>
+                </a>
+            </div>
+        </div>
+        </div><div id="RadWindowManager2_prompttemplate" style="display:none;">
+         <div class="rwDialogPopup radprompt">
+                <div class="rwDialogText">
+                {1}
+                </div>
+                <div>
+                    <script type="text/javascript">
+                    function RadWindowprompt_detectenter(id, ev, input)
+                    {
+                        if (!ev) ev = window.event;
+                        if (ev.keyCode == 13)
+                        {
+                            var but = input.parentNode.parentNode.getElementsByTagName("A")[0];
+                            if (but)
+                            {
+                                if (but.click) but.click();
+                                else if (but.onclick)
+                                {
+                                    but.focus(); var click = but.onclick; but.onclick = null; if (click) click.call(but);
+                                }
+                            }
+                           return false;
+                        }
+                        else return true;
+                    }
+                    </script>
+                    <input title="Enter Value" onkeydown="return RadWindowprompt_detectenter('{0}', event, this);" type="text"  class="rwDialogInput" value="{2}" />
+                </div>
+                <div>
+                    <a onclick="$find('{0}').close(this.parentNode.parentNode.getElementsByTagName('input')[0].value);"
+                        class="rwPopupButton" href="javascript:void(0);" ><span class="rwOuterSpan"><span class="rwInnerSpan">##LOC[OK]##</span></span></a>
+                    <a onclick="$find('{0}').close(null);" class="rwPopupButton"  href="javascript:void(0);"><span class="rwOuterSpan"><span class="rwInnerSpan">##LOC[Cancel]##</span></span></a>
+                </div>
+            </div>
+        </div><div id="RadWindowManager2_confirmtemplate" style="display:none;">
+        <div class="rwDialogPopup radconfirm">
+            <div class="rwDialogText">
+            {1}
+            </div>
+            <div>
+                <a onclick="$find('{0}').close(true);"  class="rwPopupButton" href="javascript:void(0);" ><span class="rwOuterSpan"><span class="rwInnerSpan">##LOC[OK]##</span></span></a>
+                <a onclick="$find('{0}').close(false);" class="rwPopupButton"  href="javascript:void(0);"><span class="rwOuterSpan"><span class="rwInnerSpan">##LOC[Cancel]##</span></span></a>
+            </div>
+        </div>
+        </div><input id="RadWindowManager2_ClientState" name="RadWindowManager2_ClientState" type="hidden" />
+</div>
+        
+        <link href='https://jbphh-safewaters.org/public/common/jbphh_default/_consolidated_.css' type='text/css' rel='stylesheet' />
+        <link href='https://jbphh-safewaters.org/public/common/styles/application.css' type='text/css' rel='stylesheet' />
+        <script type='text/javascript' src='https://jbphh-safewaters.org/public/common/scripts/common.js'></script>
+        
+    <style>
+        .RadMenu_Context .rmText {
+            text-align: left;
+        }
+    </style>
+    <div class="RadAjaxPanel" id="ctl00_cphMain_ctl00_cphMain_rapSearchResultsPanel">
+	<div id="ctl00_cphMain_rapSearchResults" class="rapSearchResults">
+		
+        <div id="divMain" style="padding: 0!important; width: 1157px; min-height: 765px; overflow: hidden!important; ">
+            <table border="0" style="width: 888px; vertical-align: top;">
+                <tr style="vertical-align: top;">
+                    <td style="vertical-align: top" class="divMainMinHeightTitle">
+                        <table id="tblSearchResultsHeading" border="0" style="width: 1144px">
+                            <tr style="vertical-align: middle; text-align: right; width: 100%;">
+                                <td class="search_heading2" style="vertical-align: middle; text-align: left; width: 1144px;">
+                                    <div id="ctl00_cphMain_RadSearchBox1" class="RadSearchBox RadSearchBox_Default">
+			<span class="rsbInner"><input class="rsbInput radPreventDecorate rsbEmptyMessage" type="text" value="enter search word or phrase" name="ctl00_cphMain_RadSearchBox1" id="ctl00_cphMain_RadSearchBox1_Input" /><button class="rsbButton rsbButtonSearch" type="button" aria-label="Search button"><span class="rsbIcon rsbIconSearch"><!-- &nbsp; --></span></button></span><input id="ctl00_cphMain_RadSearchBox1_ClientState" name="ctl00_cphMain_RadSearchBox1_ClientState" type="hidden" />
+		</div>
+                                </td>
+                                <td valign="middle" align="right">
+                                    <div id="ctl00_cphMain_ddlFileType" class="RadComboBox RadComboBox_Default">
+			<table summary="combobox" style="border-width:0;border-collapse:collapse;width:100%">
+				<tr class="rcbReadOnly">
+					<td class="rcbInputCell rcbInputCellLeft" style="width:100%;"><input name="ctl00$cphMain$ddlFileType" type="text" class="rcbInput radPreventDecorate" id="ctl00_cphMain_ddlFileType_Input" value="Show All File Types" readonly="readonly" /></td><td class="rcbArrowCell rcbArrowCellRight"><a id="ctl00_cphMain_ddlFileType_Arrow" style="overflow: hidden;display: block;position: relative;outline: none;">select</a></td>
+				</tr>
+			</table><div class="rcbSlide" style="z-index:6000;display:none;"><div id="ctl00_cphMain_ddlFileType_DropDown" class="RadComboBoxDropDown RadComboBoxDropDown_Default "><div class="rcbScroll rcbWidth"><ul class="rcbList"><li class="rcbItem">Show All File Types</li><li class="rcbItem">Adobe Acrobat (pdf)</li></ul></div></div></div><input id="ctl00_cphMain_ddlFileType_ClientState" name="ctl00_cphMain_ddlFileType_ClientState" type="hidden" />
+		</div>
+                                </td>
+                                <td>
+                                    <div id="ctl00_cphMain_ddlSortField" class="RadComboBox RadComboBox_Default">
+			<table summary="combobox" style="border-width:0;border-collapse:collapse;width:100%">
+				<tr class="rcbReadOnly">
+					<td class="rcbInputCell rcbInputCellLeft" style="width:100%;"><input name="ctl00$cphMain$ddlSortField" type="text" class="rcbInput radPreventDecorate" id="ctl00_cphMain_ddlSortField_Input" value="Sort by System Filename" readonly="readonly" /></td><td class="rcbArrowCell rcbArrowCellRight"><a id="ctl00_cphMain_ddlSortField_Arrow" style="overflow: hidden;display: block;position: relative;outline: none;">select</a></td>
+				</tr>
+			</table><div class="rcbSlide" style="z-index:6000;display:none;"><div id="ctl00_cphMain_ddlSortField_DropDown" class="RadComboBoxDropDown RadComboBoxDropDown_Default "><div class="rcbScroll rcbWidth"><ul class="rcbList"><li class="rcbItem">Sort by Publication Date</li><li class="rcbItem">Sort by Publication Date (DESC)</li><li class="rcbItem">Sort by Rank</li><li class="rcbItem">Sort by Rank (DESC)</li><li class="rcbItem">Sort by System Filename</li><li class="rcbItem">Sort by System Filename (DESC)</li><li class="rcbItem">Sort by Title</li><li class="rcbItem">Sort by Title (DESC)</li></ul></div></div></div><input id="ctl00_cphMain_ddlSortField_ClientState" name="ctl00_cphMain_ddlSortField_ClientState" type="hidden" />
+		</div>
+                                </td>
+                                <td style="margin-top: -11px;" class="pt">
+                                    <div id="ctl00_cphMain_ddlCoverage" class="RadComboBox RadComboBox_Default">
+			<table summary="combobox" style="border-width:0;border-collapse:collapse;width:100%">
+				<tr class="rcbReadOnly">
+					<td class="rcbInputCell rcbInputCellLeft" style="width:100%;"><input name="ctl00$cphMain$ddlCoverage" type="text" class="rcbInput radPreventDecorate" id="ctl00_cphMain_ddlCoverage_Input" value="Show All Coverages" readonly="readonly" /></td><td class="rcbArrowCell rcbArrowCellRight"><a id="ctl00_cphMain_ddlCoverage_Arrow" style="overflow: hidden;display: block;position: relative;outline: none;">select</a></td>
+				</tr>
+			</table><div class="rcbSlide" style="z-index:6000;display:none;"><div id="ctl00_cphMain_ddlCoverage_DropDown" class="RadComboBoxDropDown RadComboBoxDropDown_Default "><div class="rcbScroll rcbWidth"><ul class="rcbList"><li class="rcbItem">Show All Coverages</li><li class="rcbItem">No Coverage Assigned</li><li class="rcbItem">Flushing Zone I1</li></ul></div></div></div><input id="ctl00_cphMain_ddlCoverage_ClientState" name="ctl00_cphMain_ddlCoverage_ClientState" type="hidden" />
+		</div>
+                                </td>
+                                <td>
+                                    <div id="ctl00_cphMain_ddlShowItems" class="RadComboBox RadComboBox_Default">
+			<table summary="combobox" style="border-width:0;border-collapse:collapse;width:100%">
+				<tr class="rcbReadOnly">
+					<td class="rcbInputCell rcbInputCellLeft" style="width:100%;"><input name="ctl00$cphMain$ddlShowItems" type="text" class="rcbInput radPreventDecorate" id="ctl00_cphMain_ddlShowItems_Input" value="Show 100 Items" readonly="readonly" /></td><td class="rcbArrowCell rcbArrowCellRight"><a id="ctl00_cphMain_ddlShowItems_Arrow" style="overflow: hidden;display: block;position: relative;outline: none;">select</a></td>
+				</tr>
+			</table><div class="rcbSlide" style="z-index:6000;display:none;"><div id="ctl00_cphMain_ddlShowItems_DropDown" class="RadComboBoxDropDown RadComboBoxDropDown_Default "><div class="rcbScroll rcbWidth"><ul class="rcbList"><li class="rcbItem">Show 10 Items</li><li class="rcbItem">Show 20 Items</li><li class="rcbItem">Show 50 Items</li><li class="rcbItem">Show 100 Items</li></ul></div></div></div><input id="ctl00_cphMain_ddlShowItems_ClientState" name="ctl00_cphMain_ddlShowItems_ClientState" type="hidden" />
+		</div>
+                                </td>
+                                <td class="search_heading2" style="white-space: nowrap; text-align: right; vertical-align: middle;">&nbsp; Page
+                                <span id="cphMain_lblPageToShow">1</span>
+                                    of
+                                <span id="cphMain_lblLastPage">1</span>
+                                    &nbsp;
+                                </td>
+                                <td style="vertical-align: middle; text-align: right; white-space: nowrap; overflow: visible">
+                                    <span id="ctl00_cphMain_btnDisplayFirstPage" title="Display First Page..." class="RadButton RadButton_Default rbImageButton btnPageFirst" style="background-image:url('https://jbphh-safewaters.org/public/common/jbphh_default/Masterpage/PageFirst.gif');"><span class="rbText rbHideElement"></span><input id="ctl00_cphMain_btnDisplayFirstPage_ClientState" name="ctl00_cphMain_btnDisplayFirstPage_ClientState" type="hidden" /></span>
+                                    <span id="ctl00_cphMain_btnDisplayPrevPage" title="Display Previous Page..." class="RadButton RadButton_Default rbImageButton btnPagePrevious" style="background-image:url('https://jbphh-safewaters.org/public/common/jbphh_default/Masterpage/PagePrevious.gif');"><span class="rbText rbHideElement"></span><input id="ctl00_cphMain_btnDisplayPrevPage_ClientState" name="ctl00_cphMain_btnDisplayPrevPage_ClientState" type="hidden" /></span>
+                                    <span id="ctl00_cphMain_btnDisplayNextPage" title="Display Next Page..." class="RadButton RadButton_Default rbImageButton btnPageNext" style="background-image:url('https://jbphh-safewaters.org/public/common/jbphh_default/Masterpage/PageNext.gif');"><span class="rbText rbHideElement"></span><input id="ctl00_cphMain_btnDisplayNextPage_ClientState" name="ctl00_cphMain_btnDisplayNextPage_ClientState" type="hidden" /></span>
+                                    <span id="ctl00_cphMain_btnDisplayLastPage" title="Display Last Page..." class="RadButton RadButton_Default rbImageButton btnPageLast" style="background-image:url('https://jbphh-safewaters.org/public/common/jbphh_default/Masterpage/PageLast.gif');"><span class="rbText rbHideElement"></span><input id="ctl00_cphMain_btnDisplayLastPage_ClientState" name="ctl00_cphMain_btnDisplayLastPage_ClientState" type="hidden" /></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6" id="tdSearchResults" onclick='tdSearchResults_onclick(event, this);' class="search_text">
+                                    <br />
+                                    <span id="cphMain_lblSearchResults"><a id='aFile6411' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=6411' target='_blank'>981053_20220127-EPA 525.2_ID011522-18-02_I1</a>, Hawaii State Department of Health, 2022-03-21<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_006411.pdf (1 MB) <span id='span6411' class='LIBRARY_metadata'> metadata</span></div><a id='aFile6412' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=6412' target='_blank'>981587_20220128-EPA 8015_ID011522-18-01_I1</a>, Hawaii State Department of Health, 2022-03-21<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_006412.pdf (1 MB) <span id='span6412' class='LIBRARY_metadata'> metadata</span></div><a id='aFile6413' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=6413' target='_blank'>981590_20220128-EPA 8015_ID011522-18-02_I1</a>, Hawaii State Department of Health, 2022-03-21<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_006413.pdf (1 MB) <span id='span6413' class='LIBRARY_metadata'> metadata</span></div><a id='aFile6414' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=6414' target='_blank'>981907_20220202-@8015_C8-C44_ASSETS_ID011822-48-04_I1</a>, Hawaii State Department of Health, 2022-03-21<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_006414.pdf (1 MB) <span id='span6414' class='LIBRARY_metadata'> metadata</span></div><a id='aFile6415' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=6415' target='_blank'>982107_20220219-EPA 8015_ID011522-23-01_I1</a>, Hawaii State Department of Health, 2022-03-21<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_006415.pdf (1 MB) <span id='span6415' class='LIBRARY_metadata'> metadata</span></div><a id='aFile6416' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=6416' target='_blank'>982178_20220131-TPH as Gas_ID011522-16-02_I1</a>, Hawaii State Department of Health, 2022-03-21<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_006416.pdf (2 MB) <span id='span6416' class='LIBRARY_metadata'> metadata</span></div><a id='aFile6417' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=6417' target='_blank'>Data Tables, Flushing_zone_I1-Validated_SVOCs_for_public</a>, Hawaii State Department of Health, 2022-03-21<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_006417.pdf (194 KB) <span id='span6417' class='LIBRARY_metadata'> metadata</span></div><a id='aFile6418' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=6418' target='_blank'>Data Tables, Flushing_zone_I1-Validated_TPH_for_public</a>, Hawaii State Department of Health, 2022-03-21<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_006418.pdf (111 KB) <span id='span6418' class='LIBRARY_metadata'> metadata</span></div><a id='aFile6419' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=6419' target='_blank'>DVC_Stage 2A_JBPHH_981053_final</a>, Hawaii State Department of Health, 2022-03-21<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_006419.pdf (585 KB) <span id='span6419' class='LIBRARY_metadata'> metadata</span></div><a id='aFile6420' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=6420' target='_blank'>DVC_Stage 2A_JBPHH_981907_final</a>, Hawaii State Department of Health, 2022-03-21<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_006420.pdf (259 KB) <span id='span6420' class='LIBRARY_metadata'> metadata</span></div><a id='aFile6421' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=6421' target='_blank'>DVC_Stage 2A_JBPHH_982178_final</a>, Hawaii State Department of Health, 2022-03-21<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_006421.pdf (195 KB) <span id='span6421' class='LIBRARY_metadata'> metadata</span></div><a id='aFile6422' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=6422' target='_blank'>DVR_981587_20220128_ID011522-18-01_8015B_I1</a>, Hawaii State Department of Health, 2022-03-21<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_006422.pdf (276 KB) <span id='span6422' class='LIBRARY_metadata'> metadata</span></div><a id='aFile6423' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=6423' target='_blank'>DVR_981590_20220128_ID011522-18-02_8015B_I1</a>, Hawaii State Department of Health, 2022-03-21<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_006423.pdf (271 KB) <span id='span6423' class='LIBRARY_metadata'> metadata</span></div><a id='aFile6424' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=6424' target='_blank'>DVR_982107_20220219-EPA 8015_ID011522-23-01_I1-final</a>, Hawaii State Department of Health, 2022-03-21<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_006424.pdf (880 KB) <span id='span6424' class='LIBRARY_metadata'> metadata</span></div></span>
+                                    <div tabindex="0" id="ctl00_cphMain_ucFileContextMenu1_ContextMenu1">
+			<div class="RadMenu RadMenu_Default RadMenu_Context RadMenu_Default_Context rmRoundedCorners rmRoundedCorners_Default rmShadows">
+				<ul class="rmActive rmVertical rmGroup rmLevel1">
+					<li class="rmItem rmFirst"><a class="rmLink" href="#"><span class="rmText">Open</span></a></li><li class="rmItem "><a class="rmLink" href="#"><span class="rmText">Open in new tab</span></a></li><li class="rmItem "><a class="rmLink" href="#"><span class="rmText">Open in new window</span></a></li><li class="rmItem "><a class="rmLink" href="#"><span class="rmText">Save target as server filename...</span></a></li><li class="rmItem "><a class="rmLink" href="#"><span class="rmText">Save target as title filename...</span></a></li><li class="rmItem "><a class="rmLink" href="#"><span class="rmText">Save target as original filename...</span></a></li><li class="rmItem rmLast"><a class="rmLink" href="#"><span class="rmText">Print target...</span></a></li>
+				</ul>
+			</div><input id="ctl00_cphMain_ucFileContextMenu1_ContextMenu1_ClientState" name="ctl00_cphMain_ucFileContextMenu1_ContextMenu1_ClientState" type="hidden" />
+		</div>
+
+
+    <script type="text/javascript">
+
+        function OnClientItemClicked(sender, args) {
+            var command = args.get_item().get_value()
+            var target_url = args.get_targetElement().getAttribute("href");
+
+            switch (command) {
+                case 'Open':
+                    target_url += '&iFilename=0';
+                    window.open(target_url, '_self');
+                    break;
+                case 'OpenInNewTab':
+                    target_url += '&iFilename=0';
+                    window.open(target_url, '_blank');
+                    break;
+                case 'OpenInNewWindow':
+                    target_url += '&iFilename=0';
+                    window.open(target_url, '_blank', 'height=800, width=1024, resizable=yes');
+                    break;
+                case 'Servername':
+                    target_url += '&iFilename=0';
+                    target_url = target_url.replace('FileImage_Inline', 'FileImage');
+                    window.open(target_url, '_self');
+                    break;
+                case 'Title':
+                    target_url += '&iFilename=1';
+                    target_url = target_url.replace('FileImage_Inline', 'FileImage');
+                    window.open(target_url, '_self');
+                    break;
+                case 'Original':
+                    target_url += '&iFilename=2';
+                    target_url = target_url.replace('FileImage_Inline', 'FileImage');
+                    window.open(target_url, '_self');
+                    break;
+                case 'PrintTarget':
+                    var hWnd = window.open(target_url, '_blank', 'height=800, width=1024');
+                    hWnd.print();
+            }
+        }
+
+        function showContextMenu(sender, args) { // Keep as working webservice, use by adding  OnClientShowing="showContextMenu" to ContextMenu
+            var $ = $telerik.$;
+            var DSN = 'PUB',
+                target_url = args._targetElement.nameProp,
+                id = target_url.slice(target_url.search('ID=') + 3),
+                menuItem3 = sender.get_items().getItem(3),
+                menuItem4 = sender.get_items().getItem(4),
+                menuItem5 = sender.get_items().getItem(5);
+
+            $.get("/SearchResultsService.svc/GetServerFilename", { DSN: DSN, idFile: id }, function (data) { menuItem3.set_text("Save target as '" + data.d + "' ..."); });
+            $.get("/SearchResultsService.svc/GetTitleFilename", { DSN: DSN, idFile: id }, function (data) { menuItem4.set_text("Save target as '" + data.d + "' ..."); });
+            $.get("/SearchResultsService.svc/GetOriginalFilename", { DSN: DSN, idFile: id }, function (data) { menuItem5.set_text("Save target as '" + data.d + "' ..."); });
+        }
+
+    </script>
+
+                                </td>
+                            </tr>
+                            <tr style="vertical-align: middle; text-align: right; width: 100%;">
+                                <td colspan="5" class="search_heading2" style="vertical-align: middle; text-align: left; width: 95%;">
+                                    <span id="cphMain_lblPageFirstRow2">1</span>
+                                    -
+                                <span id="cphMain_lblPageLastRow2">14</span>
+                                    of
+                                <span id="cphMain_lblRowCount2">14</span>
+                                    Results
+                                </td>
+                                <td id="td2" class="search_heading2" style="white-space: nowrap; text-align: right; vertical-align: middle;">Page
+                                <span id="cphMain_lblPageToShow2">1</span>
+                                    of
+                                <span id="cphMain_lblLastPage2">1</span>
+                                    &nbsp;
+                                </td>
+                                <td style="vertical-align: middle; text-align: right; white-space: nowrap;">
+                                    <span id="ctl00_cphMain_btnDisplayFirstPage2" title="Display First Page..." class="RadButton RadButton_Default rbImageButton btnPageFirst" style="background-image:url('https://jbphh-safewaters.org/public/common/jbphh_default/Masterpage/PageFirst.gif');"><span class="rbText rbHideElement"></span><input id="ctl00_cphMain_btnDisplayFirstPage2_ClientState" name="ctl00_cphMain_btnDisplayFirstPage2_ClientState" type="hidden" /></span>
+                                    <span id="ctl00_cphMain_btnDisplayPrevPage2" title="Display Previous Page..." class="RadButton RadButton_Default rbImageButton btnPagePrevious" style="background-image:url('https://jbphh-safewaters.org/public/common/jbphh_default/Masterpage/PagePrevious.gif');"><span class="rbText rbHideElement"></span><input id="ctl00_cphMain_btnDisplayPrevPage2_ClientState" name="ctl00_cphMain_btnDisplayPrevPage2_ClientState" type="hidden" /></span>
+                                    <span id="ctl00_cphMain_btnDisplayNextPage2" title="Display Next Page..." class="RadButton RadButton_Default rbImageButton btnPageNext" style="background-image:url('https://jbphh-safewaters.org/public/common/jbphh_default/Masterpage/PageNext.gif');"><span class="rbText rbHideElement"></span><input id="ctl00_cphMain_btnDisplayNextPage2_ClientState" name="ctl00_cphMain_btnDisplayNextPage2_ClientState" type="hidden" /></span>
+                                    <span id="ctl00_cphMain_btnDisplayLastPage2" title="Display Last Page..." class="RadButton RadButton_Default rbImageButton btnPageLast" style="background-image:url('https://jbphh-safewaters.org/public/common/jbphh_default/Masterpage/PageLast.gif');"><span class="rbText rbHideElement"></span><input id="ctl00_cphMain_btnDisplayLastPage2_ClientState" name="ctl00_cphMain_btnDisplayLastPage2_ClientState" type="hidden" /></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">
+                                    <br />
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <div id="ctl00_cphMain_RadToolTipManager1" style="display:none;position:absolute;">
+			<div id="ctl00_cphMain_RadToolTipManager1RTMPanel">
+
+			</div><input id="ctl00_cphMain_RadToolTipManager1_ClientState" name="ctl00_cphMain_RadToolTipManager1_ClientState" type="hidden" />
+		</div>
+        </div>
+    
+	</div>
+</div>
+    
+        <script type="text/javascript">
+            function CallBackFunction(radWindow, returnValue) {
+                // RadWindow has closed so refresh page
+                window.location.reload(false);
+            }
+
+            function onSearch(sender, args) {
+                var Search = args.get_text();
+                var x = Search.l
+                if (Search.length < 1) {
+                    alert('Please enter a word or phrase to search for and then press [ENTER].');
+                    //Search.focus;
+                } else {
+                    OnRequestStart();
+                }
+            }
+
+            function tdSearchResults_onclick(evt, elem) {
+                var srcElement = evt.srcElement ? evt.srcElement : evt.target;
+
+                if (srcElement.id.search('spanEdit') == 0) {
+                    // It's a span in format spanEdit456 (ends in record id)
+                    var id = srcElement.id.substr(8);
+                    var HREF = 'Approve.aspx?DSN=PUB&title=Edit Metadata&idFile=' + id
+
+                    ShowDialogInParent2(-1, -1, 640, 820, HREF, '');
+                    if ('1' == '0') {
+                        window.event.returnValue = false;
+                    } else {
+                        evt.preventDefault(); // Works in FireFox
+                        evt.stopPropagation(); // The officially correct way per docs
+                    }
+                }
+            }
+
+            function ShowFile(ID) {
+                window.open('StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=' + ID, '_self');
+            }
+
+        </script>
+    
+
+    
+
+<script type="text/javascript">
+//<![CDATA[
+window.__TsmHiddenField = $get('RadScriptManager1_TSM');Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadAjaxManager, {"_updatePanels":"","ajaxSettings":[],"clientEvents":{OnRequestStart:"OnRequestStart",OnResponseEnd:"OnResponseEnd"},"defaultLoadingPanelID":"","enableAJAX":true,"enableHistory":false,"links":[],"requestQueueSize":3,"styles":[],"uniqueID":"ctl00$RadAjaxManager1","updatePanelsRenderMode":0}, null, null, $get("RadAjaxManager1"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadWindowManager, {"behaviors":36,"clientStateFieldID":"RadWindowManager1_ClientState","formID":"form1","iconUrl":"","minimizeIconUrl":"","name":"RadWindowManager1","reloadOnShow":true,"showContentDuringLoad":false,"skin":"Default","visibleStatusbar":false,"windowControls":"[]"}, {"close":OnRadWindowClose}, null, $get("RadWindowManager1"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadWindowManager, {"behaviors":36,"clientStateFieldID":"RadWindowManager2_ClientState","formID":"form1","iconUrl":"","minimizeIconUrl":"","name":"RadWindowManager2","reloadOnShow":true,"showContentDuringLoad":false,"skin":"Default","visibleOnPageLoad":true,"visibleStatusbar":false,"windowControls":"[]"}, null, null, $get("RadWindowManager2"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadSearchBox, {"_emptyMessage":"enter search word or phrase","_enableAutoComplete":false,"_postBackOnSearch":true,"_postBackReference":"__doPostBack(\u0027ctl00$cphMain$RadSearchBox1\u0027,\u0027arguments\u0027)","_renderMode":2,"_showAllResultsText":"Show All Results","_skinName":"Default","_uniqueId":"ctl00$cphMain$RadSearchBox1","clientStateFieldID":"ctl00_cphMain_RadSearchBox1_ClientState"}, {"search":onSearch}, null, $get("ctl00_cphMain_RadSearchBox1"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadComboBox, {"_dropDownWidth":205,"_height":0,"_postBackReference":"__doPostBack(\u0027ctl00$cphMain$ddlFileType\u0027,\u0027arguments\u0027)","_skin":"Default","_text":"Show All File Types","_uniqueId":"ctl00$cphMain$ddlFileType","_value":"All","clientStateFieldID":"ctl00_cphMain_ddlFileType_ClientState","collapseAnimation":"{\"duration\":450}","expandAnimation":"{\"duration\":450}","itemData":[{"value":"All","selected":true},{"value":"pdf"}],"localization":"{\"AllItemsCheckedString\":\"All items checked\",\"ItemsCheckedString\":\"items checked\",\"CheckAllString\":\"Check All\"}","selectedIndex":0}, null, null, $get("ctl00_cphMain_ddlFileType"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadComboBox, {"_dropDownWidth":205,"_height":0,"_postBackReference":"__doPostBack(\u0027ctl00$cphMain$ddlSortField\u0027,\u0027arguments\u0027)","_skin":"Default","_text":"Sort by System Filename","_uniqueId":"ctl00$cphMain$ddlSortField","_value":"SystemFilename","clientStateFieldID":"ctl00_cphMain_ddlSortField_ClientState","collapseAnimation":"{\"duration\":450}","expandAnimation":"{\"duration\":450}","itemData":[{"value":"PublicationDate"},{"value":"PublicationDate DESC"},{"value":"Rank"},{"value":"Rank DESC"},{"value":"SystemFilename","selected":true},{"value":"SystemFilename DESC"},{"value":"Title"},{"value":"Title DESC"}],"localization":"{\"AllItemsCheckedString\":\"All items checked\",\"ItemsCheckedString\":\"items checked\",\"CheckAllString\":\"Check All\"}","selectedIndex":4}, null, null, $get("ctl00_cphMain_ddlSortField"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadComboBox, {"_dropDownWidth":400,"_height":0,"_postBackReference":"__doPostBack(\u0027ctl00$cphMain$ddlCoverage\u0027,\u0027arguments\u0027)","_skin":"Default","_text":"Show All Coverages","_uniqueId":"ctl00$cphMain$ddlCoverage","clientStateFieldID":"ctl00_cphMain_ddlCoverage_ClientState","collapseAnimation":"{\"duration\":450}","emptyMessage":"coverage filter","expandAnimation":"{\"duration\":450}","itemData":[{"selected":true},{},{}],"localization":"{\"AllItemsCheckedString\":\"All items checked\",\"ItemsCheckedString\":\"items checked\",\"CheckAllString\":\"Check All\"}","selectedIndex":0}, null, null, $get("ctl00_cphMain_ddlCoverage"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadComboBox, {"_dropDownWidth":0,"_height":0,"_postBackReference":"__doPostBack(\u0027ctl00$cphMain$ddlShowItems\u0027,\u0027arguments\u0027)","_skin":"Default","_text":"Show 100 Items","_uniqueId":"ctl00$cphMain$ddlShowItems","_value":"100","clientStateFieldID":"ctl00_cphMain_ddlShowItems_ClientState","collapseAnimation":"{\"duration\":450}","expandAnimation":"{\"duration\":450}","itemData":[{"value":"10"},{"value":"20"},{"value":"50"},{"value":"100","selected":true}],"localization":"{\"AllItemsCheckedString\":\"All items checked\",\"ItemsCheckedString\":\"items checked\",\"CheckAllString\":\"Check All\"}","selectedIndex":3}, null, null, $get("ctl00_cphMain_ddlShowItems"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadButton, {"_accessKey":"","_hasIcon":false,"_hasImage":true,"_isClientSubmit":true,"_isImageButton":true,"_postBackReference":"__doPostBack('ctl00$cphMain$btnDisplayFirstPage','')","_renderMode":1,"clientStateFieldID":"ctl00_cphMain_btnDisplayFirstPage_ClientState","confirmSettings":{},"cssClass":"btnPageFirst","iconData":{},"imageData":{"imageUrl":"https://jbphh-safewaters.org/public/common/jbphh_default/Masterpage/PageFirst.gif"},"toggleStatesData":[],"toolTip":"Display First Page...","uniqueGroupName":"","uniqueID":"ctl00$cphMain$btnDisplayFirstPage"}, null, null, $get("ctl00_cphMain_btnDisplayFirstPage"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadButton, {"_accessKey":"","_hasIcon":false,"_hasImage":true,"_isClientSubmit":true,"_isImageButton":true,"_postBackReference":"__doPostBack('ctl00$cphMain$btnDisplayPrevPage','')","_renderMode":1,"clientStateFieldID":"ctl00_cphMain_btnDisplayPrevPage_ClientState","confirmSettings":{},"cssClass":"btnPagePrevious","iconData":{},"imageData":{"imageUrl":"https://jbphh-safewaters.org/public/common/jbphh_default/Masterpage/PagePrevious.gif"},"toggleStatesData":[],"toolTip":"Display Previous Page...","uniqueGroupName":"","uniqueID":"ctl00$cphMain$btnDisplayPrevPage"}, null, null, $get("ctl00_cphMain_btnDisplayPrevPage"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadButton, {"_accessKey":"","_hasIcon":false,"_hasImage":true,"_isClientSubmit":true,"_isImageButton":true,"_postBackReference":"__doPostBack('ctl00$cphMain$btnDisplayNextPage','')","_renderMode":1,"clientStateFieldID":"ctl00_cphMain_btnDisplayNextPage_ClientState","confirmSettings":{},"cssClass":"btnPageNext","iconData":{},"imageData":{"imageUrl":"https://jbphh-safewaters.org/public/common/jbphh_default/Masterpage/PageNext.gif"},"toggleStatesData":[],"toolTip":"Display Next Page...","uniqueGroupName":"","uniqueID":"ctl00$cphMain$btnDisplayNextPage"}, null, null, $get("ctl00_cphMain_btnDisplayNextPage"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadButton, {"_accessKey":"","_hasIcon":false,"_hasImage":true,"_isClientSubmit":true,"_isImageButton":true,"_postBackReference":"__doPostBack('ctl00$cphMain$btnDisplayLastPage','')","_renderMode":1,"clientStateFieldID":"ctl00_cphMain_btnDisplayLastPage_ClientState","confirmSettings":{},"cssClass":"btnPageLast","iconData":{},"imageData":{"imageUrl":"https://jbphh-safewaters.org/public/common/jbphh_default/Masterpage/PageLast.gif"},"toggleStatesData":[],"toolTip":"Display Last Page...","uniqueGroupName":"","uniqueID":"ctl00$cphMain$btnDisplayLastPage"}, null, null, $get("ctl00_cphMain_btnDisplayLastPage"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadContextMenu, {"_childListElementCssClass":null,"_skin":"Default","clientStateFieldID":"ctl00_cphMain_ucFileContextMenu1_ContextMenu1_ClientState","collapseAnimation":"{\"duration\":450}","enableRoundedCorners":true,"enableShadows":true,"expandAnimation":"{\"duration\":450}","itemData":[{"value":"Open"},{"value":"OpenInNewTab"},{"value":"OpenInNewWindow"},{"value":"Servername"},{"value":"Title"},{"value":"Original"},{"value":"PrintTarget"}],"targets":[{"id":"","type":1},{"id":"aFile6411","type":0},{"id":"aFile6412","type":0},{"id":"aFile6413","type":0},{"id":"aFile6414","type":0},{"id":"aFile6415","type":0},{"id":"aFile6416","type":0},{"id":"aFile6417","type":0},{"id":"aFile6418","type":0},{"id":"aFile6419","type":0},{"id":"aFile6420","type":0},{"id":"aFile6411","type":0},{"id":"aFile6412","type":0},{"id":"aFile6413","type":0},{"id":"aFile6414","type":0},{"id":"aFile6415","type":0},{"id":"aFile6416","type":0},{"id":"aFile6417","type":0},{"id":"aFile6418","type":0},{"id":"aFile6419","type":0},{"id":"aFile6420","type":0},{"id":"aFile6411","type":0},{"id":"aFile6412","type":0},{"id":"aFile6413","type":0},{"id":"aFile6414","type":0},{"id":"aFile6415","type":0},{"id":"aFile6416","type":0},{"id":"aFile6417","type":0},{"id":"aFile6418","type":0},{"id":"aFile6419","type":0},{"id":"aFile6420","type":0},{"id":"aFile6421","type":0},{"id":"aFile6422","type":0},{"id":"aFile6423","type":0},{"id":"aFile6424","type":0}]}, {"itemClicked":OnClientItemClicked}, null, $get("ctl00_cphMain_ucFileContextMenu1_ContextMenu1"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadButton, {"_accessKey":"","_hasIcon":false,"_hasImage":true,"_isClientSubmit":true,"_isImageButton":true,"_postBackReference":"__doPostBack('ctl00$cphMain$btnDisplayFirstPage2','')","_renderMode":1,"clientStateFieldID":"ctl00_cphMain_btnDisplayFirstPage2_ClientState","confirmSettings":{},"cssClass":"btnPageFirst","iconData":{},"imageData":{"imageUrl":"https://jbphh-safewaters.org/public/common/jbphh_default/Masterpage/PageFirst.gif"},"toggleStatesData":[],"toolTip":"Display First Page...","uniqueGroupName":"","uniqueID":"ctl00$cphMain$btnDisplayFirstPage2"}, null, null, $get("ctl00_cphMain_btnDisplayFirstPage2"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadButton, {"_accessKey":"","_hasIcon":false,"_hasImage":true,"_isClientSubmit":true,"_isImageButton":true,"_postBackReference":"__doPostBack('ctl00$cphMain$btnDisplayPrevPage2','')","_renderMode":1,"clientStateFieldID":"ctl00_cphMain_btnDisplayPrevPage2_ClientState","confirmSettings":{},"cssClass":"btnPagePrevious","iconData":{},"imageData":{"imageUrl":"https://jbphh-safewaters.org/public/common/jbphh_default/Masterpage/PagePrevious.gif"},"toggleStatesData":[],"toolTip":"Display Previous Page...","uniqueGroupName":"","uniqueID":"ctl00$cphMain$btnDisplayPrevPage2"}, null, null, $get("ctl00_cphMain_btnDisplayPrevPage2"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadButton, {"_accessKey":"","_hasIcon":false,"_hasImage":true,"_isClientSubmit":true,"_isImageButton":true,"_postBackReference":"__doPostBack('ctl00$cphMain$btnDisplayNextPage2','')","_renderMode":1,"clientStateFieldID":"ctl00_cphMain_btnDisplayNextPage2_ClientState","confirmSettings":{},"cssClass":"btnPageNext","iconData":{},"imageData":{"imageUrl":"https://jbphh-safewaters.org/public/common/jbphh_default/Masterpage/PageNext.gif"},"toggleStatesData":[],"toolTip":"Display Next Page...","uniqueGroupName":"","uniqueID":"ctl00$cphMain$btnDisplayNextPage2"}, null, null, $get("ctl00_cphMain_btnDisplayNextPage2"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadButton, {"_accessKey":"","_hasIcon":false,"_hasImage":true,"_isClientSubmit":true,"_isImageButton":true,"_postBackReference":"__doPostBack('ctl00$cphMain$btnDisplayLastPage2','')","_renderMode":1,"clientStateFieldID":"ctl00_cphMain_btnDisplayLastPage2_ClientState","confirmSettings":{},"cssClass":"btnPageLast","iconData":{},"imageData":{"imageUrl":"https://jbphh-safewaters.org/public/common/jbphh_default/Masterpage/PageLast.gif"},"toggleStatesData":[],"toolTip":"Display Last Page...","uniqueGroupName":"","uniqueID":"ctl00$cphMain$btnDisplayLastPage2"}, null, null, $get("ctl00_cphMain_btnDisplayLastPage2"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadToolTipManager, {"_cssClass":"","_manualCloseButtonText":"Close","_updatePanelUniqueId":"ctl00$cphMain$RadToolTipManager1RTMPanel","clientStateFieldID":"ctl00_cphMain_RadToolTipManager1_ClientState","formID":"form1","height":"500px","hideEvent":4,"isToolTipFactory":true,"loadOnDemand":true,"offsetX":80,"position":13,"showEvent":2,"skin":"Default","targetControls":"[['span6411','span6411','6411'],['span6412','span6412','6412'],['span6413','span6413','6413'],['span6414','span6414','6414'],['span6415','span6415','6415'],['span6416','span6416','6416'],['span6417','span6417','6417'],['span6418','span6418','6418'],['span6419','span6419','6419'],['span6420','span6420','6420'],['span6411','span6411','6411'],['span6412','span6412','6412'],['span6413','span6413','6413'],['span6414','span6414','6414'],['span6415','span6415','6415'],['span6416','span6416','6416'],['span6417','span6417','6417'],['span6418','span6418','6418'],['span6419','span6419','6419'],['span6420','span6420','6420'],['span6411','span6411','6411'],['span6412','span6412','6412'],['span6413','span6413','6413'],['span6414','span6414','6414'],['span6415','span6415','6415'],['span6416','span6416','6416'],['span6417','span6417','6417'],['span6418','span6418','6418'],['span6419','span6419','6419'],['span6420','span6420','6420'],['span6421','span6421','6421'],['span6422','span6422','6422'],['span6423','span6423','6423'],['span6424','span6424','6424']]","width":"650px"}, null, null, $get("ctl00_cphMain_RadToolTipManager1"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadAjaxPanel, {"clientEvents":{OnRequestStart:"OnRequestStart",OnResponseEnd:"OnResponseEnd"},"enableAJAX":true,"enableHistory":false,"links":[],"loadingPanelID":"","styles":[],"uniqueID":"ctl00$cphMain$rapSearchResults"}, null, null, $get("ctl00_cphMain_rapSearchResults"));
+});
+//]]>
+</script>
+</form>
+</body>
+</html>
+
+    <script type="text/javascript">
+
+        /*        window.alert = function (Text) {	-- 2020-04-27 causes unintended refresh of entire page after every alert, needs more work!
+                    radalert(Text, 400, 200, '');
+                }
+        */
+        function AutoSizeParentFrameHeight() {
+            if (typeof window.parent.AutoSizeFrameHeight == 'function') {
+                window.parent.AutoSizeFrameHeight();
+            } else if (typeof window.parent.parent.AutoSizeFrameHeight == 'function') {
+                window.parent.parent.AutoSizeFrameHeight();
+            }
+        }
+
+        function btnToolbar1InitInParent(CssClass, Tooltip, OnClick) {
+            if (typeof parent.btnToolbar1 != 'undefined') {
+                parent.btnToolbar1.init(CssClass, Tooltip, OnClick);
+            } else if (typeof parent.parent.btnToolbar1 != 'undefined') {
+                parent.parent.btnToolbar1.init(CssClass, Tooltip, OnClick);
+            }
+        }
+
+        function btnToolbar2InitInParent(CssClass, Tooltip, OnClick) {
+            if (typeof parent.btnToolbar2 != 'undefined') {
+                parent.btnToolbar2.init(CssClass, Tooltip, OnClick);
+            } else if (typeof parent.parent.btnToolbar2 != 'undefined') {
+                parent.parent.btnToolbar2.init(CssClass, Tooltip, OnClick);
+            }
+        }
+
+        function btnToolbar3InitInParent(CssClass, Tooltip, OnClick) {
+            if (typeof parent.btnToolbar3 != 'undefined') {
+                parent.btnToolbar3.init(CssClass, Tooltip, OnClick);
+            } else if (typeof parent.parent.btnToolbar3 != 'undefined') {
+                parent.parent.btnToolbar3.init(CssClass, Tooltip, OnClick);
+            }
+        }
+
+        function OnRadWindowClose(radWindow, returnValue) {
+            // Only called if running outside of framework
+            if (typeof RefreshDataOnDialogClose === 'undefined') {
+                // No special refresh function, so just refresh the whole page
+                window.location.reload(false);
+            } else {
+                var oWnd = $find("RadWindowManager1");
+                oWnd.closeActiveWindow();
+                RefreshDataOnDialogClose(radWindow, returnValue);
+            }
+        }
+
+        var gSavedFocus;
+
+        function OnRequestStart() {
+            gSavedFocus = document.activeElement;
+            if (typeof window.parent.ShowBusy == 'function') {
+                window.parent.ShowBusy();
+            } else if (typeof window.parent.parent.ShowBusy == 'function') {
+                window.parent.parent.ShowBusy();
+            }
+        }
+
+        function OnResponseEnd() {
+            if (typeof window.parent.HideBusy == 'function') {
+                window.parent.HideBusy();
+                console.log('OnResponseEnd');
+                //AutoSizeParentFrameHeight();  // Some apps change size e.g., Team Directory
+            } else if (typeof window.parent.parent.HideBusy == 'function') {
+                window.parent.parent.HideBusy();
+            }
+            //if (typeof gSavedFocus !== 'undefined') { gSavedFocus.focus() }   // 2020-05-06 generating error in rgrdSeddmatchingFiles
+        }
+
+        OnResponseEnd();   // Always call when we load in case parent doesn't know (e.g., in tab iFrame, on anchor click in dashboard...)
+
+        function ShowBusyWithTitleInParent(Title, ReturnValue) {
+            if (typeof window.parent.ShowBusyWithTitle == 'function') {
+                return window.parent.ShowBusyWithTitle(Title, ReturnValue);
+            } else if (typeof window.parent.parent.ShowBusy == 'function') {
+                return window.parent.parent.ShowBusyWithTitle(Title, ReturnValue);
+            }
+        }
+
+        function ShowDialogInParent(Left, Top, Height, Width, URL, Status, ShowMaxButton) {
+            URL = '../library/' + URL;
+            if (typeof window.parent.ShowDialog == 'function') {
+                window.parent.ShowDialog(Left, Top, Height, Width, URL, Status, ShowMaxButton);
+            } else if (typeof window.parent.parent.ShowDialog == 'function') {
+                window.parent.parent.ShowDialog(Left, Top, Height, Width, URL, Status, ShowMaxButton);
+            }
+            else {
+                // No parent so just do it here
+                var oWnd = $find("RadWindowManager1");
+                oWnd.SetSize(Width, Height);
+                if (Left > 0) {     // If Left = -1 Then we center dialog, otherwise position it
+                    oWnd.MoveTo(Left, Top);
+                }
+                if (typeof ShowMaxButton === 'undefined') {
+                    oWnd.set_behaviors(Telerik.Web.UI.WindowBehaviors.Move + Telerik.Web.UI.WindowBehaviors.Resize + Telerik.Web.UI.WindowBehaviors.Close);
+                } else {
+                    oWnd.set_behaviors(Telerik.Web.UI.WindowBehaviors.Move + Telerik.Web.UI.WindowBehaviors.Resize + Telerik.Web.UI.WindowBehaviors.Close + Telerik.Web.UI.WindowBehaviors.Maximize);
+                }
+                oWnd.SetStatus(Status);
+                oWnd.SetUrl(URL);
+                oWnd.Show();
+            }
+        }
+
+        function ShowDialogInParent2(Left, Top, Height, Width, URL, Status) {
+            URL = '../library/' + URL;
+            if (typeof window.parent.ShowDialog2 == 'function') {
+                window.parent.ShowDialog2(Left, Top, Height, Width, URL, Status);
+            }
+            else if (typeof window.parent.parent.ShowDialog2 == 'function') {
+                window.parent.parent.ShowDialog2(Left, Top, Height, Width, URL, Status);
+            }
+            else {
+                // no parent so just do it here (No MaxButton, and no refresh on close)
+                var oWnd = $find("RadWindowManager2");
+                oWnd.SetSize(Width, Height);
+                if (Left > 0) {     // If Left = -1 Then we center dialog, otherwise position it
+                    oWnd.MoveTo(Left, Top);
+                }
+                oWnd.SetStatus(Status);
+                oWnd.SetUrl(URL);
+                oWnd.Show();
+            }
+        }
+
+        function ShowUrlInParent(URL, Title) {
+            if (typeof window.parent.ShowURL == 'function') {
+                window.parent.ShowURL(URL, Title);
+            }
+            else {
+                // No parent so just do it here
+                window.location = URL;
+                document.title = Title;
+            }
+        }
+
+        function SizeFrameHeightInParent() {
+            if (typeof window.parent.SizeFrameHeight == 'function') {
+                //alert('There is parent SizeFrameHeight!');
+                Height = $telerik.$(document).height();  // Save for parent use later if needed
+                window.parent.parent.SizeFrameHeight(Height);
+            }
+        }
+
+        $telerik.$(document).ready(SizeFrameHeightInParent);
+    </script>

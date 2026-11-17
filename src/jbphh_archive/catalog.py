@@ -13,6 +13,7 @@ from pathlib import Path
 from jbphh_archive import REPO_ROOT
 
 CATALOG_FILE = REPO_ROOT / "catalog" / "documents.csv"
+ZONES_FILE = REPO_ROOT / "catalog" / "zones.csv"
 REGISTRY_FILE = Path("registry") / "documents.csv"  # the published copy, inside the archive
 
 Row = dict[str, str]
@@ -42,6 +43,20 @@ def write_rows(path: Path, columns: list[str], rows: list[Row]) -> None:
         writer.writeheader()
         writer.writerows(rows)
     os.replace(temp, path)
+
+
+def zone_row(zone_id: str) -> Row:
+    """The zone's row in catalog/zones.csv. Stops with a plain message if the zone isn't there."""
+    zones = read_rows(ZONES_FILE)[1]
+    for zone in zones:
+        if zone["zone_id"] == zone_id:
+            return zone
+    sys.exit(f"Zone {zone_id} is not in catalog/zones.csv. Zones: {', '.join(z['zone_id'] for z in zones)}.")
+
+
+def values(cell: str) -> list[str]:
+    """The values in a multi-value cell such as `zones`, separated by '; '."""
+    return [value for value in cell.split("; ") if value]
 
 
 def registered_paths(rows: list[Row]) -> dict[str, str]:

@@ -1,0 +1,689 @@
+
+<!DOCTYPE html>
+<html lang="en-us">
+<head><meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" /><title>
+
+</title>
+    <style>
+        html {
+            background-size: cover;
+            height: 100%;
+            width: 100%;
+        }
+
+        * {
+            font-family: Arial, Verdana;
+        }
+
+        label {
+            font-size: 12px;
+        }
+
+        .divForm, .divTab {
+            position: relative;
+            height: 100%; /* 630px; */
+            width: 100% /* 860px; */
+        }
+
+        .divForm {
+            /* background-color: rgb(234,234,234); */
+            border: 1px solid black !important;
+        }
+
+        .divField {
+            position: absolute;
+        }
+
+        .divField * {
+            font-size: 12px
+        }
+
+        .divField a, .divField a:active, .divField a:link, .divField a:visited {
+            color: #5e5a4f;
+            text-decoration: none;
+        }
+
+        .divField a:hover {
+            color: black;
+            cursor: pointer;
+            text-decoration: underline !important;
+        }
+
+        .hidden {
+            display: none !important;
+            visibility: hidden !important
+        }
+
+        .MultiPageBorder {
+            border: inset 2px Silver
+        }
+
+        .racItem, .rcbHovered, .rcbInput, .rcbItem {
+            font-size: 12px !important;
+        }
+
+        .RadMultiPage {
+            padding-bottom: 0px;
+            margin-bottom: 15px;
+        }
+
+    </style>
+<link href="https://d35islomi5rx1v.cloudfront.net/ajaxz/2025.2.528/Window.css" type="text/css" rel="stylesheet" class="Telerik_stylesheet" /><link href="https://d35islomi5rx1v.cloudfront.net/ajaxz/2025.2.528/Default/Window.Default.css" type="text/css" rel="stylesheet" class="Telerik_stylesheet" /><link href="https://d35islomi5rx1v.cloudfront.net/ajaxz/2025.2.528/Common/fonticons.css" type="text/css" rel="stylesheet" class="Telerik_stylesheet" /><link href="https://d35islomi5rx1v.cloudfront.net/ajaxz/2025.2.528/Common/MaterialRipple.css" type="text/css" rel="stylesheet" class="Telerik_stylesheet" /><link href="https://d35islomi5rx1v.cloudfront.net/ajaxz/2025.2.528/SearchBoxLite.css" type="text/css" rel="stylesheet" class="Telerik_stylesheet" /><link href="https://d35islomi5rx1v.cloudfront.net/ajaxz/2025.2.528/DefaultLite/SearchBox.Default.css" type="text/css" rel="stylesheet" class="Telerik_stylesheet" /><link href="https://d35islomi5rx1v.cloudfront.net/ajaxz/2025.2.528/ComboBox.css" type="text/css" rel="stylesheet" class="Telerik_stylesheet" /><link href="https://d35islomi5rx1v.cloudfront.net/ajaxz/2025.2.528/Default/ComboBox.Default.css" type="text/css" rel="stylesheet" class="Telerik_stylesheet" /><link href="https://d35islomi5rx1v.cloudfront.net/ajaxz/2025.2.528/Button.css" type="text/css" rel="stylesheet" class="Telerik_stylesheet" /><link href="https://d35islomi5rx1v.cloudfront.net/ajaxz/2025.2.528/Default/Button.Default.css" type="text/css" rel="stylesheet" class="Telerik_stylesheet" /><link href="https://d35islomi5rx1v.cloudfront.net/ajaxz/2025.2.528/Menu.css" type="text/css" rel="stylesheet" class="Telerik_stylesheet" /><link href="https://d35islomi5rx1v.cloudfront.net/ajaxz/2025.2.528/Default/Menu.Default.css" type="text/css" rel="stylesheet" class="Telerik_stylesheet" /><link href="https://d35islomi5rx1v.cloudfront.net/ajaxz/2025.2.528/ToolTip.css" type="text/css" rel="stylesheet" class="Telerik_stylesheet" /><link href="https://d35islomi5rx1v.cloudfront.net/ajaxz/2025.2.528/Default/ToolTip.Default.css" type="text/css" rel="stylesheet" class="Telerik_stylesheet" /></head>
+<body style="background-color: transparent; margin: 0; padding: 0;">
+    <form method="post" action="./searchresults.aspx?dsn=pub&amp;category=JBPHH&amp;subcategory=Navy+Flushing+Zone+I1" id="form1">
+<input type="hidden" name="RadScriptManager1_TSM" id="RadScriptManager1_TSM" value="" />
+<input type="hidden" name="RadStyleSheetManager1_TSSM" id="RadStyleSheetManager1_TSSM" value="" />
+<input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="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" />
+
+
+<script src="/public/library/Telerik.Web.UI.WebResource.axd?_TSM_HiddenField_=RadScriptManager1_TSM&amp;compress=1&amp;_TSM_CombinedScripts_=%3b%3bSystem.Web.Extensions%2c+Version%3d4.0.0.0%2c+Culture%3dneutral%2c+PublicKeyToken%3d31bf3856ad364e35%3aen-US%3add3ac3d5-1e29-4112-8fed-529caffa8f24%3aea597d4b" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+if (typeof(Sys) === 'undefined') throw new Error('ASP.NET Ajax client-side framework failed to load.');
+//]]>
+</script>
+
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/Core.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/jQuery.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/jQueryInclude.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Ajax/Ajax.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/jQueryPlugins.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/AnimationFramework/AnimationFramework.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/Animation/AnimationScripts.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/Popup/PopupScripts.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/Helpers/IETouchActionManager.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/TouchScrollExtender.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/Widgets/Draggable.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/Widgets/Resizable.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/ShortCutManager/ShortCutManagerScripts.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/MaterialRipple/MaterialRippleScripts.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Window/RadWindowScripts.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Window/RadWindowManager.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/Navigation/NavigationScripts.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/Navigation/OverlayScript.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/SearchBox/RadSearchBoxScripts.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/Navigation/OData/OData.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/ComboBox/RadComboBoxScripts.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/ComboBox/Views/ClassicView.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Button/RadButtonScripts.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Common/Scrolling/ScrollingScripts.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Menu/RadMenuScripts.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Menu/ContextMenu/RadContextMenuScripts.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Menu/MenuItem/RadMenuItem.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/Menu/Views/ClassicView.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/ToolTip/RadToolTipScripts.js" type="text/javascript"></script>
+<script src="https://d2i2wahzwrm1n5.cloudfront.net/ajaxz/2025.2.528/ToolTip/Scripts/RadToolTipManager.js" type="text/javascript"></script>
+<input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="5C693043" />
+<input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="IXUK/in6hbEFbbqznF38FSPsXnkmn+QXpsBwZIcsFniMjLLuTWJSuUjnXRTl6/93TYrmz5z6NWh41QsiB81gvr59/TpHo87q8aSDEsOIcGKpaTl9H3sHkPm++6l81jYcgXoA4r2/VIRmHjeYhcLgtaPsId2qnrToaDZZiEi6POfgg9hxEQIJ9QkaXheGPIneoJZbuz/tqPppc/usiUZ8x+05uTPYALqIwTNPRODZy8bkN/01Vf+GFZCbBBf3xnCKc0ic4iLV26LZ8igGaY/wt2tRWmfO9SwGzVtn64CCUOn+Y9oe9275ye+BhP+MCy591gNRDxhdp2Fpw+z+TzQBfrlbqg+nxGzulcT6m45yLAbP3QdJcP97+Hci/3UBHXWjCQpU6tK4JN1aoYm9u0ACdrCBKxFuBzj/2b8BVTLdr/hla62aNFIK8jfiebiMBsc7" />
+        
+
+        <!-- 2025.2.528.462 --><div id="RadAjaxManager1SU">
+	<span id="RadAjaxManager1" style="display:none;"></span>
+</div>
+        <div id="RadWindowManager1" style="display:none;">
+	<div id="RadWindowManager1_alerttemplate" style="display:none;">
+        <div class="rwDialogPopup radalert">
+            <div class="rwDialogText">
+            {1}
+            </div>
+
+            <div>
+                <a  onclick="$find('{0}').close(true);"
+                class="rwPopupButton" href="javascript:void(0);">
+                    <span class="rwOuterSpan">
+                        <span class="rwInnerSpan">##LOC[OK]##</span>
+                    </span>
+                </a>
+            </div>
+        </div>
+        </div><div id="RadWindowManager1_prompttemplate" style="display:none;">
+         <div class="rwDialogPopup radprompt">
+                <div class="rwDialogText">
+                {1}
+                </div>
+                <div>
+                    <script type="text/javascript">
+                    function RadWindowprompt_detectenter(id, ev, input)
+                    {
+                        if (!ev) ev = window.event;
+                        if (ev.keyCode == 13)
+                        {
+                            var but = input.parentNode.parentNode.getElementsByTagName("A")[0];
+                            if (but)
+                            {
+                                if (but.click) but.click();
+                                else if (but.onclick)
+                                {
+                                    but.focus(); var click = but.onclick; but.onclick = null; if (click) click.call(but);
+                                }
+                            }
+                           return false;
+                        }
+                        else return true;
+                    }
+                    </script>
+                    <input title="Enter Value" onkeydown="return RadWindowprompt_detectenter('{0}', event, this);" type="text"  class="rwDialogInput" value="{2}" />
+                </div>
+                <div>
+                    <a onclick="$find('{0}').close(this.parentNode.parentNode.getElementsByTagName('input')[0].value);"
+                        class="rwPopupButton" href="javascript:void(0);" ><span class="rwOuterSpan"><span class="rwInnerSpan">##LOC[OK]##</span></span></a>
+                    <a onclick="$find('{0}').close(null);" class="rwPopupButton"  href="javascript:void(0);"><span class="rwOuterSpan"><span class="rwInnerSpan">##LOC[Cancel]##</span></span></a>
+                </div>
+            </div>
+        </div><div id="RadWindowManager1_confirmtemplate" style="display:none;">
+        <div class="rwDialogPopup radconfirm">
+            <div class="rwDialogText">
+            {1}
+            </div>
+            <div>
+                <a onclick="$find('{0}').close(true);"  class="rwPopupButton" href="javascript:void(0);" ><span class="rwOuterSpan"><span class="rwInnerSpan">##LOC[OK]##</span></span></a>
+                <a onclick="$find('{0}').close(false);" class="rwPopupButton"  href="javascript:void(0);"><span class="rwOuterSpan"><span class="rwInnerSpan">##LOC[Cancel]##</span></span></a>
+            </div>
+        </div>
+        </div><input id="RadWindowManager1_ClientState" name="RadWindowManager1_ClientState" type="hidden" />
+</div>
+        <div id="RadWindowManager2" style="display:none;">
+	<div id="RadWindowManager2_alerttemplate" style="display:none;">
+        <div class="rwDialogPopup radalert">
+            <div class="rwDialogText">
+            {1}
+            </div>
+
+            <div>
+                <a  onclick="$find('{0}').close(true);"
+                class="rwPopupButton" href="javascript:void(0);">
+                    <span class="rwOuterSpan">
+                        <span class="rwInnerSpan">##LOC[OK]##</span>
+                    </span>
+                </a>
+            </div>
+        </div>
+        </div><div id="RadWindowManager2_prompttemplate" style="display:none;">
+         <div class="rwDialogPopup radprompt">
+                <div class="rwDialogText">
+                {1}
+                </div>
+                <div>
+                    <script type="text/javascript">
+                    function RadWindowprompt_detectenter(id, ev, input)
+                    {
+                        if (!ev) ev = window.event;
+                        if (ev.keyCode == 13)
+                        {
+                            var but = input.parentNode.parentNode.getElementsByTagName("A")[0];
+                            if (but)
+                            {
+                                if (but.click) but.click();
+                                else if (but.onclick)
+                                {
+                                    but.focus(); var click = but.onclick; but.onclick = null; if (click) click.call(but);
+                                }
+                            }
+                           return false;
+                        }
+                        else return true;
+                    }
+                    </script>
+                    <input title="Enter Value" onkeydown="return RadWindowprompt_detectenter('{0}', event, this);" type="text"  class="rwDialogInput" value="{2}" />
+                </div>
+                <div>
+                    <a onclick="$find('{0}').close(this.parentNode.parentNode.getElementsByTagName('input')[0].value);"
+                        class="rwPopupButton" href="javascript:void(0);" ><span class="rwOuterSpan"><span class="rwInnerSpan">##LOC[OK]##</span></span></a>
+                    <a onclick="$find('{0}').close(null);" class="rwPopupButton"  href="javascript:void(0);"><span class="rwOuterSpan"><span class="rwInnerSpan">##LOC[Cancel]##</span></span></a>
+                </div>
+            </div>
+        </div><div id="RadWindowManager2_confirmtemplate" style="display:none;">
+        <div class="rwDialogPopup radconfirm">
+            <div class="rwDialogText">
+            {1}
+            </div>
+            <div>
+                <a onclick="$find('{0}').close(true);"  class="rwPopupButton" href="javascript:void(0);" ><span class="rwOuterSpan"><span class="rwInnerSpan">##LOC[OK]##</span></span></a>
+                <a onclick="$find('{0}').close(false);" class="rwPopupButton"  href="javascript:void(0);"><span class="rwOuterSpan"><span class="rwInnerSpan">##LOC[Cancel]##</span></span></a>
+            </div>
+        </div>
+        </div><input id="RadWindowManager2_ClientState" name="RadWindowManager2_ClientState" type="hidden" />
+</div>
+        
+        <link href='https://jbphh-safewaters.org/public/common/jbphh_default/_consolidated_.css' type='text/css' rel='stylesheet' />
+        <link href='https://jbphh-safewaters.org/public/common/styles/application.css' type='text/css' rel='stylesheet' />
+        <script type='text/javascript' src='https://jbphh-safewaters.org/public/common/scripts/common.js'></script>
+        
+    <style>
+        .RadMenu_Context .rmText {
+            text-align: left;
+        }
+    </style>
+    <div class="RadAjaxPanel" id="ctl00_cphMain_ctl00_cphMain_rapSearchResultsPanel">
+	<div id="ctl00_cphMain_rapSearchResults" class="rapSearchResults">
+		
+        <div id="divMain" style="padding: 0!important; width: 1157px; min-height: 765px; overflow: hidden!important; ">
+            <table border="0" style="width: 888px; vertical-align: top;">
+                <tr style="vertical-align: top;">
+                    <td style="vertical-align: top" class="divMainMinHeightTitle">
+                        <table id="tblSearchResultsHeading" border="0" style="width: 1144px">
+                            <tr style="vertical-align: middle; text-align: right; width: 100%;">
+                                <td class="search_heading2" style="vertical-align: middle; text-align: left; width: 1144px;">
+                                    <div id="ctl00_cphMain_RadSearchBox1" class="RadSearchBox RadSearchBox_Default">
+			<span class="rsbInner"><input class="rsbInput radPreventDecorate rsbEmptyMessage" type="text" value="enter search word or phrase" name="ctl00_cphMain_RadSearchBox1" id="ctl00_cphMain_RadSearchBox1_Input" /><button class="rsbButton rsbButtonSearch" type="button" aria-label="Search button"><span class="rsbIcon rsbIconSearch"><!-- &nbsp; --></span></button></span><input id="ctl00_cphMain_RadSearchBox1_ClientState" name="ctl00_cphMain_RadSearchBox1_ClientState" type="hidden" />
+		</div>
+                                </td>
+                                <td valign="middle" align="right">
+                                    <div id="ctl00_cphMain_ddlFileType" class="RadComboBox RadComboBox_Default">
+			<table summary="combobox" style="border-width:0;border-collapse:collapse;width:100%">
+				<tr class="rcbReadOnly">
+					<td class="rcbInputCell rcbInputCellLeft" style="width:100%;"><input name="ctl00$cphMain$ddlFileType" type="text" class="rcbInput radPreventDecorate" id="ctl00_cphMain_ddlFileType_Input" value="Show All File Types" readonly="readonly" /></td><td class="rcbArrowCell rcbArrowCellRight"><a id="ctl00_cphMain_ddlFileType_Arrow" style="overflow: hidden;display: block;position: relative;outline: none;">select</a></td>
+				</tr>
+			</table><div class="rcbSlide" style="z-index:6000;display:none;"><div id="ctl00_cphMain_ddlFileType_DropDown" class="RadComboBoxDropDown RadComboBoxDropDown_Default "><div class="rcbScroll rcbWidth"><ul class="rcbList"><li class="rcbItem">Show All File Types</li><li class="rcbItem">Adobe Acrobat (pdf)</li></ul></div></div></div><input id="ctl00_cphMain_ddlFileType_ClientState" name="ctl00_cphMain_ddlFileType_ClientState" type="hidden" />
+		</div>
+                                </td>
+                                <td>
+                                    <div id="ctl00_cphMain_ddlSortField" class="RadComboBox RadComboBox_Default">
+			<table summary="combobox" style="border-width:0;border-collapse:collapse;width:100%">
+				<tr class="rcbReadOnly">
+					<td class="rcbInputCell rcbInputCellLeft" style="width:100%;"><input name="ctl00$cphMain$ddlSortField" type="text" class="rcbInput radPreventDecorate" id="ctl00_cphMain_ddlSortField_Input" value="Sort by System Filename" readonly="readonly" /></td><td class="rcbArrowCell rcbArrowCellRight"><a id="ctl00_cphMain_ddlSortField_Arrow" style="overflow: hidden;display: block;position: relative;outline: none;">select</a></td>
+				</tr>
+			</table><div class="rcbSlide" style="z-index:6000;display:none;"><div id="ctl00_cphMain_ddlSortField_DropDown" class="RadComboBoxDropDown RadComboBoxDropDown_Default "><div class="rcbScroll rcbWidth"><ul class="rcbList"><li class="rcbItem">Sort by Publication Date</li><li class="rcbItem">Sort by Publication Date (DESC)</li><li class="rcbItem">Sort by Rank</li><li class="rcbItem">Sort by Rank (DESC)</li><li class="rcbItem">Sort by System Filename</li><li class="rcbItem">Sort by System Filename (DESC)</li><li class="rcbItem">Sort by Title</li><li class="rcbItem">Sort by Title (DESC)</li></ul></div></div></div><input id="ctl00_cphMain_ddlSortField_ClientState" name="ctl00_cphMain_ddlSortField_ClientState" type="hidden" />
+		</div>
+                                </td>
+                                <td style="margin-top: -11px;" class="pt">
+                                    <div id="ctl00_cphMain_ddlCoverage" class="RadComboBox RadComboBox_Default">
+			<table summary="combobox" style="border-width:0;border-collapse:collapse;width:100%">
+				<tr class="rcbReadOnly">
+					<td class="rcbInputCell rcbInputCellLeft" style="width:100%;"><input name="ctl00$cphMain$ddlCoverage" type="text" class="rcbInput radPreventDecorate" id="ctl00_cphMain_ddlCoverage_Input" value="Show All Coverages" readonly="readonly" /></td><td class="rcbArrowCell rcbArrowCellRight"><a id="ctl00_cphMain_ddlCoverage_Arrow" style="overflow: hidden;display: block;position: relative;outline: none;">select</a></td>
+				</tr>
+			</table><div class="rcbSlide" style="z-index:6000;display:none;"><div id="ctl00_cphMain_ddlCoverage_DropDown" class="RadComboBoxDropDown RadComboBoxDropDown_Default "><div class="rcbScroll rcbWidth"><ul class="rcbList"><li class="rcbItem">Show All Coverages</li><li class="rcbItem">No Coverage Assigned</li><li class="rcbItem">Flushing Zone I1</li></ul></div></div></div><input id="ctl00_cphMain_ddlCoverage_ClientState" name="ctl00_cphMain_ddlCoverage_ClientState" type="hidden" />
+		</div>
+                                </td>
+                                <td>
+                                    <div id="ctl00_cphMain_ddlShowItems" class="RadComboBox RadComboBox_Default">
+			<table summary="combobox" style="border-width:0;border-collapse:collapse;width:100%">
+				<tr class="rcbReadOnly">
+					<td class="rcbInputCell rcbInputCellLeft" style="width:100%;"><input name="ctl00$cphMain$ddlShowItems" type="text" class="rcbInput radPreventDecorate" id="ctl00_cphMain_ddlShowItems_Input" value="Show 100 Items" readonly="readonly" /></td><td class="rcbArrowCell rcbArrowCellRight"><a id="ctl00_cphMain_ddlShowItems_Arrow" style="overflow: hidden;display: block;position: relative;outline: none;">select</a></td>
+				</tr>
+			</table><div class="rcbSlide" style="z-index:6000;display:none;"><div id="ctl00_cphMain_ddlShowItems_DropDown" class="RadComboBoxDropDown RadComboBoxDropDown_Default "><div class="rcbScroll rcbWidth"><ul class="rcbList"><li class="rcbItem">Show 10 Items</li><li class="rcbItem">Show 20 Items</li><li class="rcbItem">Show 50 Items</li><li class="rcbItem">Show 100 Items</li></ul></div></div></div><input id="ctl00_cphMain_ddlShowItems_ClientState" name="ctl00_cphMain_ddlShowItems_ClientState" type="hidden" />
+		</div>
+                                </td>
+                                <td class="search_heading2" style="white-space: nowrap; text-align: right; vertical-align: middle;">&nbsp; Page
+                                <span id="cphMain_lblPageToShow">1</span>
+                                    of
+                                <span id="cphMain_lblLastPage">2</span>
+                                    &nbsp;
+                                </td>
+                                <td style="vertical-align: middle; text-align: right; white-space: nowrap; overflow: visible">
+                                    <span id="ctl00_cphMain_btnDisplayFirstPage" title="Display First Page..." class="RadButton RadButton_Default rbImageButton btnPageFirst" style="background-image:url('https://jbphh-safewaters.org/public/common/jbphh_default/Masterpage/PageFirst.gif');"><span class="rbText rbHideElement"></span><input id="ctl00_cphMain_btnDisplayFirstPage_ClientState" name="ctl00_cphMain_btnDisplayFirstPage_ClientState" type="hidden" /></span>
+                                    <span id="ctl00_cphMain_btnDisplayPrevPage" title="Display Previous Page..." class="RadButton RadButton_Default rbImageButton btnPagePrevious" style="background-image:url('https://jbphh-safewaters.org/public/common/jbphh_default/Masterpage/PagePrevious.gif');"><span class="rbText rbHideElement"></span><input id="ctl00_cphMain_btnDisplayPrevPage_ClientState" name="ctl00_cphMain_btnDisplayPrevPage_ClientState" type="hidden" /></span>
+                                    <span id="ctl00_cphMain_btnDisplayNextPage" title="Display Next Page..." class="RadButton RadButton_Default rbImageButton btnPageNext" style="background-image:url('https://jbphh-safewaters.org/public/common/jbphh_default/Masterpage/PageNext.gif');"><span class="rbText rbHideElement"></span><input id="ctl00_cphMain_btnDisplayNextPage_ClientState" name="ctl00_cphMain_btnDisplayNextPage_ClientState" type="hidden" /></span>
+                                    <span id="ctl00_cphMain_btnDisplayLastPage" title="Display Last Page..." class="RadButton RadButton_Default rbImageButton btnPageLast" style="background-image:url('https://jbphh-safewaters.org/public/common/jbphh_default/Masterpage/PageLast.gif');"><span class="rbText rbHideElement"></span><input id="ctl00_cphMain_btnDisplayLastPage_ClientState" name="ctl00_cphMain_btnDisplayLastPage_ClientState" type="hidden" /></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6" id="tdSearchResults" onclick='tdSearchResults_onclick(event, this);' class="search_text">
+                                    <br />
+                                    <span id="cphMain_lblSearchResults"><a id='aFile2925' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2925' target='_blank'>Laboratory Report 810-12264-1, Level 4</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002925.pdf (31 MB) <span id='span2925' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2926' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2926' target='_blank'>Laboratory Report 810-12365-1, Level 4</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002926.pdf (6 MB) <span id='span2926' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2927' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2927' target='_blank'>Laboratory Report 810-12366-1, Level 4</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002927.pdf (9 MB) <span id='span2927' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2928' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2928' target='_blank'>Laboratory Report 810-12460-1, Level 3, Revision 1</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002928.pdf (1 MB) <span id='span2928' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2929' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2929' target='_blank'>Laboratory Report 810-12460-1, Level 4, Revision 1</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002929.pdf (62 MB) <span id='span2929' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2930' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2930' target='_blank'>Laboratory Report, SDG 2A14028, Level 2</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002930.pdf (250 KB) <span id='span2930' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2931' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2931' target='_blank'>Laboratory Report, SDG 2A14029, Level 2</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002931.pdf (250 KB) <span id='span2931' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2932' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2932' target='_blank'>Laboratory Report, SDG 2A14031, Level 2</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002932.pdf (249 KB) <span id='span2932' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2933' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2933' target='_blank'>Laboratory Report, SDG 2A14034, Level 2</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002933.pdf (250 KB) <span id='span2933' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2934' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2934' target='_blank'>Laboratory Report, SDG 2A18017, Level 2</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002934.pdf (250 KB) <span id='span2934' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2935' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2935' target='_blank'>Laboratory Report, SDG 2A19069, Level 2</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002935.pdf (463 KB) <span id='span2935' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2936' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2936' target='_blank'>Laboratory Report, SDG 580-109293-1, Level 2</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002936.pdf (1 MB) <span id='span2936' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2937' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2937' target='_blank'>Laboratory Report, SDG 580-109293-1, Level 4</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002937.pdf (64 MB) <span id='span2937' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2938' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2938' target='_blank'>Laboratory Report, SDG 580-109293-2, Level 2</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002938.pdf (1 MB) <span id='span2938' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2939' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2939' target='_blank'>Laboratory Report, SDG 580-109293-2, Level 4</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002939.pdf (59 MB) <span id='span2939' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2940' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2940' target='_blank'>Laboratory Report, SDG 580-109324-1, Level 2</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002940.pdf (1 MB) <span id='span2940' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2941' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2941' target='_blank'>Laboratory Report, SDG 580-109336-1, Level 2</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002941.pdf (817 KB) <span id='span2941' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2942' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2942' target='_blank'>Laboratory Report, SDG 580-109381-1, Level 2</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002942.pdf (680 KB) <span id='span2942' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2943' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2943' target='_blank'>Laboratory Report, SDG 580-109487-2, Level 2</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002943.pdf (691 KB) <span id='span2943' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2944' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2944' target='_blank'>Laboratory Report, SDG 810-12077-2, Level 2, Revision 1</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002944.pdf (1 MB) <span id='span2944' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2945' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2945' target='_blank'>Laboratory Report, SDG 810-12122-1, Level 2</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002945.pdf (926 KB) <span id='span2945' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2946' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2946' target='_blank'>Laboratory Report, SDG 810-12122-1, Level 4, Revision 1</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002946.pdf (30 MB) <span id='span2946' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2947' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2947' target='_blank'>Laboratory Report, SDG 810-12264-1, Level 2</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002947.pdf (1 MB) <span id='span2947' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2948' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2948' target='_blank'>Laboratory Report, SDG 810-12365-1, Level 2</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002948.pdf (1 MB) <span id='span2948' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2949' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2949' target='_blank'>Laboratory Report, SDG 810-12366-1, Level 2</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002949.pdf (1 MB) <span id='span2949' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2950' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2950' target='_blank'>Laboratory Report, SDG 977829, Level 2</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002950.pdf (1 MB) <span id='span2950' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2951' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2951' target='_blank'>Laboratory Report, SDG C22A011, Level 2, Revision 1</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002951.pdf (1 MB) <span id='span2951' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2952' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2952' target='_blank'>Laboratory Report, SDG C22A011, Level 4 (2)</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002952.pdf (4 MB) <span id='span2952' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2953' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2953' target='_blank'>Laboratory Report, SDG C22A011, Level 4</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002953.pdf (4 MB) <span id='span2953' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2954' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2954' target='_blank'>Laboratory Report, SDG C22A014, Level 2, Revision 1</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002954.pdf (2 MB) <span id='span2954' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2955' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2955' target='_blank'>Laboratory Report, SDG C22A014-I1, Level 4, Revision</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002955.pdf (8 MB) <span id='span2955' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2956' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2956' target='_blank'>Laboratory Report, SDG C22A016, Level 2, Revision 2</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002956.pdf (2 MB) <span id='span2956' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2957' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2957' target='_blank'>Laboratory Report, SDG C22A016, Level 4, Revision 1</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002957.pdf (8 MB) <span id='span2957' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2958' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2958' target='_blank'>Laboratory Report, SDG C22A022, Level 2, Revision 1</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002958.pdf (1022 KB) <span id='span2958' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2959' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2959' target='_blank'>Laboratory Report, SDG C22A022, Level 4, Revision 1</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002959.pdf (2 MB) <span id='span2959' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2960' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2960' target='_blank'>Laboratory Report, SDG C22A026, Level 2, Revision 1</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002960.pdf (2 MB) <span id='span2960' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2961' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2961' target='_blank'>Laboratory Report, SDG C22A026, Level 4, Revision 2</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002961.pdf (3 MB) <span id='span2961' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2962' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2962' target='_blank'>Laboratory Report, SDG C22A036, Level 2, Revision 1</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002962.pdf (1 MB) <span id='span2962' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2963' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2963' target='_blank'>Laboratory Report, SDG C22A036, Level 4, Revision 1</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002963.pdf (2 MB) <span id='span2963' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2964' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2964' target='_blank'>Laboratory Report, SDG DA40915, Level 2</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002964.pdf (881 KB) <span id='span2964' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2965' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2965' target='_blank'>Laboratory Report, SDG DA40915, Level 4</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002965.pdf (8 MB) <span id='span2965' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2966' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2966' target='_blank'>Laboratory Report, SDG DA40924, Level 4</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002966.pdf (7 MB) <span id='span2966' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2967' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2967' target='_blank'>Laboratory Report, SDG DA40925, Level 2</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002967.pdf (490 KB) <span id='span2967' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2968' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2968' target='_blank'>Laboratory Report, SDG DA40925, Level 4</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002968.pdf (7 MB) <span id='span2968' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2969' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2969' target='_blank'>Laboratory Report, SDG DA40928, Level 2</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002969.pdf (1 MB) <span id='span2969' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2970' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2970' target='_blank'>Laboratory Report, SDG DA40928, Level 4</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002970.pdf (21 MB) <span id='span2970' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2971' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2971' target='_blank'>Laboratory Report, SDG DA40953, Level 4 (2)</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002971.pdf (41 MB) <span id='span2971' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2972' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2972' target='_blank'>Laboratory Report, SDG DA40953, Level 4 (3)</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002972.pdf (9 MB) <span id='span2972' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2973' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2973' target='_blank'>Laboratory Report, SDG DA40953, Level 4</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002973.pdf (41 MB) <span id='span2973' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2974' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2974' target='_blank'>Laboratory Report, SDG DA40988, Level 4</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002974.pdf (15 MB) <span id='span2974' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2975' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2975' target='_blank'>Data Validation Report, Level S2AVEM, SDG 2A14028</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002975.pdf (227 KB) <span id='span2975' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2976' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2976' target='_blank'>Data Validation Report, Level S2AVEM, SDG 2A14029</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002976.pdf (227 KB) <span id='span2976' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2977' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2977' target='_blank'>Data Validation Report, Level S2AVEM, SDG 2A14031</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002977.pdf (227 KB) <span id='span2977' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2978' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2978' target='_blank'>Data Validation Report, Level S2AVEM, SDG 2A14034</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002978.pdf (227 KB) <span id='span2978' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2979' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2979' target='_blank'>Data Validation Report, Level S2AVEM, SDG 2A18017</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002979.pdf (227 KB) <span id='span2979' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2980' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2980' target='_blank'>Data Validation Report, Level S2AVEM, SDG 580-109324-1</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002980.pdf (97 KB) <span id='span2980' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2981' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2981' target='_blank'>Data Validation Report, Level S2AVEM, SDG 580-109336-1</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002981.pdf (157 KB) <span id='span2981' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2982' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2982' target='_blank'>Data Validation Report, Level S2AVEM, SDG 580-109381-1</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002982.pdf (89 KB) <span id='span2982' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2983' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2983' target='_blank'>Data Validation Report, Level S2AVEM, SDG 810-12077-2</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002983.pdf (171 KB) <span id='span2983' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2984' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2984' target='_blank'>Data Validation Report, Level S2AVEM, SDG 810-12122-1</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002984.pdf (175 KB) <span id='span2984' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2985' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2985' target='_blank'>Data Validation Report, Level S2AVEM, SDG 810-12264-1</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002985.pdf (172 KB) <span id='span2985' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2986' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2986' target='_blank'>Data Validation Report, Level S2AVEM, SDG 810-12365-1</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002986.pdf (168 KB) <span id='span2986' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2987' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2987' target='_blank'>Data Validation Report, Level S2AVEM, SDG 810-12366-1</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002987.pdf (168 KB) <span id='span2987' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2988' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2988' target='_blank'>Data Validation Report, Level S2AVEM, SDG 810-12460-1 (2)</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002988.pdf (176 KB) <span id='span2988' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2989' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2989' target='_blank'>Data Validation Report, Level S2AVEM, SDG 810-12460-1</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002989.pdf (175 KB) <span id='span2989' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2990' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2990' target='_blank'>Data Validation Report, Level S2AVEM, SDG C22A011</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002990.pdf (175 KB) <span id='span2990' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2991' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2991' target='_blank'>Data Validation Report, Level S2AVEM, SDG C22A014</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002991.pdf (262 KB) <span id='span2991' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2992' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2992' target='_blank'>Data Validation Report, Level S2AVEM, SDG C22A016</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002992.pdf (182 KB) <span id='span2992' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2993' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2993' target='_blank'>Data Validation Report, Level S2AVEM, SDG C22A022</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002993.pdf (174 KB) <span id='span2993' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2994' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2994' target='_blank'>Data Validation Report, Level S2AVEM, SDG C22A026</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002994.pdf (24 KB) <span id='span2994' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2995' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2995' target='_blank'>Data Validation Report, Level S2AVEM, SDG C22A036</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002995.pdf (85 KB) <span id='span2995' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2996' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2996' target='_blank'>Data Validation Report, Level S2AVEM, SDG DA40915</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002996.pdf (27 KB) <span id='span2996' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2997' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2997' target='_blank'>Data Validation Report, Level S2AVEM, SDG DA40925</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002997.pdf (22 KB) <span id='span2997' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2998' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2998' target='_blank'>Data Validation Report, Level S2AVEM, SDG DA40928</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002998.pdf (33 KB) <span id='span2998' class='LIBRARY_metadata'> metadata</span></div><a id='aFile2999' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=2999' target='_blank'>Data Validation Report, Level S2AVEM, SDG DA40953</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_002999.pdf (1010 KB) <span id='span2999' class='LIBRARY_metadata'> metadata</span></div><a id='aFile3000' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=3000' target='_blank'>Data Validation Report, Level S2AVEM, SDG DA40955</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_003000.pdf (27 KB) <span id='span3000' class='LIBRARY_metadata'> metadata</span></div><a id='aFile3001' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=3001' target='_blank'>Data Validation Report, Level S2AVEM, SDG DA40988</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_003001.pdf (139 KB) <span id='span3001' class='LIBRARY_metadata'> metadata</span></div><a id='aFile3002' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=3002' target='_blank'>Data Validation Report, Level S4VEM, SDG 2A14031</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_003002.pdf (507 KB) <span id='span3002' class='LIBRARY_metadata'> metadata</span></div><a id='aFile3003' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=3003' target='_blank'>Data Validation Report, Level S4VEM, SDG 580-109293-1</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_003003.pdf (1 MB) <span id='span3003' class='LIBRARY_metadata'> metadata</span></div><a id='aFile3004' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=3004' target='_blank'>Data Validation Report, Level S4VEM, SDG 810-12077-2</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_003004.pdf (1 MB) <span id='span3004' class='LIBRARY_metadata'> metadata</span></div><a id='aFile3005' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=3005' target='_blank'>Data Validation Report, Level S4VEM, SDG 810-12122-1</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_003005.pdf (1 MB) <span id='span3005' class='LIBRARY_metadata'> metadata</span></div><a id='aFile3006' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=3006' target='_blank'>Data Validation Report, Level S4VEM, SDG C22A011</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_003006.pdf (886 KB) <span id='span3006' class='LIBRARY_metadata'> metadata</span></div><a id='aFile3007' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=3007' target='_blank'>Data Validation Report, Level S4VEM, SDG C22A036</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_003007.pdf (445 KB) <span id='span3007' class='LIBRARY_metadata'> metadata</span></div><a id='aFile3008' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=3008' target='_blank'>Data Validation Report, Level S4VEM, SDG DA40915</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_003008.pdf (1 MB) <span id='span3008' class='LIBRARY_metadata'> metadata</span></div><a id='aFile3009' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=3009' target='_blank'>Zone I1 - Data Review Report - SDG 2A14028</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_003009.pdf (127 KB) <span id='span3009' class='LIBRARY_metadata'> metadata</span></div><a id='aFile3010' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=3010' target='_blank'>Zone I1 - Data Review Report - SDG 2A14029</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_003010.pdf (125 KB) <span id='span3010' class='LIBRARY_metadata'> metadata</span></div><a id='aFile3011' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=3011' target='_blank'>Zone I1 - Data Review Report - SDG 2A14031</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_003011.pdf (125 KB) <span id='span3011' class='LIBRARY_metadata'> metadata</span></div><a id='aFile3012' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=3012' target='_blank'>Zone I1 - Data Review Report - SDG 2A14034</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_003012.pdf (125 KB) <span id='span3012' class='LIBRARY_metadata'> metadata</span></div><a id='aFile3013' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=3013' target='_blank'>Zone I1 - Data Review Report - SDG 2A18017</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_003013.pdf (126 KB) <span id='span3013' class='LIBRARY_metadata'> metadata</span></div><a id='aFile3014' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=3014' target='_blank'>Zone I1 - Data Review Report - SDG 810120772</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_003014.pdf (133 KB) <span id='span3014' class='LIBRARY_metadata'> metadata</span></div><a id='aFile3015' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=3015' target='_blank'>Zone I1 - Data Review Report - SDG 810121221</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_003015.pdf (123 KB) <span id='span3015' class='LIBRARY_metadata'> metadata</span></div><a id='aFile3016' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=3016' target='_blank'>Zone I1 - Data Review Report - SDG 810122641</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_003016.pdf (130 KB) <span id='span3016' class='LIBRARY_metadata'> metadata</span></div><a id='aFile3017' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=3017' target='_blank'>Zone I1 - Data Review Report - SDG 810123651</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_003017.pdf (133 KB) <span id='span3017' class='LIBRARY_metadata'> metadata</span></div><a id='aFile3018' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=3018' target='_blank'>Zone I1 - Data Review Report - SDG 810123661</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_003018.pdf (134 KB) <span id='span3018' class='LIBRARY_metadata'> metadata</span></div><a id='aFile3019' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=3019' target='_blank'>Zone I1 - Data Review Report - SDG 810124601</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_003019.pdf (134 KB) <span id='span3019' class='LIBRARY_metadata'> metadata</span></div><a id='aFile3020' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=3020' target='_blank'>Zone I1 - Data Review Report - SDG 5801092931</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_003020.pdf (147 KB) <span id='span3020' class='LIBRARY_metadata'> metadata</span></div><a id='aFile3021' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=3021' target='_blank'>Zone I1 - Data Review Report - SDG 5801092932</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_003021.pdf (150 KB) <span id='span3021' class='LIBRARY_metadata'> metadata</span></div><a id='aFile3022' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=3022' target='_blank'>Zone I1 - Data Review Report - SDG 5801093241</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_003022.pdf (129 KB) <span id='span3022' class='LIBRARY_metadata'> metadata</span></div><a id='aFile3023' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=3023' target='_blank'>Zone I1 - Data Review Report - SDG 5801093361</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_003023.pdf (122 KB) <span id='span3023' class='LIBRARY_metadata'> metadata</span></div><a id='aFile3024' href='StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=3024' target='_blank'>Zone I1 - Data Review Report - SDG 5801093811</a>, Interagency Drinking Water System Team, 2022-02-09<br />Joint Base Pearl Harbor-Hickam, Hawaii (<span title='Public Users have rights to view this document...'>Public Users</span>)<br /><div title='Coverage(s)'>Flushing Zone I1</div><div class='PDF_GIF'> pub_003024.pdf (125 KB) <span id='span3024' class='LIBRARY_metadata'> metadata</span></div></span>
+                                    <div tabindex="0" id="ctl00_cphMain_ucFileContextMenu1_ContextMenu1">
+			<div class="RadMenu RadMenu_Default RadMenu_Context RadMenu_Default_Context rmRoundedCorners rmRoundedCorners_Default rmShadows">
+				<ul class="rmActive rmVertical rmGroup rmLevel1">
+					<li class="rmItem rmFirst"><a class="rmLink" href="#"><span class="rmText">Open</span></a></li><li class="rmItem "><a class="rmLink" href="#"><span class="rmText">Open in new tab</span></a></li><li class="rmItem "><a class="rmLink" href="#"><span class="rmText">Open in new window</span></a></li><li class="rmItem "><a class="rmLink" href="#"><span class="rmText">Save target as server filename...</span></a></li><li class="rmItem "><a class="rmLink" href="#"><span class="rmText">Save target as title filename...</span></a></li><li class="rmItem "><a class="rmLink" href="#"><span class="rmText">Save target as original filename...</span></a></li><li class="rmItem rmLast"><a class="rmLink" href="#"><span class="rmText">Print target...</span></a></li>
+				</ul>
+			</div><input id="ctl00_cphMain_ucFileContextMenu1_ContextMenu1_ClientState" name="ctl00_cphMain_ucFileContextMenu1_ContextMenu1_ClientState" type="hidden" />
+		</div>
+
+
+    <script type="text/javascript">
+
+        function OnClientItemClicked(sender, args) {
+            var command = args.get_item().get_value()
+            var target_url = args.get_targetElement().getAttribute("href");
+
+            switch (command) {
+                case 'Open':
+                    target_url += '&iFilename=0';
+                    window.open(target_url, '_self');
+                    break;
+                case 'OpenInNewTab':
+                    target_url += '&iFilename=0';
+                    window.open(target_url, '_blank');
+                    break;
+                case 'OpenInNewWindow':
+                    target_url += '&iFilename=0';
+                    window.open(target_url, '_blank', 'height=800, width=1024, resizable=yes');
+                    break;
+                case 'Servername':
+                    target_url += '&iFilename=0';
+                    target_url = target_url.replace('FileImage_Inline', 'FileImage');
+                    window.open(target_url, '_self');
+                    break;
+                case 'Title':
+                    target_url += '&iFilename=1';
+                    target_url = target_url.replace('FileImage_Inline', 'FileImage');
+                    window.open(target_url, '_self');
+                    break;
+                case 'Original':
+                    target_url += '&iFilename=2';
+                    target_url = target_url.replace('FileImage_Inline', 'FileImage');
+                    window.open(target_url, '_self');
+                    break;
+                case 'PrintTarget':
+                    var hWnd = window.open(target_url, '_blank', 'height=800, width=1024');
+                    hWnd.print();
+            }
+        }
+
+        function showContextMenu(sender, args) { // Keep as working webservice, use by adding  OnClientShowing="showContextMenu" to ContextMenu
+            var $ = $telerik.$;
+            var DSN = 'PUB',
+                target_url = args._targetElement.nameProp,
+                id = target_url.slice(target_url.search('ID=') + 3),
+                menuItem3 = sender.get_items().getItem(3),
+                menuItem4 = sender.get_items().getItem(4),
+                menuItem5 = sender.get_items().getItem(5);
+
+            $.get("/SearchResultsService.svc/GetServerFilename", { DSN: DSN, idFile: id }, function (data) { menuItem3.set_text("Save target as '" + data.d + "' ..."); });
+            $.get("/SearchResultsService.svc/GetTitleFilename", { DSN: DSN, idFile: id }, function (data) { menuItem4.set_text("Save target as '" + data.d + "' ..."); });
+            $.get("/SearchResultsService.svc/GetOriginalFilename", { DSN: DSN, idFile: id }, function (data) { menuItem5.set_text("Save target as '" + data.d + "' ..."); });
+        }
+
+    </script>
+
+                                </td>
+                            </tr>
+                            <tr style="vertical-align: middle; text-align: right; width: 100%;">
+                                <td colspan="5" class="search_heading2" style="vertical-align: middle; text-align: left; width: 95%;">
+                                    <span id="cphMain_lblPageFirstRow2">1</span>
+                                    -
+                                <span id="cphMain_lblPageLastRow2">100</span>
+                                    of
+                                <span id="cphMain_lblRowCount2">109</span>
+                                    Results
+                                </td>
+                                <td id="td2" class="search_heading2" style="white-space: nowrap; text-align: right; vertical-align: middle;">Page
+                                <span id="cphMain_lblPageToShow2">1</span>
+                                    of
+                                <span id="cphMain_lblLastPage2">2</span>
+                                    &nbsp;
+                                </td>
+                                <td style="vertical-align: middle; text-align: right; white-space: nowrap;">
+                                    <span id="ctl00_cphMain_btnDisplayFirstPage2" title="Display First Page..." class="RadButton RadButton_Default rbImageButton btnPageFirst" style="background-image:url('https://jbphh-safewaters.org/public/common/jbphh_default/Masterpage/PageFirst.gif');"><span class="rbText rbHideElement"></span><input id="ctl00_cphMain_btnDisplayFirstPage2_ClientState" name="ctl00_cphMain_btnDisplayFirstPage2_ClientState" type="hidden" /></span>
+                                    <span id="ctl00_cphMain_btnDisplayPrevPage2" title="Display Previous Page..." class="RadButton RadButton_Default rbImageButton btnPagePrevious" style="background-image:url('https://jbphh-safewaters.org/public/common/jbphh_default/Masterpage/PagePrevious.gif');"><span class="rbText rbHideElement"></span><input id="ctl00_cphMain_btnDisplayPrevPage2_ClientState" name="ctl00_cphMain_btnDisplayPrevPage2_ClientState" type="hidden" /></span>
+                                    <span id="ctl00_cphMain_btnDisplayNextPage2" title="Display Next Page..." class="RadButton RadButton_Default rbImageButton btnPageNext" style="background-image:url('https://jbphh-safewaters.org/public/common/jbphh_default/Masterpage/PageNext.gif');"><span class="rbText rbHideElement"></span><input id="ctl00_cphMain_btnDisplayNextPage2_ClientState" name="ctl00_cphMain_btnDisplayNextPage2_ClientState" type="hidden" /></span>
+                                    <span id="ctl00_cphMain_btnDisplayLastPage2" title="Display Last Page..." class="RadButton RadButton_Default rbImageButton btnPageLast" style="background-image:url('https://jbphh-safewaters.org/public/common/jbphh_default/Masterpage/PageLast.gif');"><span class="rbText rbHideElement"></span><input id="ctl00_cphMain_btnDisplayLastPage2_ClientState" name="ctl00_cphMain_btnDisplayLastPage2_ClientState" type="hidden" /></span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td colspan="6">
+                                    <br />
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+            <div id="ctl00_cphMain_RadToolTipManager1" style="display:none;position:absolute;">
+			<div id="ctl00_cphMain_RadToolTipManager1RTMPanel">
+
+			</div><input id="ctl00_cphMain_RadToolTipManager1_ClientState" name="ctl00_cphMain_RadToolTipManager1_ClientState" type="hidden" />
+		</div>
+        </div>
+    
+	</div>
+</div>
+    
+        <script type="text/javascript">
+            function CallBackFunction(radWindow, returnValue) {
+                // RadWindow has closed so refresh page
+                window.location.reload(false);
+            }
+
+            function onSearch(sender, args) {
+                var Search = args.get_text();
+                var x = Search.l
+                if (Search.length < 1) {
+                    alert('Please enter a word or phrase to search for and then press [ENTER].');
+                    //Search.focus;
+                } else {
+                    OnRequestStart();
+                }
+            }
+
+            function tdSearchResults_onclick(evt, elem) {
+                var srcElement = evt.srcElement ? evt.srcElement : evt.target;
+
+                if (srcElement.id.search('spanEdit') == 0) {
+                    // It's a span in format spanEdit456 (ends in record id)
+                    var id = srcElement.id.substr(8);
+                    var HREF = 'Approve.aspx?DSN=PUB&title=Edit Metadata&idFile=' + id
+
+                    ShowDialogInParent2(-1, -1, 640, 820, HREF, '');
+                    if ('1' == '0') {
+                        window.event.returnValue = false;
+                    } else {
+                        evt.preventDefault(); // Works in FireFox
+                        evt.stopPropagation(); // The officially correct way per docs
+                    }
+                }
+            }
+
+            function ShowFile(ID) {
+                window.open('StreamResource.axd?DSN=PUB&Mode=FileImage_Inline&ID=' + ID, '_self');
+            }
+
+        </script>
+    
+
+    
+
+<script type="text/javascript">
+//<![CDATA[
+window.__TsmHiddenField = $get('RadScriptManager1_TSM');Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadAjaxManager, {"_updatePanels":"","ajaxSettings":[],"clientEvents":{OnRequestStart:"OnRequestStart",OnResponseEnd:"OnResponseEnd"},"defaultLoadingPanelID":"","enableAJAX":true,"enableHistory":false,"links":[],"requestQueueSize":3,"styles":[],"uniqueID":"ctl00$RadAjaxManager1","updatePanelsRenderMode":0}, null, null, $get("RadAjaxManager1"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadWindowManager, {"behaviors":36,"clientStateFieldID":"RadWindowManager1_ClientState","formID":"form1","iconUrl":"","minimizeIconUrl":"","name":"RadWindowManager1","reloadOnShow":true,"showContentDuringLoad":false,"skin":"Default","visibleStatusbar":false,"windowControls":"[]"}, {"close":OnRadWindowClose}, null, $get("RadWindowManager1"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadWindowManager, {"behaviors":36,"clientStateFieldID":"RadWindowManager2_ClientState","formID":"form1","iconUrl":"","minimizeIconUrl":"","name":"RadWindowManager2","reloadOnShow":true,"showContentDuringLoad":false,"skin":"Default","visibleOnPageLoad":true,"visibleStatusbar":false,"windowControls":"[]"}, null, null, $get("RadWindowManager2"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadSearchBox, {"_emptyMessage":"enter search word or phrase","_enableAutoComplete":false,"_postBackOnSearch":true,"_postBackReference":"__doPostBack(\u0027ctl00$cphMain$RadSearchBox1\u0027,\u0027arguments\u0027)","_renderMode":2,"_showAllResultsText":"Show All Results","_skinName":"Default","_uniqueId":"ctl00$cphMain$RadSearchBox1","clientStateFieldID":"ctl00_cphMain_RadSearchBox1_ClientState"}, {"search":onSearch}, null, $get("ctl00_cphMain_RadSearchBox1"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadComboBox, {"_dropDownWidth":205,"_height":0,"_postBackReference":"__doPostBack(\u0027ctl00$cphMain$ddlFileType\u0027,\u0027arguments\u0027)","_skin":"Default","_text":"Show All File Types","_uniqueId":"ctl00$cphMain$ddlFileType","_value":"All","clientStateFieldID":"ctl00_cphMain_ddlFileType_ClientState","collapseAnimation":"{\"duration\":450}","expandAnimation":"{\"duration\":450}","itemData":[{"value":"All","selected":true},{"value":"pdf"}],"localization":"{\"AllItemsCheckedString\":\"All items checked\",\"ItemsCheckedString\":\"items checked\",\"CheckAllString\":\"Check All\"}","selectedIndex":0}, null, null, $get("ctl00_cphMain_ddlFileType"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadComboBox, {"_dropDownWidth":205,"_height":0,"_postBackReference":"__doPostBack(\u0027ctl00$cphMain$ddlSortField\u0027,\u0027arguments\u0027)","_skin":"Default","_text":"Sort by System Filename","_uniqueId":"ctl00$cphMain$ddlSortField","_value":"SystemFilename","clientStateFieldID":"ctl00_cphMain_ddlSortField_ClientState","collapseAnimation":"{\"duration\":450}","expandAnimation":"{\"duration\":450}","itemData":[{"value":"PublicationDate"},{"value":"PublicationDate DESC"},{"value":"Rank"},{"value":"Rank DESC"},{"value":"SystemFilename","selected":true},{"value":"SystemFilename DESC"},{"value":"Title"},{"value":"Title DESC"}],"localization":"{\"AllItemsCheckedString\":\"All items checked\",\"ItemsCheckedString\":\"items checked\",\"CheckAllString\":\"Check All\"}","selectedIndex":4}, null, null, $get("ctl00_cphMain_ddlSortField"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadComboBox, {"_dropDownWidth":400,"_height":0,"_postBackReference":"__doPostBack(\u0027ctl00$cphMain$ddlCoverage\u0027,\u0027arguments\u0027)","_skin":"Default","_text":"Show All Coverages","_uniqueId":"ctl00$cphMain$ddlCoverage","clientStateFieldID":"ctl00_cphMain_ddlCoverage_ClientState","collapseAnimation":"{\"duration\":450}","emptyMessage":"coverage filter","expandAnimation":"{\"duration\":450}","itemData":[{"selected":true},{},{}],"localization":"{\"AllItemsCheckedString\":\"All items checked\",\"ItemsCheckedString\":\"items checked\",\"CheckAllString\":\"Check All\"}","selectedIndex":0}, null, null, $get("ctl00_cphMain_ddlCoverage"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadComboBox, {"_dropDownWidth":0,"_height":0,"_postBackReference":"__doPostBack(\u0027ctl00$cphMain$ddlShowItems\u0027,\u0027arguments\u0027)","_skin":"Default","_text":"Show 100 Items","_uniqueId":"ctl00$cphMain$ddlShowItems","_value":"100","clientStateFieldID":"ctl00_cphMain_ddlShowItems_ClientState","collapseAnimation":"{\"duration\":450}","expandAnimation":"{\"duration\":450}","itemData":[{"value":"10"},{"value":"20"},{"value":"50"},{"value":"100","selected":true}],"localization":"{\"AllItemsCheckedString\":\"All items checked\",\"ItemsCheckedString\":\"items checked\",\"CheckAllString\":\"Check All\"}","selectedIndex":3}, null, null, $get("ctl00_cphMain_ddlShowItems"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadButton, {"_accessKey":"","_hasIcon":false,"_hasImage":true,"_isClientSubmit":true,"_isImageButton":true,"_postBackReference":"__doPostBack('ctl00$cphMain$btnDisplayFirstPage','')","_renderMode":1,"clientStateFieldID":"ctl00_cphMain_btnDisplayFirstPage_ClientState","confirmSettings":{},"cssClass":"btnPageFirst","iconData":{},"imageData":{"imageUrl":"https://jbphh-safewaters.org/public/common/jbphh_default/Masterpage/PageFirst.gif"},"toggleStatesData":[],"toolTip":"Display First Page...","uniqueGroupName":"","uniqueID":"ctl00$cphMain$btnDisplayFirstPage"}, null, null, $get("ctl00_cphMain_btnDisplayFirstPage"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadButton, {"_accessKey":"","_hasIcon":false,"_hasImage":true,"_isClientSubmit":true,"_isImageButton":true,"_postBackReference":"__doPostBack('ctl00$cphMain$btnDisplayPrevPage','')","_renderMode":1,"clientStateFieldID":"ctl00_cphMain_btnDisplayPrevPage_ClientState","confirmSettings":{},"cssClass":"btnPagePrevious","iconData":{},"imageData":{"imageUrl":"https://jbphh-safewaters.org/public/common/jbphh_default/Masterpage/PagePrevious.gif"},"toggleStatesData":[],"toolTip":"Display Previous Page...","uniqueGroupName":"","uniqueID":"ctl00$cphMain$btnDisplayPrevPage"}, null, null, $get("ctl00_cphMain_btnDisplayPrevPage"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadButton, {"_accessKey":"","_hasIcon":false,"_hasImage":true,"_isClientSubmit":true,"_isImageButton":true,"_postBackReference":"__doPostBack('ctl00$cphMain$btnDisplayNextPage','')","_renderMode":1,"clientStateFieldID":"ctl00_cphMain_btnDisplayNextPage_ClientState","confirmSettings":{},"cssClass":"btnPageNext","iconData":{},"imageData":{"imageUrl":"https://jbphh-safewaters.org/public/common/jbphh_default/Masterpage/PageNext.gif"},"toggleStatesData":[],"toolTip":"Display Next Page...","uniqueGroupName":"","uniqueID":"ctl00$cphMain$btnDisplayNextPage"}, null, null, $get("ctl00_cphMain_btnDisplayNextPage"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadButton, {"_accessKey":"","_hasIcon":false,"_hasImage":true,"_isClientSubmit":true,"_isImageButton":true,"_postBackReference":"__doPostBack('ctl00$cphMain$btnDisplayLastPage','')","_renderMode":1,"clientStateFieldID":"ctl00_cphMain_btnDisplayLastPage_ClientState","confirmSettings":{},"cssClass":"btnPageLast","iconData":{},"imageData":{"imageUrl":"https://jbphh-safewaters.org/public/common/jbphh_default/Masterpage/PageLast.gif"},"toggleStatesData":[],"toolTip":"Display Last Page...","uniqueGroupName":"","uniqueID":"ctl00$cphMain$btnDisplayLastPage"}, null, null, $get("ctl00_cphMain_btnDisplayLastPage"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadContextMenu, {"_childListElementCssClass":null,"_skin":"Default","clientStateFieldID":"ctl00_cphMain_ucFileContextMenu1_ContextMenu1_ClientState","collapseAnimation":"{\"duration\":450}","enableRoundedCorners":true,"enableShadows":true,"expandAnimation":"{\"duration\":450}","itemData":[{"value":"Open"},{"value":"OpenInNewTab"},{"value":"OpenInNewWindow"},{"value":"Servername"},{"value":"Title"},{"value":"Original"},{"value":"PrintTarget"}],"targets":[{"id":"","type":1},{"id":"aFile2925","type":0},{"id":"aFile2926","type":0},{"id":"aFile2927","type":0},{"id":"aFile2928","type":0},{"id":"aFile2929","type":0},{"id":"aFile2930","type":0},{"id":"aFile2931","type":0},{"id":"aFile2932","type":0},{"id":"aFile2933","type":0},{"id":"aFile2934","type":0},{"id":"aFile2925","type":0},{"id":"aFile2926","type":0},{"id":"aFile2927","type":0},{"id":"aFile2928","type":0},{"id":"aFile2929","type":0},{"id":"aFile2930","type":0},{"id":"aFile2931","type":0},{"id":"aFile2932","type":0},{"id":"aFile2933","type":0},{"id":"aFile2934","type":0},{"id":"aFile2925","type":0},{"id":"aFile2926","type":0},{"id":"aFile2927","type":0},{"id":"aFile2928","type":0},{"id":"aFile2929","type":0},{"id":"aFile2930","type":0},{"id":"aFile2931","type":0},{"id":"aFile2932","type":0},{"id":"aFile2933","type":0},{"id":"aFile2934","type":0},{"id":"aFile2935","type":0},{"id":"aFile2936","type":0},{"id":"aFile2937","type":0},{"id":"aFile2938","type":0},{"id":"aFile2939","type":0},{"id":"aFile2940","type":0},{"id":"aFile2941","type":0},{"id":"aFile2942","type":0},{"id":"aFile2943","type":0},{"id":"aFile2944","type":0},{"id":"aFile2945","type":0},{"id":"aFile2946","type":0},{"id":"aFile2947","type":0},{"id":"aFile2948","type":0},{"id":"aFile2949","type":0},{"id":"aFile2950","type":0},{"id":"aFile2951","type":0},{"id":"aFile2952","type":0},{"id":"aFile2953","type":0},{"id":"aFile2954","type":0},{"id":"aFile2955","type":0},{"id":"aFile2956","type":0},{"id":"aFile2957","type":0},{"id":"aFile2958","type":0},{"id":"aFile2959","type":0},{"id":"aFile2960","type":0},{"id":"aFile2961","type":0},{"id":"aFile2962","type":0},{"id":"aFile2963","type":0},{"id":"aFile2964","type":0},{"id":"aFile2965","type":0},{"id":"aFile2966","type":0},{"id":"aFile2967","type":0},{"id":"aFile2968","type":0},{"id":"aFile2969","type":0},{"id":"aFile2970","type":0},{"id":"aFile2971","type":0},{"id":"aFile2972","type":0},{"id":"aFile2973","type":0},{"id":"aFile2974","type":0},{"id":"aFile2975","type":0},{"id":"aFile2976","type":0},{"id":"aFile2977","type":0},{"id":"aFile2978","type":0},{"id":"aFile2979","type":0},{"id":"aFile2980","type":0},{"id":"aFile2981","type":0},{"id":"aFile2982","type":0},{"id":"aFile2983","type":0},{"id":"aFile2984","type":0},{"id":"aFile2985","type":0},{"id":"aFile2986","type":0},{"id":"aFile2987","type":0},{"id":"aFile2988","type":0},{"id":"aFile2989","type":0},{"id":"aFile2990","type":0},{"id":"aFile2991","type":0},{"id":"aFile2992","type":0},{"id":"aFile2993","type":0},{"id":"aFile2994","type":0},{"id":"aFile2995","type":0},{"id":"aFile2996","type":0},{"id":"aFile2997","type":0},{"id":"aFile2998","type":0},{"id":"aFile2999","type":0},{"id":"aFile3000","type":0},{"id":"aFile3001","type":0},{"id":"aFile3002","type":0},{"id":"aFile3003","type":0},{"id":"aFile3004","type":0},{"id":"aFile3005","type":0},{"id":"aFile3006","type":0},{"id":"aFile3007","type":0},{"id":"aFile3008","type":0},{"id":"aFile3009","type":0},{"id":"aFile3010","type":0},{"id":"aFile3011","type":0},{"id":"aFile3012","type":0},{"id":"aFile3013","type":0},{"id":"aFile3014","type":0},{"id":"aFile3015","type":0},{"id":"aFile3016","type":0},{"id":"aFile3017","type":0},{"id":"aFile3018","type":0},{"id":"aFile3019","type":0},{"id":"aFile3020","type":0},{"id":"aFile3021","type":0},{"id":"aFile3022","type":0},{"id":"aFile3023","type":0},{"id":"aFile3024","type":0}]}, {"itemClicked":OnClientItemClicked}, null, $get("ctl00_cphMain_ucFileContextMenu1_ContextMenu1"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadButton, {"_accessKey":"","_hasIcon":false,"_hasImage":true,"_isClientSubmit":true,"_isImageButton":true,"_postBackReference":"__doPostBack('ctl00$cphMain$btnDisplayFirstPage2','')","_renderMode":1,"clientStateFieldID":"ctl00_cphMain_btnDisplayFirstPage2_ClientState","confirmSettings":{},"cssClass":"btnPageFirst","iconData":{},"imageData":{"imageUrl":"https://jbphh-safewaters.org/public/common/jbphh_default/Masterpage/PageFirst.gif"},"toggleStatesData":[],"toolTip":"Display First Page...","uniqueGroupName":"","uniqueID":"ctl00$cphMain$btnDisplayFirstPage2"}, null, null, $get("ctl00_cphMain_btnDisplayFirstPage2"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadButton, {"_accessKey":"","_hasIcon":false,"_hasImage":true,"_isClientSubmit":true,"_isImageButton":true,"_postBackReference":"__doPostBack('ctl00$cphMain$btnDisplayPrevPage2','')","_renderMode":1,"clientStateFieldID":"ctl00_cphMain_btnDisplayPrevPage2_ClientState","confirmSettings":{},"cssClass":"btnPagePrevious","iconData":{},"imageData":{"imageUrl":"https://jbphh-safewaters.org/public/common/jbphh_default/Masterpage/PagePrevious.gif"},"toggleStatesData":[],"toolTip":"Display Previous Page...","uniqueGroupName":"","uniqueID":"ctl00$cphMain$btnDisplayPrevPage2"}, null, null, $get("ctl00_cphMain_btnDisplayPrevPage2"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadButton, {"_accessKey":"","_hasIcon":false,"_hasImage":true,"_isClientSubmit":true,"_isImageButton":true,"_postBackReference":"__doPostBack('ctl00$cphMain$btnDisplayNextPage2','')","_renderMode":1,"clientStateFieldID":"ctl00_cphMain_btnDisplayNextPage2_ClientState","confirmSettings":{},"cssClass":"btnPageNext","iconData":{},"imageData":{"imageUrl":"https://jbphh-safewaters.org/public/common/jbphh_default/Masterpage/PageNext.gif"},"toggleStatesData":[],"toolTip":"Display Next Page...","uniqueGroupName":"","uniqueID":"ctl00$cphMain$btnDisplayNextPage2"}, null, null, $get("ctl00_cphMain_btnDisplayNextPage2"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadButton, {"_accessKey":"","_hasIcon":false,"_hasImage":true,"_isClientSubmit":true,"_isImageButton":true,"_postBackReference":"__doPostBack('ctl00$cphMain$btnDisplayLastPage2','')","_renderMode":1,"clientStateFieldID":"ctl00_cphMain_btnDisplayLastPage2_ClientState","confirmSettings":{},"cssClass":"btnPageLast","iconData":{},"imageData":{"imageUrl":"https://jbphh-safewaters.org/public/common/jbphh_default/Masterpage/PageLast.gif"},"toggleStatesData":[],"toolTip":"Display Last Page...","uniqueGroupName":"","uniqueID":"ctl00$cphMain$btnDisplayLastPage2"}, null, null, $get("ctl00_cphMain_btnDisplayLastPage2"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadToolTipManager, {"_cssClass":"","_manualCloseButtonText":"Close","_updatePanelUniqueId":"ctl00$cphMain$RadToolTipManager1RTMPanel","clientStateFieldID":"ctl00_cphMain_RadToolTipManager1_ClientState","formID":"form1","height":"500px","hideEvent":4,"isToolTipFactory":true,"loadOnDemand":true,"offsetX":80,"position":13,"showEvent":2,"skin":"Default","targetControls":"[['span2925','span2925','2925'],['span2926','span2926','2926'],['span2927','span2927','2927'],['span2928','span2928','2928'],['span2929','span2929','2929'],['span2930','span2930','2930'],['span2931','span2931','2931'],['span2932','span2932','2932'],['span2933','span2933','2933'],['span2934','span2934','2934'],['span2925','span2925','2925'],['span2926','span2926','2926'],['span2927','span2927','2927'],['span2928','span2928','2928'],['span2929','span2929','2929'],['span2930','span2930','2930'],['span2931','span2931','2931'],['span2932','span2932','2932'],['span2933','span2933','2933'],['span2934','span2934','2934'],['span2925','span2925','2925'],['span2926','span2926','2926'],['span2927','span2927','2927'],['span2928','span2928','2928'],['span2929','span2929','2929'],['span2930','span2930','2930'],['span2931','span2931','2931'],['span2932','span2932','2932'],['span2933','span2933','2933'],['span2934','span2934','2934'],['span2935','span2935','2935'],['span2936','span2936','2936'],['span2937','span2937','2937'],['span2938','span2938','2938'],['span2939','span2939','2939'],['span2940','span2940','2940'],['span2941','span2941','2941'],['span2942','span2942','2942'],['span2943','span2943','2943'],['span2944','span2944','2944'],['span2945','span2945','2945'],['span2946','span2946','2946'],['span2947','span2947','2947'],['span2948','span2948','2948'],['span2949','span2949','2949'],['span2950','span2950','2950'],['span2951','span2951','2951'],['span2952','span2952','2952'],['span2953','span2953','2953'],['span2954','span2954','2954'],['span2955','span2955','2955'],['span2956','span2956','2956'],['span2957','span2957','2957'],['span2958','span2958','2958'],['span2959','span2959','2959'],['span2960','span2960','2960'],['span2961','span2961','2961'],['span2962','span2962','2962'],['span2963','span2963','2963'],['span2964','span2964','2964'],['span2965','span2965','2965'],['span2966','span2966','2966'],['span2967','span2967','2967'],['span2968','span2968','2968'],['span2969','span2969','2969'],['span2970','span2970','2970'],['span2971','span2971','2971'],['span2972','span2972','2972'],['span2973','span2973','2973'],['span2974','span2974','2974'],['span2975','span2975','2975'],['span2976','span2976','2976'],['span2977','span2977','2977'],['span2978','span2978','2978'],['span2979','span2979','2979'],['span2980','span2980','2980'],['span2981','span2981','2981'],['span2982','span2982','2982'],['span2983','span2983','2983'],['span2984','span2984','2984'],['span2985','span2985','2985'],['span2986','span2986','2986'],['span2987','span2987','2987'],['span2988','span2988','2988'],['span2989','span2989','2989'],['span2990','span2990','2990'],['span2991','span2991','2991'],['span2992','span2992','2992'],['span2993','span2993','2993'],['span2994','span2994','2994'],['span2995','span2995','2995'],['span2996','span2996','2996'],['span2997','span2997','2997'],['span2998','span2998','2998'],['span2999','span2999','2999'],['span3000','span3000','3000'],['span3001','span3001','3001'],['span3002','span3002','3002'],['span3003','span3003','3003'],['span3004','span3004','3004'],['span3005','span3005','3005'],['span3006','span3006','3006'],['span3007','span3007','3007'],['span3008','span3008','3008'],['span3009','span3009','3009'],['span3010','span3010','3010'],['span3011','span3011','3011'],['span3012','span3012','3012'],['span3013','span3013','3013'],['span3014','span3014','3014'],['span3015','span3015','3015'],['span3016','span3016','3016'],['span3017','span3017','3017'],['span3018','span3018','3018'],['span3019','span3019','3019'],['span3020','span3020','3020'],['span3021','span3021','3021'],['span3022','span3022','3022'],['span3023','span3023','3023'],['span3024','span3024','3024']]","width":"650px"}, null, null, $get("ctl00_cphMain_RadToolTipManager1"));
+});
+Sys.Application.add_init(function() {
+    $create(Telerik.Web.UI.RadAjaxPanel, {"clientEvents":{OnRequestStart:"OnRequestStart",OnResponseEnd:"OnResponseEnd"},"enableAJAX":true,"enableHistory":false,"links":[],"loadingPanelID":"","styles":[],"uniqueID":"ctl00$cphMain$rapSearchResults"}, null, null, $get("ctl00_cphMain_rapSearchResults"));
+});
+//]]>
+</script>
+</form>
+</body>
+</html>
+
+    <script type="text/javascript">
+
+        /*        window.alert = function (Text) {	-- 2020-04-27 causes unintended refresh of entire page after every alert, needs more work!
+                    radalert(Text, 400, 200, '');
+                }
+        */
+        function AutoSizeParentFrameHeight() {
+            if (typeof window.parent.AutoSizeFrameHeight == 'function') {
+                window.parent.AutoSizeFrameHeight();
+            } else if (typeof window.parent.parent.AutoSizeFrameHeight == 'function') {
+                window.parent.parent.AutoSizeFrameHeight();
+            }
+        }
+
+        function btnToolbar1InitInParent(CssClass, Tooltip, OnClick) {
+            if (typeof parent.btnToolbar1 != 'undefined') {
+                parent.btnToolbar1.init(CssClass, Tooltip, OnClick);
+            } else if (typeof parent.parent.btnToolbar1 != 'undefined') {
+                parent.parent.btnToolbar1.init(CssClass, Tooltip, OnClick);
+            }
+        }
+
+        function btnToolbar2InitInParent(CssClass, Tooltip, OnClick) {
+            if (typeof parent.btnToolbar2 != 'undefined') {
+                parent.btnToolbar2.init(CssClass, Tooltip, OnClick);
+            } else if (typeof parent.parent.btnToolbar2 != 'undefined') {
+                parent.parent.btnToolbar2.init(CssClass, Tooltip, OnClick);
+            }
+        }
+
+        function btnToolbar3InitInParent(CssClass, Tooltip, OnClick) {
+            if (typeof parent.btnToolbar3 != 'undefined') {
+                parent.btnToolbar3.init(CssClass, Tooltip, OnClick);
+            } else if (typeof parent.parent.btnToolbar3 != 'undefined') {
+                parent.parent.btnToolbar3.init(CssClass, Tooltip, OnClick);
+            }
+        }
+
+        function OnRadWindowClose(radWindow, returnValue) {
+            // Only called if running outside of framework
+            if (typeof RefreshDataOnDialogClose === 'undefined') {
+                // No special refresh function, so just refresh the whole page
+                window.location.reload(false);
+            } else {
+                var oWnd = $find("RadWindowManager1");
+                oWnd.closeActiveWindow();
+                RefreshDataOnDialogClose(radWindow, returnValue);
+            }
+        }
+
+        var gSavedFocus;
+
+        function OnRequestStart() {
+            gSavedFocus = document.activeElement;
+            if (typeof window.parent.ShowBusy == 'function') {
+                window.parent.ShowBusy();
+            } else if (typeof window.parent.parent.ShowBusy == 'function') {
+                window.parent.parent.ShowBusy();
+            }
+        }
+
+        function OnResponseEnd() {
+            if (typeof window.parent.HideBusy == 'function') {
+                window.parent.HideBusy();
+                console.log('OnResponseEnd');
+                //AutoSizeParentFrameHeight();  // Some apps change size e.g., Team Directory
+            } else if (typeof window.parent.parent.HideBusy == 'function') {
+                window.parent.parent.HideBusy();
+            }
+            //if (typeof gSavedFocus !== 'undefined') { gSavedFocus.focus() }   // 2020-05-06 generating error in rgrdSeddmatchingFiles
+        }
+
+        OnResponseEnd();   // Always call when we load in case parent doesn't know (e.g., in tab iFrame, on anchor click in dashboard...)
+
+        function ShowBusyWithTitleInParent(Title, ReturnValue) {
+            if (typeof window.parent.ShowBusyWithTitle == 'function') {
+                return window.parent.ShowBusyWithTitle(Title, ReturnValue);
+            } else if (typeof window.parent.parent.ShowBusy == 'function') {
+                return window.parent.parent.ShowBusyWithTitle(Title, ReturnValue);
+            }
+        }
+
+        function ShowDialogInParent(Left, Top, Height, Width, URL, Status, ShowMaxButton) {
+            URL = '../library/' + URL;
+            if (typeof window.parent.ShowDialog == 'function') {
+                window.parent.ShowDialog(Left, Top, Height, Width, URL, Status, ShowMaxButton);
+            } else if (typeof window.parent.parent.ShowDialog == 'function') {
+                window.parent.parent.ShowDialog(Left, Top, Height, Width, URL, Status, ShowMaxButton);
+            }
+            else {
+                // No parent so just do it here
+                var oWnd = $find("RadWindowManager1");
+                oWnd.SetSize(Width, Height);
+                if (Left > 0) {     // If Left = -1 Then we center dialog, otherwise position it
+                    oWnd.MoveTo(Left, Top);
+                }
+                if (typeof ShowMaxButton === 'undefined') {
+                    oWnd.set_behaviors(Telerik.Web.UI.WindowBehaviors.Move + Telerik.Web.UI.WindowBehaviors.Resize + Telerik.Web.UI.WindowBehaviors.Close);
+                } else {
+                    oWnd.set_behaviors(Telerik.Web.UI.WindowBehaviors.Move + Telerik.Web.UI.WindowBehaviors.Resize + Telerik.Web.UI.WindowBehaviors.Close + Telerik.Web.UI.WindowBehaviors.Maximize);
+                }
+                oWnd.SetStatus(Status);
+                oWnd.SetUrl(URL);
+                oWnd.Show();
+            }
+        }
+
+        function ShowDialogInParent2(Left, Top, Height, Width, URL, Status) {
+            URL = '../library/' + URL;
+            if (typeof window.parent.ShowDialog2 == 'function') {
+                window.parent.ShowDialog2(Left, Top, Height, Width, URL, Status);
+            }
+            else if (typeof window.parent.parent.ShowDialog2 == 'function') {
+                window.parent.parent.ShowDialog2(Left, Top, Height, Width, URL, Status);
+            }
+            else {
+                // no parent so just do it here (No MaxButton, and no refresh on close)
+                var oWnd = $find("RadWindowManager2");
+                oWnd.SetSize(Width, Height);
+                if (Left > 0) {     // If Left = -1 Then we center dialog, otherwise position it
+                    oWnd.MoveTo(Left, Top);
+                }
+                oWnd.SetStatus(Status);
+                oWnd.SetUrl(URL);
+                oWnd.Show();
+            }
+        }
+
+        function ShowUrlInParent(URL, Title) {
+            if (typeof window.parent.ShowURL == 'function') {
+                window.parent.ShowURL(URL, Title);
+            }
+            else {
+                // No parent so just do it here
+                window.location = URL;
+                document.title = Title;
+            }
+        }
+
+        function SizeFrameHeightInParent() {
+            if (typeof window.parent.SizeFrameHeight == 'function') {
+                //alert('There is parent SizeFrameHeight!');
+                Height = $telerik.$(document).height();  // Save for parent use later if needed
+                window.parent.parent.SizeFrameHeight(Height);
+            }
+        }
+
+        $telerik.$(document).ready(SizeFrameHeightInParent);
+    </script>
