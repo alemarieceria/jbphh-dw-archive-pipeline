@@ -85,6 +85,13 @@ document's title page. Disagreements are flagged, never picked silently. The Rec
 Plan's own stage names mean something else and are not used; "phase" is never used
 for its zone groups.
 
+**Data dictionary.** Every catalog file gets a section in `catalog/README.md` before its
+first commit. The section says:
+- for the file: what one row is and its ID column; where the data came from (source,
+  method, and the date it was made or checked); who or what writes it; how it is updated
+- for each column: its name and format; allowed values; what it means, including what a
+  blank means; who fills it (a command or a person)
+
 **New columns in documents.csv**
 - `sample_start`, `sample_end`: computed from extracted sample data, never typed
 - `stage`, `period`: from the vocabulary

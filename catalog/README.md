@@ -22,34 +22,44 @@ Scope so far: Zone I1 (Red Hill Housing) emergency response, Nov 2021 to Mar 202
 
 ## documents.csv
 
-One row per file or web page in scope. Started as the collection list (what to download or
-capture). Retrieval fields get filled in as each file lands in the archive.
+One row per file or web page in scope. The ID column is `doc_id`.
 
-| Column | Format | Description |
-|---|---|---|
-| `doc_id` | `DOC-0001` | Stable ID. Never reuse or renumber, even if a row is dropped. |
-| `group` | vocabulary | Where the item came from or what role it plays: `zone_page_er`, `navy_lab_collection`, `doh_lab_collection`, `governing`, `doh_decision`, `public_communication`, `web_page`. |
-| `title_as_posted` | text | Title exactly as the source shows it. |
-| `source_url` | URL | Where to get it. Blank if not found yet. |
-| `original_filename` | text | Filename on the source, when known before download. Library files are `pub_00NNNN.pdf`. |
-| `library_id` | text | ID in the jbphh-safewaters document library, for library files. |
-| `producer` | text | Organization that created the document (lab, validator, agency). Blank if not yet confirmed. |
-| `doc_type` | vocabulary | `lab_report`, `lab_report_bundle`, `data_validation_report`, `data_validation_checklist`, `data_review_report`, `data_table`, `summary_report`, `results_crosstab`, `removal_action_report`, `plan`, `plan_addendum`, `plan_and_results`, `sop`, `guidance`, `technical_memo`, `regulatory_directive`, `regulatory_advisory`, `regulatory_memo`, `press_release`, `fact_sheet`, `map`, `graphic`, `transcript`, `library_listing`, `web_page`. |
-| `date_as_listed` | date | Date shown in the title or listing. **Not** necessarily when it was posted or created. |
-| `zones` | list | Flushing zones the document covers, separated by `; ` (for example `I1` or `I1; D1`). `all` for system-wide documents such as plans and directives. |
-| `phase` | vocabulary | Response phase the document belongs to. So far always `emergency_response` (Nov 2021 to Mar 2022). |
-| `size_listed` | text | File size as the library lists it. |
-| `sdg` | text | Lab job or sample delivery group number, normalized (for example `810-12077-2`). For DOH files, the lab report number. |
-| `package_or_validation_level` | text | For lab reports, the data package level (`Level 2`, `Level 3`, `Level 4`). For validation files, the validation stage (`S2AVEM`, `S4VEM`, `Stage 2A`). |
-| `revision` | text | Revision as labeled (`Revision 1`), or `duplicate upload (2)` for files the library lists twice. |
-| `duplicate_of` | doc_id | Filled when this file is byte-identical to another registered file (same SHA-256). Points to the copy to use. **Tools must skip rows with this filled**, so each file is processed once; the duplicate stays archived as evidence of what was posted. |
-| `priority` | vocabulary | `core` (evidence chain and governing documents), `supporting` (communications, fact sheets, maps), `context` (background such as transcripts). |
-| `in_team_folder` | `yes` / `no` | Whether the team's existing I1 folder should already have it, for cross-checking. |
-| `status` | vocabulary | `to_find` (no URL yet), `to_download` (file), `to_capture` (web page), `done`, `unavailable`. |
-| `retrieved_utc` | datetime | When the file was downloaded or captured. |
-| `sha256` | text | File hash, recorded at download. Proves the archived file hasn't changed. |
-| `local_path` | text | Path inside the Shared Drive, for example `raw/jbphh-safewaters/pub_002925.pdf`. When one item has several files (a web page saved as PDF and HTML, or a listing split across pages), paths are separated by `; `. |
-| `notes` | text | Known issues, context, and anything still to verify. |
+**Source:** built by A. Ceria for Zone I1, manually, from I1's zone page, the Navy and DOH I1
+library listings, and documents cited by other documents. Files downloaded 2026-10-31.
+Checked 2026-11-17: `archive inventory --zone I1` matched all 123 library rows to the live
+listings (`reports/2026-11-17-inventory-I1.csv`).
+
+**Who writes it:** people, and `archive download` (retrieval columns). `archive discover`
+will propose new rows once it is built.
+
+**Updates:** rows are never deleted and a `doc_id` is never reused. After a change, commit the
+file and run `archive publish`.
+
+| Column | Format | Description | Filled by |
+|---|---|---|---|
+| `doc_id` | `DOC-0001` | Stable ID. Never reuse or renumber, even if a row is dropped. | Manually, on approval |
+| `group` | vocabulary | Where the item came from or what role it plays: `zone_page_er`, `navy_lab_collection`, `doh_lab_collection`, `governing`, `doh_decision`, `public_communication`, `web_page`. | Manually (later proposed by `archive discover`) |
+| `title_as_posted` | text | Title exactly as the source shows it. | Manually (later proposed by `archive discover`) |
+| `source_url` | URL | Where to get it. Blank if not found yet. | Manually (later proposed by `archive discover`) |
+| `original_filename` | text | Filename on the source, when known before download. Library files are `pub_00NNNN.pdf`. | Manually, or `archive download` when blank |
+| `library_id` | text | ID in the jbphh-safewaters document library, for library files. Blank if not a library file. | Manually (later proposed by `archive discover`) |
+| `producer` | text | Organization that created the document (lab, validator, agency). Blank if not yet confirmed. | Manually (later proposed by `archive discover`) |
+| `doc_type` | vocabulary | `lab_report`, `lab_report_bundle`, `data_validation_report`, `data_validation_checklist`, `data_review_report`, `data_table`, `summary_report`, `results_crosstab`, `removal_action_report`, `plan`, `plan_addendum`, `plan_and_results`, `sop`, `guidance`, `technical_memo`, `regulatory_directive`, `regulatory_advisory`, `regulatory_memo`, `press_release`, `fact_sheet`, `map`, `graphic`, `transcript`, `library_listing`, `web_page`. | Manually (later proposed by `archive discover`) |
+| `date_as_listed` | date | Date shown in the title or listing. **Not** necessarily when it was posted or created. | Manually (later proposed by `archive discover`) |
+| `zones` | list | Flushing zones the document covers, separated by `; ` (for example `I1` or `I1; D1`). `all` for system-wide documents such as plans and directives. | Manually (later proposed by `archive discover`) |
+| `phase` | vocabulary | Response phase the document belongs to. So far always `emergency_response` (Nov 2021 to Mar 2022). | Manually (later proposed by `archive discover`) |
+| `size_listed` | text | File size as the library lists it. | Manually (later proposed by `archive discover`) |
+| `sdg` | text | Lab job or sample delivery group number, normalized (for example `810-12077-2`). For DOH files, the lab report number. | Manually (later proposed by `archive discover`) |
+| `package_or_validation_level` | text | For lab reports, the data package level (`Level 2`, `Level 3`, `Level 4`). For validation files, the validation stage (`S2AVEM`, `S4VEM`, `Stage 2A`). | Manually (later proposed by `archive discover`) |
+| `revision` | text | Revision as labeled (`Revision 1`), or `duplicate upload (2)` for files the library lists twice. | Manually |
+| `duplicate_of` | doc_id | Filled when this file is byte-identical to another registered file (same SHA-256). Points to the copy to use. **Tools must skip rows with this filled**, so each file is processed once; the duplicate stays archived as evidence of what was posted. Blank if not a duplicate. | Manually |
+| `priority` | vocabulary | `core` (evidence chain and governing documents), `supporting` (communications, fact sheets, maps), `context` (background such as transcripts). | Manually |
+| `in_team_folder` | `yes` / `no` | Whether the team's existing I1 folder should already have it, for cross-checking. | Manually |
+| `status` | vocabulary | `to_find` (no URL yet), `to_download` (file), `to_capture` (web page), `done`, `unavailable`. | Manually (`to_find`, `to_download`, `to_capture`, `unavailable`); `archive download` sets `done` |
+| `retrieved_utc` | datetime | When the file was downloaded or captured. Blank if not collected yet. | `archive download`; manually for the 12 manually captured web pages |
+| `sha256` | text | File hash, recorded at download. Proves the archived file hasn't changed. Blank if not downloaded yet, or for a manually captured web page (no fingerprint yet). | `archive download` |
+| `local_path` | text | Path inside the Shared Drive, for example `raw/jbphh-safewaters/pub_002925.pdf`. When one item has several files (a web page saved as PDF and HTML, or a listing split across pages), paths are separated by `; `. Blank if not collected yet. | `archive download`; manually for the 12 manually captured web pages |
+| `notes` | text | Known issues, context, and anything still to verify. | Manually |
 
 ## zones.csv
 
@@ -58,14 +68,17 @@ documents are listed on the Safe Waters site. Event dates, such as a zone's amen
 go in `timeline.csv`, not here. Made from the Safe Waters site's Water System Zone Map and the
 20 zone pages, checked 2026-11-17.
 
-| Column | Format | Description |
-|---|---|---|
-| `zone_id` | `I1` | Zone ID as the site writes it. |
-| `name` | text | Area names as the site's Water System Zone Map shows them. |
-| `emergency_response` | `yes` / `no` | Whether the zone has emergency response documents. Only J1 is `no`. |
-| `zone_page_url` | URL | The zone's page, as linked from the Water System Zone Map. |
-| `navy_listing_url`, `doh_listing_url`, `ltm_listing_url` | URL | The zone's Navy, DOH and LTM library listings. Blank when the zone has none. |
-| `notes` | text | Known issues, with the date they were checked. |
+The ID column is `zone_id`. **Who writes it:** people, manually. **Updates:** when the site's
+zone map or a zone page changes, edit the row and date the change in `notes`.
+
+| Column | Format | Description | Filled by |
+|---|---|---|---|
+| `zone_id` | `I1` | Zone ID as the site writes it. | Manually |
+| `name` | text | Area names as the site's Water System Zone Map shows them. | Manually |
+| `emergency_response` | `yes` / `no` | Whether the zone has emergency response documents. Only J1 is `no`. | Manually |
+| `zone_page_url` | URL | The zone's page, as linked from the Water System Zone Map. | Manually |
+| `navy_listing_url`, `doh_listing_url`, `ltm_listing_url` | URL | The zone's Navy, DOH and LTM library listings. Blank when the zone has none. | Manually |
+| `notes` | text | Known issues, with the date they were checked. Blank means no known issues. | Manually |
 
 The other registry tables (`wayback_captures.csv`, `wayback_page_history.csv`) stay in the
 Drive's `registry/` until `archive wayback` is built, and are described in its `README.md`.
