@@ -33,4 +33,5 @@ Add `--env-file .env` to any step that uses the Shared Drive. Close `documents.c
 ```bash
 uv run pytest
 uv run ruff check .
+uv run ruff format --check .
 ```

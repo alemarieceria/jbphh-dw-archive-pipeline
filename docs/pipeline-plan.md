@@ -24,7 +24,7 @@ of the JBPHH drinking water flushing zones, in a way anyone can rerun and check:
 | Discrepancy log | CSV in this repo (`catalog/discrepancies.csv`); teammates submit findings through a Google Form; `archive findings import` turns responses into proposed rows for review | History and review, without teammates needing Git. |
 | Database | None for the archive. The Evidence Tracer gets its own Neon database later and loads the published catalog into it. | The catalog is small and changed by one process; a database would add upkeep without solving a current problem. |
 | Code | One Python package with one command: `uv run archive <step> --zone I1` | Easier to learn than many scripts; `uv run archive --help` lists every step. |
-| Tools | Python + uv, httpx (downloads), Playwright (page captures, diagrams), pytest + ruff, GitHub with automatic checks, Excalidraw stepped diagrams | All already in use. |
+| Tools | Python + uv, httpx (downloads), Playwright (page captures, diagrams), pytest + ruff, GitHub with automatic checks, Excalidraw stepped diagrams | All in use except GitHub Actions (planned). |
 | Wayback backups | Automatic: `archive wayback` checks for an existing backup and, if none, saves the page with archive.org's Save Page Now service (free archive.org account; keys in `.env`). Results go in `catalog/wayback.csv`. | Every source page gets an independent public copy without hand work. |
 | Viewing sources | `archive publish` writes `derived/zone-index/<zone>.csv`: every document for a zone, with its link, Wayback link and captures. A notebook only if capture previews are needed. | Opens in Drive or Excel without Python. |
 | Tests | Every step ships with unit tests that run offline on saved pages. Archive checks (`inventory`, `verify`) run against the real Drive and website and write dated reports. A step is done only when both pass. | Accuracy must be provable, not assumed. |
@@ -37,7 +37,7 @@ Each step gets a section, with a stepped diagram, in `notebooks/workflows.ipynb`
 | Step | What it answers | Status |
 | --- | --- | --- |
 | 1. How to read the notebook | How to view and run the documentation | Done: the notebook's first section explains how to view and run it |
-| 2. The big picture | How the steps fit together | Partial: `archive-big-picture` maps how the pieces connect today; `archive-pipeline` (planned) shows how the archive will run, step by step. Both stay; the big picture is redrawn when the catalog moves (item 3 of the order of work). |
+| 2. The big picture | How the steps fit together | Partial: `archive-big-picture` maps how the pieces connect today; `archive-pipeline` (planned) shows how the archive will run, step by step. Both stay. The big picture is redrawn as the map of every component once we know whether the results database belongs on it. |
 | 3. Scope | Which zones, which dates, zone versus system-wide documents | Partial: decided above; `catalog/zones.csv` not yet made |
 | 4. Discovery | Which documents exist for a zone, and how do we know we have them all? | Partial (see below) |
 | 5. Cataloging | Turning found documents into reviewed catalog rows | Partial: I1's 169 rows were built by hand; no script |
@@ -59,9 +59,12 @@ Each step gets a section, with a stepped diagram, in `notebooks/workflows.ipynb`
 
 ### 5–7. Status details
 
-- **Catalog:** 169 rows for I1; 160 downloaded, 9 still to find (7 governing documents, 2 Navy communications).
+- **Catalog:** 169 rows for I1; 160 collected (148 files downloaded, 12 web pages captured by
+  hand), 9 still to find (7 governing documents, 2 Navy communications).
 - **Discrepancy log:** 18 findings (FND-0001 to FND-0018); 6 confirmed, 12 to verify.
 - **Page captures** to automate with Playwright: PDF, single-file web page (MHTML) and PNG per page.
+  `archive capture` takes over the 12 pages captured by hand and records a fingerprint for
+  every capture, including the existing ones.
 - **Wayback:** automatic (see Decisions). Needs an archive.org account before the step is built.
 
 ### 10. The Evidence Tracer connection
@@ -146,9 +149,9 @@ derived/ (including derived/zone-index/)
 
 1. **Restructure** this repo into `src/jbphh_archive/` with one `archive` command; move
    `scripts/` code in, with tests proving nothing changed.
-2. **Big picture:** keep `archive-big-picture` as the map of every component and
-   `archive-pipeline` as the step-by-step view; redraw the big picture when the catalog
-   moves (item 3). Add the step outline above to `notebooks/workflows.ipynb`.
+2. **Big picture:** keep `archive-big-picture` and `archive-pipeline` (the step-by-step
+   view). Redraw the big picture as the map of every component once we know whether the
+   results database belongs on it. Add the step outline above to `notebooks/workflows.ipynb`.
 3. **Catalog, scope and discovery for I1:** move `documents.csv` into `catalog/`;
    `archive download` reads and writes it there, and a first `archive publish` copies it
    to the Drive's `registry/` (read-only), so the Evidence Tracer keeps working. Then
