@@ -44,10 +44,13 @@ file and run `archive publish`.
 | `original_filename` | text | Filename on the source, when known before download. Library files are `pub_00NNNN.pdf`. | Manually, or `archive download` when blank |
 | `library_id` | text | ID in the jbphh-safewaters document library, for library files. Blank if not a library file. | Manually (later proposed by `archive discover`) |
 | `producer` | text | Organization that created the document (lab, validator, agency). Blank if not yet confirmed. | Manually (later proposed by `archive discover`) |
+| `publisher` | org ID | Stakeholder Directory org ID of the issuing organization (for example `idwst`, `doh`). The most specific one that exists; if only its parent exists, use the parent and say so in `notes`. Blank if not set yet. | Manually (later proposed by `archive discover`) |
 | `doc_type` | vocabulary | `lab_report`, `lab_report_bundle`, `data_validation_report`, `data_validation_checklist`, `data_review_report`, `data_table`, `summary_report`, `results_crosstab`, `removal_action_report`, `plan`, `plan_addendum`, `plan_and_results`, `sop`, `guidance`, `technical_memo`, `regulatory_directive`, `regulatory_advisory`, `regulatory_memo`, `press_release`, `fact_sheet`, `map`, `graphic`, `transcript`, `library_listing`, `web_page`. | Manually (later proposed by `archive discover`) |
 | `date_as_listed` | date | Date shown in the title or listing. **Not** necessarily when it was posted or created. | Manually (later proposed by `archive discover`) |
 | `zones` | list | Flushing zones the document covers, separated by `; ` (for example `I1` or `I1; D1`). `all` for system-wide documents such as plans and directives. | Manually (later proposed by `archive discover`) |
 | `phase` | vocabulary | Response phase the document belongs to. So far always `emergency_response` (Nov 2021 to Mar 2022). | Manually (later proposed by `archive discover`) |
+| `stage` | list | Emergency response stage, from the vocabulary: `immediate`, `stage_1` to `stage_4`, separated by `; `. Blank for monitoring documents, or not set yet. | Manually (later proposed by `archive discover`) |
+| `period` | vocabulary | Monitoring period: `ltm_p1` to `ltm_p7`, `edwm_q1` to `edwm_q4`, `pem`. Blank for emergency response documents, or not set yet. | Manually (later proposed by `archive discover`) |
 | `size_listed` | text | File size as the library lists it. | Manually (later proposed by `archive discover`) |
 | `sdg` | text | Lab job or sample delivery group number, normalized (for example `810-12077-2`). For DOH files, the lab report number. | Manually (later proposed by `archive discover`) |
 | `package_or_validation_level` | text | For lab reports, the data package level (`Level 2`, `Level 3`, `Level 4`). For validation files, the validation stage (`S2AVEM`, `S4VEM`, `Stage 2A`). | Manually (later proposed by `archive discover`) |
@@ -55,11 +58,15 @@ file and run `archive publish`.
 | `duplicate_of` | doc_id | Filled when this file is byte-identical to another registered file (same SHA-256). Points to the copy to use. **Tools must skip rows with this filled**, so each file is processed once; the duplicate stays archived as evidence of what was posted. Blank if not a duplicate. | Manually |
 | `priority` | vocabulary | `core` (evidence chain and governing documents), `supporting` (communications, fact sheets, maps), `context` (background such as transcripts). | Manually |
 | `in_team_folder` | `yes` / `no` | Whether the team's existing I1 folder should already have it, for cross-checking. | Manually |
-| `status` | vocabulary | `to_find` (no URL yet), `to_download` (file), `to_capture` (web page), `done`, `unavailable`. | Manually (`to_find`, `to_download`, `to_capture`, `unavailable`); `archive download` sets `done` |
+| `status` | vocabulary | `to_find` (no URL yet), `to_download` (file), `to_capture` (web page), `link_only` (cataloged and linked, not downloaded: LTM, EDWM and post-EDWM documents), `done`, `unavailable`, `excluded` (found but out of scope; the reason goes in `notes`). | Manually (`to_find`, `to_download`, `to_capture`, `unavailable`, `excluded`); `archive discover` proposes `link_only`; `archive download` sets `done` |
 | `retrieved_utc` | datetime | When the file was downloaded or captured. Blank if not collected yet. | `archive download`; manually for the 12 manually captured web pages |
 | `sha256` | text | File hash, recorded at download. Proves the archived file hasn't changed. Blank if not downloaded yet, or for a manually captured web page (no fingerprint yet). | `archive download` |
 | `local_path` | text | Path inside the Shared Drive, for example `raw/jbphh-safewaters/pub_002925.pdf`. When one item has several files (a web page saved as PDF and HTML, or a listing split across pages), paths are separated by `; `. Blank if not collected yet. | `archive download`; manually for the 12 manually captured web pages |
 | `notes` | text | Known issues, context, and anything still to verify. | Manually |
+| `found_via` | vocabulary | How the document was found: `zone_page`, `navy_listing`, `doh_listing`, `ltm_listing`, `edwm_listing`, `cited`, `other_site`. Blank for rows built before `archive discover`. | `archive discover`; manually for `cited` |
+| `found_on` | URL or doc_id | The page where it was found, or for `cited`, the `doc_id` of the document that cites it. Blank for rows built before `archive discover`. | `archive discover`; manually for `cited` |
+| `first_seen_utc` | datetime | When `archive discover` first saw it on the source. Blank if never seen by `archive discover`. | `archive discover` |
+| `last_seen_utc` | datetime | The last time `archive discover` saw it on the source. If this stops updating, the site removed the document. Blank if never seen by `archive discover`. | `archive discover` |
 
 ## zones.csv
 
