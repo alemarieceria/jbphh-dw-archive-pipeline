@@ -38,7 +38,7 @@ Each step gets a section, with a stepped diagram, in `notebooks/workflows.ipynb`
 | --- | --- | --- |
 | 1. How to read the notebook | How to view and run the documentation | Done: the notebook's first section explains how to view and run it |
 | 2. The big picture | How the steps fit together | Partial: `archive-big-picture` maps how the pieces connect today; `archive-pipeline` (planned) shows how the archive will run, step by step. Both stay. The big picture is redrawn as the map of every component once we know whether the results database belongs on it. |
-| 3. Scope | Which zones, which dates, zone versus system-wide documents | Partial: decided above; `catalog/zones.csv` not yet made |
+| 3. Scope | Which zones, which dates, zone versus system-wide documents | Done: decided above; `catalog/zones.csv` lists the 20 zones with their zone page and library listing links |
 | 4. Discovery | Which documents exist for a zone, and how do we know we have them all? | Partial (see below) |
 | 5. Cataloging | Turning found documents into reviewed catalog rows | Partial: I1's 169 rows were built by hand; no script |
 | 6. Collection | Downloading files, capturing web pages, Wayback backups | Partial: downloads automated; page captures and Wayback by hand |

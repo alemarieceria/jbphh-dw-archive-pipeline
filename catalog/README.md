@@ -51,5 +51,21 @@ capture). Retrieval fields get filled in as each file lands in the archive.
 | `local_path` | text | Path inside the Shared Drive, for example `raw/jbphh-safewaters/pub_002925.pdf`. When one item has several files (a web page saved as PDF and HTML, or a listing split across pages), paths are separated by `; `. |
 | `notes` | text | Known issues, context, and anything still to verify. |
 
+## zones.csv
+
+One row per zone: the 19 flushing zones plus J1 (Manana Housing). Says where each zone's
+documents are listed on the Safe Waters site. Event dates, such as a zone's amendment date,
+go in `timeline.csv`, not here. Made from the Safe Waters site's Water System Zone Map and the
+20 zone pages, checked 2026-11-17.
+
+| Column | Format | Description |
+|---|---|---|
+| `zone_id` | `I1` | Zone ID as the site writes it. |
+| `name` | text | Area names as the site's Water System Zone Map shows them. |
+| `emergency_response` | `yes` / `no` | Whether the zone has emergency response documents. Only J1 is `no`. |
+| `zone_page_url` | URL | The zone's page, as linked from the Water System Zone Map. |
+| `navy_listing_url`, `doh_listing_url`, `ltm_listing_url` | URL | The zone's Navy, DOH and LTM library listings. Blank when the zone has none. |
+| `notes` | text | Known issues, with the date they were checked. |
+
 The other registry tables (`wayback_captures.csv`, `wayback_page_history.csv`) stay in the
 Drive's `registry/` until `archive wayback` is built, and are described in its `README.md`.
