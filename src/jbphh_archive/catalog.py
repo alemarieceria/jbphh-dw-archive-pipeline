@@ -14,6 +14,7 @@ from jbphh_archive import REPO_ROOT
 
 CATALOG_FILE = REPO_ROOT / "catalog" / "documents.csv"
 ZONES_FILE = REPO_ROOT / "catalog" / "zones.csv"
+COMMUNITIES_FILE = REPO_ROOT / "catalog" / "communities.csv"
 REGISTRY_FILE = Path("registry") / "documents.csv"  # the published copy, inside the archive
 
 Row = dict[str, str]
