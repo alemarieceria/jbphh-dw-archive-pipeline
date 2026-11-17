@@ -37,7 +37,7 @@ Each step gets a section, with a stepped diagram, in `notebooks/workflows.ipynb`
 | Step | What it answers | Status |
 | --- | --- | --- |
 | 1. How to read the notebook | How to view and run the documentation | Not started |
-| 2. The big picture | How the steps fit together | Partial: `archive-big-picture` maps how the pieces connect today; `archive-pipeline` (planned) shows how the archive will run, step by step. Both stay; the big picture is redrawn when the catalog moves (item 6 of the order of work). |
+| 2. The big picture | How the steps fit together | Partial: `archive-big-picture` maps how the pieces connect today; `archive-pipeline` (planned) shows how the archive will run, step by step. Both stay; the big picture is redrawn when the catalog moves (item 3 of the order of work). |
 | 3. Scope | Which zones, which dates, zone versus system-wide documents | Partial: decided above; `catalog/zones.csv` not yet made |
 | 4. Discovery | Which documents exist for a zone, and how do we know we have them all? | Partial (see below) |
 | 5. Cataloging | Turning found documents into reviewed catalog rows | Partial: I1's 169 rows were built by hand; no script |
@@ -106,7 +106,9 @@ wording (amended, lifted).
 - Discovery: website facts, only when a row is created; afterwards only `last_seen_utc`.
   Differences go to a report.
 - Discovery proposes, you decide: group, doc_type, producer, publisher, phase, stage,
-  period, zones, sdg, package_or_validation_level
+  period, zones, sdg, package_or_validation_level. You review by listing: one decision
+  per library listing (accept all its rows once its count matches), and flagged rows
+  one by one.
 - Download and verify: retrieved_utc, sha256, local_path, `status` → done
 - Extraction: sample dates
 - People only: priority, in_team_folder, duplicate_of, revision, notes, and the statuses
@@ -146,14 +148,17 @@ derived/ (including derived/zone-index/)
    `scripts/` code in, with tests proving nothing changed.
 2. **Big picture:** keep `archive-big-picture` as the map of every component and
    `archive-pipeline` as the step-by-step view; redraw the big picture when the catalog
-   moves (item 6). Add the step outline above to `notebooks/workflows.ipynb`.
-3. **Scope and Discovery for I1:** `catalog/zones.csv`, then `archive inventory --zone I1`
-   (listings and zone page against the catalog), checked against the known I1 facts.
+   moves (item 3). Add the step outline above to `notebooks/workflows.ipynb`.
+3. **Catalog, scope and discovery for I1:** move `documents.csv` into `catalog/`;
+   `archive download` reads and writes it there, and a first `archive publish` copies it
+   to the Drive's `registry/` (read-only), so the Evidence Tracer keeps working. Then
+   `catalog/zones.csv` and `archive inventory --zone I1` (listings and zone page against
+   the catalog), checked against the known I1 facts. The other catalog files join
+   `catalog/` when the step that uses them is built.
 4. **Cataloging:** `archive discover --zone I1` proposes rows; it should reproduce I1's
    existing rows.
 5. **Collection:** `archive capture`, then `archive wayback`, then the sources view in
    `notebooks/zones.ipynb`.
-6. **Validation and storage:** `archive verify`; move the catalog into `catalog/`;
-   `archive publish`.
+6. **Validation and storage:** `archive verify`; `archive publish` adds the zone indexes.
 7. **Discrepancy workflow:** the Google Form and `archive findings import`.
 8. **Pilot a second zone**, then the rest.
