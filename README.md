@@ -25,7 +25,7 @@ Add `--env-file .env` to any step that uses the Shared Drive. Close `documents.c
 ## Diagrams
 
 - `notebooks/workflows.ipynb` shows every diagram. Open it in VS Code, select the repo's `.venv` as the kernel, and choose **Run All**. The files are in `docs/diagrams/`: `specs/`, `svgs/`, `pngs/`, `embeds/` (the Back / Next players) and `screenshots/`.
-- **Stepped** (Back / Next) diagrams: edit the spec, then run `uv run archive diagrams build docs/diagrams/specs/<name>.toml`. A rebuild replaces the diagram's files, so don't edit those directly. **Hand-drawn** diagrams: edit `svgs/<name>.excalidraw.svg` in VS Code with the Excalidraw extension, then run `uv run archive diagrams png` to refresh its PNG for Word and Google Docs.
+- **Stepped** (Back / Next) diagrams: edit the spec, then run `uv run archive diagrams build docs/diagrams/specs/<name>.toml`. A rebuild replaces the diagram's files, so don't edit those directly. Diagrams **created in Excalidraw**: edit `svgs/<name>.excalidraw.svg` in VS Code with the Excalidraw extension, then run `uv run archive diagrams png` to refresh its PNG for Word and Google Docs.
 - Every diagram follows the style rules in [docs/diagrams/README.md](docs/diagrams/README.md).
 - When a step's behavior changes, update its diagram in the same commit.
 
