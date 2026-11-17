@@ -25,6 +25,7 @@ def test_no_step_shows_help(capsys):
 @pytest.mark.parametrize(
     ("argv", "step", "passed_on"),
     [
+        (["inventory", "--zone", "I1"], "inventory", ["--zone", "I1"]),
         (["download", "--dry-run", "--limit", "5"], "download", ["--dry-run", "--limit", "5"]),
         (["publish", "--dry-run"], "publish", ["--dry-run"]),
         (["diagrams", "png", "--force"], "diagrams png", ["--force"]),

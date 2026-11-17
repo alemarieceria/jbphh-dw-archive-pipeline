@@ -1,9 +1,6 @@
 """Checks on catalog/zones.csv: the zones match the plan's Scope row, and every link follows the site's pattern."""
 
-from jbphh_archive import REPO_ROOT
-from jbphh_archive.catalog import read_rows
-
-ZONES_FILE = REPO_ROOT / "catalog" / "zones.csv"
+from jbphh_archive.catalog import ZONES_FILE, read_rows
 
 # The plan's Scope row: 19 flushing zones, plus J1 (Manana Housing), which has no emergency response documents.
 FLUSHING_ZONES = [

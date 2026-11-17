@@ -1,0 +1,124 @@
+listing,library_id,title,filename,doc_id,catalog_status,result
+navy,pub_002925,"Laboratory Report 810-12264-1, Level 4",pub_002925.pdf,DOC-0010,done,matched
+navy,pub_002926,"Laboratory Report 810-12365-1, Level 4",pub_002926.pdf,DOC-0011,done,matched
+navy,pub_002927,"Laboratory Report 810-12366-1, Level 4",pub_002927.pdf,DOC-0012,done,matched
+navy,pub_002928,"Laboratory Report 810-12460-1, Level 3, Revision 1",pub_002928.pdf,DOC-0013,done,matched
+navy,pub_002929,"Laboratory Report 810-12460-1, Level 4, Revision 1",pub_002929.pdf,DOC-0014,done,matched
+navy,pub_002930,"Laboratory Report, SDG 2A14028, Level 2",pub_002930.pdf,DOC-0015,done,matched
+navy,pub_002931,"Laboratory Report, SDG 2A14029, Level 2",pub_002931.pdf,DOC-0016,done,matched
+navy,pub_002932,"Laboratory Report, SDG 2A14031, Level 2",pub_002932.pdf,DOC-0017,done,matched
+navy,pub_002933,"Laboratory Report, SDG 2A14034, Level 2",pub_002933.pdf,DOC-0018,done,matched
+navy,pub_002934,"Laboratory Report, SDG 2A18017, Level 2",pub_002934.pdf,DOC-0019,done,matched
+navy,pub_002935,"Laboratory Report, SDG 2A19069, Level 2",pub_002935.pdf,DOC-0020,done,matched
+navy,pub_002936,"Laboratory Report, SDG 580-109293-1, Level 2",pub_002936.pdf,DOC-0021,done,matched
+navy,pub_002937,"Laboratory Report, SDG 580-109293-1, Level 4",pub_002937.pdf,DOC-0022,done,matched
+navy,pub_002938,"Laboratory Report, SDG 580-109293-2, Level 2",pub_002938.pdf,DOC-0023,done,matched
+navy,pub_002939,"Laboratory Report, SDG 580-109293-2, Level 4",pub_002939.pdf,DOC-0024,done,matched
+navy,pub_002940,"Laboratory Report, SDG 580-109324-1, Level 2",pub_002940.pdf,DOC-0025,done,matched
+navy,pub_002941,"Laboratory Report, SDG 580-109336-1, Level 2",pub_002941.pdf,DOC-0026,done,matched
+navy,pub_002942,"Laboratory Report, SDG 580-109381-1, Level 2",pub_002942.pdf,DOC-0027,done,matched
+navy,pub_002943,"Laboratory Report, SDG 580-109487-2, Level 2",pub_002943.pdf,DOC-0028,done,matched
+navy,pub_002944,"Laboratory Report, SDG 810-12077-2, Level 2, Revision 1",pub_002944.pdf,DOC-0029,done,matched
+navy,pub_002945,"Laboratory Report, SDG 810-12122-1, Level 2",pub_002945.pdf,DOC-0030,done,matched
+navy,pub_002946,"Laboratory Report, SDG 810-12122-1, Level 4, Revision 1",pub_002946.pdf,DOC-0031,done,matched
+navy,pub_002947,"Laboratory Report, SDG 810-12264-1, Level 2",pub_002947.pdf,DOC-0032,done,matched
+navy,pub_002948,"Laboratory Report, SDG 810-12365-1, Level 2",pub_002948.pdf,DOC-0033,done,matched
+navy,pub_002949,"Laboratory Report, SDG 810-12366-1, Level 2",pub_002949.pdf,DOC-0034,done,matched
+navy,pub_002950,"Laboratory Report, SDG 977829, Level 2",pub_002950.pdf,DOC-0035,done,matched
+navy,pub_002951,"Laboratory Report, SDG C22A011, Level 2, Revision 1",pub_002951.pdf,DOC-0036,done,matched
+navy,pub_002952,"Laboratory Report, SDG C22A011, Level 4 (2)",pub_002952.pdf,DOC-0037,done,matched
+navy,pub_002953,"Laboratory Report, SDG C22A011, Level 4",pub_002953.pdf,DOC-0038,done,matched
+navy,pub_002954,"Laboratory Report, SDG C22A014, Level 2, Revision 1",pub_002954.pdf,DOC-0039,done,matched
+navy,pub_002955,"Laboratory Report, SDG C22A014-I1, Level 4, Revision",pub_002955.pdf,DOC-0040,done,matched
+navy,pub_002956,"Laboratory Report, SDG C22A016, Level 2, Revision 2",pub_002956.pdf,DOC-0041,done,matched
+navy,pub_002957,"Laboratory Report, SDG C22A016, Level 4, Revision 1",pub_002957.pdf,DOC-0042,done,matched
+navy,pub_002958,"Laboratory Report, SDG C22A022, Level 2, Revision 1",pub_002958.pdf,DOC-0043,done,matched
+navy,pub_002959,"Laboratory Report, SDG C22A022, Level 4, Revision 1",pub_002959.pdf,DOC-0044,done,matched
+navy,pub_002960,"Laboratory Report, SDG C22A026, Level 2, Revision 1",pub_002960.pdf,DOC-0045,done,matched
+navy,pub_002961,"Laboratory Report, SDG C22A026, Level 4, Revision 2",pub_002961.pdf,DOC-0046,done,matched
+navy,pub_002962,"Laboratory Report, SDG C22A036, Level 2, Revision 1",pub_002962.pdf,DOC-0047,done,matched
+navy,pub_002963,"Laboratory Report, SDG C22A036, Level 4, Revision 1",pub_002963.pdf,DOC-0048,done,matched
+navy,pub_002964,"Laboratory Report, SDG DA40915, Level 2",pub_002964.pdf,DOC-0049,done,matched
+navy,pub_002965,"Laboratory Report, SDG DA40915, Level 4",pub_002965.pdf,DOC-0050,done,matched
+navy,pub_002966,"Laboratory Report, SDG DA40924, Level 4",pub_002966.pdf,DOC-0051,done,matched
+navy,pub_002967,"Laboratory Report, SDG DA40925, Level 2",pub_002967.pdf,DOC-0052,done,matched
+navy,pub_002968,"Laboratory Report, SDG DA40925, Level 4",pub_002968.pdf,DOC-0053,done,matched
+navy,pub_002969,"Laboratory Report, SDG DA40928, Level 2",pub_002969.pdf,DOC-0054,done,matched
+navy,pub_002970,"Laboratory Report, SDG DA40928, Level 4",pub_002970.pdf,DOC-0055,done,matched
+navy,pub_002971,"Laboratory Report, SDG DA40953, Level 4 (2)",pub_002971.pdf,DOC-0056,done,matched
+navy,pub_002972,"Laboratory Report, SDG DA40953, Level 4 (3)",pub_002972.pdf,DOC-0057,done,matched
+navy,pub_002973,"Laboratory Report, SDG DA40953, Level 4",pub_002973.pdf,DOC-0058,done,matched
+navy,pub_002974,"Laboratory Report, SDG DA40988, Level 4",pub_002974.pdf,DOC-0059,done,matched
+navy,pub_002975,"Data Validation Report, Level S2AVEM, SDG 2A14028",pub_002975.pdf,DOC-0060,done,matched
+navy,pub_002976,"Data Validation Report, Level S2AVEM, SDG 2A14029",pub_002976.pdf,DOC-0061,done,matched
+navy,pub_002977,"Data Validation Report, Level S2AVEM, SDG 2A14031",pub_002977.pdf,DOC-0062,done,matched
+navy,pub_002978,"Data Validation Report, Level S2AVEM, SDG 2A14034",pub_002978.pdf,DOC-0063,done,matched
+navy,pub_002979,"Data Validation Report, Level S2AVEM, SDG 2A18017",pub_002979.pdf,DOC-0064,done,matched
+navy,pub_002980,"Data Validation Report, Level S2AVEM, SDG 580-109324-1",pub_002980.pdf,DOC-0065,done,matched
+navy,pub_002981,"Data Validation Report, Level S2AVEM, SDG 580-109336-1",pub_002981.pdf,DOC-0066,done,matched
+navy,pub_002982,"Data Validation Report, Level S2AVEM, SDG 580-109381-1",pub_002982.pdf,DOC-0067,done,matched
+navy,pub_002983,"Data Validation Report, Level S2AVEM, SDG 810-12077-2",pub_002983.pdf,DOC-0068,done,matched
+navy,pub_002984,"Data Validation Report, Level S2AVEM, SDG 810-12122-1",pub_002984.pdf,DOC-0069,done,matched
+navy,pub_002985,"Data Validation Report, Level S2AVEM, SDG 810-12264-1",pub_002985.pdf,DOC-0070,done,matched
+navy,pub_002986,"Data Validation Report, Level S2AVEM, SDG 810-12365-1",pub_002986.pdf,DOC-0071,done,matched
+navy,pub_002987,"Data Validation Report, Level S2AVEM, SDG 810-12366-1",pub_002987.pdf,DOC-0072,done,matched
+navy,pub_002988,"Data Validation Report, Level S2AVEM, SDG 810-12460-1 (2)",pub_002988.pdf,DOC-0073,done,matched
+navy,pub_002989,"Data Validation Report, Level S2AVEM, SDG 810-12460-1",pub_002989.pdf,DOC-0074,done,matched
+navy,pub_002990,"Data Validation Report, Level S2AVEM, SDG C22A011",pub_002990.pdf,DOC-0075,done,matched
+navy,pub_002991,"Data Validation Report, Level S2AVEM, SDG C22A014",pub_002991.pdf,DOC-0076,done,matched
+navy,pub_002992,"Data Validation Report, Level S2AVEM, SDG C22A016",pub_002992.pdf,DOC-0077,done,matched
+navy,pub_002993,"Data Validation Report, Level S2AVEM, SDG C22A022",pub_002993.pdf,DOC-0078,done,matched
+navy,pub_002994,"Data Validation Report, Level S2AVEM, SDG C22A026",pub_002994.pdf,DOC-0079,done,matched
+navy,pub_002995,"Data Validation Report, Level S2AVEM, SDG C22A036",pub_002995.pdf,DOC-0080,done,matched
+navy,pub_002996,"Data Validation Report, Level S2AVEM, SDG DA40915",pub_002996.pdf,DOC-0081,done,matched
+navy,pub_002997,"Data Validation Report, Level S2AVEM, SDG DA40925",pub_002997.pdf,DOC-0082,done,matched
+navy,pub_002998,"Data Validation Report, Level S2AVEM, SDG DA40928",pub_002998.pdf,DOC-0083,done,matched
+navy,pub_002999,"Data Validation Report, Level S2AVEM, SDG DA40953",pub_002999.pdf,DOC-0084,done,matched
+navy,pub_003000,"Data Validation Report, Level S2AVEM, SDG DA40955",pub_003000.pdf,DOC-0085,done,matched
+navy,pub_003001,"Data Validation Report, Level S2AVEM, SDG DA40988",pub_003001.pdf,DOC-0086,done,matched
+navy,pub_003002,"Data Validation Report, Level S4VEM, SDG 2A14031",pub_003002.pdf,DOC-0087,done,matched
+navy,pub_003003,"Data Validation Report, Level S4VEM, SDG 580-109293-1",pub_003003.pdf,DOC-0088,done,matched
+navy,pub_003004,"Data Validation Report, Level S4VEM, SDG 810-12077-2",pub_003004.pdf,DOC-0089,done,matched
+navy,pub_003005,"Data Validation Report, Level S4VEM, SDG 810-12122-1",pub_003005.pdf,DOC-0090,done,matched
+navy,pub_003006,"Data Validation Report, Level S4VEM, SDG C22A011",pub_003006.pdf,DOC-0091,done,matched
+navy,pub_003007,"Data Validation Report, Level S4VEM, SDG C22A036",pub_003007.pdf,DOC-0092,done,matched
+navy,pub_003008,"Data Validation Report, Level S4VEM, SDG DA40915",pub_003008.pdf,DOC-0093,done,matched
+navy,pub_003009,Zone I1 - Data Review Report - SDG 2A14028,pub_003009.pdf,DOC-0094,done,matched
+navy,pub_003010,Zone I1 - Data Review Report - SDG 2A14029,pub_003010.pdf,DOC-0095,done,matched
+navy,pub_003011,Zone I1 - Data Review Report - SDG 2A14031,pub_003011.pdf,DOC-0096,done,matched
+navy,pub_003012,Zone I1 - Data Review Report - SDG 2A14034,pub_003012.pdf,DOC-0097,done,matched
+navy,pub_003013,Zone I1 - Data Review Report - SDG 2A18017,pub_003013.pdf,DOC-0098,done,matched
+navy,pub_003014,Zone I1 - Data Review Report - SDG 810120772,pub_003014.pdf,DOC-0099,done,matched
+navy,pub_003015,Zone I1 - Data Review Report - SDG 810121221,pub_003015.pdf,DOC-0100,done,matched
+navy,pub_003016,Zone I1 - Data Review Report - SDG 810122641,pub_003016.pdf,DOC-0101,done,matched
+navy,pub_003017,Zone I1 - Data Review Report - SDG 810123651,pub_003017.pdf,DOC-0102,done,matched
+navy,pub_003018,Zone I1 - Data Review Report - SDG 810123661,pub_003018.pdf,DOC-0103,done,matched
+navy,pub_003019,Zone I1 - Data Review Report - SDG 810124601,pub_003019.pdf,DOC-0104,done,matched
+navy,pub_003020,Zone I1 - Data Review Report - SDG 5801092931,pub_003020.pdf,DOC-0105,done,matched
+navy,pub_003021,Zone I1 - Data Review Report - SDG 5801092932,pub_003021.pdf,DOC-0106,done,matched
+navy,pub_003022,Zone I1 - Data Review Report - SDG 5801093241,pub_003022.pdf,DOC-0107,done,matched
+navy,pub_003023,Zone I1 - Data Review Report - SDG 5801093361,pub_003023.pdf,DOC-0108,done,matched
+navy,pub_003024,Zone I1 - Data Review Report - SDG 5801093811,pub_003024.pdf,DOC-0109,done,matched
+navy,pub_003025,Zone I1 - Data Review Report - SDG C22A011,pub_003025.pdf,DOC-0110,done,matched
+navy,pub_003026,Zone I1 - Data Review Report - SDG C22A016,pub_003026.pdf,DOC-0111,done,matched
+navy,pub_003027,Zone I1 - Data Review Report - SDG C22A022,pub_003027.pdf,DOC-0112,done,matched
+navy,pub_003028,Zone I1 - Data Review Report - SDG C22A026,pub_003028.pdf,DOC-0113,done,matched
+navy,pub_003029,Zone I1 - Data Review Report - SDG C22A036,pub_003029.pdf,DOC-0114,done,matched
+navy,pub_003030,Zone I1 - Data Review Report - SDG DA40915,pub_003030.pdf,DOC-0115,done,matched
+navy,pub_003031,Zone I1 - Data Review Report - SDG DA40925,pub_003031.pdf,DOC-0116,done,matched
+navy,pub_003032,Zone I1 - Data Review Report - SDG DA40928,pub_003032.pdf,DOC-0117,done,matched
+navy,pub_003033,Zone I1 - Data Review Report - SDG DA40988,pub_003033.pdf,DOC-0118,done,matched
+doh,pub_006411,981053_20220127-EPA 525.2_ID011522-18-02_I1,pub_006411.pdf,DOC-0119,done,matched
+doh,pub_006412,981587_20220128-EPA 8015_ID011522-18-01_I1,pub_006412.pdf,DOC-0120,done,matched
+doh,pub_006413,981590_20220128-EPA 8015_ID011522-18-02_I1,pub_006413.pdf,DOC-0121,done,matched
+doh,pub_006414,981907_20220202-@8015_C8-C44_ASSETS_ID011822-48-04_I1,pub_006414.pdf,DOC-0122,done,matched
+doh,pub_006415,982107_20220219-EPA 8015_ID011522-23-01_I1,pub_006415.pdf,DOC-0123,done,matched
+doh,pub_006416,982178_20220131-TPH as Gas_ID011522-16-02_I1,pub_006416.pdf,DOC-0124,done,matched
+doh,pub_006417,"Data Tables, Flushing_zone_I1-Validated_SVOCs_for_public",pub_006417.pdf,DOC-0125,done,matched
+doh,pub_006418,"Data Tables, Flushing_zone_I1-Validated_TPH_for_public",pub_006418.pdf,DOC-0126,done,matched
+doh,pub_006419,DVC_Stage 2A_JBPHH_981053_final,pub_006419.pdf,DOC-0127,done,matched
+doh,pub_006420,DVC_Stage 2A_JBPHH_981907_final,pub_006420.pdf,DOC-0128,done,matched
+doh,pub_006421,DVC_Stage 2A_JBPHH_982178_final,pub_006421.pdf,DOC-0129,done,matched
+doh,pub_006422,DVR_981587_20220128_ID011522-18-01_8015B_I1,pub_006422.pdf,DOC-0130,done,matched
+doh,pub_006423,DVR_981590_20220128_ID011522-18-02_8015B_I1,pub_006423.pdf,DOC-0131,done,matched
+doh,pub_006424,DVR_982107_20220219-EPA 8015_ID011522-23-01_I1-final,pub_006424.pdf,DOC-0132,done,matched
