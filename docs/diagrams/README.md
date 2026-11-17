@@ -23,17 +23,17 @@ Every diagram follows these rules, so a reader who has learned one can read the 
 
 | Meaning | Fill | Border |
 | --- | --- | --- |
-| Automatic step | `#e4ece7` | `#1f5c4a` |
-| Step you do by hand | `#f8efe7` | `#8c4a35`, thick (4) |
+| Automated step | `#e4ece7` | `#1f5c4a` |
+| Manual step | `#f8efe7` | `#8c4a35`, thick (4) |
 | Where data comes from or goes | `#e6eef6` | `#2d5b85` |
 | Where data is stored | `#dcd6cc` | `#443f38`, thick (3) |
-| Automatic checks | white | `#625b53`, dashed (3) |
+| Automated checks | white | `#625b53`, dashed (3) |
 | Panel (a column, a group, the legend) | white | `#625b53` |
 | Note | `#eeeae2` | `#625b53` |
 
 The blue and the tan are not in the design system; they are used only in diagrams. Every
 diagram whose colors carry meaning has a legend listing the ones it uses. A screenshot
-walkthrough (`listing-check-by-hand`) uses these colors only to pair each highlight with
+walkthrough (`manual-listing-check`) uses these colors only to pair each highlight with
 its label, so it has no legend.
 
 **Arrows** are `#443f38` and show data moving, or the order of steps in a step-by-step

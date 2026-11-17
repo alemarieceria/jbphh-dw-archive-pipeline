@@ -1,7 +1,7 @@
 # Stepped diagram: the archive pipeline, from the website to the tools that read it.
 # Build it with: uv run archive diagrams build docs/diagrams/specs/archive-pipeline.toml
 #
-# How this file works: see listing-check-by-hand.toml. Each element's `step` is where it first appears.
+# How this file works: see manual-listing-check.toml. Each element's `step` is where it first appears.
 # Colors, sizes and wording follow the style rules in docs/diagrams/README.md.
 
 name = "archive-pipeline"
@@ -150,7 +150,7 @@ step = 1
 type = "text"
 x = 1288
 y = 212
-text = "Automatic step"
+text = "Automated step"
 fontSize = 20
 strokeColor = "#1c1a17"
 
@@ -172,7 +172,7 @@ step = 1
 type = "text"
 x = 1288
 y = 264
-text = "Step you do by hand"
+text = "Manual step"
 fontSize = 20
 strokeColor = "#1c1a17"
 
@@ -238,7 +238,7 @@ step = 1
 type = "text"
 x = 1288
 y = 442
-text = "Automatic checks"
+text = "Automated checks"
 fontSize = 20
 strokeColor = "#1c1a17"
 
@@ -536,7 +536,7 @@ strokeColor = "#2d5b85"
 roughness = 0
 label = { text = "Explorer:\nAddress Lookup,\nGlossary, Directory\n+ Evidence Tracer", fontSize = 20, strokeColor = "#1c1a17" }
 
-# ---- Step 7: automatic checks and status ----
+# ---- Step 7: automated checks and status ----
 
 [[elements]]
 step = 7

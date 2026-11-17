@@ -12,7 +12,7 @@ Writes three files, named after the spec's `name`, into docs/diagrams/'s subfold
     pngs/<name>.png             the finished drawing as an image, for Word and Google Docs
 
 Usage (from the project folder):
-    uv run archive diagrams build docs/diagrams/specs/listing-check-by-hand.toml
+    uv run archive diagrams build docs/diagrams/specs/manual-listing-check.toml
 """
 
 import argparse
