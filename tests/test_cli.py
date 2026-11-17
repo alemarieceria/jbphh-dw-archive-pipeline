@@ -26,6 +26,7 @@ def test_no_step_shows_help(capsys):
     ("argv", "step", "passed_on"),
     [
         (["download", "--dry-run", "--limit", "5"], "download", ["--dry-run", "--limit", "5"]),
+        (["publish", "--dry-run"], "publish", ["--dry-run"]),
         (["diagrams", "png", "--force"], "diagrams png", ["--force"]),
         (["diagrams", "build", "spec.toml"], "diagrams build", ["spec.toml"]),
     ],

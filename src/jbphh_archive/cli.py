@@ -7,12 +7,13 @@ to it. To add a step, add a line to STEPS.
 
 import sys
 
-from jbphh_archive import download
+from jbphh_archive import download, publish
 from jbphh_archive.diagrams import build_stepper, export_pngs
 
 # Step name -> (one-line summary, function that runs the step with the remaining options).
 STEPS = {
     "download": ("Download catalog rows marked to_download into raw/<site>/", download.main),
+    "publish": ("Copy the catalog to the Drive's registry/, where tools read it", publish.main),
     "diagrams png": ("Write a PNG in pngs/ for each SVG in svgs/ (only where the SVG changed)", export_pngs.main),
     "diagrams build": ("Build a stepped (Back / Next) diagram from its spec", build_stepper.main),
 }

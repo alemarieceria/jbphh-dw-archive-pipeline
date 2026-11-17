@@ -43,7 +43,7 @@ Each step gets a section, with a stepped diagram, in `notebooks/workflows.ipynb`
 | 5. Cataloging | Turning found documents into reviewed catalog rows | Partial: I1's 169 rows were built by hand; no script |
 | 6. Collection | Downloading files, capturing web pages, Wayback backups | Partial: downloads automated; page captures and Wayback by hand |
 | 7. Validation | Is the archive complete and unchanged? | Partial: Navy I1 listing checked by hand; no scripts |
-| 8. Storage | What lives where, publishing, backups, permissions | Partial: Drive in use; catalog not yet moved to this repo |
+| 8. Storage | What lives where, publishing, backups, permissions | Partial: the catalog is in this repo (`catalog/documents.csv`); `archive publish` copies it to the Drive's `registry/`; no zone indexes yet |
 | 9. Keeping it current | Documents added to or removed from the website later | Not started |
 | 10. Use | Evidence Tracer, researchers, discrepancy log | Partial: the Tracer reads the catalog; log exists on the Drive |
 | 11. Archiving a zone, start to finish | Every command in order, and the "done" checklist | Not started |

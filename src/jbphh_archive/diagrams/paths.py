@@ -12,10 +12,8 @@ file, so the scripts and the notebooks find files the same way:
 import sys
 from pathlib import Path
 
-# Found from this file's own place (src/jbphh_archive/diagrams/paths.py), so it works from
-# any folder, including notebooks/. This relies on `uv sync` installing the project in
-# editable mode (uv's default), which keeps this file inside the repo's src/.
-REPO_ROOT = Path(__file__).resolve().parents[3]
+from jbphh_archive import REPO_ROOT
+
 DIAGRAMS_FOLDER = REPO_ROOT / "docs" / "diagrams"
 SVG_SUFFIX = ".excalidraw.svg"
 
