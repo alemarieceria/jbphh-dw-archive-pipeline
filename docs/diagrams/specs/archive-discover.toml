@@ -1,0 +1,498 @@
+# Stepped diagram: what `archive discover` reads and writes for one zone.
+# Build it with: uv run archive diagrams build docs/diagrams/specs/archive-discover.toml
+#
+# How this file works: see manual-listing-check.toml. Each element's `step` is where it first appears.
+# Colors, sizes and wording follow the style rules in docs/diagrams/README.md.
+
+name = "archive-discover"
+title = "Discover: propose a zone's catalog rows"
+width = 1600
+height = 820
+
+[[steps]]
+caption = "`archive discover --zone I1` first reads all 20 zone pages on the Safe Waters site: each page's \"Last Updated\" date and every link. That way each document lists every zone that posts it. The 4 EDWM Waiawa Shaft files are on all 20 pages."
+
+[[steps]]
+caption = "On I1's page, each link takes its group, phase, and stage or period from its section and the bold line above it (\"Stage 4\", \"Period 3\", \"Quarter 2\"). The interactive map sits outside the sections, so it is flagged."
+
+[[steps]]
+caption = "Next it reads I1's Navy, DOH and LTM listings, sorted by System Filename, 100 per page. Each result takes its phase and stage from the zone page's link to its listing. New results get `doc_type`, `sdg` and level from their titles."
+
+[[steps]]
+caption = "Each document is compared with `catalog/documents.csv` and marked `matched`, `changed`, `new` or `missing`. The catalog itself is not changed."
+
+[[steps]]
+caption = "It writes the review file, `reports/<date>-discover-I1.csv`: one row per source with its count, then that source's documents. For I1 on 2026-11-17: 132 matched, 179 new `link_only`, 1 flagged (the map)."
+
+[[steps]]
+caption = "You review it: one `decision` per source, and flagged rows one by one. `archive merge` (not built yet) will apply the approved rows."
+
+# ---- Background, title, legend and the zone pages (step 1) ----
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 0
+y = 0
+width = 1600
+height = 820
+backgroundColor = "#fbf8f3"
+fillStyle = "solid"
+strokeColor = "transparent"
+strokeWidth = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 449
+y = 20
+text = "Discover: propose a zone's catalog rows"
+fontSize = 36
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "text"
+x = 523
+y = 72
+text = "What `archive discover --zone I1` reads and writes"
+fontSize = 22
+strokeColor = "#443f38"
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 1220
+y = 140
+width = 360
+height = 400
+roundness = { type = 3 }
+backgroundColor = "#ffffff"
+fillStyle = "solid"
+strokeColor = "#625b53"
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1240
+y = 155
+text = "Legend"
+fontSize = 24
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 1240
+y = 210
+width = 44
+height = 30
+backgroundColor = "#e4ece7"
+fillStyle = "solid"
+strokeColor = "#1f5c4a"
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1298
+y = 212
+text = "Automated step"
+fontSize = 20
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 1240
+y = 262
+width = 44
+height = 30
+backgroundColor = "#f8efe7"
+fillStyle = "solid"
+strokeColor = "#8c4a35"
+strokeWidth = 4
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1298
+y = 264
+text = "Manual step"
+fontSize = 20
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 1240
+y = 314
+width = 44
+height = 30
+backgroundColor = "#e6eef6"
+fillStyle = "solid"
+strokeColor = "#2d5b85"
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1298
+y = 310
+text = "Where data comes\nfrom or goes"
+fontSize = 20
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 1240
+y = 388
+width = 44
+height = 30
+backgroundColor = "#dcd6cc"
+fillStyle = "solid"
+strokeColor = "#443f38"
+strokeWidth = 3
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1298
+y = 390
+text = "Where data is stored"
+fontSize = 20
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 1240
+y = 440
+width = 44
+height = 30
+backgroundColor = "#eeeae2"
+fillStyle = "solid"
+strokeColor = "#625b53"
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1298
+y = 442
+text = "Note"
+fontSize = 20
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "arrow"
+x = 1240
+y = 507
+points = [[0, 0], [44, 0]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1298
+y = 494
+text = "Data moves this way"
+fontSize = 20
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 20
+y = 140
+width = 260
+height = 100
+roundness = { type = 3 }
+backgroundColor = "#e6eef6"
+fillStyle = "solid"
+strokeColor = "#2d5b85"
+roughness = 0
+label = { text = "Safe Waters site:\n20 zone pages", fontSize = 20, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 1
+type = "arrow"
+x = 280
+y = 190
+points = [[0, 0], [60, 0]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 340
+y = 140
+width = 320
+height = 100
+roundness = { type = 3 }
+backgroundColor = "#e4ece7"
+fillStyle = "solid"
+strokeColor = "#1f5c4a"
+roughness = 0
+label = { text = "1. Read all 20\nzone pages: dates\nand every link", fontSize = 20, strokeColor = "#1c1a17" }
+
+# ---- Step 2: propose values from the page ----
+
+[[elements]]
+step = 2
+type = "arrow"
+x = 500
+y = 240
+points = [[0, 0], [0, 35]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 2
+type = "rectangle"
+x = 340
+y = 275
+width = 320
+height = 100
+roundness = { type = 3 }
+backgroundColor = "#e4ece7"
+fillStyle = "solid"
+strokeColor = "#1f5c4a"
+roughness = 0
+label = { text = "2. Propose group,\nphase, stage, period\nfrom the page", fontSize = 20, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 2
+type = "rectangle"
+x = 740
+y = 275
+width = 300
+height = 100
+roundness = { type = 3 }
+backgroundColor = "#eeeae2"
+fillStyle = "solid"
+strokeColor = "#625b53"
+roughness = 0
+label = { text = "Flagged: the\ninteractive map,\noutside the sections", fontSize = 18, strokeColor = "#1c1a17" }
+
+# ---- Step 3: the zone's listings ----
+
+[[elements]]
+step = 3
+type = "rectangle"
+x = 20
+y = 410
+width = 260
+height = 100
+roundness = { type = 3 }
+backgroundColor = "#e6eef6"
+fillStyle = "solid"
+strokeColor = "#2d5b85"
+roughness = 0
+label = { text = "Safe Waters site:\nI1's Navy, DOH\nand LTM listings", fontSize = 20, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 3
+type = "arrow"
+x = 280
+y = 460
+points = [[0, 0], [60, 0]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 3
+type = "arrow"
+x = 500
+y = 375
+points = [[0, 0], [0, 35]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 3
+type = "rectangle"
+x = 340
+y = 410
+width = 320
+height = 100
+roundness = { type = 3 }
+backgroundColor = "#e4ece7"
+fillStyle = "solid"
+strokeColor = "#1f5c4a"
+roughness = 0
+label = { text = "3. Read the Navy,\nDOH and LTM listings;\nvalues from titles", fontSize = 20, strokeColor = "#1c1a17" }
+
+# ---- Step 4: compare with the catalog ----
+
+[[elements]]
+step = 4
+type = "arrow"
+x = 500
+y = 510
+points = [[0, 0], [0, 35]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 4
+type = "rectangle"
+x = 340
+y = 545
+width = 320
+height = 100
+roundness = { type = 3 }
+backgroundColor = "#e4ece7"
+fillStyle = "solid"
+strokeColor = "#1f5c4a"
+roughness = 0
+label = { text = "4. Compare with the\ncatalog: `matched`, `changed`,\n`new` or `missing`", fontSize = 20, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 4
+type = "rectangle"
+x = 740
+y = 545
+width = 300
+height = 100
+roundness = { type = 3 }
+backgroundColor = "#dcd6cc"
+fillStyle = "solid"
+strokeColor = "#443f38"
+strokeWidth = 3
+roughness = 0
+label = { text = "`catalog/documents.csv`\nread, never changed", fontSize = 20, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 4
+type = "arrow"
+x = 740
+y = 595
+points = [[0, 0], [-80, 0]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+# ---- Step 5: write the review file ----
+
+[[elements]]
+step = 5
+type = "arrow"
+x = 500
+y = 645
+points = [[0, 0], [0, 35]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 5
+type = "rectangle"
+x = 340
+y = 680
+width = 320
+height = 100
+roundness = { type = 3 }
+backgroundColor = "#e4ece7"
+fillStyle = "solid"
+strokeColor = "#1f5c4a"
+roughness = 0
+label = { text = "5. Write the\nreview file", fontSize = 20, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 5
+type = "arrow"
+x = 660
+y = 730
+points = [[0, 0], [80, 0]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 5
+type = "rectangle"
+x = 740
+y = 675
+width = 300
+height = 110
+roundness = { type = 3 }
+backgroundColor = "#dcd6cc"
+fillStyle = "solid"
+strokeColor = "#443f38"
+strokeWidth = 3
+roughness = 0
+label = { text = "`reports/<date>-`\n`discover-I1.csv`\none row per source,\nthen its documents", fontSize = 20, strokeColor = "#1c1a17" }
+
+# ---- Step 6: review, then merge (not built yet) ----
+
+[[elements]]
+step = 6
+type = "arrow"
+x = 1040
+y = 730
+points = [[0, 0], [60, 0]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 6
+type = "rectangle"
+x = 1100
+y = 680
+width = 300
+height = 100
+roundness = { type = 3 }
+backgroundColor = "#f8efe7"
+fillStyle = "solid"
+strokeColor = "#8c4a35"
+strokeWidth = 4
+roughness = 0
+label = { text = "6. You review:\none `decision` per source;\nflagged rows one by one", fontSize = 20, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 6
+type = "arrow"
+x = 1250
+y = 680
+points = [[0, 0], [0, -35]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 6
+type = "text"
+x = 1262
+y = 652
+text = "decisions"
+fontSize = 18
+strokeColor = "#443f38"
+
+[[elements]]
+step = 6
+type = "rectangle"
+x = 1100
+y = 545
+width = 300
+height = 100
+roundness = { type = 3 }
+backgroundColor = "#eeeae2"
+fillStyle = "solid"
+strokeColor = "#625b53"
+roughness = 0
+label = { text = "`archive merge`\n(not built yet)\napplies approved rows", fontSize = 18, strokeColor = "#1c1a17" }
