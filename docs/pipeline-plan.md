@@ -59,8 +59,8 @@ Each step gets a section, with a stepped diagram, in `notebooks/workflows.ipynb`
 
 ### 5–7. Status details
 
-- **Catalog:** 169 rows for I1; 160 collected (148 files downloaded, 12 web pages captured by
-  hand), 9 still to find (7 governing documents, 2 Navy communications).
+- **Catalog:** 169 rows for I1; 160 collected (148 files downloaded, 12 web pages captured
+  manually), 9 still to find (7 governing documents, 2 Navy communications).
 - **Discrepancy log:** 18 findings (FND-0001 to FND-0018); 6 confirmed, 12 to verify.
 - **Page captures** to automate with Playwright: PDF, single-file web page (MHTML) and PNG per page.
   `archive capture` takes over the 12 pages captured manually and records a fingerprint for
