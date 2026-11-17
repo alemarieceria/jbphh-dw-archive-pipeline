@@ -31,6 +31,8 @@ Add `--env-file .env` to any step that uses the Shared Drive. Close `documents.c
 
 ## Checks
 
+GitHub runs these on every push.
+
 ```bash
 uv run pytest
 uv run ruff check .

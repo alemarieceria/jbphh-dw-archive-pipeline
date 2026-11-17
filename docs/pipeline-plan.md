@@ -24,7 +24,7 @@ of the JBPHH drinking water flushing zones, in a way anyone can rerun and check:
 | Discrepancy log | CSV in this repo (`catalog/discrepancies.csv`); teammates submit findings through a Google Form; `archive findings import` turns responses into proposed rows for review | History and review, without teammates needing Git. |
 | Database | None for the archive. The Evidence Tracer gets its own Neon database later and loads the published catalog into it. | The catalog is small and changed by one process; a database would add upkeep without solving a current problem. |
 | Code | One Python package with one command: `uv run archive <step> --zone I1` | Easier to learn than many scripts; `uv run archive --help` lists every step. |
-| Tools | Python + uv, httpx (downloads), Playwright (page captures, diagrams), pytest + ruff, GitHub with automated checks, Excalidraw stepped diagrams | All in use except GitHub Actions (planned). |
+| Tools | Python + uv, httpx (downloads), Playwright (page captures, diagrams), pytest + ruff, GitHub with automated checks, Excalidraw stepped diagrams | All in use. |
 | Wayback backups | Automated: `archive wayback` checks for an existing backup and, if none, saves the page with archive.org's Save Page Now service (free archive.org account; keys in `.env`). Results go in `catalog/wayback.csv`. | Every source page gets an independent public copy without manual work. |
 | Viewing sources | `archive publish` writes `derived/zone-index/<zone>.csv`: every document for a zone, with its link, Wayback link and captures. A notebook only if capture previews are needed. | Opens in Drive or Excel without Python. |
 | Tests | Every step ships with unit tests that run offline on saved pages. Archive checks (`inventory`, `verify`) run against the real Drive and website and write dated reports. A step is done only when both pass. | Accuracy must be provable, not assumed. |
@@ -59,8 +59,8 @@ Each step gets a section, with a stepped diagram, in `notebooks/workflows.ipynb`
 
 ### 5–7. Status details
 
-- **Catalog:** 169 rows for I1; 160 collected (148 files downloaded, 12 web pages captured by
-  hand), 9 still to find (7 governing documents, 2 Navy communications).
+- **Catalog:** 169 rows for I1; 160 collected (148 files downloaded, 12 web pages captured
+  manually), 9 still to find (7 governing documents, 2 Navy communications).
 - **Discrepancy log:** 18 findings (FND-0001 to FND-0018); 6 confirmed, 12 to verify.
 - **Page captures** to automate with Playwright: PDF, single-file web page (MHTML) and PNG per page.
   `archive capture` takes over the 12 pages captured manually and records a fingerprint for
@@ -168,7 +168,7 @@ column; and a stepped diagram in `notebooks/workflows.ipynb`. The other catalog 
 3. **Catalog, scope and inventory for I1** (done except its diagram): `documents.csv` moved
    into `catalog/` and published to the Drive's `registry/`; `catalog/zones.csv`;
    `archive inventory --zone I1` matches all 123 Navy and DOH listing results to the catalog.
-4. **Automated checks** (next): GitHub Actions runs the tests and ruff on every push.
+4. **Automated checks** (done): GitHub Actions runs the tests and ruff on every push.
 5. **Cataloging:** first add the new columns and statuses from "Catalog design" (`idwst`
    goes into the Directory first). Then `archive discover --zone I1` proposes rows,
    including LTM and EDWM documents as `link_only`; it should reproduce I1's existing rows.
