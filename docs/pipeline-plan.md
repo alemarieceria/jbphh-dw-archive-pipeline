@@ -154,21 +154,33 @@ derived/ (including derived/zone-index/)
 
 ## Order of work
 
-1. **Restructure** this repo into `src/jbphh_archive/` with one `archive` command; move
-   `scripts/` code in, with tests proving nothing changed.
-2. **Big picture:** keep `archive-big-picture` and `archive-pipeline` (the step-by-step
-   view). Redraw the big picture as the map of every component once we know whether the
-   results database belongs on it. Add the step outline above to `notebooks/workflows.ipynb`.
-3. **Catalog, scope and discovery for I1:** move `documents.csv` into `catalog/`;
-   `archive download` reads and writes it there, and a first `archive publish` copies it
-   to the Drive's `registry/` (read-only), so the Evidence Tracer keeps working. Then
-   `catalog/zones.csv` and `archive inventory --zone I1` (listings and zone page against
-   the catalog), checked against the known I1 facts. The other catalog files join
-   `catalog/` when the step that uses them is built.
-4. **Cataloging:** `archive discover --zone I1` proposes rows; it should reproduce I1's
-   existing rows.
-5. **Collection:** `archive capture`, then `archive wayback`, then the sources view in
-   `notebooks/zones.ipynb`.
-6. **Validation and storage:** `archive verify`; `archive publish` adds the zone indexes.
-7. **Discrepancy workflow:** the Google Form and `archive findings import`.
-8. **Pilot a second zone**, then the rest.
+Each item is done only when it has: unit tests that run offline; a real-world check with a
+dated report, where one applies; a `catalog/README.md` section for any new catalog file or
+column; and a stepped diagram in `notebooks/workflows.ipynb`. The other catalog files join
+`catalog/` when the step that uses them is built.
+
+1. **Restructure** (done): this repo into `src/jbphh_archive/` with one `archive` command;
+   `scripts/` code moved in, with tests proving nothing changed.
+2. **Big picture** (partial): keep `archive-big-picture` and `archive-pipeline` (the
+   step-by-step view), and the step outline in `notebooks/workflows.ipynb`. Redraw the big
+   picture as the map of every component once we know whether the results database
+   belongs on it.
+3. **Catalog, scope and inventory for I1** (done except its diagram): `documents.csv` moved
+   into `catalog/` and published to the Drive's `registry/`; `catalog/zones.csv`;
+   `archive inventory --zone I1` matches all 123 Navy and DOH listing results to the catalog.
+4. **Automated checks** (next): GitHub Actions runs the tests and ruff on every push.
+5. **Cataloging:** first add the new columns and statuses from "Catalog design" (`idwst`
+   goes into the Directory first). Then `archive discover --zone I1` proposes rows,
+   including LTM and EDWM documents as `link_only`; it should reproduce I1's existing rows.
+   Catalog validation joins the automated checks.
+6. **Collection:** `archive capture`, then `archive wayback` (building on the manual Wayback
+   records in the Drive's `registry/`), then the sources view in `notebooks/zones.ipynb`.
+   Update the Drive's `web-captures/README.txt`.
+7. **Validation and storage:** `archive verify`; `archive publish` adds the zone indexes.
+8. **Team and discrepancy workflow:** add the team to the Shared Drive as Viewers
+   (downloading allowed); the Google Form and `archive findings import`; update the Drive's
+   `START-HERE.md`.
+9. **Pilot a second zone**, writing step 11's start-to-finish checklist along the way; then
+   the remaining zones, following it.
+10. **Keeping it current:** a weekly automated inventory of the live site, as a dated
+    report; a stale `last_seen_utc` shows a document the site removed.
