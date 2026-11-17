@@ -48,6 +48,15 @@ def test_select_rows_skips_done_and_unfound():
     assert [r["doc_id"] for r in select_rows(rows, None, None)] == ["DOC-0001"]
 
 
+def test_select_rows_skips_link_only_and_excluded():
+    rows = [
+        row(doc_id="DOC-0001"),
+        row(doc_id="DOC-0002", status="link_only"),
+        row(doc_id="DOC-0003", status="excluded"),
+    ]
+    assert [r["doc_id"] for r in select_rows(rows, None, None)] == ["DOC-0001"]
+
+
 def test_select_rows_skips_duplicates():
     rows = [row(doc_id="DOC-0001"), row(doc_id="DOC-0002", duplicate_of="DOC-0001")]
     assert [r["doc_id"] for r in select_rows(rows, None, None)] == ["DOC-0001"]
