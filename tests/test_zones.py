@@ -1,6 +1,9 @@
-"""Checks on catalog/zones.csv: the zones match the plan's Scope row, and every link follows the site's pattern."""
+"""Checks on catalog/zones.csv and catalog/communities.csv: the zones match the plan's Scope row, every link
+follows the site's pattern, and every community belongs to its zone."""
 
-from jbphh_archive.catalog import ZONES_FILE, read_rows
+from datetime import date
+
+from jbphh_archive.catalog import COMMUNITIES_FILE, ZONES_FILE, read_rows
 
 # The plan's Scope row: 19 flushing zones, plus J1 (Manana Housing), which has no emergency response documents.
 FLUSHING_ZONES = [
@@ -51,3 +54,26 @@ def test_links_follow_the_site_pattern():
             assert listings == [LISTING.format(source, zone) for source in ("Navy", "DoH", "LTM")]
         else:
             assert listings == ["", "", ""]
+
+
+def test_page_last_updated_is_a_date():
+    for z in zones():
+        assert date.fromisoformat(z["page_last_updated"]).isoformat() == z["page_last_updated"]
+
+
+def test_every_community_belongs_to_its_zone():
+    names = {z["zone_id"]: z["name"].split(", ") for z in zones()}
+    communities = read_rows(COMMUNITIES_FILE)[1]
+    pairs = [(c["zone_id"], c["community"]) for c in communities]
+    assert len(pairs) == len(set(pairs))
+    assert {zone for zone, _ in pairs} == set(names)
+    for zone, community in pairs:
+        assert community in names[zone]
+
+
+def test_homes_is_a_whole_number_or_blank_with_a_note():
+    for c in read_rows(COMMUNITIES_FILE)[1]:
+        if c["homes"]:
+            assert c["homes"].isdigit()
+        else:
+            assert c["notes"] == "No home count on the zone page."

@@ -84,8 +84,26 @@ zone map or a zone page changes, edit the row and date the change in `notes`.
 | `name` | text | Area names as the site's Water System Zone Map shows them. | Manually |
 | `emergency_response` | `yes` / `no` | Whether the zone has emergency response documents. Only J1 is `no`. | Manually |
 | `zone_page_url` | URL | The zone's page, as linked from the Water System Zone Map. | Manually |
+| `page_last_updated` | date | The zone page's "Last Updated" date, as `YYYY-MM-DD`. | Manually |
 | `navy_listing_url`, `doh_listing_url`, `ltm_listing_url` | URL | The zone's Navy, DOH and LTM library listings. Blank when the zone has none. | Manually |
 | `notes` | text | Known issues, with the date they were checked. Blank means no known issues. | Manually |
+
+## communities.csv
+
+One row per community in a zone, as the zone page lists it under "Communities". A community in
+several zones (such as Aliamanu Military Reservation) has one row per zone. The ID columns are
+`zone_id` and `community` together. Copied from the 20 live zone pages on 2026-11-17 by a
+one-time script; no `archive` command writes it yet.
+
+**Who writes it:** people, manually. **Updates:** when a zone page's communities or counts
+change, edit its rows and that zone's `page_last_updated` in `zones.csv`.
+
+| Column | Format | Description | Filled by |
+|---|---|---|---|
+| `zone_id` | `I1` | The zone, from `zones.csv`. | Manually |
+| `community` | text | Community name as the zone page writes it. Each name is also in that zone's `name` in `zones.csv`. | Manually |
+| `homes` | whole number | Homes the zone page gives for this community; the count sits next to its community's name. Blank when the page gives no count (never `0`). | Manually |
+| `notes` | text | Known issues. "No home count on the zone page." when `homes` is blank. | Manually |
 
 The other registry tables (`wayback_captures.csv`, `wayback_page_history.csv`) stay in the
 Drive's `registry/` until `archive wayback` is built, and are described in its `README.md`.
