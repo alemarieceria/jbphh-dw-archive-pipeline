@@ -57,6 +57,35 @@ Each step gets a section, with a stepped diagram, in `notebooks/workflows.ipynb`
 - **Shared documents** are archived once and list every zone they belong to.
 - **Known facts (2026-11-17, from `archive inventory --zone I1`):** the Navy I1 listing shows 109 documents and the DoH I1 listing 14. All 123 library IDs match `done` catalog rows, one by one. Each result's library ID is in its link (`aFile2925` = `pub_002925.pdf`).
 
+**`archive discover --zone <zone>` (designed 2026-11-17)**
+- **Reads:** all 20 zone pages, so each document lists every zone that posts it; then every
+  section of the chosen zone's page, and its Navy, DOH and LTM listings. A listing link is
+  matched by its `subcategory`, because the zone page wraps listing links in a frame link.
+  The EDWM listing covers all zones, so a later all-zone pass reads it. Cited documents and
+  files on other sites stay manual (`found_via` = `cited` or `other_site`).
+- **Proposes values** from the section and link text: "Immediate", "Stage 2" and "Stage 4"
+  are emergency response; "Stage 5" and "Period 1" to "Period 7" are LTM (`ltm_p1` to
+  `ltm_p7`); "Quarter 1" to "Quarter 4" are EDWM (`edwm_q1` to `edwm_q4`). A file posted on
+  several zone pages gets one row listing every zone that posts it.
+- **Writes only a review file,** `reports/<UTC date>-discover-<zone>.csv`, never the catalog.
+  Each document is `matched`, `new`, `changed` or `missing`. Each listing has one summary row
+  whose `decision` covers all its rows; flagged rows get their own `decision`. Links outside
+  the page's sections (such as the interactive map) are flagged.
+- **Existing rows:** the first run fills `found_via`, `found_on` and `first_seen_utc` once for
+  each row it matches. After that, only `last_seen_utc` changes.
+- **`archive merge`** applies the approved decisions: a dry run first, then `--apply`. It
+  assigns `doc_id`s, and it refuses to run if the catalog changed since the review file was
+  made.
+- **New `group` values**, added to `catalog/README.md` with the first rows that use them:
+  `zone_page_ltm` and `zone_page_edwm` (links in those sections of a zone page, including its
+  listing link), `zone_page_pem`, `ltm_lab_collection` (LTM listing results) and
+  `source_water` (Waiawa Shaft files, posted on every zone page). `edwm_lab_collection`
+  joins with the all-zone pass.
+- **I1 check (counted 2026-11-17):** 132 rows matched (9 from the zone page, 109 Navy, 14
+  DOH); 37 expected gaps (cited documents and other sites); 179 new `link_only` proposals
+  (14 LTM, 5 EDWM and 5 Waiawa Shaft links on the zone page, and 155 LTM listing results).
+  Each run recounts from the live site.
+
 ### 5–7. Status details
 
 - **Catalog:** 169 rows for I1; 160 collected (148 files downloaded, 12 web pages captured
