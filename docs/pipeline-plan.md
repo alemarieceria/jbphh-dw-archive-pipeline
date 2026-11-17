@@ -168,8 +168,8 @@ fingerprint checks run locally against the Drive.
 
 ```
 jbphh-dw-archive-pipeline/
-├── catalog/            master records: documents, document_links, timeline, zones, wayback,
-│                       discrepancies (+ README)
+├── catalog/            master records: documents, document_links, timeline, zones, communities,
+│                       wayback, discrepancies (+ README)
 ├── reports/            dated inventory and verify reports
 ├── src/jbphh_archive/  cli, config, catalog, discover, inventory, download, capture,
 │                       wayback, verify, publish, findings, diagrams/
