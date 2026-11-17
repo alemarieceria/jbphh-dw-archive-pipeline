@@ -1,4 +1,4 @@
-"""Tests for the download stage. They use a fake web server, so no network is needed."""
+"""Tests for the download step. They use a fake web server, so no network is needed."""
 
 import hashlib
 
