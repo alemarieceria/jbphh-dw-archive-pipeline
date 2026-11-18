@@ -3,7 +3,7 @@
 The one place to see what this pipeline is for, how it is organized, and what is done.
 Written by A. Ceria. Update a stage's **Status** line whenever its work changes.
 
-Last updated: 2026-11-17.
+Last updated: 2026-11-18.
 
 ## Goal
 
@@ -50,7 +50,7 @@ Each step gets a section, with a stepped diagram, in `notebooks/workflows.ipynb`
 
 ### 4. Discovery
 
-- **Sources:** every section of each zone page (emergency response, LTM, EDWM, PEM), the Navy and DoH library listings (`.../searchresults.aspx?dsn=pub&category=JBPHH&subcategory=<Navy or DoH>%20Flushing%20Zone%20<zone>`), the LTM and EDWM libraries, and files linked from other sites.
+- **Sources:** every section of each zone page (emergency response, LTM, EDWM, PEM), the Navy and DoH library listings (`.../searchresults.aspx?dsn=pub&category=JBPHH&subcategory=<Navy or DoH>%20Flushing%20Zone%20<zone>`), the LTM and EDWM libraries, the Document Library page and its 2022 Public Notices page, and files linked from other sites.
 - **Listings:** sort by System Filename and show 100 per page. The default sort skips and repeats files between pages. Plain HTTP works; no browser needed.
 - **Cited documents** (plans, DOH directives) are found by reading other documents. Each catalog row records where it was found, so it can be checked even though it cannot be counted.
 - **Phase rule:** phase comes from the document's stage label (Immediate, Stage 2 and Stage 4 are emergency response). The Nov 20, 2021 – Mar 31, 2022 window only flags mismatches. Event dates, such as each zone's amendment date, go in `catalog/timeline.csv`, not `zones.csv`.
@@ -61,8 +61,10 @@ Each step gets a section, with a stepped diagram, in `notebooks/workflows.ipynb`
 - **Reads:** all 20 zone pages, so each document lists every zone that posts it; then every
   section of the chosen zone's page, and its Navy, DOH and LTM listings. A listing link is
   matched by its `subcategory`, because the zone page wraps listing links in a frame link.
-  The EDWM listing covers all zones, so a later all-zone pass reads it. Cited documents and
-  files on other sites stay manual (`found_via` = `cited` or `other_site`).
+  The EDWM listing and the Document Library cover all zones, so a later all-zone pass reads
+  them. The Document Library's Aiea-Halawa Shaft items get `status` `excluded`, because
+  they're about a different water source. Cited documents and files on other sites stay
+  manual (`found_via` = `cited` or `other_site`).
 - **Proposes values** from the section and link text: "Immediate", "Stage 2" and "Stage 4"
   are emergency response; "Stage 5" and "Period 1" to "Period 7" are LTM (`ltm_p1` to
   `ltm_p7`); "Quarter 1" to "Quarter 4" are EDWM (`edwm_q1` to `edwm_q4`). A file posted on
@@ -116,8 +118,12 @@ zone should need no Tracer code changes.
 ## Catalog design (decided 2026-11-10)
 
 **Vocabulary.** One value per idea, whatever the source calls it:
-- `phase`: emergency_response, ltm, edwm, post_edwm
-- `stage` (emergency response only): immediate, stage_1 to stage_4
+- `phase`: emergency_response, ltm, edwm, post_edwm; `monitoring` for an item that covers
+  more than one monitoring phase (such as the Drinking Water Monitoring Dashboard)
+- `stage` (emergency response only): immediate, stage_1 to stage_4. The Drinking Water
+  Sampling Plan (Addendum 3) calls these "Steps": Step 1 to Step 4 are stage_1 to stage_4,
+  and Steps 2a to 2d are all stage_2. Its Step 0 (shaft samples) has no stage, and Step 5 is
+  the ltm phase.
 - `period` (monitoring only): ltm_p1 to ltm_p7, edwm_q1 to edwm_q4, pem
 Values come from the site's link text and section, then the file name, then the
 document's title page. Disagreements are flagged, never picked silently. The Recovery
