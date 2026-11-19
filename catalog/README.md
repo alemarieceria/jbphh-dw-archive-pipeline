@@ -8,7 +8,8 @@ This folder is the only place catalog rows are edited. `uv run --env-file .env a
 copies them to the Drive's `registry/`, where tools such as the Evidence Tracer read them.
 Never edit the Drive's copy; the next publish replaces it.
 
-Scope so far: Zone I1 (Red Hill Housing) emergency response, Nov 2021 to Mar 2022.
+Scope so far: Zone I1 (Red Hill Housing): its emergency response documents (Nov 2021 to Mar
+2022), and its LTM and EDWM documents as `link_only`.
 
 ## Conventions
 
@@ -25,13 +26,15 @@ Scope so far: Zone I1 (Red Hill Housing) emergency response, Nov 2021 to Mar 202
 One row per file or web page in scope. The ID column is `doc_id`.
 
 **Source:** built by A. Ceria for Zone I1, manually, from I1's zone page, the Navy and DOH I1
-library listings, and documents cited by other documents. Files downloaded 2026-10-31.
+library listings, and documents cited by other documents. DOC-0170 to DOC-0349 (I1's LTM and
+EDWM documents and the monitoring dashboard, all `link_only`) were added by `archive merge`
+from `reports/2026-11-19-discover-I1.csv`. Files downloaded 2026-10-31.
 Checked 2026-11-17: `archive inventory --zone I1` matched all 123 library rows to the live
 listings (`reports/2026-11-17-inventory-I1.csv`).
 
 **Who writes it:** people, and `archive download` (retrieval columns). `archive discover`
-proposes new rows in a review file in `reports/`. `archive merge` (not built yet) will apply
-the approved ones.
+proposes new rows in a review file in `reports/`. `archive merge` writes the ones you
+accept.
 
 **Updates:** rows are never deleted and a `doc_id` is never reused. After a change, commit the
 file and run `archive publish`.
@@ -39,7 +42,7 @@ file and run `archive publish`.
 | Column | Format | Description | Filled by |
 |---|---|---|---|
 | `doc_id` | `DOC-0001` | Stable ID. Never reuse or renumber, even if a row is dropped. | Manually, on approval |
-| `group` | vocabulary | Where the item came from or what role it plays: `zone_page_er`, `navy_lab_collection`, `doh_lab_collection`, `governing`, `doh_decision`, `public_communication`, `web_page`. | Manually (proposed by `archive discover`) |
+| `group` | vocabulary | Where the item came from or what role it plays: `zone_page_er`, `navy_lab_collection`, `doh_lab_collection`, `governing`, `doh_decision`, `public_communication`, `web_page`; `zone_page_ltm` and `zone_page_edwm` (links in a zone page's LTM or EDWM section, including its listing link), `ltm_lab_collection` (LTM listing results), `source_water` (Waiawa Shaft files, posted on every zone page). | Manually (proposed by `archive discover`) |
 | `title_as_posted` | text | Title exactly as the source shows it. | Manually (proposed by `archive discover`) |
 | `source_url` | URL | Where to get it. Blank if not found yet. | Manually (proposed by `archive discover`) |
 | `original_filename` | text | Filename on the source, when known before download. Library files are `pub_00NNNN.pdf`. | Manually (proposed by `archive discover`), or `archive download` when blank |
@@ -49,7 +52,7 @@ file and run `archive publish`.
 | `doc_type` | vocabulary | `lab_report`, `lab_report_bundle`, `data_validation_report`, `data_validation_checklist`, `data_review_report`, `data_table`, `summary_report`, `results_crosstab`, `removal_action_report`, `plan`, `plan_addendum`, `plan_and_results`, `sop`, `guidance`, `technical_memo`, `regulatory_directive`, `regulatory_advisory`, `regulatory_memo`, `press_release`, `fact_sheet`, `map`, `graphic`, `transcript`, `library_listing`, `web_page`. | Manually (proposed by `archive discover`) |
 | `date_as_listed` | date | Date shown in the title or listing. **Not** necessarily when it was posted or created. | Manually (proposed by `archive discover`) |
 | `zones` | list | Flushing zones the document covers, separated by `; ` (for example `I1` or `I1; D1`). `all` for system-wide documents such as plans and directives. | Manually (proposed by `archive discover`) |
-| `phase` | vocabulary | Response phase the document belongs to. So far always `emergency_response` (Nov 2021 to Mar 2022). | Manually (proposed by `archive discover`) |
+| `phase` | vocabulary | Which part of the response the document belongs to: `emergency_response` (the emergency response, Nov 2021 to Mar 2022), `ltm` (Long Term Monitoring), `edwm` (Extended Drinking Water Monitoring), `post_edwm` (monitoring after EDWM; the site calls it "Post-EDWM", or PEM), or `monitoring` (covers more than one of the 3 monitoring phases, such as the Drinking Water Monitoring Dashboard). | Manually (proposed by `archive discover`) |
 | `stage` | list | Emergency response stage, from the vocabulary: `immediate`, `stage_1` to `stage_4`, separated by `; `. Blank for monitoring documents, or not set yet. | Manually (proposed by `archive discover`) |
 | `period` | vocabulary | Monitoring period: `ltm_p1` to `ltm_p7`, `edwm_q1` to `edwm_q4`, `pem`. Blank for emergency response documents, or not set yet. | Manually (proposed by `archive discover`) |
 | `size_listed` | text | File size as the library lists it. | Manually (proposed by `archive discover`) |
@@ -64,10 +67,10 @@ file and run `archive publish`.
 | `sha256` | text | File hash, recorded at download. Proves the archived file hasn't changed. Blank if not downloaded yet, or for a manually captured web page (no fingerprint yet). | `archive download` |
 | `local_path` | text | Path inside the Shared Drive, for example `raw/jbphh-safewaters/pub_002925.pdf`. When one item has several files (a web page saved as PDF and HTML, or a listing split across pages), paths are separated by `; `. Blank if not collected yet. | `archive download`; manually for the 12 manually captured web pages |
 | `notes` | text | Known issues, context, and anything still to verify. | Manually |
-| `found_via` | vocabulary | How the document was found: `zone_page`, `navy_listing`, `doh_listing`, `ltm_listing`, `edwm_listing`, `cited`, `other_site`. Blank for rows built before `archive discover`. | `archive discover`; manually for `cited` |
-| `found_on` | URL or doc_id | The page where it was found, or for `cited`, the `doc_id` of the document that cites it. Blank for rows built before `archive discover`. | `archive discover`; manually for `cited` |
-| `first_seen_utc` | datetime | When `archive discover` first saw it on the source. Blank if never seen by `archive discover`. | `archive discover` |
-| `last_seen_utc` | datetime | The last time `archive discover` saw it on the source. If this stops updating, the site removed the document. Blank if never seen by `archive discover`. | `archive discover` |
+| `found_via` | vocabulary | How the document was found: `zone_page`, `navy_listing`, `doh_listing`, `ltm_listing`, `edwm_listing`, `cited`, `other_site`. Blank for rows built before `archive discover`. | `archive discover`, written by `archive merge`; manually for `cited` |
+| `found_on` | URL or doc_id | The page where it was found, or for `cited`, the `doc_id` of the document that cites it. Blank for rows built before `archive discover`. | `archive discover`, written by `archive merge`; manually for `cited` |
+| `first_seen_utc` | datetime | When `archive discover` first saw it on the source. Blank if never seen by `archive discover`. | `archive discover`, written by `archive merge` |
+| `last_seen_utc` | datetime | The last time `archive discover` saw it on the source. If this stops updating, the site removed the document. Blank if never seen by `archive discover`. | `archive discover`, written by `archive merge` |
 
 ## zones.csv
 

@@ -1,6 +1,8 @@
 """Tests for the discover step. The 20 zone pages and the I1 LTM listing were saved from the live
 site on 2026-11-17 (tests/fixtures/discover/); the Navy and DOH listings are the inventory step's
-saved pages (tests/fixtures/inventory/). No network is needed."""
+saved pages (tests/fixtures/inventory/). The catalog is catalog/documents.csv as it was on 2026-11-17
+(tests/fixtures/catalog/), before `archive merge` added rows, so the counts stay those the saved pages
+were checked against. No network is needed."""
 
 import csv
 import hashlib
@@ -12,7 +14,7 @@ import httpx
 import pytest
 
 from jbphh_archive import discover, inventory
-from jbphh_archive.catalog import CATALOG_FILE, ZONES_FILE, read_rows
+from jbphh_archive.catalog import ZONES_FILE, read_rows
 from jbphh_archive.discover import (
     ZonePageError,
     agree,
@@ -31,6 +33,7 @@ from jbphh_archive.discover import (
 from jbphh_archive.inventory import Result
 
 FIXTURES = Path(__file__).parent / "fixtures"
+CATALOG_FILE = FIXTURES / "catalog" / "documents-2026-11-17.csv"
 ZONES = read_rows(ZONES_FILE)[1]
 ZONE_IDS = [z["zone_id"] for z in ZONES]
 WAIAWA_EDWM = "https://jbphh-safewaters.org/public/EDWM_Q{}_Sampling_Results_Waiawa_Shaft_24JUL2025.pdf"
@@ -296,6 +299,7 @@ class FakeSite:
 def run(monkeypatch, tmp_path, zone: str) -> tuple[int, list[dict[str, str]]]:
     monkeypatch.setattr(discover, "make_client", lambda: httpx.Client(transport=httpx.MockTransport(FakeSite())))
     monkeypatch.setattr(discover, "REPORTS_FOLDER", tmp_path)
+    monkeypatch.setattr(discover, "CATALOG_FILE", CATALOG_FILE)
     monkeypatch.setattr(inventory, "DELAY_SECONDS", 0)
     code = discover.main(["--zone", zone])
     (report,) = tmp_path.glob(f"*-discover-{zone}.csv")
@@ -342,6 +346,45 @@ def test_existing_rows_get_their_discovery_bookkeeping_once(monkeypatch, tmp_pat
         navy["last_seen_utc"],
     )
     assert navy["group"] == navy["doc_type"] == ""  # an existing row's values stay the catalog's
+
+
+def test_existing_rows_get_a_proposed_stage_where_the_catalog_has_none(monkeypatch, tmp_path):
+    """129 of I1's 169 rows: 6 zone page links name their stage, and the 123 Navy and DOH results take
+    stage_4 from the zone page's links to their listings."""
+    _, report = run(monkeypatch, tmp_path, "I1")
+    existing = [r for r in report if r["row_type"] == "document" and r["doc_id"]]
+    assert Counter(r["stage"] for r in existing) == {"stage_4": 126, "stage_2": 2, "immediate": 1, "": 3}
+    assert {r["doc_id"]: r["stage"] for r in existing if r["source"] == "zone_page"} == {
+        "DOC-0001": "immediate",
+        "DOC-0002": "stage_2",
+        "DOC-0003": "stage_2",
+        "DOC-0004": "stage_4",
+        "DOC-0005": "",
+        "DOC-0006": "stage_4",
+        "DOC-0007": "stage_4",
+        "DOC-0008": "",
+        "DOC-0009": "",
+    }
+
+
+def test_a_catalog_stage_is_kept():
+    zone = next(z for z in ZONES if z["zone_id"] == "I1")
+    rows = [r | {"stage": "stage_2"} if r["doc_id"] == "DOC-0004" else r for r in read_rows(CATALOG_FILE)[1]]
+    report = discover.build_report(zone, ZONES, rows, [page(z) for z in ZONE_IDS], {}, "now", "")
+    (doc_0004,) = [r for r in report if r["doc_id"] == "DOC-0004"]
+    assert (doc_0004["result"], doc_0004["stage"], doc_0004["flag"]) == ("matched", "", "")
+
+
+def test_a_stage_disagreement_on_an_existing_row_is_flagged():
+    zone = next(z for z in ZONES if z["zone_id"] == "I1")
+    i1 = page("I1")
+    for link in i1.links:
+        if "Immediate_Drinking_Water" in link.url:  # DOC-0001
+            link.part = "Stage 2 Sampling"
+    pages = [i1 if z == "I1" else page(z) for z in ZONE_IDS]
+    report = discover.build_report(zone, ZONES, read_rows(CATALOG_FILE)[1], pages, {}, "now", "")
+    (doc_0001,) = [r for r in report if r["doc_id"] == "DOC-0001"]
+    assert (doc_0001["stage"], doc_0001["flag"]) == ("", "stage: link text says immediate, bold line says stage_2")
 
 
 def test_new_ltm_results_get_every_proposed_value(monkeypatch, tmp_path):

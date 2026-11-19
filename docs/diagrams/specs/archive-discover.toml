@@ -25,7 +25,7 @@ caption = "Each document is compared with `catalog/documents.csv` and marked `ma
 caption = "It writes the review file, `reports/<date>-discover-I1.csv`: one row per source with its count, then that source's documents. For I1 on 2026-11-17: 132 matched, 179 new `link_only`, 1 flagged (the map)."
 
 [[steps]]
-caption = "You review it: one `decision` per source, and flagged rows one by one. `archive merge` (not built yet) will apply the approved rows."
+caption = "You review it: one `decision` per source, and flagged rows one by one. `archive merge` applies the accepted rows (its diagram is under 5. Cataloging)."
 
 # ---- Background, title, legend and the zone pages (step 1) ----
 
@@ -437,7 +437,7 @@ strokeWidth = 3
 roughness = 0
 label = { text = "`reports/<date>-`\n`discover-I1.csv`\none row per source,\nthen its documents", fontSize = 20, strokeColor = "#1c1a17" }
 
-# ---- Step 6: review, then merge (not built yet) ----
+# ---- Step 6: review, then merge ----
 
 [[elements]]
 step = 6
@@ -491,8 +491,8 @@ y = 545
 width = 300
 height = 100
 roundness = { type = 3 }
-backgroundColor = "#eeeae2"
+backgroundColor = "#e4ece7"
 fillStyle = "solid"
-strokeColor = "#625b53"
+strokeColor = "#1f5c4a"
 roughness = 0
-label = { text = "`archive merge`\n(not built yet)\napplies approved rows", fontSize = 18, strokeColor = "#1c1a17" }
+label = { text = "`archive merge`\napplies approved rows", fontSize = 20, strokeColor = "#1c1a17" }
