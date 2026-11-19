@@ -21,6 +21,7 @@ ZONES = read_rows(ZONES_FILE)[1]
 COLUMNS = read_rows(CATALOG_FILE)[0]
 NOW = "2026-11-19T00:00:00Z"
 MAP = "View Interactive Results Map"
+WAIAWA_PFAS = "Waiawa Shaft PFAS Results (April 2023)"
 
 
 @pytest.fixture
@@ -54,6 +55,8 @@ def i1_review(catalog_path: Path, decision: str = "accept") -> list[dict[str, st
     for r in report:
         if r["row_type"] == "source" and r["result"] == "read":
             r["decision"] = decision
+        if r["link_text"] == WAIAWA_PFAS:
+            r["doc_type"] = "results_crosstab"  # discover can't tell its type; a reviewer fills it in
     return report
 
 
@@ -146,6 +149,23 @@ def test_an_accepted_new_row_needs_a_group_and_status(catalog_file, tmp_path):
     map_row["decision"] = "accept"
     with pytest.raises(SystemExit, match=f"new row '{MAP}' has no group or status"):
         merge.main([str(save(tmp_path, report)), "--apply"])
+
+
+def test_a_new_row_that_breaks_a_catalog_rule_stops_the_merge(catalog_file, tmp_path):
+    report = i1_review(catalog_file)
+    (pfas,) = [r for r in report if r["link_text"] == WAIAWA_PFAS]
+    pfas["doc_type"] = ""
+    with pytest.raises(SystemExit, match=r"would break the catalog's rules[\s\S]*doc_type: is blank"):
+        merge.main([str(save(tmp_path, report)), "--apply"])
+    assert catalog_file.read_bytes() == CATALOG_FILE.read_bytes()
+
+
+def test_a_date_rewritten_by_excel_stops_the_merge(catalog_file, tmp_path):
+    report = i1_review(catalog_file)
+    (pfas,) = [r for r in report if r["link_text"] == WAIAWA_PFAS]
+    pfas["date_as_listed"] = "4/1/2023"
+    with pytest.raises(SystemExit, match="date_as_listed: '4/1/2023' is not YYYY-MM-DD or YYYY-MM"):
+        merge.main([str(save(tmp_path, report))])
 
 
 def test_blank_and_reject_decisions_change_nothing(catalog_file, tmp_path, capsys):

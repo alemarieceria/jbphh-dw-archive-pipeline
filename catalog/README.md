@@ -8,6 +8,9 @@ This folder is the only place catalog rows are edited. `uv run --env-file .env a
 copies them to the Drive's `registry/`, where tools such as the Evidence Tracer read them.
 Never edit the Drive's copy; the next publish replaces it.
 
+`uv run archive validate` checks these files against the rules below. GitHub runs it on every
+push, so a file that breaks a rule fails the checks.
+
 Scope so far: Zone I1 (Red Hill Housing): its emergency response documents (Nov 2021 to Mar
 2022), and its LTM and EDWM documents as `link_only`.
 

@@ -9,6 +9,7 @@ jobs:
         with:
           enable-cache: true
       - run: uv sync --locked
+      - run: uv run archive validate
       - run: uv run pytest
       - run: uv run ruff check .
       - run: uv run ruff format --check .
