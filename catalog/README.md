@@ -8,7 +8,8 @@ This folder is the only place catalog rows are edited. `uv run --env-file .env a
 copies them to the Drive's `registry/`, where tools such as the Evidence Tracer read them.
 Never edit the Drive's copy; the next publish replaces it.
 
-Scope so far: Zone I1 (Red Hill Housing) emergency response, Nov 2021 to Mar 2022.
+Scope so far: Zone I1 (Red Hill Housing): its emergency response documents (Nov 2021 to Mar
+2022), and its LTM and EDWM documents as `link_only`.
 
 ## Conventions
 
@@ -25,7 +26,9 @@ Scope so far: Zone I1 (Red Hill Housing) emergency response, Nov 2021 to Mar 202
 One row per file or web page in scope. The ID column is `doc_id`.
 
 **Source:** built by A. Ceria for Zone I1, manually, from I1's zone page, the Navy and DOH I1
-library listings, and documents cited by other documents. Files downloaded 2026-10-31.
+library listings, and documents cited by other documents. DOC-0170 to DOC-0349 (I1's LTM and
+EDWM documents and the monitoring dashboard, all `link_only`) were added by `archive merge`
+from `reports/2026-11-19-discover-I1.csv`. Files downloaded 2026-10-31.
 Checked 2026-11-17: `archive inventory --zone I1` matched all 123 library rows to the live
 listings (`reports/2026-11-17-inventory-I1.csv`).
 
