@@ -56,7 +56,7 @@ they're blank and updates `last_seen_utc`. What `archive merge` does with a `cha
 | `section` | The bold line on the zone page above the link ("Quarter 2 - Samples Collected …"). Blank for listing results. |
 | `link_text` | The link or listing result text, as the site shows it. |
 | `doc_id` | The catalog row, for `matched`, `changed` and `missing` rows. Blank for `new` rows; `archive merge` assigns one. |
-| `group` to `period`, `status` | Proposed values, with the same names and vocabulary as `catalog/documents.csv` (see `catalog/README.md`). A `new` row gets every value discover can propose. An existing row shows only what the site shows (`title_as_posted`, `source_url`, `original_filename`, `library_id`, `date_as_listed`, `size_listed`, `zones`); its other values stay the catalog's. |
+| `group` to `period`, `status` | Proposed values, with the same names and vocabulary as `catalog/documents.csv` (see `catalog/README.md`). A `new` row gets every value discover can propose. An existing row shows what the site shows (`title_as_posted`, `source_url`, `original_filename`, `library_id`, `date_as_listed`, `size_listed`, `zones`) and, where the catalog's `stage` is blank, the proposed `stage`. Its other values stay the catalog's. |
 | `found_via`, `found_on`, `first_seen_utc`, `last_seen_utc` | The discovery columns, as `catalog/README.md` describes them. An existing row keeps the catalog's value where it has one. |
 | `page_last_updated` | Zone page rows only: the page's "Last Updated", as `YYYY-MM-DD`. |
 | `catalog_sha256` | Run row only: the fingerprint of `catalog/documents.csv` when the file was made. |

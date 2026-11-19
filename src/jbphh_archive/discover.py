@@ -93,7 +93,8 @@ REPORT_COLUMNS = [
     "page_last_updated",  # zone_page rows: the page's "Last Updated"
     "catalog_sha256",  # run row: the catalog's fingerprint when the review file was made
 ]
-# Values the site shows. On an existing row, only these are reported, and a difference from the catalog is flagged.
+# Values the site shows. On an existing row, these are reported (plus a proposed stage where the catalog's is
+# blank), and a difference from the catalog is flagged.
 SITE_FACTS = ("title_as_posted", "source_url", "original_filename", "library_id", "date_as_listed", "size_listed")
 COMPARED = ("title_as_posted", "original_filename", "date_as_listed", "size_listed")
 
@@ -392,8 +393,9 @@ def differences(proposed: Row, row: Row) -> list[str]:
 
 
 def document_row(source: str, found_on: str, now: str, proposed: Row, flags: list[str], row: Row | None) -> Row:
-    """One document row of the review file. An existing row reports only the site's values and the
-    discovery bookkeeping (filled once); a new row reports every proposed value."""
+    """One document row of the review file. An existing row reports the site's values, the discovery
+    bookkeeping (filled once) and, where the catalog's `stage` is blank, the proposed stage; a new row
+    reports every proposed value."""
     out = dict.fromkeys(REPORT_COLUMNS, "") | {"row_type": "document", "source": source}
     if row is None:
         out |= proposed | {"result": "new", "found_via": source, "found_on": found_on, "first_seen_utc": now}
@@ -407,7 +409,12 @@ def document_row(source: str, found_on: str, now: str, proposed: Row, flags: lis
             "found_on": row["found_on"] or found_on,
             "first_seen_utc": row["first_seen_utc"] or now,
         }
-        flags = [f"changed: {'; '.join(changed)}"] if changed else []
+        # A blank catalog stage gets the proposed one, and keeps a stage disagreement flag.
+        stage_flags = []
+        if not row["stage"]:
+            out["stage"] = proposed.get("stage", "")
+            stage_flags = [flag for flag in flags if flag.startswith("stage:")]
+        flags = ([f"changed: {'; '.join(changed)}"] if changed else []) + stage_flags
     return out | {"flag": " | ".join(flags), "last_seen_utc": now}
 
 
