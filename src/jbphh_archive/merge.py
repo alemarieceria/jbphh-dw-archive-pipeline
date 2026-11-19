@@ -34,6 +34,7 @@ from pathlib import Path
 from jbphh_archive import catalog
 from jbphh_archive.catalog import Row, read_rows, values, write_rows
 from jbphh_archive.discover import COMPARED, REPORT_COLUMNS
+from jbphh_archive.validate import document_problems
 
 # The review file's proposed values, which a reviewer may correct before accepting a new row.
 EDITABLE = (
@@ -74,6 +75,12 @@ class Changes:
     accepted: int = 0
     rejected: int = 0
     undecided: list[Row] = field(default_factory=list)
+
+    def touched(self) -> set[str]:
+        """The doc_ids of every row added or changed."""
+        ids = {row["doc_id"] for row in self.added} | set(self.filled) | set(self.seen)
+        ids |= {doc_id for doc_id, _ in self.staged} | {doc_id for doc_id, *_ in self.updated}
+        return ids | {doc_id for doc_id, _ in self.noted_missing}
 
     def any(self) -> bool:
         return bool(self.added or self.filled or self.staged or self.seen or self.updated or self.noted_missing)
@@ -285,6 +292,12 @@ def main(argv: list[str] | None = None) -> int:
     try:
         run = check_review(review, review_columns, catalog_bytes)
         merged, changes = merge(columns, rows, review, zone_of(args.review_file))
+        # Rows added or changed must follow the catalog's rules, so a review file saved by a program
+        # that rewrites values (Excel turns 2022-04-26 into 4/26/2022) can't put them in the catalog.
+        zone_ids = [zone["zone_id"] for zone in read_rows(catalog.ZONES_FILE)[1]]
+        problems = document_problems(merged, zone_ids, only=changes.touched())
+        if problems:
+            raise MergeError("these rows would break the catalog's rules (catalog/README.md):\n" + "\n".join(problems))
     except MergeError as err:
         sys.exit(f"Stopped, nothing written:\n{err}")
 
