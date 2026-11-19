@@ -36,6 +36,7 @@ Add `--env-file .env` to any step that uses the Shared Drive. Close `documents.c
 GitHub runs these on every push.
 
 ```bash
+uv run archive validate
 uv run pytest
 uv run ruff check .
 uv run ruff format --check .

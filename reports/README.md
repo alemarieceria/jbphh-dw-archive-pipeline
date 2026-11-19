@@ -18,9 +18,11 @@ listings, plus one row per catalog row a listing should show but doesn't.
 ## Discover review file: `<UTC date>-discover-<zone>.csv`
 
 Written by `archive discover --zone <zone>`. It proposes catalog rows and never changes the
-catalog. Open it in Google Sheets or Excel to review it. Fill in only `decision`, and correct a
-proposed value if it's wrong. `archive merge` reads only those and refuses to run if the
-catalog changed since the file was made.
+catalog. You can look at it in Google Sheets or Excel, but make your edits in VS Code: a
+spreadsheet program can rewrite dates when it saves (Excel turns `2022-04-26` into
+`4/26/2022`). If that happens, `archive merge` stops and names the rows. Fill in only
+`decision`, and correct a proposed value if it's wrong. `archive merge` reads only those and
+refuses to run if the catalog changed since the file was made.
 
 **Rows**, in this order:
 

@@ -40,9 +40,9 @@ Each step gets a section, with a stepped diagram, in `notebooks/workflows.ipynb`
 | 2. The big picture | How the steps fit together | Partial: `archive-big-picture` maps how the pieces connect today; `archive-pipeline` (planned) shows how the archive will run, step by step. Both stay. The big picture is redrawn as the map of every component once we know whether the results database belongs on it. |
 | 3. Scope | Which zones, which dates, zone versus system-wide documents | Done: decided above; `catalog/zones.csv` lists the 20 zones with their zone page and library listing links |
 | 4. Discovery | Which documents exist for a zone, and how do we know we have them all? | Partial: `archive discover --zone I1` reads the zone pages and I1's Navy, DOH and LTM listings and proposes rows in a review file; `archive inventory --zone I1` checks the Navy and DOH listings (see below). Not yet: the EDWM listing and other zones. |
-| 5. Cataloging | Turning found documents into reviewed catalog rows | Partial: I1's first 169 rows were built manually; `archive merge` added 180 more; `archive discover` proposes rows in a review file and `archive merge` applies the accepted ones. Not yet: catalog validation. |
+| 5. Cataloging | Turning found documents into reviewed catalog rows | Partial: I1's first 169 rows were built manually; `archive merge` added 180 more; `archive discover` proposes rows in a review file and `archive merge` applies the accepted ones. `archive validate` checks the catalog on every push. |
 | 6. Collection | Downloading files, capturing web pages, Wayback backups | Partial: downloads automated; page captures and Wayback done manually |
-| 7. Validation | Is the archive complete and unchanged? | Partial: `archive inventory` checks a zone's Navy and DOH listings against the catalog; no `archive verify` yet |
+| 7. Validation | Is the archive complete and unchanged? | Partial: `archive inventory` checks a zone's Navy and DOH listings against the catalog; `archive validate` checks that the catalog follows its rules; no `archive verify` yet |
 | 8. Storage | What lives where, publishing, backups, permissions | Partial: the catalog is in this repo (`catalog/documents.csv`); `archive publish` copies it to the Drive's `registry/`; no zone indexes yet |
 | 9. Keeping it current | Documents added to or removed from the website later | Not started |
 | 10. Use | Evidence Tracer, researchers, discrepancy log | Partial: the Tracer reads the catalog; log exists on the Drive |
@@ -172,14 +172,15 @@ wording (amended, lifted).
   to_find, unavailable, excluded
 - `doc_id` is assigned on approval and never reused. Rows are never deleted.
 
-Review files are safe to open in Google Sheets or Excel: merge reads only the decision
-and editable columns, and refuses to run if the catalog changed since the proposal.
+Review files can be read in Google Sheets or Excel but are edited only in VS Code, because a
+spreadsheet program can rewrite dates when it saves. Merge reads only the decision and
+editable columns, checks the rows it adds or changes against the catalog rules, and refuses
+to run if the catalog changed since the proposal.
 
 **Not in the catalog:** sample types and methods describe single samples, so they live
 in `derived/`.
 
-**GitHub Actions:** tests and ruff on every push; catalog validation on every catalog
-change; a weekly inventory of the live site as a dated report. Downloads and
+**GitHub Actions:** tests, ruff and `archive validate` on every push; a weekly inventory of the live site as a dated report. Downloads and
 fingerprint checks run locally against the Drive.
 
 ## Target structure
@@ -215,13 +216,14 @@ column; and a stepped diagram in `notebooks/workflows.ipynb`. The other catalog 
 3. **Catalog, scope and inventory for I1** (done): `documents.csv` moved
    into `catalog/` and published to the Drive's `registry/`; `catalog/zones.csv`;
    `archive inventory --zone I1` matches all 123 Navy and DOH listing results to the catalog.
-4. **Automated checks** (done): GitHub Actions runs the tests and ruff on every push.
-5. **Cataloging** (partial): first add the new columns and statuses from "Catalog design"
+4. **Automated checks** (done): GitHub Actions runs the tests, ruff and `archive validate` on every
+   push.
+5. **Cataloging** (done): first add the new columns and statuses from "Catalog design"
    (`idwst` goes into the Directory first). Then `archive discover --zone I1` proposes rows,
    including LTM and EDWM documents as `link_only`; it should reproduce I1's existing rows.
-   Catalog validation joins the automated checks. Done so far: the new columns and
-   statuses, `archive discover --zone I1` and `archive merge`. Next: catalog validation in
-   the automated checks.
+   Catalog validation joins the automated checks. Done: the new columns and statuses,
+   `archive discover --zone I1`, `archive merge`, and `archive validate`, which GitHub runs
+   on every push.
 6. **Collection:** `archive capture`, then `archive wayback` (building on the manual Wayback
    records in the Drive's `registry/`), then the sources view in `notebooks/zones.ipynb`.
    Update the Drive's `web-captures/README.txt`.

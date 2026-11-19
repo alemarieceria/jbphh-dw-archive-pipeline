@@ -1,0 +1,353 @@
+# Stepped diagram: what `archive validate` reads and checks.
+# Build it with: uv run archive diagrams build docs/diagrams/specs/archive-validate.toml
+#
+# How this file works: see manual-listing-check.toml. Each element's `step` is where it first appears.
+# Colors, sizes and wording follow the style rules in docs/diagrams/README.md.
+
+name = "archive-validate"
+title = "Validate: check the catalog follows its rules"
+width = 1600
+height = 700
+
+[[steps]]
+caption = "`archive validate` reads `catalog/documents.csv`, `zones.csv` and `communities.csv`."
+
+[[steps]]
+caption = "It checks each file's columns against `catalog/README.md`, then every row: values in the vocabulary, IDs, dates, UTC times, fingerprints and `; ` lists."
+
+[[steps]]
+caption = "It checks values that must agree: a stage only on emergency response rows, a period that fits the phase, a `done` row with a `local_path`, and a `duplicate_of` that points to a real row."
+
+[[steps]]
+caption = "It prints each problem with its file, line, ID and column, or \"No problems\", and changes nothing. GitHub runs it on every push, so a broken catalog fails the checks."
+
+# ---- Background, title, legend and the catalog files (step 1) ----
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 0
+y = 0
+width = 1600
+height = 700
+backgroundColor = "#fbf8f3"
+fillStyle = "solid"
+strokeColor = "transparent"
+strokeWidth = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 412
+y = 20
+text = "Validate: check the catalog follows its rules"
+fontSize = 36
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "text"
+x = 574
+y = 72
+text = "What `archive validate` reads and checks"
+fontSize = 22
+strokeColor = "#443f38"
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 1220
+y = 140
+width = 360
+height = 330
+roundness = { type = 3 }
+backgroundColor = "#ffffff"
+fillStyle = "solid"
+strokeColor = "#625b53"
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1240
+y = 155
+text = "Legend"
+fontSize = 24
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 1240
+y = 210
+width = 44
+height = 30
+backgroundColor = "#e4ece7"
+fillStyle = "solid"
+strokeColor = "#1f5c4a"
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1298
+y = 212
+text = "Automated step"
+fontSize = 20
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 1240
+y = 262
+width = 44
+height = 30
+backgroundColor = "#dcd6cc"
+fillStyle = "solid"
+strokeColor = "#443f38"
+strokeWidth = 3
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1298
+y = 264
+text = "Where data is stored"
+fontSize = 20
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 1240
+y = 314
+width = 44
+height = 30
+backgroundColor = "#ffffff"
+fillStyle = "solid"
+strokeColor = "#625b53"
+strokeWidth = 3
+strokeStyle = "dashed"
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1298
+y = 316
+text = "Automated checks"
+fontSize = 20
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 1240
+y = 366
+width = 44
+height = 30
+backgroundColor = "#eeeae2"
+fillStyle = "solid"
+strokeColor = "#625b53"
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1298
+y = 368
+text = "Note"
+fontSize = 20
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "arrow"
+x = 1240
+y = 433
+points = [[0, 0], [44, 0]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1298
+y = 420
+text = "Data moves this way"
+fontSize = 20
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 20
+y = 140
+width = 260
+height = 100
+roundness = { type = 3 }
+backgroundColor = "#dcd6cc"
+fillStyle = "solid"
+strokeColor = "#443f38"
+strokeWidth = 3
+roughness = 0
+label = { text = "`catalog/`: documents,\nzones and communities", fontSize = 20, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 1
+type = "arrow"
+x = 280
+y = 190
+points = [[0, 0], [60, 0]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 340
+y = 140
+width = 320
+height = 100
+roundness = { type = 3 }
+backgroundColor = "#e4ece7"
+fillStyle = "solid"
+strokeColor = "#1f5c4a"
+roughness = 0
+label = { text = "1. Read the 3\ncatalog files", fontSize = 20, strokeColor = "#1c1a17" }
+
+# ---- Step 2: columns and formats ----
+
+[[elements]]
+step = 2
+type = "arrow"
+x = 500
+y = 240
+points = [[0, 0], [0, 35]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 2
+type = "rectangle"
+x = 340
+y = 275
+width = 320
+height = 100
+roundness = { type = 3 }
+backgroundColor = "#e4ece7"
+fillStyle = "solid"
+strokeColor = "#1f5c4a"
+roughness = 0
+label = { text = "2. Check the columns\nand every value", fontSize = 20, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 2
+type = "rectangle"
+x = 740
+y = 275
+width = 300
+height = 100
+roundness = { type = 3 }
+backgroundColor = "#eeeae2"
+fillStyle = "solid"
+strokeColor = "#625b53"
+roughness = 0
+label = { text = "Vocabulary, IDs, dates,\nUTC times, fingerprints,\n`; ` lists", fontSize = 18, strokeColor = "#1c1a17" }
+
+# ---- Step 3: values that must agree ----
+
+[[elements]]
+step = 3
+type = "arrow"
+x = 500
+y = 375
+points = [[0, 0], [0, 35]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 3
+type = "rectangle"
+x = 340
+y = 410
+width = 320
+height = 100
+roundness = { type = 3 }
+backgroundColor = "#e4ece7"
+fillStyle = "solid"
+strokeColor = "#1f5c4a"
+roughness = 0
+label = { text = "3. Check values\nthat must agree", fontSize = 20, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 3
+type = "rectangle"
+x = 740
+y = 410
+width = 300
+height = 100
+roundness = { type = 3 }
+backgroundColor = "#eeeae2"
+fillStyle = "solid"
+strokeColor = "#625b53"
+roughness = 0
+label = { text = "Stage only on emergency\nresponse rows; period fits\nphase; `done` has a path", fontSize = 18, strokeColor = "#1c1a17" }
+
+# ---- Step 4: the result ----
+
+[[elements]]
+step = 4
+type = "arrow"
+x = 500
+y = 510
+points = [[0, 0], [0, 35]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 4
+type = "rectangle"
+x = 340
+y = 545
+width = 320
+height = 100
+roundness = { type = 3 }
+backgroundColor = "#e4ece7"
+fillStyle = "solid"
+strokeColor = "#1f5c4a"
+roughness = 0
+label = { text = "4. List each problem,\nor \"No problems\";\nchange nothing", fontSize = 20, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 4
+type = "arrow"
+x = 660
+y = 595
+points = [[0, 0], [80, 0]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 4
+type = "rectangle"
+x = 740
+y = 545
+width = 300
+height = 100
+roundness = { type = 3 }
+backgroundColor = "#ffffff"
+fillStyle = "solid"
+strokeColor = "#625b53"
+strokeWidth = 3
+strokeStyle = "dashed"
+roughness = 0
+label = { text = "GitHub, on every push:\na problem fails\nthe checks", fontSize = 20, strokeColor = "#1c1a17" }
