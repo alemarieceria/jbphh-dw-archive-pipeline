@@ -30,8 +30,8 @@ Checked 2026-11-17: `archive inventory --zone I1` matched all 123 library rows t
 listings (`reports/2026-11-17-inventory-I1.csv`).
 
 **Who writes it:** people, and `archive download` (retrieval columns). `archive discover`
-proposes new rows in a review file in `reports/`. `archive merge` (not built yet) will apply
-the approved ones.
+proposes new rows in a review file in `reports/`. `archive merge` writes the ones you
+accept.
 
 **Updates:** rows are never deleted and a `doc_id` is never reused. After a change, commit the
 file and run `archive publish`.
@@ -39,7 +39,7 @@ file and run `archive publish`.
 | Column | Format | Description | Filled by |
 |---|---|---|---|
 | `doc_id` | `DOC-0001` | Stable ID. Never reuse or renumber, even if a row is dropped. | Manually, on approval |
-| `group` | vocabulary | Where the item came from or what role it plays: `zone_page_er`, `navy_lab_collection`, `doh_lab_collection`, `governing`, `doh_decision`, `public_communication`, `web_page`. | Manually (proposed by `archive discover`) |
+| `group` | vocabulary | Where the item came from or what role it plays: `zone_page_er`, `navy_lab_collection`, `doh_lab_collection`, `governing`, `doh_decision`, `public_communication`, `web_page`; `zone_page_ltm` and `zone_page_edwm` (links in a zone page's LTM or EDWM section, including its listing link), `ltm_lab_collection` (LTM listing results), `source_water` (Waiawa Shaft files, posted on every zone page). | Manually (proposed by `archive discover`) |
 | `title_as_posted` | text | Title exactly as the source shows it. | Manually (proposed by `archive discover`) |
 | `source_url` | URL | Where to get it. Blank if not found yet. | Manually (proposed by `archive discover`) |
 | `original_filename` | text | Filename on the source, when known before download. Library files are `pub_00NNNN.pdf`. | Manually (proposed by `archive discover`), or `archive download` when blank |
@@ -64,10 +64,10 @@ file and run `archive publish`.
 | `sha256` | text | File hash, recorded at download. Proves the archived file hasn't changed. Blank if not downloaded yet, or for a manually captured web page (no fingerprint yet). | `archive download` |
 | `local_path` | text | Path inside the Shared Drive, for example `raw/jbphh-safewaters/pub_002925.pdf`. When one item has several files (a web page saved as PDF and HTML, or a listing split across pages), paths are separated by `; `. Blank if not collected yet. | `archive download`; manually for the 12 manually captured web pages |
 | `notes` | text | Known issues, context, and anything still to verify. | Manually |
-| `found_via` | vocabulary | How the document was found: `zone_page`, `navy_listing`, `doh_listing`, `ltm_listing`, `edwm_listing`, `cited`, `other_site`. Blank for rows built before `archive discover`. | `archive discover`; manually for `cited` |
-| `found_on` | URL or doc_id | The page where it was found, or for `cited`, the `doc_id` of the document that cites it. Blank for rows built before `archive discover`. | `archive discover`; manually for `cited` |
-| `first_seen_utc` | datetime | When `archive discover` first saw it on the source. Blank if never seen by `archive discover`. | `archive discover` |
-| `last_seen_utc` | datetime | The last time `archive discover` saw it on the source. If this stops updating, the site removed the document. Blank if never seen by `archive discover`. | `archive discover` |
+| `found_via` | vocabulary | How the document was found: `zone_page`, `navy_listing`, `doh_listing`, `ltm_listing`, `edwm_listing`, `cited`, `other_site`. Blank for rows built before `archive discover`. | `archive discover`, written by `archive merge`; manually for `cited` |
+| `found_on` | URL or doc_id | The page where it was found, or for `cited`, the `doc_id` of the document that cites it. Blank for rows built before `archive discover`. | `archive discover`, written by `archive merge`; manually for `cited` |
+| `first_seen_utc` | datetime | When `archive discover` first saw it on the source. Blank if never seen by `archive discover`. | `archive discover`, written by `archive merge` |
+| `last_seen_utc` | datetime | The last time `archive discover` saw it on the source. If this stops updating, the site removed the document. Blank if never seen by `archive discover`. | `archive discover`, written by `archive merge` |
 
 ## zones.csv
 

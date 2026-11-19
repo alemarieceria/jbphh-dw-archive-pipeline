@@ -40,7 +40,7 @@ Each step gets a section, with a stepped diagram, in `notebooks/workflows.ipynb`
 | 2. The big picture | How the steps fit together | Partial: `archive-big-picture` maps how the pieces connect today; `archive-pipeline` (planned) shows how the archive will run, step by step. Both stay. The big picture is redrawn as the map of every component once we know whether the results database belongs on it. |
 | 3. Scope | Which zones, which dates, zone versus system-wide documents | Done: decided above; `catalog/zones.csv` lists the 20 zones with their zone page and library listing links |
 | 4. Discovery | Which documents exist for a zone, and how do we know we have them all? | Partial: `archive discover --zone I1` reads the zone pages and I1's Navy, DOH and LTM listings and proposes rows in a review file; `archive inventory --zone I1` checks the Navy and DOH listings (see below). Not yet: the EDWM listing and other zones. |
-| 5. Cataloging | Turning found documents into reviewed catalog rows | Partial: I1's 169 rows were built manually; `archive discover` proposes new rows; no `archive merge` yet |
+| 5. Cataloging | Turning found documents into reviewed catalog rows | Partial: I1's 169 rows were built manually; `archive discover` proposes rows in a review file and `archive merge` applies the accepted ones. Not yet: catalog validation. |
 | 6. Collection | Downloading files, capturing web pages, Wayback backups | Partial: downloads automated; page captures and Wayback done manually |
 | 7. Validation | Is the archive complete and unchanged? | Partial: `archive inventory` checks a zone's Navy and DOH listings against the catalog; no `archive verify` yet |
 | 8. Storage | What lives where, publishing, backups, permissions | Partial: the catalog is in this repo (`catalog/documents.csv`); `archive publish` copies it to the Drive's `registry/`; no zone indexes yet |
@@ -83,7 +83,7 @@ Each step gets a section, with a stepped diagram, in `notebooks/workflows.ipynb`
   the zones a document covers.
 - **Existing rows:** the first run fills `found_via`, `found_on` and `first_seen_utc` once for
   each row it matches. After that, only `last_seen_utc` changes.
-- **`archive merge`** applies the approved decisions: a dry run first, then `--apply`. It
+- **`archive merge` (built 2026-11-18)** applies the approved decisions: a dry run first, then `--apply`. It
   assigns `doc_id`s, and it refuses to run if the catalog changed since the review file was
   made.
 - **New `group` values**, added to `catalog/README.md` with the first rows that use them:
@@ -218,7 +218,8 @@ column; and a stepped diagram in `notebooks/workflows.ipynb`. The other catalog 
    (`idwst` goes into the Directory first). Then `archive discover --zone I1` proposes rows,
    including LTM and EDWM documents as `link_only`; it should reproduce I1's existing rows.
    Catalog validation joins the automated checks. Done so far: the new columns and
-   statuses, and `archive discover --zone I1`. Next: `archive merge`.
+   statuses, `archive discover --zone I1` and `archive merge`. Next: catalog validation in
+   the automated checks.
 6. **Collection:** `archive capture`, then `archive wayback` (building on the manual Wayback
    records in the Drive's `registry/`), then the sources view in `notebooks/zones.ipynb`.
    Update the Drive's `web-captures/README.txt`.

@@ -19,8 +19,8 @@ listings, plus one row per catalog row a listing should show but doesn't.
 
 Written by `archive discover --zone <zone>`. It proposes catalog rows and never changes the
 catalog. Open it in Google Sheets or Excel to review it. Fill in only `decision`, and correct a
-proposed value if it's wrong. `archive merge` (not built yet) reads only those and refuses to
-run if the catalog changed since the file was made.
+proposed value if it's wrong. `archive merge` reads only those and refuses to run if the
+catalog changed since the file was made.
 
 **Rows**, in this order:
 
@@ -37,11 +37,16 @@ run if the catalog changed since the file was made.
    in its `decision`. That covers every unflagged row below it.
 2. On each row with a `flag`, read the flag and write `accept` or `reject` in its own `decision`.
 3. A blank `decision` means not decided yet.
+4. Run `uv run archive merge reports/<file>` to see what would change. If it looks right, run
+   it again with `--apply`, commit `catalog/documents.csv`, and run `archive publish`.
 
-For a `new` row, `accept` adds it to the catalog and `reject` leaves it out. For a `matched`
-row, `accept` fills its discovery columns (`found_via`, `found_on`, `first_seen_utc`) if
-they're blank and updates `last_seen_utc`. What `archive merge` does with a `changed` or
-`missing` row is decided when it's built; rows are never deleted.
+For a `new` row, `accept` adds it to the catalog with the next `doc_id`, and `reject` leaves it
+out. For a `matched` row, `accept` fills its discovery columns (`found_via`, `found_on`,
+`first_seen_utc`) and `stage` if they're blank, and updates `last_seen_utc`. For a `changed`
+row, `accept` also takes the site's new value and keeps the old one in `notes`, dated; for
+`zones`, the site's zones are added to the catalog's. For a `missing` row, `accept` adds a
+dated note; rows are never deleted. A `decision` filled in on an unflagged row overrides its
+source row's.
 
 **Columns**
 

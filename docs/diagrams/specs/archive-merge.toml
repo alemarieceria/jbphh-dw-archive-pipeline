@@ -1,0 +1,444 @@
+# Stepped diagram: what `archive merge` reads and writes.
+# Build it with: uv run archive diagrams build docs/diagrams/specs/archive-merge.toml
+#
+# How this file works: see manual-listing-check.toml. Each element's `step` is where it first appears.
+# Colors, sizes and wording follow the style rules in docs/diagrams/README.md.
+
+name = "archive-merge"
+title = "Merge: apply a review file to the catalog"
+width = 1600
+height = 820
+
+[[steps]]
+caption = "`archive merge reports/<date>-discover-I1.csv` reads the review file and `catalog/documents.csv`."
+
+[[steps]]
+caption = "It compares the catalog's fingerprint with the review file's `catalog_sha256`. If the catalog changed since the file was made, it stops and writes nothing."
+
+[[steps]]
+caption = "It reads each `decision`: a source row's covers its unflagged rows, and a flagged row needs its own. Anything other than `accept`, `reject` or blank stops it."
+
+[[steps]]
+caption = "For each accepted row: `new` gets the next `doc_id`; `matched` gets its blank discovery columns and `stage` filled; `changed` takes the site's value and keeps the old one in `notes`; `missing` gets a dated note."
+
+[[steps]]
+caption = "Without `--apply`, it only shows what would change. With `--apply`, it writes `catalog/documents.csv`; you commit it and run `archive publish`."
+
+# ---- Background, title, legend and the two inputs (step 1) ----
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 0
+y = 0
+width = 1600
+height = 820
+backgroundColor = "#fbf8f3"
+fillStyle = "solid"
+strokeColor = "transparent"
+strokeWidth = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 448
+y = 20
+text = "Merge: apply a review file to the catalog"
+fontSize = 36
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "text"
+x = 591
+y = 72
+text = "What `archive merge` reads and writes"
+fontSize = 22
+strokeColor = "#443f38"
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 1220
+y = 140
+width = 360
+height = 330
+roundness = { type = 3 }
+backgroundColor = "#ffffff"
+fillStyle = "solid"
+strokeColor = "#625b53"
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1240
+y = 155
+text = "Legend"
+fontSize = 24
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 1240
+y = 210
+width = 44
+height = 30
+backgroundColor = "#e4ece7"
+fillStyle = "solid"
+strokeColor = "#1f5c4a"
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1298
+y = 212
+text = "Automated step"
+fontSize = 20
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 1240
+y = 262
+width = 44
+height = 30
+backgroundColor = "#f8efe7"
+fillStyle = "solid"
+strokeColor = "#8c4a35"
+strokeWidth = 4
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1298
+y = 264
+text = "Manual step"
+fontSize = 20
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 1240
+y = 314
+width = 44
+height = 30
+backgroundColor = "#dcd6cc"
+fillStyle = "solid"
+strokeColor = "#443f38"
+strokeWidth = 3
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1298
+y = 316
+text = "Where data is stored"
+fontSize = 20
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 1240
+y = 366
+width = 44
+height = 30
+backgroundColor = "#eeeae2"
+fillStyle = "solid"
+strokeColor = "#625b53"
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1298
+y = 368
+text = "Note"
+fontSize = 20
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "arrow"
+x = 1240
+y = 433
+points = [[0, 0], [44, 0]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1298
+y = 420
+text = "Data moves this way"
+fontSize = 20
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 20
+y = 140
+width = 260
+height = 100
+roundness = { type = 3 }
+backgroundColor = "#dcd6cc"
+fillStyle = "solid"
+strokeColor = "#443f38"
+strokeWidth = 3
+roughness = 0
+label = { text = "`reports/<date>-`\n`discover-I1.csv`\nwith your decisions", fontSize = 20, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 1
+type = "arrow"
+x = 280
+y = 190
+points = [[0, 0], [60, 0]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 340
+y = 140
+width = 320
+height = 100
+roundness = { type = 3 }
+backgroundColor = "#e4ece7"
+fillStyle = "solid"
+strokeColor = "#1f5c4a"
+roughness = 0
+label = { text = "1. Read the review\nfile and the catalog", fontSize = 20, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 740
+y = 140
+width = 300
+height = 100
+roundness = { type = 3 }
+backgroundColor = "#dcd6cc"
+fillStyle = "solid"
+strokeColor = "#443f38"
+strokeWidth = 3
+roughness = 0
+label = { text = "`catalog/documents.csv`", fontSize = 20, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 1
+type = "arrow"
+x = 740
+y = 190
+points = [[0, 0], [-80, 0]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+# ---- Step 2: the same catalog? ----
+
+[[elements]]
+step = 2
+type = "arrow"
+x = 500
+y = 240
+points = [[0, 0], [0, 35]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 2
+type = "rectangle"
+x = 340
+y = 275
+width = 320
+height = 100
+roundness = { type = 3 }
+backgroundColor = "#e4ece7"
+fillStyle = "solid"
+strokeColor = "#1f5c4a"
+roughness = 0
+label = { text = "2. Same catalog as when\nthe file was made?", fontSize = 20, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 2
+type = "rectangle"
+x = 740
+y = 275
+width = 300
+height = 100
+roundness = { type = 3 }
+backgroundColor = "#eeeae2"
+fillStyle = "solid"
+strokeColor = "#625b53"
+roughness = 0
+label = { text = "If not: it stops\nand writes nothing", fontSize = 18, strokeColor = "#1c1a17" }
+
+# ---- Step 3: the decisions ----
+
+[[elements]]
+step = 3
+type = "arrow"
+x = 500
+y = 375
+points = [[0, 0], [0, 35]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 3
+type = "rectangle"
+x = 340
+y = 410
+width = 320
+height = 100
+roundness = { type = 3 }
+backgroundColor = "#e4ece7"
+fillStyle = "solid"
+strokeColor = "#1f5c4a"
+roughness = 0
+label = { text = "3. Read each\n`decision`", fontSize = 20, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 3
+type = "rectangle"
+x = 740
+y = 410
+width = 300
+height = 100
+roundness = { type = 3 }
+backgroundColor = "#eeeae2"
+fillStyle = "solid"
+strokeColor = "#625b53"
+roughness = 0
+label = { text = "A source row covers its\nunflagged rows; a flagged\nrow needs its own", fontSize = 18, strokeColor = "#1c1a17" }
+
+# ---- Step 4: apply each accepted row ----
+
+[[elements]]
+step = 4
+type = "arrow"
+x = 500
+y = 510
+points = [[0, 0], [0, 35]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 4
+type = "rectangle"
+x = 340
+y = 545
+width = 320
+height = 100
+roundness = { type = 3 }
+backgroundColor = "#e4ece7"
+fillStyle = "solid"
+strokeColor = "#1f5c4a"
+roughness = 0
+label = { text = "4. Apply each\naccepted row", fontSize = 20, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 4
+type = "rectangle"
+x = 740
+y = 530
+width = 300
+height = 130
+roundness = { type = 3 }
+backgroundColor = "#eeeae2"
+fillStyle = "solid"
+strokeColor = "#625b53"
+roughness = 0
+label = { text = "`new`: next `doc_id`\n`matched`: fill blanks\n`changed`: new value,\nold one in `notes`\n`missing`: dated note", fontSize = 18, strokeColor = "#1c1a17" }
+
+# ---- Step 5: show, or write with --apply ----
+
+[[elements]]
+step = 5
+type = "arrow"
+x = 500
+y = 645
+points = [[0, 0], [0, 35]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 5
+type = "rectangle"
+x = 340
+y = 680
+width = 320
+height = 100
+roundness = { type = 3 }
+backgroundColor = "#e4ece7"
+fillStyle = "solid"
+strokeColor = "#1f5c4a"
+roughness = 0
+label = { text = "5. Show the changes;\nwrite only with `--apply`", fontSize = 20, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 5
+type = "arrow"
+x = 660
+y = 730
+points = [[0, 0], [80, 0]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 5
+type = "rectangle"
+x = 740
+y = 680
+width = 300
+height = 100
+roundness = { type = 3 }
+backgroundColor = "#dcd6cc"
+fillStyle = "solid"
+strokeColor = "#443f38"
+strokeWidth = 3
+roughness = 0
+label = { text = "`catalog/documents.csv`\nupdated", fontSize = 20, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 5
+type = "arrow"
+x = 1040
+y = 730
+points = [[0, 0], [60, 0]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 5
+type = "rectangle"
+x = 1100
+y = 680
+width = 300
+height = 100
+roundness = { type = 3 }
+backgroundColor = "#f8efe7"
+fillStyle = "solid"
+strokeColor = "#8c4a35"
+strokeWidth = 4
+roughness = 0
+label = { text = "You commit it and\nrun `archive publish`", fontSize = 20, strokeColor = "#1c1a17" }
