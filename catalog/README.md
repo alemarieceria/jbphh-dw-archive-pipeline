@@ -44,7 +44,7 @@ file and run `archive publish`.
 
 | Column | Format | Description | Filled by |
 |---|---|---|---|
-| `doc_id` | `DOC-0001` | Stable ID. Never reuse or renumber, even if a row is dropped. | Manually, on approval |
+| `doc_id` | `DOC-0001` | Stable ID. Never reuse or renumber, even if a row is dropped. | `archive merge`, when you accept a proposed row; manually for a row you add yourself |
 | `group` | vocabulary | Where the item came from or what role it plays: `zone_page_er`, `navy_lab_collection`, `doh_lab_collection`, `governing`, `doh_decision`, `public_communication`, `web_page`; `zone_page_ltm` and `zone_page_edwm` (links in a zone page's LTM or EDWM section, including its listing link), `ltm_lab_collection` (LTM listing results), `source_water` (Waiawa Shaft files, posted on every zone page). | Manually (proposed by `archive discover`) |
 | `title_as_posted` | text | Title exactly as the source shows it. | Manually (proposed by `archive discover`) |
 | `source_url` | URL | Where to get it. Blank if not found yet. | Manually (proposed by `archive discover`) |
