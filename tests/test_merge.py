@@ -1,6 +1,7 @@
 """Tests for the merge step. Each test works on a copy of the catalog in a temporary folder, with a
 review file built offline from the saved zone pages (tests/fixtures/discover/) and listings made
-from the catalog's own I1 library rows. No network is needed."""
+from the catalog's own I1 library rows. The catalog is catalog/documents.csv as it was on 2026-11-17
+(tests/fixtures/catalog/), before the first merge. No network is needed."""
 
 import hashlib
 import shutil
@@ -9,12 +10,13 @@ from pathlib import Path
 import pytest
 
 from jbphh_archive import catalog, discover, merge
-from jbphh_archive.catalog import CATALOG_FILE, ZONES_FILE, read_rows
+from jbphh_archive.catalog import ZONES_FILE, read_rows
 from jbphh_archive.discover import REPORT_COLUMNS, read_zone_page, write_report
 from jbphh_archive.inventory import Result
 from jbphh_archive.merge import MergeError, id_list, widened
 
 FIXTURES = Path(__file__).parent / "fixtures"
+CATALOG_FILE = FIXTURES / "catalog" / "documents-2026-11-17.csv"
 ZONES = read_rows(ZONES_FILE)[1]
 COLUMNS = read_rows(CATALOG_FILE)[0]
 NOW = "2026-11-19T00:00:00Z"

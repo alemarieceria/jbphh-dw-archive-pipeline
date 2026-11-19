@@ -1,6 +1,8 @@
 """Tests for the discover step. The 20 zone pages and the I1 LTM listing were saved from the live
 site on 2026-11-17 (tests/fixtures/discover/); the Navy and DOH listings are the inventory step's
-saved pages (tests/fixtures/inventory/). No network is needed."""
+saved pages (tests/fixtures/inventory/). The catalog is catalog/documents.csv as it was on 2026-11-17
+(tests/fixtures/catalog/), before `archive merge` added rows, so the counts stay those the saved pages
+were checked against. No network is needed."""
 
 import csv
 import hashlib
@@ -12,7 +14,7 @@ import httpx
 import pytest
 
 from jbphh_archive import discover, inventory
-from jbphh_archive.catalog import CATALOG_FILE, ZONES_FILE, read_rows
+from jbphh_archive.catalog import ZONES_FILE, read_rows
 from jbphh_archive.discover import (
     ZonePageError,
     agree,
@@ -31,6 +33,7 @@ from jbphh_archive.discover import (
 from jbphh_archive.inventory import Result
 
 FIXTURES = Path(__file__).parent / "fixtures"
+CATALOG_FILE = FIXTURES / "catalog" / "documents-2026-11-17.csv"
 ZONES = read_rows(ZONES_FILE)[1]
 ZONE_IDS = [z["zone_id"] for z in ZONES]
 WAIAWA_EDWM = "https://jbphh-safewaters.org/public/EDWM_Q{}_Sampling_Results_Waiawa_Shaft_24JUL2025.pdf"
@@ -296,6 +299,7 @@ class FakeSite:
 def run(monkeypatch, tmp_path, zone: str) -> tuple[int, list[dict[str, str]]]:
     monkeypatch.setattr(discover, "make_client", lambda: httpx.Client(transport=httpx.MockTransport(FakeSite())))
     monkeypatch.setattr(discover, "REPORTS_FOLDER", tmp_path)
+    monkeypatch.setattr(discover, "CATALOG_FILE", CATALOG_FILE)
     monkeypatch.setattr(inventory, "DELAY_SECONDS", 0)
     code = discover.main(["--zone", zone])
     (report,) = tmp_path.glob(f"*-discover-{zone}.csv")
