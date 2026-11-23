@@ -103,7 +103,7 @@ Each step gets a section, with a stepped diagram, in `notebooks/workflows.ipynb`
   downloaded, 12 web pages captured manually), 8 still to find (6 governing documents, 2 Navy
   communications), deferred until after data processing; none holds results data. DOC-0170 to
   DOC-0349 are monitoring documents cataloged as `link_only` by `archive merge`.
-- **Discrepancy log:** 18 findings (FND-0001 to FND-0018); 6 confirmed, 12 to verify.
+- **Discrepancy log:** 21 findings (FND-0001 to FND-0021); 9 confirmed, 12 to verify.
 - **Page captures** to automate with Playwright: PDF, single-file web page (MHTML) and PNG per page.
   `archive capture` takes over the 12 pages captured manually and records a fingerprint for
   every capture, including the existing ones.
