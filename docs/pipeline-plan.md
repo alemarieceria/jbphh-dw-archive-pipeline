@@ -40,7 +40,7 @@ Each step gets a section, with a stepped diagram, in `notebooks/workflows.ipynb`
 | 2. The big picture | How the steps fit together | Partial: `archive-big-picture` maps how the pieces connect today; `archive-pipeline` (planned) shows how the archive will run, step by step. Both stay. The big picture is redrawn as the map of every component once we know whether the results database belongs on it. |
 | 3. Scope | Which zones, which dates, zone versus system-wide documents | Done: decided above; `catalog/zones.csv` lists the 20 zones with their zone page and library listing links |
 | 4. Discovery | Which documents exist for a zone, and how do we know we have them all? | Partial: `archive discover --zone I1` reads the zone pages and I1's Navy, DOH and LTM listings and proposes rows in a review file; `archive inventory --zone I1` checks the Navy and DOH listings (see below). Not yet: the EDWM listing and other zones. |
-| 5. Cataloging | Turning found documents into reviewed catalog rows | Partial: I1's first 169 rows were built manually; `archive merge` added 180 more; `archive discover` proposes rows in a review file and `archive merge` applies the accepted ones. `archive validate` checks the catalog on every push. |
+| 5. Cataloging | Turning found documents into reviewed catalog rows | Partial: I1's first 169 rows were built manually; `archive merge` added 180 more; `archive discover` proposes rows in a review file and `archive merge` applies the accepted ones. `archive validate` checks the catalog on every push. `catalog/document_links.csv` records which I1 lab report is current for each batch. |
 | 6. Collection | Downloading files, capturing web pages, Wayback backups | Partial: downloads automated; page captures and Wayback done manually |
 | 7. Validation | Is the archive complete and unchanged? | Partial: `archive inventory` checks a zone's Navy and DOH listings against the catalog; `archive validate` checks that the catalog follows its rules; no `archive verify` yet |
 | 8. Storage | What lives where, publishing, backups, permissions | Partial: the catalog is in this repo (`catalog/documents.csv`); `archive publish` copies it to the Drive's `registry/`; no zone indexes yet |
@@ -103,6 +103,7 @@ Each step gets a section, with a stepped diagram, in `notebooks/workflows.ipynb`
   downloaded, 12 web pages captured manually), 8 still to find (6 governing documents, 2 Navy
   communications), deferred until after data processing; none holds results data. DOC-0170 to
   DOC-0349 are monitoring documents cataloged as `link_only` by `archive merge`.
+  `catalog/document_links.csv` has 26 checked links for I1's lab reports and the DOH tables.
 - **Discrepancy log:** 21 findings (FND-0001 to FND-0021); 9 confirmed, 12 to verify.
 - **Page captures** to automate with Playwright: PDF, single-file web page (MHTML) and PNG per page.
   `archive capture` takes over the 12 pages captured manually and records a fingerprint for
@@ -212,8 +213,8 @@ column; and a stepped diagram in `notebooks/workflows.ipynb`. The other catalog 
 
 **Finishing I1 (decided 2026-11-23).** Archiving I1 is done when these four steps are done;
 then data processing starts. (1) The 8 documents still to find get a dated note saying they
-are deferred. (2) `catalog/document_links.csv` records which lab file is current for each
-batch (SDG). (3) Fingerprints for the 12 manually captured web pages; then
+are deferred (done 2026-11-23, PR #25). (2) `catalog/document_links.csv` records which lab
+file is current for each batch (SDG) (done 2026-11-23, PR #26). (3) Fingerprints for the 12 manually captured web pages; then
 `archive verify --zone I1`. (4) Publish, and update this plan. Deferred until later:
 `archive capture` (new dated PDF, MHTML and PNG captures), `archive wayback`, `stage` on the
 40 non-lab rows, `publisher`, `timeline.csv`, the zone indexes, and the Drive's text about
