@@ -3,7 +3,7 @@
 The one place to see what this pipeline is for, how it is organized, and what is done.
 Written by A. Ceria. Update a stage's **Status** line whenever its work changes.
 
-Last updated: 2026-11-18.
+Last updated: 2026-11-23.
 
 ## Goal
 
@@ -99,10 +99,10 @@ Each step gets a section, with a stepped diagram, in `notebooks/workflows.ipynb`
 
 ### 5–7. Status details
 
-- **Catalog:** 349 rows for I1. The first 169 were built manually: 160 collected (148 files
-  downloaded, 12 web pages captured manually), 9 still to find (7 governing documents, 2 Navy
-  communications). DOC-0170 to DOC-0349 are monitoring documents cataloged as `link_only` by
-  `archive merge`.
+- **Catalog:** 349 rows for I1. The first 169 were built manually: 161 collected (149 files
+  downloaded, 12 web pages captured manually), 8 still to find (6 governing documents, 2 Navy
+  communications), deferred until after data processing; none holds results data. DOC-0170 to
+  DOC-0349 are monitoring documents cataloged as `link_only` by `archive merge`.
 - **Discrepancy log:** 18 findings (FND-0001 to FND-0018); 6 confirmed, 12 to verify.
 - **Page captures** to automate with Playwright: PDF, single-file web page (MHTML) and PNG per page.
   `archive capture` takes over the 12 pages captured manually and records a fingerprint for
@@ -206,6 +206,15 @@ Each item is done only when it has: unit tests that run offline; a real-world ch
 dated report, where one applies; a `catalog/README.md` section for any new catalog file or
 column; and a stepped diagram in `notebooks/workflows.ipynb`. The other catalog files join
 `catalog/` when the step that uses them is built.
+
+**Finishing I1 (decided 2026-11-23).** Archiving I1 is done when these four steps are done;
+then data processing starts. (1) The 8 documents still to find get a dated note saying they
+are deferred. (2) `catalog/document_links.csv` records which lab file is current for each
+batch (SDG). (3) Fingerprints for the 12 manually captured web pages; then
+`archive verify --zone I1`. (4) Publish, and update this plan. Deferred until later:
+`archive capture` (new dated PDF, MHTML and PNG captures), `archive wayback`, `stage` on the
+40 non-lab rows, `publisher`, `timeline.csv`, the zone indexes, and the Drive's text about
+captures.
 
 1. **Restructure** (done): this repo into `src/jbphh_archive/` with one `archive` command;
    `scripts/` code moved in, with tests proving nothing changed.
