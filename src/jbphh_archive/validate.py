@@ -1,9 +1,9 @@
 """Check the catalog files against the rules in catalog/README.md.
 
-Reads catalog/documents.csv, catalog/zones.csv and catalog/communities.csv and lists every
-value that breaks a rule: a value outside its vocabulary, a badly formed ID, date, time,
-fingerprint or list, or a row whose values contradict each other (such as a `done` row with no
-`local_path`). It changes nothing. GitHub runs it on every push, so a catalog that breaks a
+Reads catalog/documents.csv, catalog/document_links.csv, catalog/zones.csv and
+catalog/communities.csv and lists every value that breaks a rule: a value outside its
+vocabulary, a badly formed ID, date, time, fingerprint or list, or a row whose values
+contradict each other (such as a `done` row with no `local_path`). It changes nothing. GitHub runs it on every push, so a catalog that breaks a
 rule fails the checks.
 
 The allowed values below must match catalog/README.md; a test compares them.
@@ -63,6 +63,8 @@ ZONE_COLUMNS = [
     "notes",
 ]
 COMMUNITY_COLUMNS = ["zone_id", "community", "homes", "notes"]
+LINK_COLUMNS = ["doc_id", "related_doc_id", "relation", "notes"]
+RELATIONS = ("same_results", "supersedes", "corrects", "supports", "summarizes", "part_of")
 
 LTM_PERIODS = tuple(f"ltm_p{n}" for n in range(1, 8))
 EDWM_PERIODS = tuple(f"edwm_q{n}" for n in range(1, 5))
@@ -299,10 +301,60 @@ def community_problems(rows: list[Row], zones: list[Row]) -> list[str]:
     return problems
 
 
+def package_level(row: Row) -> int | None:
+    """A lab report's package level as a number (`Level 2` is 2), or None if it has none."""
+    match = re.fullmatch(r"Level (\d)", row["package_or_validation_level"])
+    return int(match[1]) if match else None
+
+
+def link_problems(rows: list[Row], documents: list[Row]) -> list[str]:
+    """Every rule document_links.csv rows break. Each row reads "doc_id relation related_doc_id"."""
+    problems: list[str] = []
+    by_id = {row["doc_id"]: row for row in documents}
+    seen: set[frozenset[str]] = set()
+    for line, row in enumerate(rows, start=2):
+        first, relation, second = row["doc_id"], row["relation"], row["related_doc_id"]
+        where = f"document_links.csv line {line} ({first} {relation} {second})"
+
+        def bad(column: str, message: str, where: str = where) -> None:
+            problems.append(f"{where}, {column}: {message}")
+
+        for column in LINK_COLUMNS:
+            if not row[column]:
+                bad(column, "is blank")
+        if relation and relation not in RELATIONS:
+            bad("relation", f"{relation!r} is not in the vocabulary")
+        for column in ("doc_id", "related_doc_id"):
+            if not row[column]:
+                continue
+            if row[column] not in by_id:
+                bad(column, f"{row[column]} is not in documents.csv")
+            elif by_id[row[column]]["duplicate_of"]:
+                bad(column, f"{row[column]} is a duplicate; link {by_id[row[column]]['duplicate_of']} instead")
+        if first and first == second:
+            bad("related_doc_id", "a document can't be linked to itself")
+        pair = frozenset((first, second))
+        if first and second and pair in seen:
+            bad("related_doc_id", "these two documents are already linked")
+        seen.add(pair)
+
+        if relation == "same_results" and first in by_id and second in by_id:
+            one, other = by_id[first], by_id[second]
+            if not one["sdg"] or one["sdg"] != other["sdg"]:
+                bad("relation", "`same_results` links two reports of the same batch (same sdg)")
+            low, high = package_level(one), package_level(other)
+            if low is None or high is None:
+                bad("relation", "`same_results` links two reports with a package level (Level 2, 3 or 4)")
+            elif low >= high:
+                bad("doc_id", "for `same_results`, doc_id is the lower package level")
+    return problems
+
+
 def all_problems() -> tuple[list[str], dict[str, int]]:
-    """Every problem in the three catalog files, and each file's row count."""
+    """Every problem in the four catalog files, and each file's row count."""
     files = {
         "documents.csv": (catalog.CATALOG_FILE, DOCUMENT_COLUMNS),
+        "document_links.csv": (catalog.LINKS_FILE, LINK_COLUMNS),
         "zones.csv": (catalog.ZONES_FILE, ZONE_COLUMNS),
         "communities.csv": (catalog.COMMUNITIES_FILE, COMMUNITY_COLUMNS),
     }
@@ -321,6 +373,8 @@ def all_problems() -> tuple[list[str], dict[str, int]]:
         problems += document_problems(tables["documents.csv"], [zone["zone_id"] for zone in zones])
     if "communities.csv" in tables:
         problems += community_problems(tables["communities.csv"], zones)
+    if "document_links.csv" in tables and "documents.csv" in tables:
+        problems += link_problems(tables["document_links.csv"], tables["documents.csv"])
     return problems, counts
 
 

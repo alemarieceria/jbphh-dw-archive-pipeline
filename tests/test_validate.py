@@ -11,12 +11,15 @@ from jbphh_archive.catalog import ZONES_FILE, read_rows, write_rows
 from jbphh_archive.validate import (
     COMMUNITY_COLUMNS,
     DOCUMENT_COLUMNS,
+    LINK_COLUMNS,
+    RELATIONS,
     VOCABULARY,
     ZONE_COLUMNS,
     community_problems,
     document_problems,
     is_date,
     is_utc,
+    link_problems,
     list_values,
     zone_problems,
 )
@@ -85,7 +88,12 @@ def readme_rows(section: str) -> dict[str, list[str]]:
 
 @pytest.mark.parametrize(
     ("section", "columns"),
-    [("documents.csv", DOCUMENT_COLUMNS), ("zones.csv", ZONE_COLUMNS), ("communities.csv", COMMUNITY_COLUMNS)],
+    [
+        ("documents.csv", DOCUMENT_COLUMNS),
+        ("document_links.csv", LINK_COLUMNS),
+        ("zones.csv", ZONE_COLUMNS),
+        ("communities.csv", COMMUNITY_COLUMNS),
+    ],
 )
 def test_the_readme_lists_the_same_columns(section, columns):
     assert list(readme_rows(section)) == columns
@@ -104,6 +112,10 @@ def readme_values(cells: list[str]) -> set[str]:
 @pytest.mark.parametrize("column", list(VOCABULARY))
 def test_the_readme_lists_the_same_allowed_values(column):
     assert readme_values(readme_rows("documents.csv")[column]) == set(VOCABULARY[column])
+
+
+def test_the_readme_lists_the_same_relations():
+    assert readme_values(readme_rows("document_links.csv")["relation"]) == set(RELATIONS)
 
 
 # ---- Formats
@@ -210,6 +222,71 @@ def test_only_limits_the_problems_to_some_rows():
     rows = [doc(doc_type=""), doc(doc_id="DOC-0002", doc_type="")]
     assert document_problems(rows, ZONE_IDS, only={"DOC-0002"}) == [
         "documents.csv line 3 (DOC-0002), doc_type: is blank"
+    ]
+
+
+# ---- document_links.csv rules
+
+LEVEL_2 = doc(doc_id="DOC-0052", sdg="DA40925", package_or_validation_level="Level 2")
+LEVEL_4 = doc(doc_id="DOC-0053", sdg="DA40925", package_or_validation_level="Level 4")
+VALIDATION = doc(doc_id="DOC-0082", doc_type="data_validation_report", sdg="DA40925")
+COPY = doc(doc_id="DOC-0051", sdg="DA40924", package_or_validation_level="Level 4", duplicate_of="DOC-0053")
+DOCUMENTS = [LEVEL_2, LEVEL_4, VALIDATION, COPY]
+
+
+def link(first: str, relation: str, second: str, notes: str = "2026-11-24: cover pages compared.") -> dict[str, str]:
+    return {"doc_id": first, "related_doc_id": second, "relation": relation, "notes": notes}
+
+
+def link_issues(*rows: dict[str, str]) -> list[str]:
+    return link_problems(list(rows), DOCUMENTS)
+
+
+def test_valid_links_have_no_problems():
+    assert link_issues(link("DOC-0052", "same_results", "DOC-0053"), link("DOC-0082", "supports", "DOC-0053")) == []
+
+
+def test_links_need_every_value_and_a_known_relation():
+    assert link_issues(link("DOC-0082", "backs", "DOC-0053", notes="")) == [
+        "document_links.csv line 2 (DOC-0082 backs DOC-0053), notes: is blank",
+        "document_links.csv line 2 (DOC-0082 backs DOC-0053), relation: 'backs' is not in the vocabulary",
+    ]
+
+
+def test_links_point_to_real_rows_that_are_not_duplicates():
+    assert link_issues(link("DOC-0082", "supports", "DOC-0999")) == [
+        "document_links.csv line 2 (DOC-0082 supports DOC-0999), related_doc_id: DOC-0999 is not in documents.csv"
+    ]
+    assert link_issues(link("DOC-0082", "supports", "DOC-0051")) == [
+        "document_links.csv line 2 (DOC-0082 supports DOC-0051), related_doc_id: DOC-0051 is a duplicate; link DOC-0053 instead"
+    ]
+
+
+def test_a_document_is_not_linked_to_itself_or_to_the_same_document_twice():
+    assert link_issues(link("DOC-0053", "supersedes", "DOC-0053")) == [
+        "document_links.csv line 2 (DOC-0053 supersedes DOC-0053), related_doc_id: a document can't be linked to itself"
+    ]
+    assert link_issues(link("DOC-0082", "supports", "DOC-0053"), link("DOC-0053", "summarizes", "DOC-0082")) == [
+        "document_links.csv line 3 (DOC-0053 summarizes DOC-0082), related_doc_id: these two documents are already linked"
+    ]
+
+
+def test_same_results_links_two_levels_of_one_batch_lower_level_first():
+    assert link_issues(link("DOC-0053", "same_results", "DOC-0052")) == [
+        "document_links.csv line 2 (DOC-0053 same_results DOC-0052), doc_id: for `same_results`, doc_id is the lower package level"
+    ]
+    assert link_issues(link("DOC-0082", "same_results", "DOC-0053")) == [
+        (
+            "document_links.csv line 2 (DOC-0082 same_results DOC-0053), relation: "
+            "`same_results` links two reports with a package level (Level 2, 3 or 4)"
+        )
+    ]
+    other_batch = doc(doc_id="DOC-0049", sdg="DA40915", package_or_validation_level="Level 2")
+    assert link_problems([link("DOC-0049", "same_results", "DOC-0053")], [*DOCUMENTS, other_batch]) == [
+        (
+            "document_links.csv line 2 (DOC-0049 same_results DOC-0053), relation: "
+            "`same_results` links two reports of the same batch (same sdg)"
+        )
     ]
 
 

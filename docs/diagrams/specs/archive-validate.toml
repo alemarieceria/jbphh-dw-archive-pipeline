@@ -10,13 +10,13 @@ width = 1600
 height = 700
 
 [[steps]]
-caption = "`archive validate` reads `catalog/documents.csv`, `zones.csv` and `communities.csv`."
+caption = "`archive validate` reads `catalog/documents.csv`, `document_links.csv`, `zones.csv` and `communities.csv`."
 
 [[steps]]
 caption = "It checks each file's columns against `catalog/README.md`, then every row: values in the vocabulary, IDs, dates, UTC times, fingerprints and `; ` lists."
 
 [[steps]]
-caption = "It checks values that must agree: a stage only on emergency response rows, a period that fits the phase, a `done` row with a `local_path`, and a `duplicate_of` that points to a real row."
+caption = "It checks values that must agree: a stage only on emergency response rows, a period that fits the phase, a `done` row with a `local_path`, a `duplicate_of` that points to a real row, and links between real rows, with `same_results` going from the lower package level to the higher."
 
 [[steps]]
 caption = "It prints each problem with its file, line, ID and column, or \"No problems\", and changes nothing. GitHub runs it on every push, so a broken catalog fails the checks."
@@ -194,7 +194,7 @@ fillStyle = "solid"
 strokeColor = "#443f38"
 strokeWidth = 3
 roughness = 0
-label = { text = "`catalog/`: documents,\nzones and communities", fontSize = 20, strokeColor = "#1c1a17" }
+label = { text = "`catalog/`: documents,\nlinks, zones and\ncommunities", fontSize = 20, strokeColor = "#1c1a17" }
 
 [[elements]]
 step = 1
@@ -218,7 +218,7 @@ backgroundColor = "#e4ece7"
 fillStyle = "solid"
 strokeColor = "#1f5c4a"
 roughness = 0
-label = { text = "1. Read the 3\ncatalog files", fontSize = 20, strokeColor = "#1c1a17" }
+label = { text = "1. Read the 4\ncatalog files", fontSize = 20, strokeColor = "#1c1a17" }
 
 # ---- Step 2: columns and formats ----
 

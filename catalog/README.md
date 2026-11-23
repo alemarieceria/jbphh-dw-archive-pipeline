@@ -31,7 +31,8 @@ One row per file or web page in scope. The ID column is `doc_id`.
 **Source:** built by A. Ceria for Zone I1, manually, from I1's zone page, the Navy and DOH I1
 library listings, and documents cited by other documents. DOC-0170 to DOC-0349 (I1's LTM and
 EDWM documents and the monitoring dashboard, all `link_only`) were added by `archive merge`
-from `reports/2026-11-19-discover-I1.csv`. Files downloaded 2026-10-31.
+from `reports/2026-11-19-discover-I1.csv`. Files downloaded 2026-10-31, except DOC-0144
+(2026-11-23).
 Checked 2026-11-17: `archive inventory --zone I1` matched all 123 library rows to the live
 listings (`reports/2026-11-17-inventory-I1.csv`).
 
@@ -74,6 +75,31 @@ file and run `archive publish`.
 | `found_on` | URL or doc_id | The page where it was found, or for `cited`, the `doc_id` of the document that cites it. Blank for rows built before `archive discover`. | `archive discover`, written by `archive merge`; manually for `cited` |
 | `first_seen_utc` | datetime | When `archive discover` first saw it on the source. Blank if never seen by `archive discover`. | `archive discover`, written by `archive merge` |
 | `last_seen_utc` | datetime | The last time `archive discover` saw it on the source. If this stops updating, the site removed the document. Blank if never seen by `archive discover`. | `archive discover`, written by `archive merge` |
+
+## document_links.csv
+
+One row per link between two documents. Each row reads as a sentence: `doc_id`, `relation`,
+`related_doc_id` ("DOC-0052 same_results DOC-0053", "DOC-0082 supports DOC-0053"). The ID
+columns are `doc_id` and `related_doc_id` together.
+
+**Which lab report data processing reads:** for each batch (SDG), the lowest package level
+confirmed to hold the same results as the higher ones: the `doc_id` of a `same_results` row.
+Point researchers to the higher level for the raw instrument data (such as chromatograms and
+calibrations). Two levels are never assumed to hold the same results; each pair is compared
+first. A report that another report supersedes is not read.
+
+**Source:** made by A. Ceria for Zone I1's lab reports, manually, by comparing each batch's
+reports. Each row's `notes` says how and when it was checked.
+
+**Who writes it:** people, manually. **Updates:** add a row only after the link is checked. If a
+link turns out wrong, fix the row and keep the old value in `notes`, dated.
+
+| Column | Format | Description | Filled by |
+|---|---|---|---|
+| `doc_id` | doc_id | The document the sentence starts with. For `same_results`, the lower package level; for `supersedes`, the newer revision. A row in `documents.csv` whose `duplicate_of` is blank. | Manually |
+| `related_doc_id` | doc_id | The document the sentence ends with. Another row in `documents.csv` whose `duplicate_of` is blank. | Manually |
+| `relation` | vocabulary | `same_results` (two package levels of one batch, such as Level 2 and Level 4, whose results were compared and match), `supersedes` (a newer revision replaces an older one), `corrects` (fixes an error in the other), `supports` (backs it up, such as a validation report for a lab report), `summarizes` (sums up its results), `part_of` (is one piece of the other). | Manually |
+| `notes` | text | How the link was checked, dated (for example "2026-11-24: cover pages compared; results on pages 3–8 match."). Never blank. | Manually |
 
 ## zones.csv
 
