@@ -28,7 +28,7 @@ caption = "`archive verify` checks every saved file against its recorded fingerp
 caption = "`archive publish` writes read-only copies of the catalog and an index for each zone, for the Explorer (Address Lookup, Glossary and Directory) and the Evidence Tracer."
 
 [[steps]]
-caption = "GitHub Actions runs the tests and catalog checks on every change and checks the live site weekly. Any time, `uv run archive status` shows plain counts by zone and status."
+caption = "GitHub Actions runs the tests and catalog checks on every change and checks the live site weekly. Any time, `uv run archive verify --zone I1` checks that a zone's archive is complete and counts its rows by status."
 
 # ---- Background, title and the source (step 1) ----
 
@@ -577,8 +577,8 @@ strokeColor = "#443f38"
 [[elements]]
 step = 7
 type = "text"
-x = 397
+x = 290
 y = 862
-text = "Any time, `uv run archive status` shows plain counts by zone and status."
+text = "Any time, `uv run archive verify --zone I1` checks a zone's archive and counts rows by status."
 fontSize = 22
 strokeColor = "#443f38"
