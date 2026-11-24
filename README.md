@@ -19,6 +19,7 @@ uv run archive inventory --zone I1                   # example: compare I1's lis
 uv run archive discover --zone I1                    # example: propose I1's catalog rows in a review file
 uv run archive merge reports/2026-11-19-discover-I1.csv   # example: see what a review file's decisions would change
 uv run --env-file .env archive download --dry-run    # example: see what would download
+uv run --env-file .env archive fingerprint           # example: see which blank fingerprints would be filled
 uv run --env-file .env archive publish --dry-run     # example: see what publishing would change
 ```
 

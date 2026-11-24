@@ -191,6 +191,20 @@ def test_dates_times_and_fingerprints_are_well_formed():
     ]
 
 
+def test_one_fingerprint_per_file_in_local_path():
+    two_files = "web-captures/navy/page.pdf; web-captures/navy/page.html"
+    assert problems(doc(local_path=two_files, sha256=f"{SHA}; {'b' * 64}")) == []
+    assert problems(doc(local_path=two_files, sha256=SHA)) == [
+        "documents.csv line 2 (DOC-0001), sha256: has 1 fingerprint(s) for 2 file(s) in local_path"
+    ]
+    assert problems(doc(sha256=f"{SHA}; ABC")) == [
+        "documents.csv line 2 (DOC-0001), sha256: is not 64 lowercase hex characters"
+    ]
+    assert problems(doc(local_path=two_files, sha256=f"{SHA};{'b' * 64}")) == [
+        "documents.csv line 2 (DOC-0001), sha256: separate values with '; ' (semicolon, one space)"
+    ]
+
+
 def test_links_between_rows_point_to_real_rows():
     second = doc(doc_id="DOC-0002", duplicate_of="DOC-0001", found_via="cited", found_on="DOC-0001")
     assert problems(doc(), second) == []

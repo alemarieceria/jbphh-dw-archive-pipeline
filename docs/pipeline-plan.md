@@ -107,7 +107,7 @@ Each step gets a section, with a stepped diagram, in `notebooks/workflows.ipynb`
 - **Discrepancy log:** 21 findings (FND-0001 to FND-0021); 9 confirmed, 12 to verify.
 - **Page captures** to automate with Playwright: PDF, single-file web page (MHTML) and PNG per page.
   `archive capture` takes over the 12 pages captured manually and records a fingerprint for
-  every capture, including the existing ones.
+  each new capture. The existing captures got theirs from `archive fingerprint` (2026-11-23).
 - **Wayback:** automated (see Decisions). The archive.org account and keys are set up; the
   step isn't built yet.
 
@@ -170,7 +170,8 @@ wording (amended, lifted).
   period, zones, sdg, package_or_validation_level. You review by listing: one decision
   per library listing (accept all its rows once its count matches), and flagged rows
   one by one.
-- Download and verify: retrieved_utc, sha256, local_path, `status` → done
+- Download: retrieved_utc, sha256, local_path, `status` → done. `archive fingerprint` fills a
+  blank sha256 for files saved another way. Verify only checks.
 - Extraction: sample dates
 - People only: priority, in_team_folder, duplicate_of, revision, notes, and the statuses
   to_find, unavailable, excluded

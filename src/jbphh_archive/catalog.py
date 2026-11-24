@@ -6,6 +6,7 @@ Tracer read it.
 """
 
 import csv
+import hashlib
 import os
 import sys
 from pathlib import Path
@@ -59,6 +60,15 @@ def zone_row(zone_id: str) -> Row:
 def values(cell: str) -> list[str]:
     """The values in a multi-value cell such as `zones`, separated by '; '."""
     return [value for value in cell.split("; ") if value]
+
+
+def file_sha256(path: Path) -> str:
+    """A file's SHA-256 fingerprint, read in pieces so a large PDF is never held in memory at once."""
+    digest = hashlib.sha256()
+    with path.open("rb") as f:
+        while chunk := f.read(1024 * 1024):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def registered_paths(rows: list[Row]) -> dict[str, str]:
