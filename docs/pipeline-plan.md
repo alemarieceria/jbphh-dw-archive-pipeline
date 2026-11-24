@@ -217,10 +217,10 @@ column; and a stepped diagram in `notebooks/workflows.ipynb`. The other catalog 
 then data processing starts. (1) The 8 documents still to find get a dated note saying they
 are deferred (done 2026-11-23, PR #25). (2) `catalog/document_links.csv` records which lab
 file is current for each batch (SDG) (done 2026-11-23, PR #26). (3) Fingerprints for the 12 manually captured web pages; then
-`archive verify --zone I1` (done 2026-11-23, PRs #28 and #29). (4) Publish, and update this plan. Deferred until later:
+`archive verify --zone I1` (done 2026-11-23, PRs #28 and #29). (4) Publish, and update this plan (done 2026-11-23, PRs #30 and #31). Deferred until later:
 `archive capture` (new dated PDF, MHTML and PNG captures), `archive wayback`, `stage` on the
 40 non-lab rows, `publisher`, `timeline.csv`, the zone indexes, and the Drive's text about
-captures.
+captures. All four steps are done, so data processing can start. Still open for I1: the known gaps `archive verify --zone I1` lists, the deferred items above, and the all-zone pass, which may find more I1 documents.
 
 1. **Restructure** (done): this repo into `src/jbphh_archive/` with one `archive` command;
    `scripts/` code moved in, with tests proving nothing changed.
