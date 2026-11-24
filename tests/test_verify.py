@@ -189,6 +189,15 @@ def test_counts_and_known_gaps_dont_fail(archive):
     ]
 
 
+def test_a_batch_with_only_a_validation_report_is_a_known_gap(archive):
+    rows = [*ROWS, doc("DOC-0008", "raw/cpf-navy/plan.pdf", doc_type="data_validation_report", sdg="D1")]
+    write_catalog(catalog.CATALOG_FILE, rows)
+    code, report = run(archive)
+    assert code == 0
+    gaps = [(r["doc_id"], r["item"], r["detail"]) for r in report if r["check"] == "gaps"]
+    assert ("DOC-0008", "SDG D1", "SDG D1 has no lab report, only DOC-0008 (data_validation_report)") in gaps
+
+
 def test_it_never_changes_the_catalog(archive, monkeypatch):
     before = catalog.CATALOG_FILE.read_bytes()
     set_listings(monkeypatch, {"navy": [], "doh": []})

@@ -30,7 +30,7 @@ known gaps are listed but don't fail it.
 | `listings` | Navy and DOH listing (`item` is `navy` or `doh`), then each result or catalog row that doesn't match | Listing: `ok`, `problem`, `listing_unavailable` (still "Application Error" after 3 tries) or `no_listing` (`zones.csv` has no link). Result: `not_in_catalog` or `not_on_listing`, as in the inventory report. |
 | `catalog` | problem `archive validate` finds, or one row if none | `ok` or `problem` |
 | `counts` | `status` value among the zone's rows (`item`) | `count` |
-| `gaps` | known gap: a row still `to_find` or `unavailable`, or a lab batch (SDG) whose only report is a copy of another batch's | `known_gap` (doesn't fail the check) |
+| `gaps` | known gap: a row still `to_find` or `unavailable`, or a lab batch (SDG) with no lab report of its own (only a validation or review report, or only a copy of another batch's report) | `known_gap` (doesn't fail the check) |
 
 **Failures:** `missing`, `changed`, `no_fingerprint`, `not_in_catalog`, `not_on_listing`,
 `listing_unavailable`, `problem`.
