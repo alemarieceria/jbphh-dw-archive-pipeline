@@ -117,7 +117,7 @@ VOCABULARY = {
     "status": ("to_find", "to_download", "to_capture", "link_only", "done", "unavailable", "excluded"),
     "found_via": ("zone_page", "navy_listing", "doh_listing", "ltm_listing", "edwm_listing", "cited", "other_site"),
 }
-LISTS = ("zones", "stage", "local_path")  # multi-value cells, separated by "; "
+LISTS = ("zones", "stage", "local_path", "sha256")  # multi-value cells, separated by "; "
 REQUIRED = ("doc_id", "group", "title_as_posted", "doc_type", "zones", "phase", "status")
 # The periods each phase allows. An emergency response document has no period.
 PERIODS_OF_PHASE = {
@@ -231,8 +231,12 @@ def document_problems(rows: list[Row], zone_ids: list[str], only: set[str] | Non
         elif row["first_seen_utc"] > row["last_seen_utc"]:
             bad("last_seen_utc", "is before first_seen_utc")
 
-        if row["sha256"] and not re.fullmatch(r"[0-9a-f]{64}", row["sha256"]):
+        # One fingerprint per file in local_path, in the same order, separated by "; ".
+        fingerprints, paths = list_values(row["sha256"])[0], list_values(row["local_path"])[0]
+        if any(not re.fullmatch(r"[0-9a-f]{64}", f) for f in fingerprints):
             bad("sha256", "is not 64 lowercase hex characters")
+        elif fingerprints and paths and len(fingerprints) != len(paths):
+            bad("sha256", f"has {len(fingerprints)} fingerprint(s) for {len(paths)} file(s) in local_path")
         if row["library_id"] and not re.fullmatch(r"pub_\d{6}", row["library_id"]):
             bad("library_id", f"{row['library_id']!r} is not like pub_002925")
         if row["source_url"] and not is_url(row["source_url"]):

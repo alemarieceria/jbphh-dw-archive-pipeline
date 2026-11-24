@@ -7,7 +7,7 @@ to it. To add a step, add a line to STEPS.
 
 import sys
 
-from jbphh_archive import discover, download, inventory, merge, publish, validate
+from jbphh_archive import discover, download, fingerprint, inventory, merge, publish, validate
 from jbphh_archive.diagrams import build_stepper, export_pngs
 
 # Step name -> (one-line summary, function that runs the step with the remaining options).
@@ -17,6 +17,7 @@ STEPS = {
     "merge": ("Apply the decisions in a discover review file to the catalog (--apply to write)", merge.main),
     "validate": ("Check the catalog files against the rules in catalog/README.md", validate.main),
     "download": ("Download catalog rows marked to_download into raw/<site>/", download.main),
+    "fingerprint": ("Fill blank fingerprints from the files on the Drive (--apply to write)", fingerprint.main),
     "publish": ("Copy the catalog to the Drive's registry/, where tools read it", publish.main),
     "diagrams png": ("Write a PNG in pngs/ for each SVG in svgs/ (only where the SVG changed)", export_pngs.main),
     "diagrams build": ("Build a stepped (Back / Next) diagram from its spec", build_stepper.main),
