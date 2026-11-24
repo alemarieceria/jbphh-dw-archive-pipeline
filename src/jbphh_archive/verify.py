@@ -10,7 +10,8 @@ A zone's rows are the catalog rows whose `zones` lists the zone or `all`. Five c
    result by result (the same check as `archive inventory`).
 4. Catalog rules: everything `archive validate` checks, including the links between documents.
 5. Counts by status, and the known gaps: rows still `to_find` or `unavailable`, and lab batches
-   (SDGs) whose only report is a copy of another batch's report.
+   (SDGs) with no lab report of their own: only a validation or review report, or only a copy
+   of another batch's report.
 
 It never changes the catalog. It writes a dated report, reports/<UTC date>-verify-<zone>.csv,
 and ends with an error code if a check fails. Known gaps are listed but don't fail it.
@@ -141,16 +142,23 @@ def counts_and_gaps(rows: list[Row]) -> list[Row]:
             report.append(
                 report_row("gaps", doc_id=row["doc_id"], item=row["doc_type"], result="known_gap", detail=detail)
             )
+    # Lab batches (SDGs) among the collected rows whose results the archive doesn't hold.
     batches: dict[str, list[Row]] = {}
     for row in rows:
-        if row["doc_type"] == "lab_report" and row["sdg"]:
+        if row["status"] == "done" and row["sdg"]:
             batches.setdefault(row["sdg"], []).append(row)
-    for sdg, reports in sorted(batches.items()):
-        if all(r["duplicate_of"] for r in reports):
+    for sdg, batch in sorted(batches.items()):
+        reports = [r for r in batch if r["doc_type"] == "lab_report"]
+        if not reports:
+            others = ", ".join(f"{r['doc_id']} ({r['doc_type']})" for r in batch)
+            gap, detail = batch, f"SDG {sdg} has no lab report, only {others}"
+        elif all(r["duplicate_of"] for r in reports):
             copies = ", ".join(f"{r['doc_id']} is a copy of {r['duplicate_of']}" for r in reports)
-            detail = f"SDG {sdg} has no report of its own: {copies}"
-            doc_ids = "; ".join(r["doc_id"] for r in reports)
-            report.append(report_row("gaps", doc_id=doc_ids, item=f"SDG {sdg}", result="known_gap", detail=detail))
+            gap, detail = reports, f"SDG {sdg} has no report of its own: {copies}"
+        else:
+            continue
+        doc_ids = "; ".join(r["doc_id"] for r in gap)
+        report.append(report_row("gaps", doc_id=doc_ids, item=f"SDG {sdg}", result="known_gap", detail=detail))
     return report
 
 

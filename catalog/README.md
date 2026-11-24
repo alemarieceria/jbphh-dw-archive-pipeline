@@ -87,7 +87,9 @@ columns are `doc_id` and `related_doc_id` together.
 confirmed to hold the same results as the higher ones: the `doc_id` of a `same_results` row.
 Point researchers to the higher level for the raw instrument data (such as chromatograms and
 calibrations). Two levels are never assumed to hold the same results; each pair is compared
-first. A report that another report supersedes is not read.
+first. A report that another report supersedes is not read. A `lab_report_bundle` is read too:
+it holds lab reports that have no row of their own. For Zone I1, DOC-0003 (Stage 2) is the only
+copy of lab jobs 977854, 580-108808-1 and 580-108842-1; it has no `sdg` and no link row.
 
 **Source:** made by A. Ceria for Zone I1's lab reports, manually, by comparing each batch's
 reports. Each row's `notes` says how and when it was checked.
