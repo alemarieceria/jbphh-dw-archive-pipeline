@@ -35,6 +35,7 @@ from `reports/2026-11-19-discover-I1.csv`. Files downloaded 2026-10-31, except D
 (2026-11-23).
 Checked 2026-11-17: `archive inventory --zone I1` matched all 123 library rows to the live
 listings (`reports/2026-11-17-inventory-I1.csv`).
+Checked again 2026-11-24 (UTC): `archive verify --zone I1` passed (`reports/2026-11-24-verify-I1.csv`).
 
 **Who writes it:** people, and `archive download` (retrieval columns). `archive discover`
 proposes new rows in a review file in `reports/`. `archive merge` writes the ones you
