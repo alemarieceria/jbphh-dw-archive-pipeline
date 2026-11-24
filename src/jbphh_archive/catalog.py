@@ -1,8 +1,8 @@
 """Read and write the catalog, and find the archive on the Shared Drive.
 
-The catalog is edited only in this repo, in catalog/documents.csv. `archive publish`
-copies it to the archive's registry/documents.csv, where tools such as the Evidence
-Tracer read it.
+The catalog is edited only in this repo, in catalog/. `archive publish` copies its files
+to the archive's registry/, where data processing and tools such as the Evidence Tracer
+read them.
 """
 
 import csv
@@ -17,7 +17,7 @@ CATALOG_FILE = REPO_ROOT / "catalog" / "documents.csv"
 ZONES_FILE = REPO_ROOT / "catalog" / "zones.csv"
 COMMUNITIES_FILE = REPO_ROOT / "catalog" / "communities.csv"
 LINKS_FILE = REPO_ROOT / "catalog" / "document_links.csv"
-REGISTRY_FILE = Path("registry") / "documents.csv"  # the published copy, inside the archive
+REGISTRY_FOLDER = Path("registry")  # where the published copies go, inside the archive
 
 Row = dict[str, str]
 

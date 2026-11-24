@@ -1,6 +1,6 @@
 # JBPHH DW Archive Pipeline
 
-Collects public JBPHH drinking water documents into the **[JBPHH DW Archive & Registry](https://drive.google.com/drive/folders/0AHEAE78xvLlaUk9PVA)** Shared Drive and records where each file came from, when it was saved, and its SHA-256 fingerprint. The files live in the Shared Drive. **The catalog lives in this repo** (`catalog/documents.csv`, columns explained in [catalog/README.md](catalog/README.md)), and `archive publish` copies it to the Drive's `registry/` for tools such as the Evidence Tracer.
+Collects public JBPHH drinking water documents into the **[JBPHH DW Archive & Registry](https://drive.google.com/drive/folders/0AHEAE78xvLlaUk9PVA)** Shared Drive and records where each file came from, when it was saved, and its SHA-256 fingerprint. The files live in the Shared Drive. **The catalog lives in this repo** (`catalog/documents.csv`, columns explained in [catalog/README.md](catalog/README.md)), and `archive publish` copies the catalog files to the Drive's `registry/` for data processing and tools such as the Evidence Tracer.
 
 The goal, decisions and order of work are in [docs/pipeline-plan.md](docs/pipeline-plan.md).
 
