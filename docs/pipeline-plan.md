@@ -41,8 +41,8 @@ Each step gets a section, with a stepped diagram, in `notebooks/workflows.ipynb`
 | 3. Scope | Which zones, which dates, zone versus system-wide documents | Done: decided above; `catalog/zones.csv` lists the 20 zones with their zone page and library listing links |
 | 4. Discovery | Which documents exist for a zone, and how do we know we have them all? | Partial: `archive discover --zone I1` reads the zone pages and I1's Navy, DOH and LTM listings and proposes rows in a review file; `archive inventory --zone I1` checks the Navy and DOH listings (see below). Not yet: the EDWM listing and other zones. |
 | 5. Cataloging | Turning found documents into reviewed catalog rows | Partial: I1's first 169 rows were built manually; `archive merge` added 180 more; `archive discover` proposes rows in a review file and `archive merge` applies the accepted ones. `archive validate` checks the catalog on every push. `catalog/document_links.csv` records which I1 lab report is current for each batch. |
-| 6. Collection | Downloading files, capturing web pages, Wayback backups | Partial: downloads automated; page captures and Wayback done manually |
-| 7. Validation | Is the archive complete and unchanged? | Partial: `archive inventory` checks a zone's Navy and DOH listings against the catalog; `archive validate` checks that the catalog follows its rules; no `archive verify` yet |
+| 6. Collection | Downloading files, capturing web pages, Wayback backups | Partial: downloads automated; page captures and Wayback done manually; `archive fingerprint` records fingerprints for files saved without one |
+| 7. Validation | Is the archive complete and unchanged? | Partial: `archive verify --zone I1` proves I1's archive is complete and unchanged in one run (files and fingerprints, the Drive, listings, catalog rules, known gaps). `archive inventory` and `archive validate` also run on their own. Not yet: other zones. |
 | 8. Storage | What lives where, publishing, backups, permissions | Partial: the catalog is in this repo (`catalog/documents.csv`); `archive publish` copies it to the Drive's `registry/`; no zone indexes yet |
 | 9. Keeping it current | Documents added to or removed from the website later | Not started |
 | 10. Use | Evidence Tracer, researchers, discrepancy log | Partial: the Tracer reads the catalog; log exists on the Drive |
@@ -104,6 +104,7 @@ Each step gets a section, with a stepped diagram, in `notebooks/workflows.ipynb`
   communications), deferred until after data processing; none holds results data. DOC-0170 to
   DOC-0349 are monitoring documents cataloged as `link_only` by `archive merge`.
   `catalog/document_links.csv` has 26 checked links for I1's lab reports and the DOH tables.
+  Every collected file has a fingerprint (the 12 captures since 2026-11-23).
 - **Discrepancy log:** 21 findings (FND-0001 to FND-0021); 9 confirmed, 12 to verify.
 - **Page captures** to automate with Playwright: PDF, single-file web page (MHTML) and PNG per page.
   `archive capture` takes over the 12 pages captured manually and records a fingerprint for
@@ -216,7 +217,7 @@ column; and a stepped diagram in `notebooks/workflows.ipynb`. The other catalog 
 then data processing starts. (1) The 8 documents still to find get a dated note saying they
 are deferred (done 2026-11-23, PR #25). (2) `catalog/document_links.csv` records which lab
 file is current for each batch (SDG) (done 2026-11-23, PR #26). (3) Fingerprints for the 12 manually captured web pages; then
-`archive verify --zone I1`. (4) Publish, and update this plan. Deferred until later:
+`archive verify --zone I1` (done 2026-11-23, PRs #28 and #29). (4) Publish, and update this plan. Deferred until later:
 `archive capture` (new dated PDF, MHTML and PNG captures), `archive wayback`, `stage` on the
 40 non-lab rows, `publisher`, `timeline.csv`, the zone indexes, and the Drive's text about
 captures.
@@ -241,7 +242,7 @@ captures.
 6. **Collection:** `archive capture`, then `archive wayback` (building on the manual Wayback
    records in the Drive's `registry/`), then the sources view in `notebooks/zones.ipynb`.
    Update the Drive's `web-captures/README.txt`.
-7. **Validation and storage:** `archive verify`; `archive publish` adds the zone indexes.
+7. **Validation and storage** (partial): `archive verify` (done for I1); `archive publish` adds the zone indexes.
 8. **Team and discrepancy workflow:** add the team to the Shared Drive as Viewers
    (downloading allowed); the Google Form and `archive findings import`; update the Drive's
    `START-HERE.md`.

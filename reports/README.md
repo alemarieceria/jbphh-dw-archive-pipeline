@@ -1,7 +1,8 @@
 # Reports
 
 Dated files written by the archive's checks. Each run writes a new file named with that day's
-date (UTC for `archive discover`). Running a check again on the same day rewrites that day's file.
+UTC date, so an evening run in Hawaii is dated the next day. Running a check again on the same
+day rewrites that day's file.
 
 ## Inventory report: `<date>-inventory-<zone>.csv`
 
@@ -14,6 +15,34 @@ listings, plus one row per catalog row a listing should show but doesn't.
 | `library_id`, `title`, `filename` | The result as the listing shows it. |
 | `doc_id`, `catalog_status` | The matching catalog row. Blank if there is none. |
 | `result` | `matched`; `not_in_catalog` (listed, no catalog row); `not_on_listing` (catalog row, not listed); `no_listing` (`zones.csv` has no link); `listing_unavailable` (still "Application Error" after 3 tries). |
+
+## Verify report: `<UTC date>-verify-<zone>.csv`
+
+Written by `archive verify --zone <zone>`, which proves a zone's archive is complete and
+unchanged. A zone's rows are the catalog rows whose `zones` lists the zone or `all`. The command
+never changes the catalog. It fails (ends with an error) if any row's `result` is a failure;
+known gaps are listed but don't fail it.
+
+| `check` | One row per | `result` |
+|---|---|---|
+| `files` | file of each `done` row | `ok`; `missing` (not on the Drive); `changed` (differs from its fingerprint); `no_fingerprint` (blank `sha256`) |
+| `drive` | file in the Drive's `raw/` or `web-captures/` that no catalog row lists (README files aside) | `not_in_catalog` |
+| `listings` | Navy and DOH listing (`item` is `navy` or `doh`), then each result or catalog row that doesn't match | Listing: `ok`, `problem`, `listing_unavailable` (still "Application Error" after 3 tries) or `no_listing` (`zones.csv` has no link). Result: `not_in_catalog` or `not_on_listing`, as in the inventory report. |
+| `catalog` | problem `archive validate` finds, or one row if none | `ok` or `problem` |
+| `counts` | `status` value among the zone's rows (`item`) | `count` |
+| `gaps` | known gap: a row still `to_find` or `unavailable`, or a lab batch (SDG) whose only report is a copy of another batch's | `known_gap` (doesn't fail the check) |
+
+**Failures:** `missing`, `changed`, `no_fingerprint`, `not_in_catalog`, `not_on_listing`,
+`listing_unavailable`, `problem`.
+
+| Column | Description |
+|---|---|
+| `check` | Which check wrote the row (see above). |
+| `doc_id` | The catalog row, where there is one. For a batch gap, every report in the batch, separated by `; `. |
+| `item` | What was checked: a file's path on the Drive, a listing, a library ID, a status, a `doc_type`, or an SDG. |
+| `result` | What the check found (see above). |
+| `count` | Listing rows: how many results the listing shows. Counts rows: how many rows have that status. |
+| `detail` | Plain-language explanation. |
 
 ## Discover review file: `<UTC date>-discover-<zone>.csv`
 

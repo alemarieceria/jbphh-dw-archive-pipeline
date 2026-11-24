@@ -1,0 +1,452 @@
+# Stepped diagram: what `archive verify` checks for one zone.
+# Build it with: uv run archive diagrams build docs/diagrams/specs/archive-verify.toml
+#
+# How this file works: see manual-listing-check.toml. Each element's `step` is where it first appears.
+# Colors, sizes and wording follow the style rules in docs/diagrams/README.md.
+
+name = "archive-verify"
+title = "Verify: prove a zone's archive is complete"
+width = 1600
+height = 800
+
+[[steps]]
+caption = "`archive verify --zone I1` reads I1's rows in `catalog/documents.csv`: every row whose `zones` lists I1 or `all`, so plans for all zones count too."
+
+[[steps]]
+caption = "Files: it reads every file of each `done` row on the Shared Drive. A file that is missing, or differs from its recorded fingerprint, fails the check."
+
+[[steps]]
+caption = "Drive: it lists any file in `raw/` or `web-captures/` that no catalog row lists, so nothing is saved without being cataloged."
+
+[[steps]]
+caption = "It matches I1's Navy and DOH listings to the catalog, as `archive inventory` does, then checks the catalog's rules, as `archive validate` does."
+
+[[steps]]
+caption = "It prints PASS or FAIL per check, counts rows by status and lists the known gaps. It writes a dated report and never changes the catalog."
+
+# ---- Background, title, legend, the catalog and step 1 ----
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 0
+y = 0
+width = 1600
+height = 800
+backgroundColor = "#fbf8f3"
+fillStyle = "solid"
+strokeColor = "transparent"
+strokeWidth = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 438
+y = 20
+text = "Verify: prove a zone's archive is complete"
+fontSize = 36
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "text"
+x = 520
+y = 72
+text = "What `archive verify --zone I1` checks, in one run"
+fontSize = 22
+strokeColor = "#443f38"
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 1220
+y = 140
+width = 360
+height = 330
+roundness = { type = 3 }
+backgroundColor = "#ffffff"
+fillStyle = "solid"
+strokeColor = "#625b53"
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1240
+y = 155
+text = "Legend"
+fontSize = 24
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 1240
+y = 210
+width = 44
+height = 30
+backgroundColor = "#e4ece7"
+fillStyle = "solid"
+strokeColor = "#1f5c4a"
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1298
+y = 212
+text = "Automated step"
+fontSize = 20
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 1240
+y = 262
+width = 44
+height = 30
+backgroundColor = "#e6eef6"
+fillStyle = "solid"
+strokeColor = "#2d5b85"
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1298
+y = 264
+text = "Where data comes from"
+fontSize = 20
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 1240
+y = 314
+width = 44
+height = 30
+backgroundColor = "#dcd6cc"
+fillStyle = "solid"
+strokeColor = "#443f38"
+strokeWidth = 3
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1298
+y = 316
+text = "Where data is stored"
+fontSize = 20
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 1240
+y = 366
+width = 44
+height = 30
+backgroundColor = "#eeeae2"
+fillStyle = "solid"
+strokeColor = "#625b53"
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1298
+y = 368
+text = "Note"
+fontSize = 20
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "arrow"
+x = 1240
+y = 433
+points = [[0, 0], [44, 0]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 1
+type = "text"
+x = 1298
+y = 420
+text = "Data moves this way"
+fontSize = 20
+strokeColor = "#1c1a17"
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 20
+y = 140
+width = 300
+height = 90
+roundness = { type = 3 }
+backgroundColor = "#dcd6cc"
+fillStyle = "solid"
+strokeColor = "#443f38"
+strokeWidth = 3
+roughness = 0
+label = { text = "`catalog/documents.csv`", fontSize = 20, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 1
+type = "arrow"
+x = 320
+y = 185
+points = [[0, 0], [100, 0]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 1
+type = "rectangle"
+x = 420
+y = 140
+width = 340
+height = 90
+roundness = { type = 3 }
+backgroundColor = "#e4ece7"
+fillStyle = "solid"
+strokeColor = "#1f5c4a"
+roughness = 0
+label = { text = "1. Read the zone's rows:\n`zones` lists I1 or `all`", fontSize = 20, strokeColor = "#1c1a17" }
+
+# ---- Step 2: files and fingerprints ----
+
+[[elements]]
+step = 2
+type = "rectangle"
+x = 20
+y = 265
+width = 300
+height = 215
+roundness = { type = 3 }
+backgroundColor = "#dcd6cc"
+fillStyle = "solid"
+strokeColor = "#443f38"
+strokeWidth = 3
+roughness = 0
+label = { text = "Shared Drive:\n`raw/` and\n`web-captures/`", fontSize = 20, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 2
+type = "arrow"
+x = 320
+y = 310
+points = [[0, 0], [100, 0]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 2
+type = "arrow"
+x = 590
+y = 230
+points = [[0, 0], [0, 35]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 2
+type = "rectangle"
+x = 420
+y = 265
+width = 340
+height = 90
+roundness = { type = 3 }
+backgroundColor = "#e4ece7"
+fillStyle = "solid"
+strokeColor = "#1f5c4a"
+roughness = 0
+label = { text = "2. Files: each one is there\nand matches its fingerprint", fontSize = 20, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 2
+type = "rectangle"
+x = 820
+y = 265
+width = 340
+height = 90
+roundness = { type = 3 }
+backgroundColor = "#eeeae2"
+fillStyle = "solid"
+strokeColor = "#625b53"
+roughness = 0
+label = { text = "A file saved without a\nfingerprint gets one from\n`archive fingerprint` first", fontSize = 18, strokeColor = "#1c1a17" }
+
+# ---- Step 3: nothing saved without a catalog row ----
+
+[[elements]]
+step = 3
+type = "arrow"
+x = 320
+y = 435
+points = [[0, 0], [100, 0]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 3
+type = "arrow"
+x = 590
+y = 355
+points = [[0, 0], [0, 35]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 3
+type = "rectangle"
+x = 420
+y = 390
+width = 340
+height = 90
+roundness = { type = 3 }
+backgroundColor = "#e4ece7"
+fillStyle = "solid"
+strokeColor = "#1f5c4a"
+roughness = 0
+label = { text = "3. Drive: every file\nhas a catalog row", fontSize = 20, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 3
+type = "rectangle"
+x = 820
+y = 390
+width = 340
+height = 90
+roundness = { type = 3 }
+backgroundColor = "#eeeae2"
+fillStyle = "solid"
+strokeColor = "#625b53"
+roughness = 0
+label = { text = "Catches a file saved\nbut never cataloged;\n`README.txt` files aside", fontSize = 18, strokeColor = "#1c1a17" }
+
+# ---- Step 4: listings and catalog rules ----
+
+[[elements]]
+step = 4
+type = "rectangle"
+x = 20
+y = 515
+width = 300
+height = 90
+roundness = { type = 3 }
+backgroundColor = "#e6eef6"
+fillStyle = "solid"
+strokeColor = "#2d5b85"
+roughness = 0
+label = { text = "Safe Waters site:\nNavy and DOH listings", fontSize = 20, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 4
+type = "arrow"
+x = 320
+y = 560
+points = [[0, 0], [100, 0]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 4
+type = "arrow"
+x = 590
+y = 480
+points = [[0, 0], [0, 35]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 4
+type = "rectangle"
+x = 420
+y = 515
+width = 340
+height = 90
+roundness = { type = 3 }
+backgroundColor = "#e4ece7"
+fillStyle = "solid"
+strokeColor = "#1f5c4a"
+roughness = 0
+label = { text = "4. Listings match the catalog;\nthe catalog's rules pass", fontSize = 20, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 4
+type = "rectangle"
+x = 820
+y = 515
+width = 340
+height = 90
+roundness = { type = 3 }
+backgroundColor = "#eeeae2"
+fillStyle = "solid"
+strokeColor = "#625b53"
+roughness = 0
+label = { text = "The same checks as\n`archive inventory` and\n`archive validate`", fontSize = 18, strokeColor = "#1c1a17" }
+
+# ---- Step 5: the result ----
+
+[[elements]]
+step = 5
+type = "arrow"
+x = 590
+y = 605
+points = [[0, 0], [0, 35]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 5
+type = "rectangle"
+x = 420
+y = 640
+width = 340
+height = 90
+roundness = { type = 3 }
+backgroundColor = "#e4ece7"
+fillStyle = "solid"
+strokeColor = "#1f5c4a"
+roughness = 0
+label = { text = "5. PASS or FAIL per check;\ncounts and known gaps", fontSize = 20, strokeColor = "#1c1a17" }
+
+[[elements]]
+step = 5
+type = "arrow"
+x = 760
+y = 685
+points = [[0, 0], [60, 0]]
+endArrowhead = "arrow"
+strokeColor = "#443f38"
+roughness = 0
+
+[[elements]]
+step = 5
+type = "rectangle"
+x = 820
+y = 640
+width = 340
+height = 90
+roundness = { type = 3 }
+backgroundColor = "#dcd6cc"
+fillStyle = "solid"
+strokeColor = "#443f38"
+strokeWidth = 3
+roughness = 0
+label = { text = "`reports/<date>-verify-I1.csv`;\nthe catalog is not changed", fontSize = 20, strokeColor = "#1c1a17" }
